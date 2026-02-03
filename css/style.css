@@ -1,114 +1,87 @@
 :root {
     --primary: #a855f7;
     --primary-glow: rgba(168, 85, 247, 0.4);
-    --bg-deep: #050508;
-    --card-glass: rgba(15, 12, 25, 0.7);
-    --radius-lg: 24px;
-    --radius-md: 12px;
-    --gap-main: 30px;
+    --bg: #050508;
+    --glass: rgba(18, 14, 30, 0.8);
+    --radius-xl: 35px;
 }
 
 body {
-    background-color: var(--bg-deep);
+    background: var(--bg);
     color: #e2e8f0;
     font-family: 'JetBrains Mono', monospace;
-    margin: 0; padding: 0;
-    overflow-x: hidden;
-    text-transform: uppercase;
+    margin: 0; text-transform: uppercase;
 }
 
-/* Lueur de fond dynamique */
 .background-glow {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 10% 10%, #1a1033 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, #0f0a25 0%, transparent 40%);
+    background: radial-gradient(circle at 10% 20%, #1a1033 0%, transparent 45%);
     z-index: -1;
 }
 
-/* HEADER FLOTTANT */
-.main-header {
-    padding: 30px 40px;
-}
-
-.header-content {
-    background: var(--card-glass);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 50px;
-    padding: 10px 30px;
-    display: flex; justify-content: space-between; align-items: center;
-}
-
-/* ESPACEMENT DU CONTENEUR */
+/* ESPACEMENTS GÉNÉREUX */
 .main-viewport {
-    max-width: 1400px; margin: 0 auto; padding: 20px 40px 60px 40px;
-    display: flex; flex-direction: column; gap: var(--gap-main);
+    max-width: 1200px; margin: 0 auto; padding: 60px 20px;
+    display: flex; flex-direction: column; gap: 50px;
 }
 
-/* CARTES GLASSMORPHISM */
 .glass-card {
-    background: var(--card-glass);
-    border: 1px solid rgba(168, 85, 247, 0.15);
-    border-radius: var(--radius-lg);
+    background: var(--glass);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: var(--radius-xl);
     padding: 40px;
+    backdrop-filter: blur(20px);
     position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-.glass-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* TAG EN HAUT DES CARTES */
 .card-tag {
-    position: absolute; top: -12px; left: 30px;
+    position: absolute; top: -14px; left: 35px;
     background: var(--primary); color: #000;
-    padding: 4px 15px; font-size: 0.65rem; font-weight: 800;
-    border-radius: 8px;
+    padding: 5px 18px; border-radius: 12px; font-size: 0.65rem; font-weight: 800;
 }
 
-/* GRILLE DYNAMIQUE */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: var(--gap-main);
+/* TERMINAL INTRO */
+.intro-terminal {
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    margin: 30px 0;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
 }
+.t-header { background: rgba(255,255,255,0.05); padding: 10px; display: flex; gap: 8px; }
+.t-header span { width: 10px; height: 10px; border-radius: 50%; background: rgba(168, 85, 247, 0.4); }
+.t-text { padding: 25px; text-transform: none; line-height: 1.7; color: #cbd5e1; font-size: 0.95rem; }
 
-/* HERO SECTION */
-.hero-content h1 { font-size: 3.5rem; margin: 0; color: #fff; }
-.role-subtitle { color: var(--primary); letter-spacing: 5px; margin-bottom: 25px; }
-.terminal-intro { background: rgba(0,0,0,0.3); padding: 25px; border-radius: var(--radius-md); margin-bottom: 30px; text-transform: none; }
+/* SCANNER AVATAR */
+.avatar-wrapper {
+    position: relative; width: 120px; height: 120px; border-radius: 25px;
+    border: 2px solid var(--primary); overflow: hidden;
+    background: var(--primary-glow); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
+}
+.scan-bar {
+    position: absolute; width: 100%; height: 3px; background: var(--primary);
+    top: 0; box-shadow: 0 0 15px var(--primary); animation: laser-scan 3s infinite ease-in-out;
+}
+@keyframes laser-scan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
 
-/* SKILLS : BARRES ARRONDIES */
-.progress-track {
-    height: 10px; background: #000; border-radius: 20px; overflow: hidden; margin-top: 10px;
-}
-.progress-fill {
-    height: 100%; background: linear-gradient(90deg, var(--primary), #d8b4fe);
-    border-radius: 20px; box-shadow: 0 0 15px var(--primary-glow);
-}
+/* GRILLES */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+.skills-grid { display: grid; gap: 20px; }
+.soft-skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.pill { padding: 10px 20px; border-radius: 50px; border: 1px solid var(--primary); font-size: 0.7rem; background: rgba(168, 85, 247, 0.05); }
 
-/* AVATAR & ID */
-.avatar-box {
-    width: 100px; height: 100px; border-radius: 50%;
-    border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; margin-bottom: 20px;
+/* CONTACT CENTERED */
+.contact-section { max-width: 800px; margin: 0 auto; width: 100%; }
+.modern-form { display: flex; flex-direction: column; gap: 20px; }
+.form-inputs { display: flex; gap: 20px; }
+.modern-form input, .modern-form textarea {
+    background: rgba(0,0,0,0.4); border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px; padding: 18px; color: #fff; font-family: inherit; outline: none; width: 100%;
 }
+.btn.full { width: 100%; padding: 20px; font-size: 1rem; }
 
-/* PILLS CERTIFICATIONS */
-.cert-pill-box { display: flex; flex-wrap: wrap; gap: 15px; }
-.pill {
-    padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(0,0,0,0.2); font-size: 0.75rem; transition: 0.3s;
-}
-.pill.active { border-color: var(--primary); background: var(--primary-glow); color: #fff; }
-
-/* BOUTONS */
-.btn {
-    padding: 15px 35px; border-radius: 50px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s;
-}
-.btn-primary { background: var(--primary); color: #000; box-shadow: 0 10px 20px var(--primary-glow); }
-.btn-secondary { border: 1px solid var(--primary); color: var(--primary); margin-left: 15px; }
-.btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+/* BOUTONS PILLULES */
+.btn { border-radius: 50px; padding: 15px 35px; font-weight: 800; cursor: pointer; text-decoration: none; transition: 0.3s; }
+.btn-primary { background: var(--primary); color: #000; border: none; box-shadow: 0 0 20px var(--primary-glow); }
+.btn-secondary { border: 2px solid var(--primary); color: var(--primary); margin-left: 15px; }
