@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Formation | Alexis Veloso</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>...</header>
-    <main class="container">
-        <h2 class="reveal highlight" style="margin-bottom: 40px;">// ACADEMIC_PROJECTS: L3_SDR</h2>
-        <div class="grid">
-            <div class="card reveal">
-                <span class="tag">Supervision</span>
-                <h3>PRTG Monitor</h3>
-                <p>Supervision des équipements réseau et services du domaine.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Virtualisation</span>
-                <h3>Proxmox</h3>
-                <p>Installation et configuration de serveurs de virtualisation.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Network</span>
-                <h3>VLAN & Routing</h3>
-                <p>Segmentation réseau et routage entre sites distants.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Security</span>
-                <h3>WSUS & EFS</h3>
-                <p>Gestion des mises à jour Windows et chiffrement de fichiers.</p>
-            </div>
+<main class="container">
+    <h2 class="highlight">// TECHNICAL_PROJECTS : FORMATION_BTS_SIO_&_L3</h2>
+    
+    <div class="card reveal">
+        <h3>Supervision & Monitoring (PRTG)</h3>
+        <p>Objectif : Garantir la haute disponibilité des services du domaine.</p>
+        <ul>
+            <li>Installation de sondes SNMP sur switchs et serveurs.</li>
+            <li>Configuration d'alertes mail/SMS en cas de dépassement de seuil (CPU, RAM, stockage).</li>
+            <li>Dashboarding pour une vue en temps réel de l'état du réseau.</li>
+        </ul>
+    </div>
+
+    <div class="grid">
+        <div class="card reveal">
+            <h4>Sécurisation WSUS</h4>
+            <p>Mise en place d'un serveur de mise à jour Windows Server 2022 pour contrôler et tester les patchs avant déploiement global, limitant les vulnérabilités 0-day.</p>
         </div>
-    </main>
-    <script src="js/main.js"></script>
-</body>
-</html>
+        <div class="card reveal">
+            <h4>Virtualisation Proxmox</h4>
+            <p>Déploiement d'un cluster d'hyperviseurs. Gestion des snapshots, des backups et de la haute disponibilité (HA) des machines virtuelles Linux et Windows.</p>
+        </div>
+        <div class="card reveal">
+            <h4>Segmentation VLAN & DHCP</h4>
+            <p>Isolation des flux (VoIP, WiFi, Management) via VLAN 802.1Q. Configuration d'étendues DHCP dédiées sur routeur Cisco et serveurs Windows.</p>
+        </div>
+        <div class="card reveal">
+            <h4>Chiffrement & EFS</h4>
+            <p>Mise en œuvre du chiffrement de fichiers local. Création d'un agent de récupération de certificats pour éviter la perte définitive de données en cas de perte de clé.</p>
+        </div>
+    </div>
+</main>
