@@ -12,122 +12,156 @@
 
     <header>
         <nav class="nav-content">
-            <div class="status-indicator"><span class="pulse"></span> SYSTÈME_PRÊT</div>
+            <div class="status-indicator">
+                <span class="pulse"></span> 
+                SYSTÈME_OPÉRATIONNEL // <span id="clock">00:00:00</span>
+            </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">01 APPRENTI</a></li>
-                <li><a href="entreprise.html">02 MISSIONS</a></li>
-                <li><a href="formation.html">03 FORMATION</a></li>
-                <li><a href="veille.html">04 VEILLE</a></li>
+                <li><a href="index.html" class="active">01_APPRENTI</a></li>
+                <li><a href="entreprise.html">02_MISSIONS</a></li>
+                <li><a href="formation.html">03_FORMATION</a></li>
+                <li><a href="veille.html">04_VEILLE</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="profile-header reveal">
-            <div class="contact-card">
-                <div class="card-main-layout">
-                    <div class="profile-info-side">
+        
+        <section class="reveal">
+            <div class="contact-card main-dashboard">
+                <div class="dashboard-header">
+                    <div class="user-id">
                         <h1 class="name-title"><span id="typewriter-name"></span><span class="custom-cursor">_</span></h1>
-                        <span class="role-tag">Systèmes, Réseaux & Cybersécurité</span>
-                        
-                        <div class="contact-details">
-                            <span class="c-label">ÉTAT CIVIL & CONTACT</span>
-                            <span class="c-value">🎂 25/05/2005</span>
-                            <span class="c-value">📞 07 71 82 48 09</span>
-                            <span class="c-value">📧 alexis.veloso25@gmail.com</span>
-                            <span class="c-value">📍 Le Perreux-sur-Marne (94)</span>
+                        <span class="role-tag">> ADMIN_SYSTÈME_RESEAUX // SDR_LEVEL_03</span>
+                    </div>
+                    <div class="status-box">
+                        <span class="c-label">STATUT_ACCÈS</span>
+                        <span class="badge-blue active-status">AUTORISÉ</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-body">
+                    <div class="info-block">
+                        <span class="c-label">IDENTITÉ_NUMÉRIQUE</span>
+                        <p>🎂 25/05/2005 (Perreux-sur-Marne)</p>
+                        <p>📧 alexis.veloso25@gmail.com</p>
+                        <p>📞 07 71 82 48 09</p>
+                    </div>
+                    <div class="info-block">
+                        <span class="c-label">QUALITÉS_PERSONNELLES</span>
+                        <div class="soft-skills-grid">
+                            <span class="soft-tag">Curieux</span>
+                            <span class="soft-tag">Esprit d'équipe</span>
+                            <span class="soft-tag">Gestion Stress</span>
+                            <span class="soft-tag">Autonome</span>
                         </div>
                     </div>
-
-                    <div class="info-right-side">
-                        <div class="stat-main">
-                            <span class="stat-num">24</span>
-                            <span class="stat-desc">Mois d'alternance</span>
-                        </div>
-                        <div class="education-level">
-                            <span class="c-label">NIVEAU D'ÉTUDES</span>
-                            <span class="c-value">Bac +3 (Licence SDR en cours)</span>
-                        </div>
+                    <div class="info-block stats-highlight">
+                        <span class="stat-num">24</span>
+                        <span class="stat-desc">Mois d'alternance</span>
                     </div>
                 </div>
 
                 <div class="action-bar">
-                    <a href="assets/cv_alexis_veloso.pdf" class="btn-action">📥 CV</a>
-                    <a href="assets/recommandation.pdf" class="btn-action">📄 RECOMMANDATION</a>
-                    <a href="https://linkedin.com/in/alexis-veloso" class="btn-action">🔗 LINKEDIN</a>
+                    <a href="assets/cv_alexis_veloso.pdf" class="btn-action">📥 DOWNLOAD_CV</a>
+                    <a href="https://linkedin.com/in/alexis-veloso" class="btn-action">🔗 LINKEDIN_PROFILE</a>
                 </div>
             </div>
         </section>
 
-        <section class="cert-section reveal">
-            <div class="panel-title">CERTIFICATIONS</div>
-            <div class="cert-row-list">
-                <span class="badge-blue">ATTESTATION RGPD 05</span>
-                <span class="badge-blue">CISCO NETACAD VALIDÉE</span>
-                <span class="badge-blue">CCNA (EN COURS)</span>
-                <span class="badge-blue">PIX : SCORE 350</span>
+        <section class="reveal">
+            <div class="panel">
+                <div class="panel-title">CENTRE_DE_CERTIFICATION // VALIDATIONS</div>
+                <div class="cert-grid-tech">
+                    <div class="cert-item">
+                        <div class="cert-hex">05</div>
+                        <div class="cert-info">
+                            <span class="cert-name">RGPD_COMPLIANCE</span>
+                            <span class="cert-status">VALIDÉE_05</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-hex">C1</div>
+                        <div class="cert-info">
+                            <span class="cert-name">CISCO_NETACAD</span>
+                            <span class="cert-status">NETWORK_CORE</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-hex">CC</div>
+                        <div class="cert-info">
+                            <span class="cert-name">CCNA_PREP</span>
+                            <span class="cert-status">EN_COURS...</span>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-hex">PX</div>
+                        <div class="cert-info">
+                            <span class="cert-name">SCORE_PIX</span>
+                            <span class="cert-status">VAL: 350</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <div class="grid-main reveal">
-            <div class="left-col">
-                <div class="panel">
-                    <div class="panel-title">COMPÉTENCES TECHNIQUES</div>
+        <section class="reveal">
+            <div class="panel">
+                <div class="panel-title">COMPÉTENCES_TECHNIQUES // ANALYSE_FLUX</div>
+                <div class="skills-wrapper">
                     
                     <div class="skill-block">
-                        <div class="skill-info"><span>Environnement Windows / Admin Systèmes</span><span class="pct">90%</span></div>
+                        <div class="skill-info"><span>WINDOWS_SERVER & AD</span><span class="pct">90%</span></div>
                         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
                     </div>
 
                     <div class="skill-block">
-                        <div class="skill-info"><span>Environnement Linux / Admin Systèmes</span><span class="pct">80%</span></div>
+                        <div class="skill-info"><span>LINUX_DEBIAN_ENV</span><span class="pct">80%</span></div>
                         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
                     </div>
 
+                    <div class="middle-cursor-separator">
+                        <div class="scan-line"></div>
+                    </div>
+
                     <div class="skill-block">
-                        <div class="skill-info"><span>Administration OFFICE 365</span><span class="pct">85%</span></div>
+                        <div class="skill-info"><span>INFRA_CISCO_ROUTING</span><span class="pct">85%</span></div>
                         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
                     </div>
 
                     <div class="skill-block">
-                        <div class="skill-info"><span>Gestion du parc / Cisco / Arduino</span><span class="pct">95%</span></div>
+                        <div class="skill-info"><span>CYBER_SECURITY_ESET</span><span class="pct">95%</span></div>
                         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
                     </div>
+
                 </div>
             </div>
+        </section>
 
-            <div class="right-col">
-                <div class="panel">
-                    <div class="panel-title">PROFIL_TERMINAL</div>
-                    <p style="line-height: 1.6; font-size: 0.95rem;">
-                        Étudiant en Licence Générale Informatique (SDR), je développe mes compétences techniques en alternance chez <strong>THENEAS</strong>. Curieux et motivé, je m'investis dans la gestion d'infrastructures et la sécurisation des données.
-                    </p>
-
-                    <div class="panel-title" style="margin-top:20px;">QUALITÉS</div>
-                    <div class="soft-skills-grid">
-                        <div class="soft-tag">Curieux</div>
-                        <div class="soft-tag">À l'écoute</div>
-                        <div class="soft-tag">Esprit d'équipe</div>
-                        <div class="soft-tag">Gestion du stress</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer class="scrolling-footer">
-            <div class="scroll-container">
-                <div class="scroll-content">
-                    <span>• 2025 - 2026 : Licence Générale Informatique SDR (CFA Cerfal Campus Montsouris)</span>
-                    <span>• 2023 - 2025 : BTS SIO SISR (CFA Cerfal Campus Montsouris)</span>
-                    <span>• 2020 - 2023 : BAC Professionnel SN (Lycée Louis Armand, Nogent-sur-Marne)</span>
-                    <span>• 2025 - 2026 : Licence Générale Informatique SDR (CFA Cerfal Campus Montsouris)</span>
-                    <span>• 2023 - 2025 : BTS SIO SISR (CFA Cerfal Campus Montsouris)</span>
-                </div>
-            </div>
-        </footer>
     </main>
 
+    <footer class="binary-footer">
+        <div class="binary-scroll">
+            <span>01010110 01000101 01001100 01001111 01010011 01001111 00100000 01000001 01001100 01000101 01011000 01001001 01010011</span>
+            <span>01001100 01001001 01000011 01000101 01001110 01000011 01000101 00100000 01010011 01000100 01010010</span>
+            <span>01010011 01011001 01010011 01010100 01000101 01001101 00100000 01010010 01000101 01000001 01000100 01011001</span>
+            <span>01010110 01000101 01001100 01001111 01010011 01001111 00100000 01000001 01001100 01000101 01011000 01001001 01010011</span>
+        </div>
+    </footer>
+
     <script>
+        // HORLOGE DYNAMIQUE DANS LE NAV
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                            now.getMinutes().toString().padStart(2, '0') + ":" + 
+                            now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // EFFET TYPEWRITER POUR LE NOM
         const text = "ALEXIS VELOSO";
         let i = 0;
         function typeWriter() {
@@ -139,6 +173,7 @@
         }
         window.onload = typeWriter;
 
+        // EFFET D'APPARITION AU SCROLL
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
