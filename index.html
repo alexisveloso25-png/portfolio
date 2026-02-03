@@ -3,119 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexis Veloso | Apprenti Licence SDR</title>
+    <title>Alexis Veloso | SDR & Cyber</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
-<body>
+<body class="cyber-theme">
+    <div id="particles-js"></div>
     <div class="scanline"></div>
 
     <header>
         <nav>
-            <ul>
-                <li><a href="index.html" class="active">/BIO</a></li>
-                <li><a href="entreprise.html">/MISSIONS</a></li>
-                <li><a href="formation.html">/LABS</a></li>
-                <li><a href="veille.html">/VEILLE</a></li>
-            </ul>
+            <div class="nav-container">
+                <div class="nav-logo">AV<span>.SYS</span></div>
+                <ul>
+                    <li><a href="index.html" class="active">/BIO</a></li>
+                    <li><a href="entreprise.html">/MISSIONS</a></li>
+                    <li><a href="formation.html">/LABS</a></li>
+                    <li><a href="veille.html">/VEILLE</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <main class="container">
-        <section class="reveal hero-section">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                </div>
-                <span class="terminal-title">SYSTEM_DATA // USER: ALEXIS_VLS // STACK: SDR</span>
-            </div>
+        <section class="reveal hero-section main-frame">
+            <div class="corner-border top-left"></div>
+            <div class="corner-border bottom-right"></div>
             
-            <div class="hero-content">
-                <h1 class="glitch-text" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
-                <h2 class="highlight">// APPRENTI EN LICENCE GÉNÉRALE INFORMATIQUE SDR</h2>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-num">03</span>
-                        <p>Ans d'Exp.</p>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1 class="glitch-text" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
+                    <div class="status-bar">
+                        <span class="pulse-dot"></span> 
+                        <span class="highlight">STATUS: ALTERNANCE @ THENEAS</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-num">L3</span>
-                        <p>Niveau Actuel</p>
+                    <p class="hero-quote">
+                        "Admiration pour la sécurité, la cybersécurité et les réseaux."
+                    </p>
+                    
+                    <div class="hero-stats-new">
+                        <div class="stat-box">
+                            <span class="stat-val">03</span>
+                            <span class="stat-label">EXP_ANS</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-val">L3</span>
+                            <span class="stat-label">LVL_SDR</span>
+                        </div>
+                        <div class="stat-box warning">
+                            <span class="stat-val">00</span>
+                            <span class="stat-label">CCNA_PROC</span>
+                        </div>
+                        <div class="stat-box success">
+                            <span class="stat-val">01</span>
+                            <span class="stat-label">PIX_CERT</span>
+                        </div>
+                        <div class="stat-box info">
+                            <span class="stat-val">05</span>
+                            <span class="stat-label">RGPD_OK</span>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-num">00</span>
-                        <p>CCNA (En cours)</p>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">01</span>
-                        <p>Certification Pix</p>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num">05</span>
-                        <p>Attest. RGPD</p>
-                    </div>
-                </div>
 
-                <div class="button-group">
-                    <a href="entreprise.html" class="btn">LOGS_PROFESSIONNELS</a>
-                    <a href="assets/cv.pdf" target="_blank" class="btn outline">TÉLÉCHARGER_CV</a>
+                    <div class="cta-group">
+                        <a href="assets/cv.pdf" target="_blank" class="cyber-btn">
+                            <span class="btn-text">TÉLÉCHARGER_CV</span>
+                            <span class="btn-glitch"></span>
+                        </a>
+                        <a href="https://linkedin.com/in/ton-profil" target="_blank" class="cyber-btn secondary">
+                            <span class="btn-text">LINKEDIN_PORTAL</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="grid">
-            <div class="card reveal">
-                <h3 class="highlight">01_CONTACT_INFO</h3>
-                <div class="contact-grid">
-                    <p><span class="cyan">LOC:</span> Le Perreux-Sur-Marne (94)</p>
-                    <p><span class="cyan">MAIL:</span> alexis.veloso25@gmail.com</p>
-                    <p><span class="cyan">TEL:</span> 07 71 82 48 09</p>
-                    <p><span class="cyan">AGE:</span> 20 ans (25/05/2005)</p>
+        <div class="grid-layout">
+            <div class="card reveal card-glass">
+                <div class="card-header">01_CONTACT_INFO</div>
+                <div class="card-body">
+                    <div class="info-row"><span class="label">LOCATION:</span> <span class="val">Le Perreux-Sur-Marne (94)</span></div>
+                    <div class="info-row"><span class="label">EMAIL:</span> <span class="val">alexis.veloso25@gmail.com</span></div>
+                    <div class="info-row"><span class="label">TEL:</span> <span class="val">07 71 82 48 09</span></div>
+                    <div class="info-row"><span class="label">DOB:</span> <span class="val">25/05/2005 (20 ans)</span></div>
                 </div>
             </div>
 
-            <div class="card reveal">
-                <h3 class="highlight">02_HARDWARE_&_SYSTEMS</h3>
-                <div class="tag-cloud">
-                    <span class="tag">Maintenance & Assemblage PC</span>
-                    <span class="tag">Gestion de parc</span>
-                    <span class="tag">Installations audiovisuelles</span>
-                    <span class="tag">Windows & Linux</span>
-                    <span class="tag">Arduino</span>
-                </div>
-            </div>
-
-            <div class="card reveal">
-                <h3 class="highlight">03_ADMIN_RESEAU_&_SDR</h3>
-                <div class="tag-cloud">
-                    <span class="tag">Active Directory</span>
-                    <span class="tag">DNS / DHCP</span>
-                    <span class="tag">Cisco Netacad IT Essentials</span>
-                    <span class="tag">Supervision PRTG</span>
-                    <span class="tag">Suite Bureautique</span>
-                </div>
-            </div>
-
-            <div class="card reveal" style="grid-column: 1 / -1;">
-                <h3 class="highlight">04_CURRICULUM_ACADEMIQUE</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4 class="cyan">2025 - 2026: Licence Générale Informatique</h4>
-                        <p>Apprentissage au CFA Cerfal Campus Montsouris, Paris 14ème.</p>
+            <div class="card reveal card-glass">
+                <div class="card-header">02_HARDWARE_&_BUREAUTIQUE</div>
+                <div class="card-body">
+                    <div class="skill-tags">
+                        <span>Maintenance PC</span>
+                        <span>Gestion Parc</span>
+                        <span>Audiovisuel</span>
+                        <span>Suite Bureautique</span>
+                        <span>Arduino</span>
                     </div>
-                    <div class="timeline-item">
-                        <h4 class="cyan">2023 - 2025: BTS SIO (Option SISR)</h4>
-                        <p>Apprentissage au CFA Cerfal Campus Montsouris, Paris 14ème.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4 class="cyan">2020 - 2023: BAC Professionnel SN (Option RISC)</h4>
-                        <p>Lycée Louis Armand, Nogent-sur-Marne (94).</p>
+                </div>
+            </div>
+
+            <div class="card reveal card-glass">
+                <div class="card-header">03_SYSTEMS_&_NETWORKS</div>
+                <div class="card-body">
+                    <div class="skill-tags">
+                        <span class="high">Windows & Linux</span>
+                        <span>Active Directory</span>
+                        <span>DNS / DHCP</span>
+                        <span>Cisco IT Essentials</span>
+                        <span>Supervision PRTG</span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <section class="reveal academic-wrap">
+            <h2 class="section-title">/ PARCOURS_ACADÉMIQUE</h2>
+            <div class="v-line-container">
+                
+                <div class="v-entry right">
+                    <div class="v-marker"></div>
+                    <div class="v-card">
+                        <span class="v-year">2025 - 2026</span>
+                        <h4>Licence Générale Informatique</h4>
+                        <p class="v-inst">CFA Cerfal Campus Montsouris // Paris 14</p>
+                    </div>
+                </div>
+
+                <div class="v-entry left">
+                    <div class="v-marker"></div>
+                    <div class="v-card">
+                        <span class="v-year">2023 - 2025</span>
+                        <h4>BTS SIO (Option SISR)</h4>
+                        <p class="v-inst">CFA Cerfal Campus Montsouris // Paris 14</p>
+                    </div>
+                </div>
+
+                <div class="v-entry right">
+                    <div class="v-marker"></div>
+                    <div class="v-card">
+                        <span class="v-year">2020 - 2023</span>
+                        <h4>BAC Pro Systèmes Numériques</h4>
+                        <p class="v-inst">Lycée Louis Armand // Nogent-Sur-Marne</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <script src="js/main.js"></script>
