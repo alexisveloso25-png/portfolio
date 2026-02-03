@@ -4,9 +4,8 @@
     --primary: #00f2ff;
     --primary-glow: rgba(0, 242, 255, 0.4);
     --accent: #ff0055;
-    /* CHANGEMENT : Fond Bleu Acier (PAS NOIR) */
-    --bg-dark: #1a222f; 
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --bg-dark: #1a222f; /* FOND BLEU ACIER - PAS DE NOIR */
+    --card-bg: rgba(30, 41, 59, 0.8);
     --border: rgba(0, 242, 255, 0.3);
     --text: #e2e8f0;
     --cyan: #00f2ff;
@@ -17,50 +16,35 @@
 
 body {
     background-color: var(--bg-dark);
-    /* Grille plus visible pour casser l'aspect uni sombre */
     background-image: 
         linear-gradient(rgba(0, 242, 255, 0.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 242, 255, 0.08) 1px, transparent 1px);
-    background-size: 45px 45px;
+    background-size: 50px 50px;
     color: var(--text);
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Ligne de balayage (Scanline) */
 .scanline {
-    width: 100%;
-    height: 100px;
-    z-index: 9999;
+    width: 100%; height: 100px; z-index: 9999;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--primary-glow) 50%, rgba(0, 0, 0, 0) 100%);
-    opacity: 0.15;
-    position: fixed;
-    bottom: 100%;
-    animation: scan 8s linear infinite;
-    pointer-events: none;
+    opacity: 0.15; position: fixed; bottom: 100%;
+    animation: scan 8s linear infinite; pointer-events: none;
 }
 
-@keyframes scan {
-    0% { bottom: 100%; }
-    100% { bottom: -100px; }
-}
+@keyframes scan { 0% { bottom: 100%; } 100% { bottom: -100px; } }
 
 header {
-    background: rgba(26, 34, 47, 0.98);
-    backdrop-filter: blur(15px);
-    position: fixed;
-    width: 100%; top: 0; z-index: 1000;
+    background: rgba(26, 34, 47, 0.98); backdrop-filter: blur(15px);
+    position: fixed; width: 100%; top: 0; z-index: 1000;
     border-bottom: 3px solid var(--primary);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 nav ul { display: flex; justify-content: center; gap: 30px; list-style: none; padding: 20px; }
 nav a {
-    text-decoration: none; color: var(--text);
-    font-family: 'Fira Code', monospace; font-size: 0.85rem;
-    text-transform: uppercase; letter-spacing: 1px;
-    transition: 0.3s;
+    text-decoration: none; color: var(--text); font-family: 'Fira Code', monospace;
+    font-size: 0.85rem; text-transform: uppercase; transition: 0.3s;
 }
 nav a.active, nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
@@ -68,8 +52,7 @@ nav a.active, nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--p
 
 .highlight {
     color: var(--primary); font-family: 'Fira Code', monospace;
-    background: rgba(0, 242, 255, 0.1); padding: 2px 10px;
-    border-radius: 4px; display: inline-block; margin-bottom: 10px;
+    background: rgba(0, 242, 255, 0.1); padding: 2px 10px; border-radius: 4px;
 }
 
 .hero-section {
@@ -91,7 +74,6 @@ nav a.active, nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--p
 .card {
     background: var(--card-bg); border: 1px solid var(--border);
     padding: 30px; border-radius: 12px; transition: 0.4s ease;
-    backdrop-filter: blur(5px);
 }
 .card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 0 25px var(--primary-glow); }
 
@@ -103,19 +85,19 @@ nav a.active, nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--p
 .btn {
     padding: 15px 30px; background: var(--primary); color: var(--bg-dark);
     text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block;
-    transition: 0.3s; font-family: 'Fira Code'; text-transform: uppercase;
+    transition: 0.3s; font-family: 'Fira Code';
 }
 .btn.outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
 .btn:hover { box-shadow: 0 0 30px var(--primary); transform: scale(1.05); }
 
-.reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+.reveal { opacity: 0; transform: translateY(40px); transition: 1s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* Terminal Header */
 .terminal-header {
     background: #2d3748; padding: 12px 20px; border-radius: 12px 12px 0 0;
-    border: 1px solid var(--border); display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
 }
 .dot { width: 12px; height: 12px; border-radius: 50%; }
 .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
 .terminal-title { font-family: 'Fira Code'; font-size: 0.8rem; color: #a0aec0; }
+.cyan { color: var(--primary); font-weight: 600; }
