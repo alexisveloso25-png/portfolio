@@ -1,26 +1,19 @@
-// TYPEWRITER EFFECT
-const nameElement = document.getElementById('typewriter');
-const fullName = "ALEXIS VELOSO";
-let i = 0;
-
-function typeWriter() {
-    if (i < fullName.length) {
-        nameElement.innerHTML += fullName.charAt(i);
-        i++;
-        setTimeout(typeWriter, 120);
-    }
-}
-
-// REAL TIME CLOCK
-function startClock() {
-    const clockElement = document.getElementById('clock');
-    setInterval(() => {
-        const now = new Date();
-        clockElement.innerText = now.toLocaleTimeString('fr-FR', { hour12: false });
-    }, 1000);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    typeWriter();
-    startClock();
+    // Clock
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString('fr-FR', { hour12: false });
+    }, 1000);
+
+    // Typewriter
+    const text = "ALEXIS VELOSO";
+    let i = 0;
+    const speed = 150;
+    function type() {
+        if (i < text.length) {
+            document.getElementById("typewriter").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
 });
