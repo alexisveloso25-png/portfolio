@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Animation au scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const scrollReveal = () => {
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (elementTop < windowHeight - 100) {
+                el.classList.add('active');
             }
         });
-    }, { threshold: 0.1 });
+    };
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Effet de parallaxe léger sur le fond (Optionnel)
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        document.querySelector('.bg-gradient').style.transform = `translate(${x * 20}px, ${y * 20}px)`;
-    });
+    window.addEventListener('scroll', scrollReveal);
+    scrollReveal(); // Lancement immédiat pour les éléments visibles
 });
