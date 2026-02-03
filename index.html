@@ -4,206 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDR_OS // ALEXIS_VELOSO</title>
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #7000ff;
-            --bg-dark: #05050a;
-            --panel-bg: rgba(20, 20, 25, 0.95);
-            --border-light: rgba(0, 242, 255, 0.3);
-            --text-main: #e0e0e0;
-        }
-
-        body {
-            background: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
-
-        /* Scan Radar */
-        .radar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
-            z-index: 1000; opacity: 0.3; animation: scan 8s linear infinite;
-        }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 100px 20px; }
-
-        /* --- SECTION COORDONNÉES AMÉLIORÉE --- */
-        .identity-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .panel {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .panel::before {
-            content: "SECURED_DATA";
-            position: absolute; top: 10px; right: 10px;
-            font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--neon-blue); opacity: 0.5;
-        }
-
-        .panel-title {
-            color: var(--neon-blue);
-            font-family: 'JetBrains Mono';
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 10px;
-        }
-
-        .info-item {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-label {
-            font-family: 'JetBrains Mono';
-            font-size: 0.7rem;
-            color: var(--neon-purple);
-            text-transform: uppercase;
-        }
-
-        .info-value {
-            font-size: 1rem;
-            color: #fff;
-            margin-top: 4px;
-        }
-
-        /* --- TIMELINE MISE À JOUR --- */
-        .timeline { position: relative; margin-top: 80px; }
-        .t-line { position: absolute; left: 50%; width: 2px; height: 100%; background: var(--border-light); transform: translateX(-50%); }
-        
-        .t-item { width: 50%; padding: 20px 40px; position: relative; box-sizing: border-box; }
-        .t-item.right { left: 50%; text-align: left; }
-        .t-item.left { left: 0; text-align: right; }
-        
-        .t-dot {
-            position: absolute; width: 16px; height: 16px; background: var(--neon-purple);
-            border-radius: 50%; top: 35px; box-shadow: 0 0 15px var(--neon-purple);
-            z-index: 5;
-        }
-        .left .t-dot { right: -8px; }
-        .right .t-dot { left: -8px; }
-
-        .t-card { 
-            background: var(--panel-bg); 
-            border: 1px solid var(--border-light); 
-            padding: 20px; 
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        .t-card:hover { border-color: var(--neon-blue); transform: scale(1.02); }
-        .t-card h4 { margin: 0 0 5px 0; color: var(--neon-blue); }
-        .t-card span { font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--neon-purple); }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div class="radar"></div>
+<body class="cyber-interface">
+    <div class="network-grid"></div>
+    <div class="network-radar"></div>
+    <div id="custom-cursor"></div>
 
-    <main class="container">
-        <div class="identity-grid">
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="system-status"><span class="pulse"></span> SYSTEM_ONLINE</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">01_BIO</a></li>
+                    <li><a href="entreprise.html">02_MISSIONS</a></li>
+                    <li><a href="formation.html">03_LABS</a></li>
+                    <li><a href="veille.html">04_VEILLE</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="viewport">
+        <section class="section hero-core reveal">
+            <div class="header-unit">
+                <h1 class="unit-name glitch-text" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
+                <p class="unit-role">CYBERSECURITY // SYSTEMS // NETWORKS ENGINEER</p>
+                <p class="unit-status">LICENCE GÉNÉRALE INFORMATIQUE SDR // @THENEAS</p>
+            </div>
+            
+            <div class="quick-stats-grid">
+                <div class="stat-module"><span class="stat-val">03</span><span class="stat-lbl">EXP_YEARS</span></div>
+                <div class="stat-module"><span class="stat-val">L3</span><span class="stat-lbl">SDR_LEVEL</span></div>
+                <div class="stat-module process"><span class="stat-val">CORE</span><span class="stat-lbl">CCNA_INIT</span></div>
+                <div class="stat-module verified"><span class="stat-val">01</span><span class="stat-lbl">PIX_CERT</span></div>
+                <div class="stat-module info"><span class="stat-val">05</span><span class="stat-lbl">RGPD_COMP</span></div>
+            </div>
+
+            <div class="cta-terminal-group">
+                <a href="assets/cv.pdf" class="btn-terminal"><span class="btn-icon">📄</span>_DOWNLOAD_CV</a>
+                <a href="https://linkedin.com/in/ton-profil" class="btn-terminal secondary"><span class="btn-icon">🔗</span>_LINKEDIN_PORTAL</a>
+            </div>
+        </section>
+
+        <div class="interface-grid">
             <div class="panel reveal">
-                <div class="panel-title">01_Dossier_Identité</div>
+                <div class="panel-header">IDENTIFICATION_MATRIX</div>
+                <div class="panel-body">
+                    <ul class="data-list">
+                        <li><span class="key">TEL:</span> <span class="val">07 71 82 48 09</span></li>
+                        <li><span class="key">MAIL:</span> <span class="val">alexis.veloso25@gmail.com</span></li>
+                        <li><span class="key">LOC:</span> <span class="val">Perreux-Sur-Marne (94)</span></li>
+                        <li><span class="key">BORN:</span> <span class="val">25 MAI 2005 (20 ans)</span></li>
+                        <li><span class="key">SOFT_SKILLS:</span> <span class="val">Rigueur, Autonomie, Proactif</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel reveal skill-distribution-panel">
+                <div class="panel-header">COMPETENCE_OVERVIEW</div>
+                <div class="panel-body">
+                    <canvas id="skillChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel reveal">
+                <div class="panel-header">HARDWARE_&_BUREAU</div>
+                <div class="panel-body">
+                    <ul class="skill-matrix">
+                        <li><span class="skill-name">Maintenance PC</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Gestion Parc IT</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Assemblage PC</span><span class="skill-level">[▓▓▓▓░]</span></li>
+                        <li><span class="skill-name">Installations AV</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Cisco Netacad</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Office 365</span><span class="skill-level">[▓▓▓▓░]</span></li>
+                        <li><span class="skill-name">Arduino / IoT</span><span class="skill-level">[▓▓▓░░]</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel reveal">
+                <div class="panel-header">SYSTEMS_&_ADMINISTRATION</div>
+                <div class="panel-body">
+                    <ul class="skill-matrix">
+                        <li><span class="skill-name">Windows / Linux</span><span class="skill-level">[▓▓▓▓░]</span></li>
+                        <li><span class="skill-name">Active Directory</span><span class="skill-level">[▓▓▓▓░]</span></li>
+                        <li><span class="skill-name">DNS / DHCP</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">PRTG Monitoring</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Python / Bash</span><span class="skill-level">[▓▓▓░░]</span></li>
+                        <li><span class="skill-name">Wireshark Analyse</span><span class="skill-level">[▓▓▓░░]</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="section timeline-container reveal">
+            <h2 class="section-title-line">// ACADEMIC_HISTORY</h2>
+            <div class="timeline-v">
+                <div class="timeline-main-line"></div>
                 
-                <div class="info-item">
-                    <span class="info-label">Nom Complet</span>
-                    <span class="info-value">Alexis Veloso</span>
+                <div class="timeline-node right">
+                    <div class="node-indicator"></div>
+                    <div class="node-panel">
+                        <span class="node-date">2025 - 2026</span>
+                        <h4>Licence Générale Informatique SDR</h4>
+                        <p>CFA Cerfal Campus Montsouris, Paris 14ème</p>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">Date de Naissance</span>
-                    <span class="info-value">25 Mai 2005 (20 ans)</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Nationalité</span>
-                    <span class="info-value">Française</span>
-                </div>
-            </div>
 
-            <div class="panel reveal">
-                <div class="panel-title">02_Canaux_Communication</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="info-item">
-                        <span class="info-label">Téléphone Direct</span>
-                        <span class="info-value">07 71 82 48 09</span>
+                <div class="timeline-node left">
+                    <div class="node-indicator"></div>
+                    <div class="node-panel">
+                        <span class="node-date">2023 - 2025</span>
+                        <h4>BTS SIO (Option SISR)</h4>
+                        <p>CFA Cerfal Campus Montsouris, Paris 14ème</p>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">E-mail Professionnel</span>
-                        <span class="info-value">alexis.veloso25@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Localisation</span>
-                        <span class="info-value">Perreux-Sur-Marne (94170)</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Disponibilité</span>
-                        <span class="info-value">Alternance (Rythme L3 SDR)</span>
+                </div>
+
+                <div class="timeline-node right">
+                    <div class="node-indicator"></div>
+                    <div class="node-panel">
+                        <span class="node-date">2020 - 2023</span>
+                        <h4>BAC Professionnel SN (Option RISC)</h4>
+                        <p>Lycée Louis Armand, Nogent-sur-Marne</p>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="panel-title reveal" style="text-align: center; border: none;">/ / PARCOURS_ACADÉMIQUE</div>
-        
-        <div class="timeline">
-            <div class="t-line"></div>
-
-            <div class="t-item right reveal">
-                <div class="t-dot"></div>
-                <div class="t-card">
-                    <span>2025 — 2026</span>
-                    <h4>Licence Générale Informatique SDR</h4>
-                    <p>Système, Développement, Réseau<br>CFA Cerfal Campus Montsouris, Paris 14ème</p>
-                </div>
-            </div>
-
-            <div class="t-item left reveal">
-                <div class="t-dot"></div>
-                <div class="t-card">
-                    <span>2023 — 2025</span>
-                    <h4>BTS SIO (Option SISR)</h4>
-                    <p>Services Informatiques aux Organisations<br>CFA Cerfal Campus Montsouris, Paris 14ème</p>
-                </div>
-            </div>
-
-            <div class="t-item right reveal">
-                <div class="t-dot"></div>
-                <div class="t-card">
-                    <span>2020 — 2023</span>
-                    <h4>BAC Professionnel SN (Option RISC)</h4>
-                    <p>Systèmes Numériques / Réseaux Informatiques et Systèmes Communiquants<br>Lycée Louis Armand, Nogent-sur-Marne</p>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
+    <div id="debug-log-console" class="log-closed">
+        <div class="log-header">
+            <span>DEBUG_LOG // SYSTEM_EVENTS</span>
+            <button onclick="toggleDebugLog()">_X</button>
+        </div>
+        <div id="log-output"></div>
+    </div>
+    <div id="log-trigger" onclick="toggleDebugLog()">_DEBUG_LOG</div>
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
