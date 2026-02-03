@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Animation au scroll (Reveal)
+    // Animation au scroll
     const revealElements = () => {
         const reveals = document.querySelectorAll('.reveal');
         reveals.forEach(el => {
@@ -11,25 +11,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Effet Typing pour les titres "highlight"
+    const typingEffect = () => {
+        const texts = document.querySelectorAll('.highlight');
+        texts.forEach(text => {
+            const content = text.innerHTML;
+            if(!text.classList.contains('typed')) {
+                text.innerHTML = '';
+                let i = 0;
+                const speed = 50;
+                const type = () => {
+                    if (i < content.length) {
+                        text.innerHTML += content.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                };
+                type();
+                text.classList.add('typed');
+            }
+        });
+    };
+
     window.addEventListener('scroll', revealElements);
     revealElements();
+    typingEffect();
 
-    // 2. Effet d'écriture sur les titres Highlight
-    const highlights = document.querySelectorAll('.highlight');
-    highlights.forEach(h => {
-        const originalText = h.innerText;
-        h.innerText = '';
-        let i = 0;
-        const type = () => {
-            if (i < originalText.length) {
-                h.innerText += originalText.charAt(i);
-                i++;
-                setTimeout(type, 50);
-            }
-        };
-        // On lance l'effet au chargement
-        type();
-    });
-
-    console.log("SEC-OPS Terminal: Access Granted for Alexis Veloso");
+    console.log("LOG: Portfolio Alexis Veloso - SYSTEM_READY");
 });
