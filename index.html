@@ -1,101 +1,156 @@
-<main class="main-viewport">
-    
-    <section class="glass-card hero-section tilt">
-        <div class="hero-content">
-            <h1 id="typewriter"></h1>
-            <div class="intro-terminal">
-                <p class="t-text">
-                    <strong>Bienvenue sur mon portfolio !</strong><br>
-                    Étudiant en Licence Générale Informatique (SDR), passionné par l’informatique depuis mon plus jeune âge. 
-                    Curieux et motivé, je développe mes connaissances dans les technologies du numérique pour sécuriser les infrastructures de demain.
-                </p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALEXIS_VELOSO // INFRA_PORTAL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <div class="scanline"></div>
+
+    <header class="main-header">
+        <div class="header-content">
+            <div class="brand">
+                <span class="status-dot pulse"></span>
+                <span class="sys-user">USER: ALEXIS_VELOSO</span>
+            </div>
+            <nav class="glass-nav">
+                <a href="index.html" class="active">BIO</a>
+                <a href="entreprise.html">MISSIONS</a>
+                <a href="formation.html">FORMATIONS</a>
+                <a href="veille.html">VEILLE</a>
+            </nav>
+            <div class="sys-info">
+                <div class="chip">LATENCY: <span id="ping-val">24MS</span></div>
+                <div id="clock">00:00:00</div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <div class="dashboard-grid">
+    <main class="main-viewport">
         
-        <section class="glass-card profile-card tilt">
-            <div class="card-tag">BIOMETRIC_DATA</div>
-            <div class="profile-layout">
-                <div class="avatar-container">
-                    <div class="avatar-hex">AV</div>
-                    <div class="laser-scan"></div>
+        <section class="glass-card hero-section">
+            <div class="hero-content">
+                <h1 id="typewriter" class="glitch-text"></h1>
+                <p class="role-subtitle">// SYSTEMS_AND_NETWORKS_EXPERT</p>
+                
+                <div class="intro-terminal">
+                    <div class="t-header"><span></span><span></span><span></span></div>
+                    <p class="t-text">
+                        <strong>Bienvenue sur mon portfolio !</strong><br><br>
+                        Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).
+                        Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. 
+                        Curieux et motivé, je développe continuellement mes compétences et mes connaissances dans le domaine des technologies et du numérique.<br><br>
+                        À travers ce portfolio, je vous invite à découvrir mes projets, mon parcours et mon intérêt pour l’informatique.
+                    </p>
                 </div>
-                <div class="data-fields">
-                    <div class="field">
-                        <span class="label">IDENTITY</span>
-                        <span class="value">ALEXIS VELOSO</span>
-                    </div>
-                    <div class="field">
-                        <span class="label">STATUS</span>
-                        <span class="value active">L3 SDR // ALTERNANT</span>
-                    </div>
-                    <div class="field">
-                        <span class="label">CONTACT</span>
-                        <span class="value email">alexis.veloso25@gmail.com</span>
-                    </div>
+
+                <div class="action-buttons">
+                    <a href="assets/cv.pdf" class="btn btn-primary">DOWNLOAD_CV</a>
+                    <a href="https://linkedin.com/in/alexis-veloso" target="_blank" class="btn btn-secondary">LINKEDIN_CONNECT</a>
                 </div>
             </div>
         </section>
 
-        <section class="glass-card skills-card tilt">
-            <div class="card-tag">TECH_CAPABILITIES</div>
-            <div class="skills-list">
-                <div class="skill-module">
-                    <div class="skill-info">
-                        <span>WINDOWS SERVER</span>
-                        <a href="#" class="btn-dl-skill" title="Download Docs">DOCX_</a>
-                    </div>
-                    <div class="progress-segmented">
-                        <div class="segment fill"></div><div class="segment fill"></div><div class="segment fill"></div>
-                        <div class="segment fill"></div><div class="segment"></div><div class="segment"></div>
+        <div class="dashboard-grid">
+            
+            <section class="glass-card profile-card">
+                <div class="card-tag">USER_PROFILE</div>
+                <div class="profile-main">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-hex">AV</div>
+                        <div class="scan-bar"></div> </div>
+                    <div class="id-badge-content">
+                        <div class="id-item"><span>NOM</span><strong>VELOSO ALEXIS</strong></div>
+                        <div class="id-item"><span>AGE</span><strong>20 ANS</strong></div>
+                        <div class="id-item"><span>LOC</span><strong>LE PERREUX (94)</strong></div>
+                        <div class="id-item"><span>MAIL</span><strong class="email">alexis.veloso25@gmail.com</strong></div>
                     </div>
                 </div>
+            </section>
+
+            <section class="glass-card education-card">
+                <div class="card-tag">ACADEMIC_PATHWAY</div>
+                <div class="modern-timeline">
+                    <div class="edu-box active">
+                        <div class="edu-date">2025-26</div>
+                        <div class="edu-details">
+                            <strong>LICENCE GÉNÉRALE INFORMATIQUE (SDR)</strong>
+                            <p>CNAM - CAMPUS MONTSOURIS</p>
+                        </div>
+                    </div>
+                    <div class="edu-box">
+                        <div class="edu-date">2023-25</div>
+                        <div class="edu-details">
+                            <strong>BTS SIO OPTION SISR</strong>
+                            <p>CAMPUS MONTSOURIS</p>
+                        </div>
+                    </div>
+                    <div class="edu-box">
+                        <div class="edu-date">2020-23</div>
+                        <div class="edu-details">
+                            <strong>BAC PRO SN OPTION SISR</strong>
+                            <p>LYCÉE LOUIS ARMAND - MENTION BIEN</p>
+                        </div>
+                    </div>
                 </div>
+            </section>
+
+            <section class="glass-card">
+                <div class="card-tag">TECHNICAL_MATRIX</div>
+                <div class="skills-grid">
+                    <div class="s-item"><span>WINDOWS SERVER (AD/GPO)</span><div class="p-bar"><div class="fill" style="width:90%"></div></div></div>
+                    <div class="s-item"><span>LINUX (DEBIAN/BASH)</span><div class="p-bar"><div class="fill" style="width:85%"></div></div></div>
+                    <div class="s-item"><span>RESEAUX (VLAN/ROUTAGE)</span><div class="p-bar"><div class="fill" style="width:80%"></div></div></div>
+                    <div class="s-item"><span>MONITORING (PRTG/SNICK)</span><div class="p-bar"><div class="fill" style="width:85%"></div></div></div>
+                    <div class="s-item"><span>VIRTUALISATION (PROXMOX/ESXI)</span><div class="p-bar"><div class="fill" style="width:75%"></div></div></div>
+                    <div class="s-item"><span>CYBERSÉCURITÉ SI</span><div class="p-bar"><div class="fill" style="width:70%"></div></div></div>
+                    <div class="s-item"><span>DÉPLOIEMENT (WDS/FOG)</span><div class="p-bar"><div class="fill" style="width:65%"></div></div></div>
+                </div>
+            </section>
+
+            <section class="glass-card">
+                <div class="card-tag">HUMAN_CORE</div>
+                <div class="soft-skills-grid">
+                    <span class="pill">CURIOSITÉ TECH</span>
+                    <span class="pill">AUTONOMIE</span>
+                    <span class="pill">ESPRIT D'ÉQUIPE</span>
+                    <span class="pill">ADAPTABILITÉ</span>
+                    <span class="pill">RIGUEUR</span>
+                    <span class="pill">COMMUNICATION</span>
+                    <span class="pill">RÉSOLUTION DE PANNES</span>
+                </div>
+            </section>
+        </div>
+
+        <section class="glass-card cert-section">
+            <div class="card-tag">VALIDATED_CERTS</div>
+            <div class="cert-flex">
+                <div class="cert-badge">MOOC ANSSI</div>
+                <div class="cert-badge">RGPD_CNIL</div>
+                <div class="cert-badge active">CCNA_EN_COURS</div>
+                <div class="cert-badge">PIX_CERTIF</div>
+                <div class="cert-badge">CISCO_IT_ESSENTIAL</div>
+            </div>
         </section>
 
-        <section class="glass-card education-card tilt">
-            <div class="card-tag">EDUCATION_LOGS</div>
-            <div class="edu-grid">
-                <div class="edu-item">
-                    <span class="year">2026</span>
-                    <div class="content"><strong>L3 SDR</strong><small>CNAM MONTSOURIS</small></div>
+        <section class="glass-card contact-section">
+            <div class="card-tag">SECURE_CONTACT</div>
+            <form class="modern-form">
+                <div class="form-inputs">
+                    <input type="text" placeholder="VOTRE_NOM" required>
+                    <input type="email" placeholder="VOTRE_EMAIL" required>
                 </div>
-                <div class="edu-item">
-                    <span class="year">2025</span>
-                    <div class="content"><strong>BTS SIO SISR</strong><small>CAMPUS MONTSOURIS</small></div>
-                </div>
-                <div class="edu-item">
-                    <span class="year">2023</span>
-                    <div class="content"><strong>BAC PRO SN</strong><small>L. ARMAND (SISR)</small></div>
-                </div>
-            </div>
+                <textarea placeholder="MESSAGE_ENCRYPTÉ..." rows="4"></textarea>
+                <button type="submit" class="btn btn-primary full">TRANSMIT_DATA_PACKET</button>
+            </form>
         </section>
-    </div>
 
-    <section class="glass-card contact-section tilt center-card">
-        <div class="card-tag">UPLINK_COMMUNICATION</div>
-        <div class="security-badge">PROTOCOL: AES-256_SECURE</div>
-        <form class="command-form">
-            <div class="input-group">
-                <div class="input-wrapper">
-                    <label>SOURCE_ID</label>
-                    <input type="text" placeholder="NOM_PRENOM" required>
-                </div>
-                <div class="input-wrapper">
-                    <label>RETURN_PATH</label>
-                    <input type="email" placeholder="EMAIL_ADDR" required>
-                </div>
-            </div>
-            <div class="input-wrapper">
-                <label>ENCRYPTED_MESSAGE</label>
-                <textarea rows="4" placeholder="ENTER_DATA..."></textarea>
-            </div>
-            <button type="submit" class="btn-primary-mega">
-                <span class="btn-text">INITIALIZE_TRANSMISSION</span>
-                <span class="btn-glitch"></span>
-            </button>
-        </form>
-    </section>
-</main>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
