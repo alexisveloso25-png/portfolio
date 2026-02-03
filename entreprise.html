@@ -1,52 +1,88 @@
-<main class="container">
-    <h2 class="reveal highlight">// MISSIONS_EN_ENTREPRISE : THENEAS</h2>
-    
-    <div class="card reveal" style="border-left: 4px solid var(--primary); margin-bottom: 50px;">
-        <span class="tag">Niveau L3 - Expertise</span>
-        <h3>Installation d'une solution de supervision PRTG</h3>
-        <p>Mise en place d'un serveur **PRTG Network Monitor** pour superviser les performances, la disponibilité et l'état des équipements réseau et des services du domaine.</p>
-    </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions Entreprise | Alexis Veloso</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">BIO</a></li>
+                <li><a href="entreprise.html">MISSIONS ENTREPRISE</a></li>
+                <li><a href="formation.html">PROJETS FORMATION</a></li>
+                <li><a href="veille.html">VEILLE CYBER</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="grid">
-        <div class="card reveal">
-            <span class="tag">Système</span>
-            <h3>Migration Profwiz</h3>
-            <p>Utilisation de Profwiz pour la migration transparente de profils utilisateurs vers un nouveau domaine.</p>
+    <main class="container">
+        <section class="reveal">
+            <span class="highlight">// EXPERIENCES_PROFESSIONNELLES : THENEAS</span>
+            <p style="margin-bottom: 40px;">Présentation de mes 9 missions majeures réalisées en milieu professionnel.</p>
+        </section>
+
+        <div class="card reveal" style="grid-column: 1 / -1; border-left: 5px solid var(--primary); margin-bottom: 40px;">
+            <span class="tag">PROJET MAJEUR - LICENCE L3</span>
+            <h3>Solution de Supervision Centralisée (PRTG)</h3>
+            <p>Le projet PRTG a été lancé pour mettre en place une supervision centralisée, plus claire et plus réactive, capable de surveiller en continu les équipements des deux sites. L’objectif est d’améliorer la disponibilité des services, de faciliter le travail de l’équipe informatique et d’anticiper les éventuels problèmes.</p>
         </div>
-        <div class="card reveal">
-            <span class="tag">Périphériques</span>
-            <h3>Scanner Toshiba</h3>
-            <p>Configuration de scanners réseau pour les utilisateurs (SMB/FTP).</p>
+
+        <div class="grid">
+            
+            <div class="card reveal">
+                <span class="tag">Migration</span>
+                <h3>Utilisation de Profwiz</h3>
+                <p>Migration automatisée de profils utilisateurs vers de nouveaux domaines ou postes de travail.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Infrastructure</span>
+                <h3>Configuration Scanners Toshiba</h3>
+                <p>Paramétrage de scanners réseau pour les utilisateurs (SMB/FTP) et gestion des flux de documents.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Gestion de Parc</span>
+                <h3>Utilisation de GLPI</h3>
+                <p>Gestion opérationnelle du parc informatique et suivi des incidents (ticketing) pour les utilisateurs finaux.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Administration</span>
+                <h3>CMD et PowerShell</h3>
+                <p>Utilisation des commandes avancées pour l'administration système et l'automatisation de tâches de maintenance.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Sécurité</span>
+                <h3>Pare-feu IPFire</h3>
+                <p>Configuration et administration d'un pare-feu IPFire pour sécuriser l'accès internet et les flux réseau.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Réseau Sans-fil</span>
+                <h3>Contrôleur Wi-Fi (Nuclias)</h3>
+                <p>Mise en place et administration d'un contrôleur Wi-Fi centralisé pour la gestion des bornes d'accès.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Cloud</span>
+                <h3>Administration Office 365</h3>
+                <p>Gestion des comptes utilisateurs, des groupes et des licences dans l'environnement Microsoft 365.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Virtualisation</span>
+                <h3>Installation de Proxmox</h3>
+                <p>Mise en place et configuration de l'hyperviseur Proxmox pour l'hébergement de machines virtuelles en entreprise.</p>
+            </div>
+
         </div>
-        <div class="card reveal">
-            <span class="tag">Gestion</span>
-            <h3>GLPI</h3>
-            <p>Utilisation de GLPI pour la gestion du parc informatique et le suivi des incidents/tickets.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Automation</span>
-            <h3>CMD & PowerShell</h3>
-            <p>Administration système via lignes de commandes et scripts automatisés.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Sécurité</span>
-            <h3>Pare-feu IPFire</h3>
-            <p>Configuration et sécurisation des flux via le firewall IPFire.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Réseau Sans-fil</span>
-            <h3>Nuclias Connect</h3>
-            <p>Mise en place et gestion d'un contrôleur Wi-Fi centralisé.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Cloud</span>
-            <h3>Administration Office 365</h3>
-            <p>Gestion des utilisateurs et des licences au sein de l'environnement Microsoft 365.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Virtualisation</span>
-            <h3>Proxmox</h3>
-            <p>Installation, configuration et gestion de machines virtuelles sur l'hyperviseur Proxmox.</p>
-        </div>
-    </div>
-</main>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
