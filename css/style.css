@@ -95,3 +95,125 @@ body {
     width: 100%; background: #000; border: 1px solid var(--border-glass); padding: 12px; border-radius: 8px; color: #fff; margin-bottom: 10px;
 }
 .btn-submit-v4 { width: 100%; background: var(--primary); padding: 12px; border: none; font-weight: 800; cursor: pointer; }
+
+/* --- ACADEMIC PIPELINE (VERTICAL) --- */
+.pipeline-container {
+    position: relative;
+    padding-left: 40px;
+    margin-top: 20px;
+}
+
+/* La ligne verticale de fond */
+.pipeline-container::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.pipeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.pipeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Le point lumineux sur la ligne */
+.pipeline-dot {
+    position: absolute;
+    left: -40px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-dark);
+    border: 2px solid var(--border-glass);
+    border-radius: 50%;
+    z-index: 2;
+    transition: 0.3s;
+}
+
+.pipeline-item.active .pipeline-dot {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* Contenu de chaque étape */
+.pipeline-content {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.pipeline-item.active .pipeline-content {
+    border-color: var(--border-glass);
+    background: rgba(168, 85, 247, 0.03);
+}
+
+.pipeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pipeline-year {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.pipeline-status {
+    font-size: 0.55rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--text-dim);
+}
+
+.pipeline-item.active .pipeline-status {
+    background: var(--primary-dim);
+    color: var(--primary);
+}
+
+.pipeline-title {
+    font-size: 0.9rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.pipeline-school {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 15px;
+    text-transform: none;
+}
+
+/* Tags de détails sous la formation */
+.pipeline-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.p-tag {
+    font-size: 0.6rem;
+    color: #888;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-transform: none;
+}
+
+/* Hover effet */
+.pipeline-item:hover .pipeline-content {
+    transform: translateX(5px);
+    border-color: var(--primary);
+}
