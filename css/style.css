@@ -37,7 +37,7 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
 
 .container { max-width: 1100px; margin: 0 auto; padding: 120px 20px; }
 
-/* --- NOUVELLE CARTE DE CONTACT DESIGN --- */
+/* --- CARTE DE CONTACT & TITRES --- */
 .contact-card {
     background: linear-gradient(135deg, rgba(112, 0, 255, 0.1), rgba(0, 242, 255, 0.05));
     border: 1px solid var(--border-light);
@@ -62,8 +62,17 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
     font-family: 'JetBrains Mono';
     color: var(--neon-purple);
     font-size: 0.9rem;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     display: block;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.sub-role-tag {
+    display: block;
+    font-family: 'JetBrains Mono';
+    color: var(--text-muted);
+    font-size: 0.8rem;
     margin-top: 5px;
 }
 
@@ -80,7 +89,50 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
 .c-label { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--neon-purple); text-transform: uppercase; margin-bottom: 5px; }
 .c-value { font-size: 1rem; color: #fff; font-weight: 500; }
 
-/* --- NOUVELLES BARRES DE COMPÉTENCES --- */
+/* --- CATALOGUE DES COMPÉTENCES --- */
+.skills-catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.skill-category h4 {
+    color: var(--neon-blue);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-family: 'JetBrains Mono';
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-list-pro {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-list-pro li {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.skill-list-pro li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--neon-purple);
+    font-weight: bold;
+}
+
+/* --- BARRES DE PROGRESSION --- */
 .skill-block { margin-bottom: 25px; }
 .skill-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
 .pct { color: var(--neon-blue); font-weight: bold; }
@@ -101,11 +153,10 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
     transition: width 2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
-/* Panels Génériques */
+/* --- PANELS & TIMELINE --- */
 .panel { background: var(--panel-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 25px; backdrop-filter: blur(10px); margin-bottom: 25px; }
 .panel-title { color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; }
 
-/* Timeline */
 .timeline { position: relative; margin-top: 50px; }
 .t-line { position: absolute; left: 50%; width: 2px; height: 100%; background: var(--border-light); transform: translateX(-50%); }
 .t-item { width: 50%; padding: 20px 40px; position: relative; box-sizing: border-box; }
@@ -119,17 +170,10 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
 .t-card span { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--neon-purple); }
 .t-card p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
 
-/* Animations */
+/* --- ANIMATIONS & RESPONSIVE --- */
 .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* Veille & Méthode */
-.method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.method-card { display: flex; gap: 15px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 4px; border: 1px solid rgba(0, 242, 255, 0.1); }
-.source-item-pro { display: block; text-decoration: none; background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); padding: 15px; border-radius: 4px; margin-bottom: 15px; transition: 0.3s; }
-.source-item-pro:hover { border-color: var(--neon-blue); transform: translateX(5px); }
-
-/* Responsive */
 @media (max-width: 768px) {
     .name-title { font-size: 2.2rem; }
     .contact-card { padding: 25px; }
