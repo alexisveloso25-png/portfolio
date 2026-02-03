@@ -3,61 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missions Entreprise | Alexis Veloso</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>SDR_OS // MISSIONS_THENEAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #7000ff;
+            --bg-dark: #05050a;
+            --panel-bg: rgba(20, 20, 25, 0.95);
+            --border-light: rgba(0, 242, 255, 0.3);
+            --text-main: #e0e0e0;
+            --text-muted: #88889b;
+        }
+
+        body { background: var(--bg-dark); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; margin: 0; overflow-x: hidden; }
+        
+        /* Scan Radar */
+        .radar { position: fixed; top: 0; left: 0; width: 100%; height: 2px; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); z-index: 1000; opacity: 0.2; animation: scan 8s linear infinite; pointer-events: none; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); }
+        .nav-content { max-width: 1100px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; }
+        .nav-links a { text-decoration: none; color: #fff; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
+        .nav-links a.active { color: var(--neon-blue); border-bottom: 1px solid var(--neon-blue); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 120px 20px; }
+
+        /* Header Entreprise */
+        .company-hero { border: 1px solid var(--border-light); padding: 40px; border-radius: 8px; background: linear-gradient(135deg, rgba(112,0,255,0.1), transparent); margin-bottom: 40px; }
+        .company-name { font-size: 3rem; font-family: 'JetBrains Mono'; color: var(--neon-blue); margin: 0; }
+        .company-type { color: var(--neon-purple); font-family: 'JetBrains Mono'; font-size: 0.9rem; margin-top: 5px; }
+
+        /* Dashboard Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: var(--panel-bg); border: 1px solid var(--border-light); padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-value { display: block; font-size: 2rem; color: var(--neon-blue); font-weight: bold; }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-family: 'JetBrains Mono'; }
+
+        /* Sections */
+        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+        .panel { background: var(--panel-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 25px; margin-bottom: 25px; }
+        .panel-title { color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 20px; }
+
+        /* Missions List */
+        .mission-item { display: flex; gap: 15px; margin-bottom: 20px; }
+        .mission-id { color: var(--neon-purple); font-family: 'JetBrains Mono'; font-size: 0.8rem; }
+        .mission-text strong { color: #fff; display: block; margin-bottom: 5px; }
+        .mission-text p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* Stack Technique */
+        .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .stack-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border-light); padding: 8px; font-size: 0.75rem; font-family: 'JetBrains Mono'; border-radius: 4px; text-align: center; }
+
+        /* Clients */
+        .client-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .client-tag { border: 1px solid var(--neon-purple); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color: var(--neon-purple); }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) { .grid-main { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-    <div class="scanline"></div>
+    <div class="radar"></div>
+
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">/BIO</a></li>
-                <li><a href="entreprise.html" class="active">/MISSIONS_PRO</a></li>
-                <li><a href="formation.html">/LABS_ACAD</a></li>
-                <li><a href="veille.html">/VEILLE_CYBER</a></li>
+        <nav class="nav-content">
+            <div class="status-indicator">● PRO_MISSION_ENVIRONMENT</div>
+            <ul class="nav-links">
+                <li><a href="index.html">01_BIO</a></li>
+                <li><a href="entreprise.html" class="active">02_MISSIONS</a></li>
+                <li><a href="formation.html">03_FORMATION</a></li>
+                <li><a href="veille.html">04_VEILLE</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="reveal section-title">
-            <span class="highlight">// WORK_LOGS : THENEAS (2024-2026)</span>
-            <h1>EXPÉRIENCES PROFESSIONNELLES</h1>
-            <p>Rapport d'activité sur 2 ans d'alternance en tant qu'apprenti informatique.</p>
+        <section class="company-hero reveal">
+            <h1 class="company-name">THENEAS</h1>
+            <div class="company-type">GEIE - Groupement Européen d'Intérêt Économique</div>
+            <p style="max-width: 700px; margin-top: 20px; font-size: 0.95rem; line-height: 1.6;">
+                Expertise multi-services (Finance, RH, IT) au profit de ses adhérents. Ma mission consiste à garantir la disponibilité et la sécurité des systèmes d'information pour l'ensemble du groupement.
+            </p>
         </section>
 
-        <div class="card reveal featured-card">
-            <span class="tag pulse">PROJET_CRITIQUE</span>
-            <h3>Solution de Supervision Centralisée (PRTG)</h3>
-            <p>Mise en place d'un monitoring temps-réel sur deux sites géographiques. Surveillance SNMP, analyse de bande passante et alertes proactives pour garantir une haute disponibilité (99.9%).</p>
-            <div class="tag-cloud">
-                <span class="tag">SNMP</span> <span class="tag">Monitoring</span> <span class="tag">SDR</span>
+        <div class="stats-grid reveal">
+            <div class="stat-card">
+                <span class="stat-value">450+</span>
+                <span class="stat-label">PC Opérationnels</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">Multi</span>
+                <span class="stat-label">Adhérents Europe</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Support IT</span>
             </div>
         </div>
 
-        <div class="grid">
-            <div class="card reveal">
-                <span class="tag">SYSTÈME</span>
-                <h3>Migration Profwiz</h3>
-                <p>Automatisation de la migration des profils utilisateurs lors de déploiements de parcs.</p>
+        <div class="grid-main">
+            <div class="left-col reveal">
+                <div class="panel">
+                    <div class="panel-title">CORE_MISSIONS // RESPONSABILITÉS</div>
+                    
+                    <div class="mission-item">
+                        <div class="mission-id">[01]</div>
+                        <div class="mission-text">
+                            <strong>Support Utilisateurs (N1/N2)</strong>
+                            <p>Assistance technique quotidienne, résolution d'incidents matériels et logiciels via ticketing.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[02]</div>
+                        <div class="mission-text">
+                            <strong>Maintenance du Parc Informatique</strong>
+                            <p>Gestion du cycle de vie des 450 équipements : déploiement, mises à jour et réparations.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[03]</div>
+                        <div class="mission-text">
+                            <strong>Formation & Accompagnement</strong>
+                            <p>Sensibilisation des collaborateurs aux outils numériques et aux bonnes pratiques de sécurité.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">PORTFOLIO_CLIENTS // ADHÉRENTS</div>
+                    <p class="info-value" style="margin-bottom: 15px; font-size: 0.85rem;">Gestion du SI pour des membres majeurs du groupement :</p>
+                    <div class="client-list">
+                        <span class="client-tag">GROUPE ROCHER</span>
+                        <span class="client-tag">FIDESCO</span>
+                        <span class="client-tag">SAJE</span>
+                        <span class="client-tag">AVM</span>
+                        <span class="client-tag">MEMBRES_EU</span>
+                    </div>
+                </div>
             </div>
-            <div class="card reveal">
-                <span class="tag">ADMIN</span>
-                <h3>GLPI & Support N2</h3>
-                <p>Optimisation du workflow de ticketing et gestion opérationnelle des actifs.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">SÉCURITÉ</span>
-                <h3>Pare-feu IPFire</h3>
-                <p>Durcissement des règles de filtrage et segmentation réseau inter-sites.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">INFRA</span>
-                <h3>Hyperviseur Proxmox</h3>
-                <p>Déploiement et clustering de machines virtuelles pour services critiques.</p>
+
+            <div class="right-col reveal">
+                <div class="panel">
+                    <div class="panel-title">TECH_STACK // TOOLS</div>
+                    <div class="stack-grid">
+                        <div class="stack-tag">OFFICE 365</div>
+                        <div class="stack-tag">GLPI</div>
+                        <div class="stack-tag">ESET ENDPOINT</div>
+                        <div class="stack-tag">BITWARDEN</div>
+                        <div class="stack-tag">AD / AZURE</div>
+                        <div class="stack-tag">NETWORKING</div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">INFRASTRUCTURE_HEALTH</div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+                        Supervision active du patrimoine informatique garantissant un taux de disponibilité maximal pour les fonctions financières, RH et juridiques du groupement.
+                    </p>
+                </div>
             </div>
         </div>
     </main>
-    <script src="js/main.js"></script>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
