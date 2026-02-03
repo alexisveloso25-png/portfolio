@@ -1,19 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Clock
-    setInterval(() => {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString('fr-FR', { hour12: false });
-    }, 1000);
-
-    // Typewriter
-    const text = "ALEXIS VELOSO";
+    const nameElement = document.getElementById('typewriter');
+    const fullName = "ALEXIS VELOSO";
     let i = 0;
-    const speed = 150;
-    function type() {
-        if (i < text.length) {
-            document.getElementById("typewriter").innerHTML += text.charAt(i);
+
+    function typeWriter() {
+        if (i < fullName.length) {
+            nameElement.innerHTML += fullName.charAt(i);
             i++;
-            setTimeout(type, speed);
+            setTimeout(typeWriter, 150);
         }
     }
-    type();
+    typeWriter();
+
+    // Horloge
+    setInterval(() => {
+        const now = new Date();
+        document.getElementById('clock').innerText = now.toLocaleTimeString('fr-FR');
+    }, 1000);
 });
