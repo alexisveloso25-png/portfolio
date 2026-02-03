@@ -41,18 +41,22 @@
         .stat-value { display: block; font-size: 2rem; color: var(--neon-blue); font-weight: bold; }
         .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-family: 'JetBrains Mono'; }
 
-        /* Sections */
-        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+        /* Layout Grid */
+        .grid-main { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 25px; }
         .panel { background: var(--panel-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 25px; margin-bottom: 25px; }
-        .panel-title { color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 20px; }
+        .panel-title { color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
 
-        /* Missions List */
-        .mission-item { display: flex; gap: 15px; margin-bottom: 20px; }
-        .mission-id { color: var(--neon-purple); font-family: 'JetBrains Mono'; font-size: 0.8rem; }
-        .mission-text strong { color: #fff; display: block; margin-bottom: 5px; }
-        .mission-text p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+        /* Missions List Style */
+        .mission-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
+        .mission-id { color: var(--neon-purple); font-family: 'JetBrains Mono'; font-size: 0.8rem; font-weight: bold; padding-top: 2px; }
+        .mission-text strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1rem; }
+        .mission-text p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 
-        /* Stack Technique */
+        /* History Sections (Licence / BTS) */
+        .history-section { border-top: 2px solid var(--neon-purple); padding-top: 30px; margin-top: 20px; }
+        .year-tag { background: var(--neon-purple); color: white; padding: 4px 12px; font-family: 'JetBrains Mono'; font-size: 0.75rem; border-radius: 4px; margin-bottom: 20px; display: inline-block; }
+
+        /* Tech Stack */
         .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .stack-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border-light); padding: 8px; font-size: 0.75rem; font-family: 'JetBrains Mono'; border-radius: 4px; text-align: center; }
 
@@ -106,38 +110,10 @@
         </div>
 
         <div class="grid-main">
-            <div class="left-col reveal">
-                <div class="panel">
-                    <div class="panel-title">CORE_MISSIONS // RESPONSABILITÉS</div>
-                    
-                    <div class="mission-item">
-                        <div class="mission-id">[01]</div>
-                        <div class="mission-text">
-                            <strong>Support Utilisateurs (N1/N2)</strong>
-                            <p>Assistance technique quotidienne, résolution d'incidents matériels et logiciels via ticketing.</p>
-                        </div>
-                    </div>
-
-                    <div class="mission-item">
-                        <div class="mission-id">[02]</div>
-                        <div class="mission-text">
-                            <strong>Maintenance du Parc Informatique</strong>
-                            <p>Gestion du cycle de vie des 450 équipements : déploiement, mises à jour et réparations.</p>
-                        </div>
-                    </div>
-
-                    <div class="mission-item">
-                        <div class="mission-id">[03]</div>
-                        <div class="mission-text">
-                            <strong>Formation & Accompagnement</strong>
-                            <p>Sensibilisation des collaborateurs aux outils numériques et aux bonnes pratiques de sécurité.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel">
+            <div class="left-col">
+                <div class="panel reveal">
                     <div class="panel-title">PORTFOLIO_CLIENTS // ADHÉRENTS</div>
-                    <p class="info-value" style="margin-bottom: 15px; font-size: 0.85rem;">Gestion du SI pour des membres majeurs du groupement :</p>
+                    <p class="info-value" style="margin-bottom: 15px; font-size: 0.85rem;">Gestion du SI pour les membres majeurs :</p>
                     <div class="client-list">
                         <span class="client-tag">GROUPE ROCHER</span>
                         <span class="client-tag">FIDESCO</span>
@@ -146,25 +122,93 @@
                         <span class="client-tag">MEMBRES_EU</span>
                     </div>
                 </div>
+
+                <div class="panel history-section reveal">
+                    <span class="year-tag">3ÈME ANNÉE : LICENCE SDR</span>
+                    <div class="panel-title">PROJETS_SUPERVISION_EXPERT</div>
+                    
+                    <div class="mission-item">
+                        <div class="mission-id">[L3]</div>
+                        <div class="mission-text">
+                            <strong>Implémentation de PRTG Network Monitor</strong>
+                            <p>Mise en place d'une solution de supervision complète pour le monitoring en temps réel des serveurs, switchs et flux réseaux du groupement.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel history-section reveal">
+                    <span class="year-tag">BTS SIO : MISSIONS EFFECTUÉES (2 ANS)</span>
+                    <div class="panel-title">ADMINISTRATION_SYSTÈMES_&_RÉSEAUX</div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Migration de profils via Profwiz</strong>
+                            <p>Gestion fluide du transfert des données et paramètres utilisateurs lors des changements de postes ou domaines.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Gestion de parc avec GLPI</strong>
+                            <p>Utilisation quotidienne pour le suivi des actifs informatiques et la résolution efficace des incidents (Ticketing).</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Infrastructure de Virtualisation</strong>
+                            <p>Installation et configuration de l'hyperviseur Proxmox pour la gestion des machines virtuelles.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Sécurité Périmétrique & WiFi</strong>
+                            <p>Configuration de pare-feu IPFire et déploiement d'un contrôleur WiFi pour la mobilité sécurisée des adhérents.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Cloud & Scripting</strong>
+                            <p>Administration de l'environnement Office 365 et usage des commandes PowerShell/CMD pour l'automatisation des tâches système.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-item">
+                        <div class="mission-id">[BTS]</div>
+                        <div class="mission-text">
+                            <strong>Configuration Scanners Réseau</strong>
+                            <p>Paramétrage des flux numérisés vers les dossiers partagés ou emails pour les utilisateurs finaux.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="right-col reveal">
                 <div class="panel">
                     <div class="panel-title">TECH_STACK // TOOLS</div>
                     <div class="stack-grid">
+                        <div class="stack-tag">PRTG (L3)</div>
+                        <div class="stack-tag">PROXMOX</div>
+                        <div class="stack-tag">IPFIRE</div>
                         <div class="stack-tag">OFFICE 365</div>
                         <div class="stack-tag">GLPI</div>
+                        <div class="stack-tag">POWERSHELL</div>
                         <div class="stack-tag">ESET ENDPOINT</div>
-                        <div class="stack-tag">BITWARDEN</div>
-                        <div class="stack-tag">AD / AZURE</div>
-                        <div class="stack-tag">NETWORKING</div>
+                        <div class="stack-tag">PROFWIZ</div>
                     </div>
                 </div>
 
                 <div class="panel">
                     <div class="panel-title">INFRASTRUCTURE_HEALTH</div>
                     <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
-                        Supervision active du patrimoine informatique garantissant un taux de disponibilité maximal pour les fonctions financières, RH et juridiques du groupement.
+                        Supervision active (PRTG) du patrimoine informatique garantissant un taux de disponibilité maximal pour les fonctions financières, RH et juridiques du groupement.
                     </p>
                 </div>
             </div>
