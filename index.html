@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // INFRA_PORTAL_V2</title>
+    <title>ALEXIS_VELOSO // PORTFOLIO_SDR</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="laser-scanner"></div>
-    <div class="scanline"></div>
+    <div class="vignette"></div>
 
     <header class="main-header">
         <div class="header-left">
@@ -17,10 +17,10 @@
             <span class="sys-title">SYSTEM_DASHBOARD // ALEXIS_VELOSO</span>
         </div>
         <nav class="nav-links">
-            <a href="index.html" class="active">[ BIO ]</a>
-            <a href="entreprise.html">[ MISSIONS ]</a>
-            <a href="formation.html">[ FORMATION ]</a>
-            <a href="veille.html">[ VEILLE ]</a>
+            <a href="index.html" class="active">[ 01_BIO ]</a>
+            <a href="entreprise.html">[ 02_MISSIONS ]</a>
+            <a href="formation.html">[ 03_FORMATION ]</a>
+            <a href="veille.html">[ 04_VEILLE ]</a>
         </nav>
         <div class="header-right">
             <div id="clock">00:00:00</div>
@@ -30,122 +30,100 @@
     <main class="container">
         
         <section class="module hero-module">
+            <div class="module-header">SYSTEM_OVERVIEW</div>
             <div class="module-content">
-                <div class="terminal-header-title">TERMINAL_ID: 0x7E4</div>
                 <h1 id="typewriter"></h1>
                 <p class="subtitle">> L3_INFORMATIQUE_SDR // SYSTEMS_AND_NETWORKS_EXPERT</p>
-                
-                <div class="intro-box">
-                    <p class="terminal-prompt">guest@portfolio:~$ <span class="command">run about_me.sh</span></p>
-                    <p class="main-text">
-                        Bienvenue ! Je suis Alexis Veloso, étudiant en Licence Générale Informatique (SDR). 
-                        En alternance chez <strong>THENEAS</strong>, je me spécialise dans le déploiement d'infrastructures résilientes et la sécurisation des flux de données. 
-                        Mon approche combine rigueur technique et curiosité constante pour les nouvelles menaces et solutions d'orchestration.
-                    </p>
+                <div class="bio-text">
+                    Bienvenue sur mon interface. Étudiant en Licence SDR et passionné par l'architecture réseau et la sécurité, 
+                    je forge mon expertise en alternance chez <strong>THENEAS</strong>.
                 </div>
             </div>
         </section>
 
-        <div class="grid-layout">
-            <div class="col-left">
-                <div class="module">
-                    <div class="module-header">CORE_IDENTIFICATION</div>
-                    <div class="id-badge">
-                        <div class="avatar">AV<div class="avatar-scan"></div></div>
-                        <div class="id-info">
-                            <div class="info-row"><span class="label">AGE</span><span class="val">20 ANS</span></div>
-                            <div class="info-row"><span class="label">LOC</span><span class="val">LE PERREUX (94)</span></div>
-                            <div class="info-row"><span class="label">MAIL</span><span class="val small">alexis.veloso25@gmail.com</span></div>
-                            <div class="info-row"><span class="label">TEL</span><span class="val">07.71.82.48.09</span></div>
-                            <div class="info-row"><span class="label">PERMIS</span><span class="val">CATÉGORIE B</span></div>
+        <div class="main-grid">
+            
+            <aside class="side-panel">
+                
+                <div class="module card-info">
+                    <div class="module-header">USER_ID_CARD</div>
+                    <div class="id-content">
+                        <div class="avatar-box">AV<div class="av-scan"></div></div>
+                        <div class="contact-data">
+                            <div class="data-row"><span class="lbl">AGE</span> <span class="val">20 ANS</span></div>
+                            <div class="data-row"><span class="lbl">LOC</span> <span class="val">LE PERREUX</span></div>
+                            <div class="data-row"><span class="lbl">MAIL</span> <span class="val email">alexis.veloso25@gmail.com</span></div>
+                            <div class="data-row"><span class="lbl">TEL</span> <span class="val">07.71.82.48.09</span></div>
+                            <div class="data-row"><span class="lbl">PERMIS</span> <span class="val">CAT. B</span></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="module">
-                    <div class="module-header">HUMAN_CORE_RESOURCES (SOFT_SKILLS)</div>
-                    <div class="soft-skills-grid">
-                        <div class="soft-card">
-                            <span class="soft-title">CURIOSITÉ</span>
-                            <p>Veille quotidienne sur vulnérabilités 0-day.</p>
+                    <div class="module-header">HUMAN_RESOURCES</div>
+                    <div class="soft-skills-stack">
+                        <div class="soft-box">
+                            <strong>CURIOSITÉ</strong>
+                            <p>Veille technologique quotidienne sur vulnérabilités 0-day.</p>
                         </div>
-                        <div class="soft-card">
-                            <span class="soft-title">AUTONOMIE</span>
-                            <p>Résolution complexe via analyse de logs.</p>
+                        <div class="soft-box">
+                            <strong>AUTONOMIE</strong>
+                            <p>Diagnostic et résolution via analyse de logs complexes.</p>
                         </div>
-                        <div class="soft-card">
-                            <span class="soft-title">COMMUNICATION</span>
-                            <p>Rédaction de schémas et procédures ISO.</p>
-                        </div>
-                        <div class="soft-card">
-                            <span class="soft-title">RIGOUREUX</span>
-                            <p>Respect strict des protocoles de sécurité.</p>
-                        </div>
-                        <div class="soft-card">
-                            <span class="soft-title">RÉACTIF</span>
-                            <p>Intervention rapide sur incidents N2/N3.</p>
-                        </div>
-                        <div class="soft-card">
-                            <span class="soft-title">COLLABORATIF</span>
-                            <p>Esprit d'équipe en environnement Agile.</p>
+                        <div class="soft-box">
+                            <strong>COMMUNICATION</strong>
+                            <p>Rédaction de schémas réseau et procédures claires.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </aside>
 
-            <div class="col-right">
+            <section class="main-panel">
+                
                 <div class="module">
-                    <div class="module-header">TECHNICAL_HARDWARE_STACK</div>
-                    <div class="skill-stack">
-                        <div class="skill-item">
-                            <div class="skill-top"><span>WINDOWS SERVER (AD, GPO, WDS)</span><span>90%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
+                    <div class="module-header">TECHNICAL_SKILLS_ANALYSIS</div>
+                    <div class="skills-grid">
+                        <div class="skill-group">
+                            <div class="skill-info"><span>WINDOWS_ENV</span><span>90%</span></div>
+                            <div class="bar-container"><div class="bar-fill" style="width: 90%;"></div></div>
+                            <p class="details">Server 2022, AD, GPO, DNS/DHCP, WDS.</p>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>LINUX (DEBIAN, UBUNTU, BASH)</span><span>85%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                        <div class="skill-group">
+                            <div class="skill-info"><span>LINUX_SYSTEMS</span><span>85%</span></div>
+                            <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+                            <p class="details">Debian/Ubuntu, Scripting Bash, SSH Hardening.</p>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>NETWORKING (CISCO, VLAN, ACL)</span><span>80%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                        <div class="skill-group">
+                            <div class="skill-info"><span>NETWORKING</span><span>80%</span></div>
+                            <div class="bar-container"><div class="bar-fill" style="width: 80%;"></div></div>
+                            <p class="details">Cisco Routing, VLANs, ACLs, VPN IPsec/SSL.</p>
                         </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>FIREWALLING & VPN (IPSEC, SSL)</span><span>75%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>MONITORING (PRTG, SNICK)</span><span>85%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>VIRTUALISATION (PROXMOX, ESXI)</span><span>80%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-top"><span>CYBER-GOUVERNANCE (RGPD, ANSSI)</span><span>80%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                        <div class="skill-group">
+                            <div class="skill-info"><span>MONITORING</span><span>85%</span></div>
+                            <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+                            <p class="details">PRTG, Snick, Supervision infrastructures.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="module">
-                    <div class="module-header">SECURE_COMMUNICATION_CHANNEL</div>
-                    <form id="contact-form" class="cyber-form">
-                        <div class="form-row">
-                            <input type="text" placeholder="IDENT_NAME" required>
-                            <input type="email" placeholder="IDENT_EMAIL" required>
+                    <div class="module-header">SECURE_CONTACT_PORT</div>
+                    <form class="contact-form">
+                        <div class="input-group">
+                            <input type="text" placeholder="USER_IDENT" required>
+                            <input type="email" placeholder="EMAIL_ADDRESS" required>
                         </div>
-                        <input type="text" placeholder="SUBJECT_LINE">
-                        <textarea placeholder="ENCRYPT_YOUR_MESSAGE_HERE..." rows="4"></textarea>
-                        <button type="submit" class="btn-primary">TRANSMIT_DATA</button>
+                        <textarea placeholder="WRITE_MESSAGE_DATA..." rows="3"></textarea>
+                        <button type="submit" class="btn-send">TRANSMIT_PACKET</button>
                     </form>
                 </div>
-            </div>
+            </section>
         </div>
 
-        <footer class="system-logs">
-            <div class="log-line">>> [LOG] SESSION_OWNER: ALEXIS_VELOSO</div>
-            <div class="log-line">>> [LOG] STATUS: READY_FOR_HIRE</div>
+        <footer class="footer-logs">
+            <span class="log">> [OK] SYSTEM_LOADED</span>
+            <span class="log">> [OK] LASER_SCANNER_ACTIVE</span>
+            <span class="log">> [OK] LOCATION: 48.8415° N, 2.5029° E</span>
         </footer>
     </main>
 
