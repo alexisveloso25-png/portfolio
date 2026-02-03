@@ -12,19 +12,18 @@
 
     <header class="main-header">
         <div class="header-left">
-            <span class="status-dot"></span>
-            <span class="sys-title">SYSTEM_DASHBOARD // ALEXIS_VELOSO</span>
+            <span class="status-dot pulse"></span>
+            <span class="sys-title">SYSTEM_DASHBOARD // USER: ALEXIS_VELOSO</span>
         </div>
         <nav class="nav-links">
-            <a href="index.html" class="active">01_BIO</a>
-            <a href="entreprise.html">02_MISSIONS</a>
-            <a href="formation.html">03_FORMATION</a>
-            <a href="veille.html">04_VEILLE</a>
+            <a href="index.html" class="active">[ 01_BIO ]</a>
+            <a href="entreprise.html">[ 02_MISSIONS ]</a>
+            <a href="formation.html">[ 03_FORMATION ]</a>
+            <a href="veille.html">[ 04_VEILLE ]</a>
         </nav>
         <div class="header-right">
             <div class="monitoring">
-                <canvas id="sparkline" width="60" height="20"></canvas>
-                <span id="ping-val">24MS</span>
+                <span id="ping-val">LATENCY: 24MS</span>
             </div>
             <div id="clock">00:00:00</div>
         </div>
@@ -34,25 +33,36 @@
         
         <section class="module hero-module">
             <div class="module-content">
-                <h1 id="typewriter"></h1>
-                <p class="subtitle">> ADMINISTRATEUR SYSTÈMES ET RÉSEAUX // SDR_LEVEL_3</p>
-                <div class="terminal-text">
-                    <p>Bienvenue sur mon portfolio ! Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).</p>
-                    <p>Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. Curieux et motivé, je développe continuellement mes compétences dans le domaine des technologies et du numérique.</p>
+                <div class="terminal-header-title">TERMINAL_ID: 0x7E4</div>
+                <h1 id="typewriter" class="glitch-text"></h1>
+                <p class="subtitle">> L3_INFORMATIQUE_SDR // SYSTEMS_AND_NETWORKS_EXPERT</p>
+                
+                <div class="intro-box">
+                    <p class="terminal-prompt">guest@portfolio:~$ <span class="command">run about_me.sh</span></p>
+                    <p class="main-text">
+                        Bienvenue sur mon portfolio ! Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).
+                        Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. 
+                        Curieux et motivé, je développe continuellement mes compétences dans le domaine des technologies et du numérique.
+                    </p>
                 </div>
+
                 <div class="btn-group">
-                    <a href="assets/cv.pdf" class="btn-primary">DOWNLOAD_CV</a>
-                    <a href="#" class="btn-secondary">CONTACT_ME</a>
+                    <a href="assets/cv.pdf" class="btn-primary" target="_blank">DOWNLOAD_CV</a>
+                    <a href="assets/lettre_reco.pdf" class="btn-secondary">RECO_LETTER</a>
+                    <a href="https://linkedin.com/in/alexis-veloso" class="btn-secondary" target="_blank">LINKEDIN</a>
                 </div>
             </div>
         </section>
 
         <div class="grid-layout">
             <div class="col-left">
-                <div class="module contact-card">
+                <div class="module id-card">
                     <div class="module-header">USER_IDENTIFICATION</div>
                     <div class="id-badge">
-                        <div class="avatar">AV<div class="avatar-scan"></div></div>
+                        <div class="avatar">
+                            AV
+                            <div class="avatar-scan"></div>
+                        </div>
                         <div class="id-info">
                             <div class="info-row"><span class="label">AGE</span><span class="val">20_YRS</span></div>
                             <div class="info-row"><span class="label">LOC</span><span class="val">LE_PERREUX_94</span></div>
@@ -62,60 +72,82 @@
                     </div>
                 </div>
 
-                <div class="module skills-card">
-                    <div class="module-header">TECHNICAL_ALLOCATION</div>
-                    <div class="skill-item">
-                        <div class="skill-top"><span>WIN_SERVER / AD</span><span>90%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
+                <div class="module">
+                    <div class="module-header">TECHNICAL_SKILLS</div>
+                    <div class="skill-stack">
+                        <div class="skill-item">
+                            <div class="skill-top"><span>WINDOWS_ENV</span><span>90%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-top"><span>LINUX_DEBIAN</span><span>85%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-top"><span>PROG_BASICS</span><span>70%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 70%;"></div></div>
+                        </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-top"><span>LINUX_DEBIAN</span><span>80%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-top"><span>CISCO_NET</span><span>85%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-top"><span>CYBER_SEC</span><span>95%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">HUMAN_CORE</div>
+                    <div class="tags">
+                        <span class="tag">CURIEUX</span>
+                        <span class="tag">MOTIVÉ</span>
+                        <span class="tag">ESPRIT_EQUIPE</span>
+                        <span class="tag">AUTODIDACTE</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-right">
-                <div class="module education-card">
+                <div class="module timeline-module">
                     <div class="module-header">ACADEMIC_TIMELINE</div>
-                    <div class="timeline-item">
-                        <span class="date">2025-26</span>
-                        <div class="content"><strong>LICENCE SDR</strong> - Campus Montsouris</div>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="date">2023-25</span>
-                        <div class="content"><strong>BTS SIO SISR</strong> - Campus Montsouris</div>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="date">2020-23</span>
-                        <div class="content"><strong>BAC PRO SN</strong> - Lycée Louis Armand</div>
+                    <div class="timeline">
+                        <div class="time-node active">
+                            <span class="year">2025-26</span>
+                            <div class="desc"><strong>LICENCE SDR</strong> - Campus Montsouris</div>
+                        </div>
+                        <div class="time-node">
+                            <span class="year">2023-25</span>
+                            <div class="desc"><strong>BTS SIO SISR</strong> - Campus Montsouris</div>
+                        </div>
+                        <div class="time-node">
+                            <span class="year">2020-23</span>
+                            <div class="desc"><strong>BAC PRO SN</strong> - Lycée Louis Armand</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="module certs-card">
-                    <div class="module-header">VALIDATED_CERTIFICATIONS</div>
+                <div class="module">
+                    <div class="module-header">SECURITY_CERTIFICATIONS</div>
                     <div class="cert-grid">
-                        <div class="cert-tag">RGPD_05</div>
-                        <div class="cert-tag">CISCO_NET</div>
-                        <div class="cert-tag">CCNA_PREP</div>
-                        <div class="cert-tag">PIX_350</div>
+                        <div class="cert-box">RGPD_05</div>
+                        <div class="cert-box">CISCO_NET</div>
+                        <div class="cert-box">CCNA_EN_COURS</div>
+                        <div class="cert-box">PIX_350</div>
                     </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">CONTACT_ME</div>
+                    <form id="contact-form" class="cyber-form">
+                        <div class="form-row">
+                            <input type="text" placeholder="USER_NAME" required>
+                            <input type="email" placeholder="USER_EMAIL" required>
+                        </div>
+                        <textarea placeholder="WRITE_YOUR_MESSAGE_HERE..." rows="3"></textarea>
+                        <button type="submit" class="btn-primary">SEND_PACKET</button>
+                    </form>
                 </div>
             </div>
         </div>
 
         <footer class="system-logs">
-            <div class="log-line">>> [LOG] SESSION_START: SUCCESS</div>
-            <div class="log-line">>> [LOG] ALTERNANCE: THENEAS_OPERATIONAL</div>
-            <div class="log-line">>> [LOG] SYSTEM_STATUS: ENCRYPTED</div>
+            <div class="log-line">>> [LOG] SESSION_OPENED: 2026.02.03</div>
+            <div class="log-line">>> [LOG] UI_MODE: VIOLET_DOMINANCE</div>
+            <div class="log-line">>> [LOG] SYSTEM_STATUS: OPERATIONAL</div>
         </footer>
     </main>
 
