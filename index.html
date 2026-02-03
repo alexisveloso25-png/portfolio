@@ -1,149 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDR_OS // ALEXIS_VELOSO</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>SDR_OS // ALEXIS_VELOSO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="radar"></div>
 
-    <header>
-        <nav class="nav-content">
-            <div class="status-indicator"><span class="pulse"></span> SYSTEM_READY</div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">01_APPRENTI</a></li>
-                <li><a href="entreprise.html">02_MISSIONS</a></li>
-                <li><a href="formation.html">03_LABS</a></li>
-                <li><a href="veille.html">04_VEILLE</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- BOOT SCREEN -->
+<div id="boot">
+    <pre id="boot-text"></pre>
+</div>
 
-    <main class="container">
-        <section class="profile-header reveal">
-            <div class="contact-card">
-                <div class="card-header">
-                    <h1 class="name-title">ALEXIS VELOSO</h1>
-                    <span class="role-tag">Passionné par la cybersécurité, systèmes et réseaux</span>
-                    <span class="sub-role-tag">Actuellement en Licence Générale en Informatique SDR</span>
-                </div>
-                <div class="card-body">
-                    <div class="contact-grid">
-                        <div class="c-item">
-                            <span class="c-label">PHONE</span>
-                            <span class="c-value">07 71 82 48 09</span>
-                        </div>
-                        <div class="c-item">
-                            <span class="c-label">EMAIL</span>
-                            <span class="c-value">alexis.veloso25@gmail.com</span>
-                        </div>
-                        <div class="c-item">
-                            <span class="c-label">LOCATION</span>
-                            <span class="c-value">Perreux-Sur-Marne (94)</span>
-                        </div>
-                        <div class="c-item">
-                            <span class="c-label">STATUS</span>
-                            <span class="c-value">Alternant @THENEAS</span>
-                        </div>
-                    </div>
-                </div>
+<div class="radar"></div>
+<div class="cursor"></div>
+
+<header>
+    <nav class="nav-content">
+        <div class="status-indicator">
+            <span class="pulse"></span> SYSTEM_SECURE
+        </div>
+        <ul class="nav-links">
+            <li><a class="active">01_BIO</a></li>
+            <li><a>02_MISSIONS</a></li>
+            <li><a>03_LABS</a></li>
+            <li><a>04_VEILLE</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container reveal">
+
+    <section class="contact-card">
+        <h1 class="glitch" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
+        <p class="role-tag">CYBERSECURITY • SYSTEMS • NETWORKS</p>
+        <p class="sub-role-tag">Licence Informatique SDR — Alternant</p>
+    </section>
+
+    <section class="panel">
+        <div class="panel-title">SKILL_ANALYSIS</div>
+
+        <div class="skill-block">
+            <div class="skill-info"><span>ADMIN_SERVEUR</span><span>85%</span></div>
+            <div class="skill-bar-bg">
+                <div class="skill-bar-fill" data-level="85"></div>
             </div>
-        </section>
+        </div>
 
-        <section class="panel reveal">
-            <div class="panel-title">CORE_SKILLS_MATRIX</div>
-            
-            <div class="skills-levels-grid">
-                <div class="skill-group-label">SYSTÈMES & SERVEURS</div>
-                
-                <div class="skill-block">
-                    <div class="skill-info"><span>Active Directory, DNS, DHCP (Windows Server)</span><span class="pct">85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Administration Linux & Windows (Client/Serveur)</span><span class="pct">90%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Gestion de Parc (GLPI) & Maintenance PC</span><span class="pct">95%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
-                </div>
-
-                <div class="skill-group-label" style="margin-top: 30px;">RÉSEAUX & INFRASTRUCTURE</div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Architecture Cisco (IT Essentials / CCNA)</span><span class="pct">80%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Programmation Arduino & Systèmes Numériques</span><span class="pct">70%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Installations Audiovisuelles Pro</span><span class="pct">85%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                </div>
-
-                <div class="skill-group-label" style="margin-top: 30px;">DÉVELOPPEMENT & BUREAUTIQUE</div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Bases de Programmation (Scripting)</span><span class="pct">65%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 65%;"></div></div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-info"><span>Suite Office (Expertise Excel/Word)</span><span class="pct">90%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                </div>
+        <div class="skill-block">
+            <div class="skill-info"><span>INFRA_NETWORK</span><span>90%</span></div>
+            <div class="skill-bar-bg">
+                <div class="skill-bar-fill" data-level="90"></div>
             </div>
-        </section>
+        </div>
 
-        <section class="timeline-section reveal">
-            <div class="panel-title" style="text-align: center; border: none;">/ / CURRICULUM_VITAE</div>
-            <div class="timeline">
-                <div class="t-line"></div>
-                <div class="t-item right">
-                    <div class="t-dot"></div>
-                    <div class="t-card">
-                        <span>2025 — 2026</span>
-                        <h4>Licence Générale Informatique SDR</h4>
-                        <p>CFA Cerfal Campus Montsouris</p>
-                    </div>
-                </div>
-                <div class="t-item left">
-                    <div class="t-dot"></div>
-                    <div class="t-card">
-                        <span>2023 — 2025</span>
-                        <h4>BTS SIO (Option SISR)</h4>
-                        <p>CFA Cerfal Campus Montsouris</p>
-                    </div>
-                </div>
-                <div class="t-item right">
-                    <div class="t-dot"></div>
-                    <div class="t-card">
-                        <span>2020 — 2023</span>
-                        <h4>BAC Professionnel SN (Systèmes Numériques)</h4>
-                        <p>Lycée Louis Armand, Nogent-sur-Marne</p>
-                    </div>
-                </div>
+        <div class="skill-block">
+            <div class="skill-info"><span>SECURITY_MONITORING</span><span>75%</span></div>
+            <div class="skill-bar-bg">
+                <div class="skill-bar-fill" data-level="75"></div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+</main>
+
+<script src="js/main.js"></script>
 </body>
 </html>
