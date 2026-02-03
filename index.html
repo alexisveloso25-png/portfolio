@@ -3,96 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // CYBER_STATION</title>
+    <title>ALEXIS_VELOSO // INFRA_PORTAL</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="scanline"></div>
-    <div class="noise"></div>
 
-    <header class="hud-header">
-        <div class="hud-left">
-            <span class="status-tag">SECURE_CONNECTION</span>
-            <div class="ping-unit">
-                <canvas id="sparkline" width="50" height="20"></canvas>
-                <span id="ping-val">24MS</span>
-            </div>
+    <header class="main-header">
+        <div class="header-left">
+            <span class="status-dot"></span>
+            <span class="sys-title">SYSTEM_DASHBOARD // ALEXIS_VELOSO</span>
         </div>
-        <nav class="hud-nav">
-            <a href="index.html" class="active">01_DASHBOARD</a>
+        <nav class="nav-links">
+            <a href="index.html" class="active">01_BIO</a>
             <a href="entreprise.html">02_MISSIONS</a>
             <a href="formation.html">03_FORMATION</a>
+            <a href="veille.html">04_VEILLE</a>
         </nav>
-        <div class="hud-right" id="clock">00:00:00</div>
+        <div class="header-right">
+            <div class="monitoring">
+                <canvas id="sparkline" width="60" height="20"></canvas>
+                <span id="ping-val">24MS</span>
+            </div>
+            <div id="clock">00:00:00</div>
+        </div>
     </header>
 
-    <main class="hud-container">
-        <section class="hero-section">
-            <div class="terminal-header">SYSTEM_ACCESS_GRANTED</div>
-            <div class="terminal-body">
+    <main class="container">
+        
+        <section class="module hero-module">
+            <div class="module-content">
                 <h1 id="typewriter"></h1>
-                <p class="role-anim">> ADMINISTRATEUR SYSTÈMES ET RÉSEAUX // SDR_STUDENT</p>
-                <div class="bio-terminal">
-                    <span class="p-label">DESCRIPTION:</span>
-                    <p>Passionné d'informatique depuis l'enfance. Expert en devenir sur les infrastructures hybrides et la cybersécurité. Actuellement en Licence SDR, alternant chez THENEAS.</p>
+                <p class="subtitle">> ADMINISTRATEUR SYSTÈMES ET RÉSEAUX // SDR_LEVEL_3</p>
+                <div class="terminal-text">
+                    <p>Bienvenue sur mon portfolio ! Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).</p>
+                    <p>Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. Curieux et motivé, je développe continuellement mes compétences dans le domaine des technologies et du numérique.</p>
+                </div>
+                <div class="btn-group">
+                    <a href="assets/cv.pdf" class="btn-primary">DOWNLOAD_CV</a>
+                    <a href="#" class="btn-secondary">CONTACT_ME</a>
                 </div>
             </div>
         </section>
 
         <div class="grid-layout">
-            <aside class="contact-module">
-                <div class="module-title">CONTACT_IDENTITY_CARD</div>
-                <div class="id-card">
-                    <div class="id-photo">
-                        <div class="scan-bar"></div>
-                        <span class="no-img">AV</span>
-                    </div>
-                    <ul class="id-details">
-                        <li><small>AGE</small> <span>20_YRS</span></li>
-                        <li><small>LOC</small> <span>LE_PERREUX_94</span></li>
-                        <li><small>MAIL</small> <span class="truncate">alexis.veloso25@gmail.com</span></li>
-                        <li><small>PHONE</small> <span>07.71.82.48.09</span></li>
-                    </ul>
-                    <div class="action-buttons">
-                        <a href="assets/cv.pdf" class="btn-glow">DOWNLOAD_CV</a>
+            <div class="col-left">
+                <div class="module contact-card">
+                    <div class="module-header">USER_IDENTIFICATION</div>
+                    <div class="id-badge">
+                        <div class="avatar">AV<div class="avatar-scan"></div></div>
+                        <div class="id-info">
+                            <div class="info-row"><span class="label">AGE</span><span class="val">20_YRS</span></div>
+                            <div class="info-row"><span class="label">LOC</span><span class="val">LE_PERREUX_94</span></div>
+                            <div class="info-row"><span class="label">MAIL</span><span class="val small">alexis.veloso25@gmail.com</span></div>
+                            <div class="info-row"><span class="label">TEL</span><span class="val">07.71.82.48.09</span></div>
+                        </div>
                     </div>
                 </div>
-            </aside>
 
-            <section class="skills-module">
-                <div class="module-title">TECHNICAL_RESOURCES_ALLOCATION</div>
-                <div class="skill-group">
+                <div class="module skills-card">
+                    <div class="module-header">TECHNICAL_ALLOCATION</div>
                     <div class="skill-item">
-                        <div class="skill-info"><span>WINDOWS_SERVER / AD</span><span class="val">90%</span></div>
-                        <div class="progress-bar"><div class="fill" style="width: 90%"></div></div>
+                        <div class="skill-top"><span>WIN_SERVER / AD</span><span>90%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-info"><span>LINUX_DEBIAN_ENV</span><span class="val">80%</span></div>
-                        <div class="progress-bar"><div class="fill" style="width: 80%"></div></div>
+                        <div class="skill-top"><span>LINUX_DEBIAN</span><span>80%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-info"><span>CISCO_NETWORKING</span><span class="val">85%</span></div>
-                        <div class="progress-bar"><div class="fill" style="width: 85%"></div></div>
+                        <div class="skill-top"><span>CISCO_NET</span><span>85%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-info"><span>CYBERSECURITY_ESET</span><span class="val">95%</span></div>
-                        <div class="progress-bar"><div class="fill" style="width: 95%"></div></div>
+                        <div class="skill-top"><span>CYBER_SEC</span><span>95%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div class="col-right">
+                <div class="module education-card">
+                    <div class="module-header">ACADEMIC_TIMELINE</div>
+                    <div class="timeline-item">
+                        <span class="date">2025-26</span>
+                        <div class="content"><strong>LICENCE SDR</strong> - Campus Montsouris</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">2023-25</span>
+                        <div class="content"><strong>BTS SIO SISR</strong> - Campus Montsouris</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">2020-23</span>
+                        <div class="content"><strong>BAC PRO SN</strong> - Lycée Louis Armand</div>
+                    </div>
+                </div>
+
+                <div class="module certs-card">
+                    <div class="module-header">VALIDATED_CERTIFICATIONS</div>
+                    <div class="cert-grid">
+                        <div class="cert-tag">RGPD_05</div>
+                        <div class="cert-tag">CISCO_NET</div>
+                        <div class="cert-tag">CCNA_PREP</div>
+                        <div class="cert-tag">PIX_350</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <section class="log-console">
-            <div class="log-stream">
-                <span>[INFO] SESSION_ENCRYPTED_AES256</span>
-                <span>[INFO] CURSUS: BAC_SN > BTS_SIO > LICENCE_SDR</span>
-                <span>[INFO] CERTIFS: RGPD, CISCO, CCNA, PIX</span>
-                <span>[WARN] UNAUTHORIZED_ACCESS_PREVENTED</span>
-            </div>
-        </section>
+        <footer class="system-logs">
+            <div class="log-line">>> [LOG] SESSION_START: SUCCESS</div>
+            <div class="log-line">>> [LOG] ALTERNANCE: THENEAS_OPERATIONAL</div>
+            <div class="log-line">>> [LOG] SYSTEM_STATUS: ENCRYPTED</div>
+        </footer>
     </main>
-    
+
     <script src="js/script.js"></script>
 </body>
 </html>
