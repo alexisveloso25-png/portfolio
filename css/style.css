@@ -183,3 +183,13 @@ header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0
     .t-item.right { left: 0; }
     .t-dot { left: 13px !important; }
 }
+.skill-group-label {
+    font-family: 'JetBrains Mono';
+    font-size: 0.7rem;
+    color: var(--neon-purple);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-left: 2px solid var(--neon-purple);
+    padding-left: 10px;
+}
