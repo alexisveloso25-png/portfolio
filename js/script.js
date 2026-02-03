@@ -1,24 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // EFFET TYPEWRITER POUR LE TITRE
-    const nameElement = document.getElementById('typewriter');
-    const fullName = "ALEXIS VELOSO";
-    let i = 0;
-    function typeWriter() {
-        if (i < fullName.length) {
-            nameElement.innerHTML += fullName.charAt(i);
-            i++;
-            setTimeout(typeWriter, 150);
+    // Typewriter
+    const nameText = "ALEXIS VELOSO";
+    let idx = 0;
+    function type() {
+        if (idx < nameText.length) {
+            document.getElementById('typewriter').innerHTML += nameText.charAt(idx);
+            idx++;
+            setTimeout(type, 150);
         }
     }
-    typeWriter();
+    type();
 
-    // MISE À JOUR DU PING ALÉATOIRE (Pour le style)
+    // Simulation Ping Réel
     setInterval(() => {
-        const ping = Math.floor(Math.random() * (28 - 18) + 18);
+        const ping = Math.floor(Math.random() * (32 - 14) + 14);
         document.getElementById('ping-val').innerText = `${ping}MS`;
-    }, 3000);
+    }, 2000);
 
-    // HORLOGE TEMPS RÉEL
+    // Horloge
     setInterval(() => {
         const now = new Date();
         document.getElementById('clock').innerText = now.toLocaleTimeString('fr-FR');
