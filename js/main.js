@@ -1,49 +1,44 @@
-// Gestion du Curseur Custom
-document.addEventListener('mousemove', (e) => {
-    const cursor = document.getElementById('custom-cursor');
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
-// Gestion du Terminal
-const terminal = document.getElementById('terminal-window');
-const input = document.getElementById('cli-input');
-const body = document.getElementById('terminal-body');
-
-function toggleTerminal() {
-    terminal.classList.toggle('hidden');
-    if(!terminal.classList.contains('hidden')) input.focus();
+// Initialisation du Log de Debug
+function logMessage(message, type = 'info') {
+    const logOutput = document.getElementById('log-output');
+    const p = document.createElement('p');
+    const timestamp = new Date().toLocaleTimeString();
+    p.innerHTML = `<span style="color: grey;">[${timestamp}]</span> <span class="log-${type}">${message}</span>`;
+    logOutput.appendChild(p);
+    logOutput.scrollTop = logOutput.scrollHeight; // Scroll automatique
 }
 
-input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const cmd = input.value.toLowerCase();
-        const line = document.createElement('div');
-        line.innerHTML = `<span>> ${cmd}</span>`;
-        body.insertBefore(line, body.querySelector('.input-line'));
-        
-        const response = document.createElement('div');
-        if (cmd === 'help') response.innerText = "Commandes: clear, bio, contact, skills";
-        else if (cmd === 'bio') response.innerText = "Alexis Veloso, Etudiant Licence SDR.";
-        else if (cmd === 'contact') response.innerText = "Email: alexis.veloso25@gmail.com";
-        else if (cmd === 'skills') response.innerText = "Win/Linux, AD, Cisco, O365, Arduino";
-        else if (cmd === 'clear') { 
-            body.querySelectorAll('div:not(.input-line)').forEach(el => el.remove());
-        } else { response.innerText = "Commande inconnue."; }
-        
-        body.insertBefore(response, body.querySelector('.input-line'));
-        input.value = "";
-        body.scrollTop = body.scrollHeight;
-    }
-});
+// Toggle de la console de Debug
+function toggleDebugLog() {
+    const console = document.getElementById('debug-log-console');
+    console.classList.toggle('log-active');
+    logMessage(`Console de debug ${console.classList.contains('log-active') ? 'ouverte' : 'fermée'}.`);
+}
 
-// Scroll Reveal Original
-const revealElements = document.querySelectorAll('.reveal');
-const scrollReveal = () => {
-    revealElements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < window.innerHeight - 100) el.classList.add('active');
+// Initialisation de Chart.js pour le graphique de compétences
+document.addEventListener('DOMContentLoaded', () => {
+    logMessage("Chargement du document terminé.");
+
+    // Curseur Custom
+    const customCursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
     });
-};
-window.addEventListener('scroll', scrollReveal);
-scrollReveal();
+    logMessage("Curseur personnalisé initialisé.");
+
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = {
+        threshold: 0.1 // L'élément est considéré "visible" dès que 10% de sa hauteur est à l'écran
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                logMessage(`Élément '${entry.target.tagName}' révélé.`);
+                // observer.unobserve(entry.target); // Optionnel: pour ne l'animer qu'une seule fois
+            }
+        });
+    }, observerOptions);
