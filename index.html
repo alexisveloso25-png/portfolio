@@ -4,218 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDR_OS // ALEXIS_VELOSO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #7000ff;
-            --bg-dark: #05050a;
-            --panel-bg: rgba(20, 20, 25, 0.9);
-            --border-light: rgba(0, 242, 255, 0.3);
-            --text-main: #e0e0e0;
-            --text-muted: #88889b;
-        }
-
-        body {
-            background: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            cursor: crosshair;
-        }
-
-        /* Effet de Grille de Fond */
-        .grid-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border-dark) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--border-dark) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-color: rgba(0, 242, 255, 0.02);
-            z-index: -1;
-        }
-
-        /* Ligne de Scan Radar */
-        .radar-line {
-            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-            box-shadow: 0 0 15px var(--neon-blue);
-            z-index: 100; opacity: 0.4;
-            animation: scanMove 6s linear infinite;
-        }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
-
-        /* Navigation */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-light);
-        }
-        .nav-content {
-            max-width: 1200px; margin: 0 auto; padding: 15px 25px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .status-indicator { font-family: 'JetBrains Mono'; color: var(--neon-blue); font-size: 0.8rem; }
-        .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; }
-        .nav-links a { text-decoration: none; color: white; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
-
-        /* Conteneur Principal */
-        .container { max-width: 1100px; margin: 0 auto; padding: 120px 20px; }
-
-        /* Hero Section */
-        .hero { text-align: center; margin-bottom: 80px; }
-        .glitch-name { font-size: 4rem; color: white; text-shadow: 0 0 10px var(--neon-blue); margin: 10px 0; }
-        .hero-sub { color: var(--neon-blue); font-family: 'JetBrains Mono'; margin-bottom: 30px; }
-
-        /* Panneaux de l'interface */
-        .interface-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .panel {
-            background: var(--panel-bg); border: 1px solid var(--border-light);
-            padding: 25px; border-radius: 8px; transition: 0.3s;
-            box-shadow: 0 0 15px rgba(0,242,255,0.05);
-        }
-        .panel:hover { border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0,242,255,0.2); }
-        .panel-title { color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.8rem; margin-bottom: 20px; border-bottom: 1px solid rgba(0,242,255,0.2); }
-
-        /* Timeline Dallas */
-        .timeline { position: relative; margin-top: 100px; padding: 20px 0; }
-        .t-line { position: absolute; left: 50%; width: 2px; height: 100%; background: var(--border-light); transform: translateX(-50%); }
-        .t-item { width: 50%; padding: 20px 40px; position: relative; box-sizing: border-box; }
-        .t-item.right { left: 50%; text-align: left; }
-        .t-item.left { left: 0; text-align: right; }
-        .t-dot {
-            position: absolute; width: 14px; height: 14px; background: var(--neon-purple);
-            border-radius: 50%; top: 30px; box-shadow: 0 0 10px var(--neon-purple);
-        }
-        .left .t-dot { right: -7px; }
-        .right .t-dot { left: -7px; }
-        .t-card { background: var(--panel-bg); border: 1px solid var(--border-light); padding: 20px; border-radius: 8px; }
-
-        /* Console de Debug */
-        #debug-console {
-            position: fixed; bottom: 0; left: 20px; width: 300px; height: 150px;
-            background: rgba(0,0,0,0.9); border: 1px solid var(--neon-blue);
-            font-family: 'JetBrains Mono'; font-size: 0.7rem; color: #fff;
-            padding: 10px; overflow-y: auto; z-index: 1001;
-        }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
-</head>
-<body>
-    <div class="grid-overlay"></div>
-    <div class="radar-line"></div>
-
-    <nav>
-        <div class="nav-content">
-            <div class="status-indicator">● SDR_SYSTEM_ACTIVE</div>
-            <ul class="nav-links">
-                <li><a href="#">/BIO</a></li>
-                <li><a href="#">/MISSIONS</a></li>
-                <li><a href="#">/LABS</a></li>
-                <li><a href="#">/VEILLE</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main class="container">
-        <section class="hero reveal">
-            <h1 class="glitch-name">ALEXIS VELOSO</h1>
-            <p class="hero-sub">CYBERSECURITY // SYSTEMS // NETWORKS</p>
-            <div class="interface-grid">
-                <div class="panel">
-                    <div class="panel-title">STATUT_ACTUEL</div>
-                    <p>Licence Générale Informatique SDR<br>Alternant chez <strong>THENEAS</strong></p>
-                </div>
-                <div class="panel">
-                    <div class="panel-title">COORDONNÉES</div>
-                    <p>📞 07 71 82 48 09<br>📧 alexis.veloso25@gmail.com</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="interface-grid">
-            <div class="panel reveal">
-                <div class="panel-title">01_HARDWARE_&_BUREAU</div>
-                <ul>
-                    <li>Maintenance & Assemblage PC</li>
-                    <li>Gestion de parc informatique</li>
-                    <li>Cisco Netacad IT Essentials</li>
-                    <li>Administration Office 365</li>
-                </ul>
-            </div>
-            <div class="panel reveal">
-                <div class="panel-title">02_SYSTEMS_&_ADMIN</div>
-                <ul>
-                    <li>Windows / Linux Admin</li>
-                    <li>Active Directory, DNS, DHCP</li>
-                    <li>Supervision PRTG</li>
-                    <li>Développement Python/Bash</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="timeline reveal">
-            <div class="t-line"></div>
-            <div class="t-item right">
-                <div class="t-dot"></div>
-                <div class="t-card">
-                    <strong>2025 - 2026</strong>
-                    <p>Licence Générale SDR - Campus Montsouris</p>
-                </div>
-            </div>
-            <div class="t-item left">
-                <div class="t-dot"></div>
-                <div class="t-card">
-                    <strong>2023 - 2025</strong>
-                    <p>BTS SIO (SISR) - Campus Montsouris</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="debug-console">
-        <div>[SYSTEM] Initializing...</div>
-        <div>[INFO] Alexis_Veloso interface loaded.</div>
-        <div id="log"></div>
-    </div>
-
-    <script>
-        // Animation au Scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    const log = document.getElementById('log');
-                    log.innerHTML += `<div>[SCAN] Section ${entry.target.tagName} détectée...</div>`;
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDR_OS // ALEXIS_VELOSO</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="cyber-interface">
-    <div class="network-grid"></div>
-    <div class="network-radar"></div>
-    <div id="custom-cursor"></div>
+<body>
+    <div class="radar"></div>
 
     <header>
         <nav>
-            <div class="nav-container">
-                <div class="system-status"><span class="pulse"></span> SYSTEM_ONLINE</div>
+            <div class="nav-content">
+                <div class="status-indicator"><span class="pulse"></span> SYSTEM_READY</div>
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">01_BIO</a></li>
                     <li><a href="entreprise.html">02_MISSIONS</a></li>
@@ -226,106 +24,100 @@
         </nav>
     </header>
 
-    <main class="viewport">
-        <section class="section hero-core reveal">
-            <div class="header-unit">
-                <h1 class="unit-name glitch-text" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
-                <p class="unit-role">CYBERSECURITY // SYSTEMS // NETWORKS ENGINEER</p>
-                <p class="unit-status">LICENCE GÉNÉRALE INFORMATIQUE SDR // @THENEAS</p>
-            </div>
-            
-            <div class="quick-stats-grid">
-                <div class="stat-module"><span class="stat-val">03</span><span class="stat-lbl">EXP_YEARS</span></div>
-                <div class="stat-module"><span class="stat-val">L3</span><span class="stat-lbl">SDR_LEVEL</span></div>
-                <div class="stat-module process"><span class="stat-val">CORE</span><span class="stat-lbl">CCNA_INIT</span></div>
-                <div class="stat-module verified"><span class="stat-val">01</span><span class="stat-lbl">PIX_CERT</span></div>
-                <div class="stat-module info"><span class="stat-val">05</span><span class="stat-lbl">RGPD_COMP</span></div>
+    <main class="container">
+        <section class="identity-grid reveal">
+            <div class="panel">
+                <div class="panel-title">01_DOSSIER_IDENTITÉ</div>
+                <div class="info-item">
+                    <span class="info-label">Nom Complet</span>
+                    <span class="info-value">Alexis Veloso</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Date de Naissance</span>
+                    <span class="info-value">25 Mai 2005 (20 ans)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nationalité</span>
+                    <span class="info-value">Française</span>
+                </div>
             </div>
 
-            <div class="cta-terminal-group">
-                <a href="assets/cv.pdf" class="btn-terminal"><span class="btn-icon">📄</span>_DOWNLOAD_CV</a>
-                <a href="https://linkedin.com/in/ton-profil" class="btn-terminal secondary"><span class="btn-icon">🔗</span>_LINKEDIN_PORTAL</a>
+            <div class="panel">
+                <div class="panel-title">02_CANAUX_COMMUNICATION</div>
+                <div class="contact-subgrid">
+                    <div class="info-item">
+                        <span class="info-label">Téléphone Direct</span>
+                        <span class="info-value">07 71 82 48 09</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">E-mail Pro</span>
+                        <span class="info-value">alexis.veloso25@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Localisation</span>
+                        <span class="info-value">Perreux-Sur-Marne (94170)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Statut</span>
+                        <span class="info-value">Alternance @THENEAS</span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <div class="interface-grid">
+        <section class="interface-grid">
             <div class="panel reveal">
-                <div class="panel-header">IDENTIFICATION_MATRIX</div>
-                <div class="panel-body">
-                    <ul class="data-list">
-                        <li><span class="key">TEL:</span> <span class="val">07 71 82 48 09</span></li>
-                        <li><span class="key">MAIL:</span> <span class="val">alexis.veloso25@gmail.com</span></li>
-                        <li><span class="key">LOC:</span> <span class="val">Perreux-Sur-Marne (94)</span></li>
-                        <li><span class="key">BORN:</span> <span class="val">25 MAI 2005 (20 ans)</span></li>
-                        <li><span class="key">SOFT_SKILLS:</span> <span class="val">Rigueur, Autonomie, Proactif</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="panel reveal skill-distribution-panel">
-                <div class="panel-header">COMPETENCE_OVERVIEW</div>
-                <div class="panel-body">
-                    <canvas id="skillChart"></canvas>
-                </div>
+                <div class="panel-title">03_HARDWARE_&_BUREAU</div>
+                <ul class="skill-list">
+                    <li>Maintenance & Assemblage PC</li>
+                    <li>Gestion de parc informatique</li>
+                    <li>Installations audiovisuelles</li>
+                    <li>Cisco Netacad IT Essentials</li>
+                    <li>Administration Office 365</li>
+                    <li>Arduino & Systèmes Numériques</li>
+                </ul>
             </div>
 
             <div class="panel reveal">
-                <div class="panel-header">HARDWARE_&_BUREAU</div>
-                <div class="panel-body">
-                    <ul class="skill-matrix">
-                        <li><span class="skill-name">Maintenance PC</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Gestion Parc IT</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Assemblage PC</span><span class="skill-level">[▓▓▓▓░]</span></li>
-                        <li><span class="skill-name">Installations AV</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Cisco Netacad</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Office 365</span><span class="skill-level">[▓▓▓▓░]</span></li>
-                        <li><span class="skill-name">Arduino / IoT</span><span class="skill-level">[▓▓▓░░]</span></li>
-                    </ul>
-                </div>
+                <div class="panel-title">04_SYSTEMS_&_ADMIN</div>
+                <ul class="skill-list">
+                    <li>Installation Windows & Linux</li>
+                    <li>Active Directory, DNS, DHCP</li>
+                    <li>Suite Bureautique (Word, Excel)</li>
+                    <li>Gestionnaire de serveurs</li>
+                    <li>Programmation IoT</li>
+                </ul>
             </div>
+        </section>
 
-            <div class="panel reveal">
-                <div class="panel-header">SYSTEMS_&_ADMINISTRATION</div>
-                <div class="panel-body">
-                    <ul class="skill-matrix">
-                        <li><span class="skill-name">Windows / Linux</span><span class="skill-level">[▓▓▓▓░]</span></li>
-                        <li><span class="skill-name">Active Directory</span><span class="skill-level">[▓▓▓▓░]</span></li>
-                        <li><span class="skill-name">DNS / DHCP</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">PRTG Monitoring</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Python / Bash</span><span class="skill-level">[▓▓▓░░]</span></li>
-                        <li><span class="skill-name">Wireshark Analyse</span><span class="skill-level">[▓▓▓░░]</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <section class="timeline-section">
+            <div class="panel-title reveal" style="text-align: center; border: none;">/ / PARCOURS_ACADÉMIQUE</div>
+            
+            <div class="timeline">
+                <div class="t-line"></div>
 
-        <section class="section timeline-container reveal">
-            <h2 class="section-title-line">// ACADEMIC_HISTORY</h2>
-            <div class="timeline-v">
-                <div class="timeline-main-line"></div>
-                
-                <div class="timeline-node right">
-                    <div class="node-indicator"></div>
-                    <div class="node-panel">
-                        <span class="node-date">2025 - 2026</span>
+                <div class="t-item right reveal">
+                    <div class="t-dot"></div>
+                    <div class="t-card">
+                        <span>2025 — 2026</span>
                         <h4>Licence Générale Informatique SDR</h4>
                         <p>CFA Cerfal Campus Montsouris, Paris 14ème</p>
                     </div>
                 </div>
 
-                <div class="timeline-node left">
-                    <div class="node-indicator"></div>
-                    <div class="node-panel">
-                        <span class="node-date">2023 - 2025</span>
+                <div class="t-item left reveal">
+                    <div class="t-dot"></div>
+                    <div class="t-card">
+                        <span>2023 — 2025</span>
                         <h4>BTS SIO (Option SISR)</h4>
                         <p>CFA Cerfal Campus Montsouris, Paris 14ème</p>
                     </div>
                 </div>
 
-                <div class="timeline-node right">
-                    <div class="node-indicator"></div>
-                    <div class="node-panel">
-                        <span class="node-date">2020 - 2023</span>
+                <div class="t-item right reveal">
+                    <div class="t-dot"></div>
+                    <div class="t-card">
+                        <span>2020 — 2023</span>
                         <h4>BAC Professionnel SN (Option RISC)</h4>
                         <p>Lycée Louis Armand, Nogent-sur-Marne</p>
                     </div>
@@ -333,15 +125,6 @@
             </div>
         </section>
     </main>
-
-    <div id="debug-log-console" class="log-closed">
-        <div class="log-header">
-            <span>DEBUG_LOG // SYSTEM_EVENTS</span>
-            <button onclick="toggleDebugLog()">_X</button>
-        </div>
-        <div id="log-output"></div>
-    </div>
-    <div id="log-trigger" onclick="toggleDebugLog()">_DEBUG_LOG</div>
 
     <script src="js/main.js"></script>
 </body>
