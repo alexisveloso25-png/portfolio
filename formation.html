@@ -3,47 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formation | Alexis Veloso</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>SDR_OS // FORMATIONS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #7000ff;
+            --bg-dark: #05050a;
+            --panel-bg: rgba(20, 20, 25, 0.95);
+            --border-light: rgba(0, 242, 255, 0.3);
+            --text-main: #e0e0e0;
+            --text-muted: #88889b;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .radar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
+            z-index: 1000; opacity: 0.2; animation: scan 8s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        header { position: fixed; top: 0; width: 100%; z-index: 1001; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); }
+        .nav-content { max-width: 1100px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; }
+        .nav-links a { text-decoration: none; color: #fff; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
+        .nav-links a.active { color: var(--neon-blue); border-bottom: 1px solid var(--neon-blue); }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 120px 20px; }
+
+        .hero-section { text-align: center; margin-bottom: 60px; }
+        .glitch-text { font-size: clamp(1.5rem, 5vw, 3rem); color: var(--neon-blue); font-family: 'JetBrains Mono'; text-transform: uppercase; letter-spacing: 4px; }
+        
+        .formation-block { margin-bottom: 60px; }
+        .panel { background: var(--panel-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 30px; backdrop-filter: blur(10px); }
+        .panel.highlight { border-left: 4px solid var(--neon-blue); }
+        
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; }
+        .year { font-family: 'JetBrains Mono'; color: var(--neon-purple); font-weight: bold; font-size: 0.9rem; }
+        h2 { margin: 0; font-size: 1.2rem; color: #fff; }
+
+        /* Style pour la description de l'école */
+        .school-context {
+            background: rgba(112, 0, 255, 0.05);
+            border-left: 2px solid var(--neon-purple);
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .formation-desc { font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin-bottom: 25px; }
+
+        .grid-modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .module-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); padding: 15px; border-radius: 4px; }
+        .module-card h5 { margin: 0 0 8px 0; color: var(--neon-blue); font-family: 'JetBrains Mono'; }
+        .module-card p { margin: 0; font-size: 0.8rem; color: var(--text-muted); }
+
+        .sub-title { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--neon-blue); margin: 30px 0 15px; text-transform: uppercase; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .project-tag { 
+            background: rgba(112, 0, 255, 0.05); border: 1px solid var(--border-light); 
+            color: var(--text-main); padding: 12px; font-family: 'JetBrains Mono'; 
+            font-size: 0.75rem; text-align: center; border-radius: 4px;
+        }
+
+        .tech-stack-simple { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .tech-item { display: flex; align-items: flex-start; gap: 15px; background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px solid var(--border-light); }
+        .tech-icon { font-size: 1.5rem; }
+        .tech-text strong { display: block; color: var(--neon-blue); font-family: 'JetBrains Mono'; font-size: 0.85rem; }
+        .tech-text p { margin: 0; font-size: 0.75rem; color: var(--text-muted); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
-    <div class="scanline"></div>
+    <div class="radar"></div>
+
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">/BIO</a></li>
-                <li><a href="entreprise.html">/MISSIONS_PRO</a></li>
-                <li><a href="formation.html" class="active">/LABS_ACAD</a></li>
-                <li><a href="veille.html">/VEILLE_CYBER</a></li>
+        <nav class="nav-content">
+            <div class="status-indicator">● ACADEMIC_RECORDS_V2</div>
+            <ul class="nav-links">
+                <li><a href="index.html">01_BIO</a></li>
+                <li><a href="entreprise.html">02_MISSIONS</a></li>
+                <li><a href="formation.html" class="active">03_FORMATION</a></li>
+                <li><a href="veille.html">04_VEILLE</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <h2 class="highlight">// ACADEMIC_LABS : CAMPUS_MONTSOURIS</h2>
-        <div class="grid">
-            <div class="card reveal">
-                <span class="tag">SÉCURITÉ</span>
-                <h3>Gestion des ACL / Partages</h3>
-                <p>Implémentation des droits NTFS fins et sécurisation des ressources partagées.</p>
+        <section class="hero-section reveal">
+            <h1 class="glitch-text">Parcours Académique</h1>
+            <p>// Analyse des environnements de formation et compétences acquises</p>
+        </section>
+
+        <section class="formation-block reveal">
+            <div class="panel highlight">
+                <div class="panel-header">
+                    <h2>LICENCE GÉNÉRALE INFORMATIQUE (SDR)</h2>
+                    <span class="year">2025 - 2026</span>
+                </div>
+                
+                <div class="school-context">
+                    <strong>L'École :</strong> Le Conservatoire National des Arts et Métiers (CNAM) est une institution prestigieuse dédiée à la formation supérieure des professionnels. Reconnu pour son exigence technique, il délivre des diplômes d'État axés sur les réalités du monde industriel et numérique.
+                </div>
+
+                <div class="panel-body">
+                    <p class="formation-desc">Le parcours <strong>SDR (Systèmes, Développement, Réseaux)</strong> au CNAM permet d'acquérir une vision 360° de l'informatique, alliant la maîtrise des couches basses (système) à l'ingénierie logicielle moderne.</p>
+                    <div class="grid-modules">
+                        <div class="module-card">
+                            <h5>Architecture Systèmes</h5>
+                            <p>Analyse des cycles processeurs et gestion des ressources par l'OS.</p>
+                        </div>
+                        <div class="module-card">
+                            <h5>Réseaux Avancés</h5>
+                            <p>Optimisation des flux et administration des protocoles de routage.</p>
+                        </div>
+                        <div class="module-card">
+                            <h5>Ingénierie BDD</h5>
+                            <p>Structuration de données massives et requêtage SQL optimisé.</p>
+                        </div>
+                        <div class="module-card">
+                            <h5>Cybersécurité SI</h5>
+                            <p>Politiques de sécurité et mécanismes de défense périmétrique.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card reveal">
-                <span class="tag">RESEAU</span>
-                <h3>Segmentation VLAN</h3>
-                <p>Création de domaines de diffusion isolés pour optimiser la sécurité LAN.</p>
+        </section>
+
+        <section class="formation-block reveal">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>BTS SIO OPTION SISR</h2>
+                    <span class="year">2023 - 2025</span>
+                </div>
+
+                <div class="school-context">
+                    <strong>L'École :</strong> Le Campus Montsouris est un centre de formation d'excellence situé à Paris, spécialisé dans l'alternance. Il bénéficie d'un écosystème pédagogique moderne favorisant la mise en pratique immédiate des concepts de l'infrastructure réseau.
+                </div>
+
+                <div class="panel-body">
+                    <p class="formation-desc">La spécialité <strong>SISR</strong> forme des experts en administration de solutions d'infrastructure, capables de maintenir la continuité de service des parcs informatiques en entreprise.</p>
+                    
+                    <h3 class="sub-title">// LABORATOIRE : LES 8 PROJETS MAJEURS</h3>
+                    <div class="projects-grid">
+                        <div class="project-tag">VLAN & Routage Inter-VLAN</div>
+                        <div class="project-tag">Déploiement Windows Server AD</div>
+                        <div class="project-tag">Supervision Réseau (PRTG)</div>
+                        <div class="project-tag">Mise en place Ticketing GLPI</div>
+                        <div class="project-tag">Scripting Automatisation Python</div>
+                        <div class="project-tag">Tunneling VPN Site-à-Site</div>
+                        <div class="project-tag">Administration Tenant O365</div>
+                        <div class="project-tag">Analyse de Trames Wireshark</div>
+                    </div>
+                </div>
             </div>
-            <div class="card reveal">
-                <span class="tag">SYSTÈME</span>
-                <h3>Windows Server & WSUS</h3>
-                <p>Gestion centralisée du cycle de vie des mises à jour critiques.</p>
+        </section>
+
+        <section class="formation-block reveal">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>BAC PRO SYSTÈMES NUMÉRIQUES (SN)</h2>
+                    <span class="year">2020 - 2023</span>
+                </div>
+
+                <div class="school-context">
+                    <strong>L'École :</strong> Le Lycée Louis Armand (Nogent-sur-Marne) est un établissement réputé pour ses pôles technologiques. Il offre un cadre technique complet pour l'apprentissage des métiers de l'électronique et du numérique.
+                </div>
+
+                <div class="panel-body">
+                    <p class="formation-desc">Spécialité <strong>RISC</strong> : Une immersion dans les bases du hardware et des premières configurations réseaux professionnelles.</p>
+                    
+                    <div class="tech-stack-simple">
+                        <div class="tech-item">
+                            <span class="tech-icon">🌐</span>
+                            <div class="tech-text">
+                                <strong>Bases Réseaux</strong>
+                                <p>Câblage et adressage IP statique.</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">💻</span>
+                            <div class="tech-text">
+                                <strong>Cisco Packet Tracer</strong>
+                                <p>Simulation de réseaux locaux.</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🤖</span>
+                            <div class="tech-text">
+                                <strong>Arduino</strong>
+                                <p>Logique de programmation IoT.</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🎓</span>
+                            <div class="tech-text">
+                                <strong>Cisco Netacad</strong>
+                                <p>Fondamentaux de la certification IT.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card reveal">
-                <span class="tag">CRYPTO</span>
-                <h3>Chiffrement EFS</h3>
-                <p>Mise en œuvre d'agents de récupération et chiffrement de fichiers locaux.</p>
-            </div>
-        </div>
+        </section>
     </main>
-    <script src="js/main.js"></script>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
