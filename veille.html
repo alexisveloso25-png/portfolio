@@ -2,56 +2,118 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Veille Technologique | Alexis Veloso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDR_OS // VEILLE_TECHNOLOGIQUE</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="scanline"></div>
+    <div class="radar"></div>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">/BIO</a></li>
-                <li><a href="entreprise.html">/MISSIONS_PRO</a></li>
-                <li><a href="formation.html">/LABS_ACAD</a></li>
-                <li><a href="veille.html" class="active">/VEILLE_CYBER</a></li>
+        <nav class="nav-content">
+            <div class="status-indicator">● THREAT_INTELLIGENCE_CENTER</div>
+            <ul class="nav-links">
+                <li><a href="index.html">01_BIO</a></li>
+                <li><a href="entreprise.html">02_MISSIONS</a></li>
+                <li><a href="formation.html">03_FORMATION</a></li>
+                <li><a href="veille.html" class="active">04_VEILLE</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="reveal">
-            <span class="highlight">// CYBER_THREAT_WATCH</span>
-            <h1>VEILLE TECHNOLOGIQUE</h1>
-            <p style="color: #64748b;">Focus 2026 : L'IA au service de l'offensive et de la défense.</p>
+        <section class="hero-section reveal">
+            <h1 class="glitch-text" data-text="VEILLE_STRATÉGIQUE">VEILLE_STRATÉGIQUE</h1>
+            <p class="subtitle">// Surveillance active de l'écosystème Cybersécurité & Infrastructure</p>
         </section>
 
-        <div class="grid">
-            <div class="card reveal">
-                <h3>Méthodologie d'agrégation</h3>
-                <ul class="info-list" style="margin-top: 15px;">
-                    <li>> Flux RSS (Feedly)</li>
-                    <li>> Bulletins ANSSI & CERT-FR</li>
-                    <li>> Labs de recherche (HuggingFace Security)</li>
-                </ul>
-            </div>
-            <div class="card reveal" style="grid-column: span 1;">
-                <span class="tag">FOCUS_IA</span>
-                <h3>IA Générative : La Menace</h3>
-                <p>Analyse du phishing ultra-réaliste et de la génération de code malveillant polymorphe.</p>
-            </div>
-        </div>
-
-        <section class="reveal" style="margin-top: 40px;">
-            <div class="card" style="border-left: 4px solid var(--primary);">
-                <h3>Sources de confiance</h3>
-                <div class="tag-cloud" style="margin-top: 10px;">
-                    <a href="https://www.ssi.gouv.fr/" target="_blank" class="tag">ANSSI</a>
-                    <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="tag">Cybermalveillance</a>
-                    <a href="https://thehackernews.com/" target="_blank" class="tag">The Hacker News</a>
+        <section class="panel reveal highlight">
+            <div class="panel-title">01_MÉTHODOLOGIE_DE_COLLECTE</div>
+            <div class="method-grid">
+                <div class="method-card">
+                    <span class="method-icon">📡</span>
+                    <div class="method-info">
+                        <strong>Flux RSS & Agrégateurs</strong>
+                        <p>Utilisation de <em>Feedly</em> pour centraliser plus de 20 sources spécialisées (ANSSI, Le Monde Informatique, BleepingComputer).</p>
+                    </div>
+                </div>
+                <div class="method-card">
+                    <span class="method-icon">🐦</span>
+                    <div class="method-info">
+                        <strong>Réseaux Sociaux Tech</strong>
+                        <p>Suivi de comptes d'experts et chercheurs en cybersécurité sur X (Twitter) et LinkedIn (Infosec).</p>
+                    </div>
+                </div>
+                <div class="method-card">
+                    <span class="method-icon">🎙️</span>
+                    <div class="method-info">
+                        <strong>Podcasts & Newsletters</strong>
+                        <p>Écoute hebdomadaire de <em>"No Limit Secu"</em> et lecture de la newsletter <em>"Actu Cyber"</em>.</p>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <div class="grid-main">
+            <div class="left-col reveal">
+                <div class="panel">
+                    <div class="panel-title">02_SOURCES_DE_RÉFÉRENCE</div>
+                    <div class="sources-list-expert">
+                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-item-pro">
+                            <div class="source-header">
+                                <span class="tag-red">ALERTE CRITIQUE</span>
+                                <strong>CERT-FR / ANSSI</strong>
+                            </div>
+                            <p>Analyse des bulletins d'alerte officiels pour application des correctifs de sécurité immédiats.</p>
+                        </a>
+                        <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="source-item-pro">
+                            <div class="source-header">
+                                <span class="tag-blue">PRÉVENTION</span>
+                                <strong>CYBERMALVEILLANCE.GOUV</strong>
+                            </div>
+                            <p>Guide de bonnes pratiques pour la sensibilisation des utilisateurs chez THENEAS.</p>
+                        </a>
+                        <a href="https://www.silicon.fr/" target="_blank" class="source-item-pro">
+                            <div class="source-header">
+                                <span class="tag-purple">INFRA</span>
+                                <strong>SILICON.FR</strong>
+                            </div>
+                            <p>Veille sur les infrastructures IT, le Cloud Computing et le Edge Networking.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-col reveal">
+                <div class="panel">
+                    <div class="panel-title">03_ANALYSE_FOCUS_2026</div>
+                    <div class="analysis-box">
+                        <h4 class="cyber-title">La menace "Living off the Land" (LotL)</h4>
+                        <p class="analysis-text">
+                            <strong>Définition :</strong> Utilisation d'outils légitimes du système (PowerShell, WMI) pour mener une attaque sans fichiers (fileless).
+                        </p>
+                        <p class="analysis-text">
+                            <strong>Analyse :</strong> Ces attaques sont difficilement détectables par les antivirus classiques car elles n'utilisent pas de malwares connus.
+                        </p>
+                        <div class="impact-shield">
+                            <strong>Impact Pro :</strong> Renforcement de la surveillance des scripts PowerShell via GPO et analyse des logs ESET Endpoint chez THENEAS.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">OUTILS_D_ANALYSE</div>
+                    <div class="tools-tag-cloud">
+                        <span>VirusTotal</span>
+                        <span>URLVoid</span>
+                        <span>HaveIBeenPwned</span>
+                        <span>CyberChef</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
     <script src="js/main.js"></script>
 </body>
 </html>
