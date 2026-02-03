@@ -1,37 +1,41 @@
-// TYPEWRITER EFFECT
+// TYPEWRITER
 const nameElement = document.getElementById('typewriter');
-const fullName = "ALEXIS VELOSO";
-let i = 0;
+const nameText = "ALEXIS VELOSO";
+let idx = 0;
 
-function typeWriter() {
-    if (i < fullName.length) {
-        nameElement.innerHTML += fullName.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
+function type() {
+    if (idx < nameText.length) {
+        nameElement.textContent += nameText.charAt(idx);
+        idx++;
+        setTimeout(type, 120);
     }
 }
 
-// REAL TIME CLOCK
-function startClock() {
-    const clockElement = document.getElementById('clock');
+// HORLOGE
+function clock() {
+    const el = document.getElementById('clock');
     setInterval(() => {
-        const now = new Date();
-        clockElement.innerText = now.toLocaleTimeString('fr-FR', { hour12: false });
+        const d = new Date();
+        el.textContent = d.getHours().toString().padStart(2, '0') + ":" + 
+                         d.getMinutes().toString().padStart(2, '0') + ":" + 
+                         d.getSeconds().toString().padStart(2, '0');
     }, 1000);
 }
 
-// SIMULATED PING
-function simulatePing() {
-    const pingElement = document.getElementById('ping-val');
-    setInterval(() => {
-        const ping = Math.floor(Math.random() * 15) + 15;
-        pingElement.innerText = `LATENCY: ${ping}MS`;
-    }, 3000);
+// ANIMATION DES BARRES AU SCROLL
+function animateSkills() {
+    const bars = document.querySelectorAll('.progress-fill');
+    bars.forEach(bar => {
+        const rect = bar.getBoundingClientRect();
+        if(rect.top < window.innerHeight) {
+            bar.style.width = bar.getAttribute('data-width');
+        }
+    });
 }
 
-// INITIALIZATION
-document.addEventListener('DOMContentLoaded', () => {
-    typeWriter();
-    startClock();
-    simulatePing();
-});
+window.addEventListener('scroll', animateSkills);
+window.onload = () => {
+    type();
+    clock();
+    setTimeout(animateSkills, 500); // Lance l'anim des barres au début
+};
