@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexis Veloso | SDR Portfolio</title>
+    <title>Alexis Veloso | Expert SDR Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="scanline"></div>
+
     <header>
         <nav>
             <ul>
@@ -22,47 +23,70 @@
     <main class="container">
         <section class="reveal hero-section">
             <div class="terminal-header">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">AUTH_TOKEN: GRANTED // USER: A_VELOSO</span>
-            </div>
-            <div class="hero-content">
-                <h1 class="glitch-text">ALEXIS VELOSO</h1>
-                <h2 class="highlight">Expert Systèmes, Données & Réseaux (SDR)</h2>
-                <p style="margin: 20px 0; font-size: 1.1rem;">
-                    Apprenti chez <strong style="color:var(--primary)">THENEAS</strong> | 
-                    Étudiant en Licence Informatique au Campus Montsouris.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item"><span class="stat-num">09</span><br>Projets Pro</div>
-                    <div class="stat-item"><span class="stat-num">08</span><br>Labs Académiques</div>
-                    <div class="stat-item"><span class="stat-num">L3</span><br>Niveau Actuel</div>
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
                 </div>
-                <div style="margin-top: 30px;">
-                    <a href="entreprise.html" class="btn">VOIR_LES_MISSIONS</a>
-                    <a href="assets/cv.pdf" class="btn outline">CONSULTER_CV</a>
+                <span class="terminal-title">TERMINAL_SESSION: alexis_vls // STATUS: ONLINE</span>
+            </div>
+            
+            <div class="hero-content">
+                <h1 class="glitch-text" data-text="ALEXIS VELOSO">ALEXIS VELOSO</h1>
+                <h2 class="highlight">// ADMINISTRATEUR SYSTÈMES, DONNÉES & RÉSEAUX (SDR)</h2>
+                
+                <p class="hero-description">
+                    Actuellement apprenti chez <span class="cyan">THENEAS</span> et étudiant en 
+                    <span class="cyan">Licence 3 Informatique</span> au Campus Montsouris. 
+                    Passionné par la sécurisation des infrastructures et la supervision réseau.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">02</span>
+                        <p>Ans d'expérience</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">09</span>
+                        <p>Missions Pro</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">L3</span>
+                        <p>Niveau Diplôme</p>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <a href="entreprise.html" class="btn">DÉCOUVRIR_MES_MISSIONS</a>
+                    <a href="assets/cv.pdf" target="_blank" class="btn outline">TÉLÉCHARGER_CV</a>
                 </div>
             </div>
         </section>
 
         <div class="grid">
             <div class="card reveal">
-                <h3 class="highlight">// INFOS_SYSTEME</h3>
-                <ul style="list-style: none; font-family: 'Fira Code'; margin-top: 15px;">
-                    <li><span style="color:var(--primary)">></span> Localisation: 94 - IDF</li>
-                    <li><span style="color:var(--primary)">></span> Email: alexis.veloso25@gmail.com</li>
-                    <li><span style="color:var(--primary)">></span> Status: Open to opportunities</li>
+                <h3 class="highlight">01_COORDONNÉES</h3>
+                <ul class="info-list" style="list-style: none; margin-top: 15px; font-family: 'Fira Code';">
+                    <li><span class="cyan">LOC:</span> Le Perreux-Sur-Marne (94)</li>
+                    <li><span class="cyan">MAIL:</span> alexis.veloso25@gmail.com</li>
+                    <li><span class="cyan">TEL:</span> 07 71 82 48 09</li>
+                    <li><span class="cyan">BIRTH:</span> 20 ans (25/05/2005)</li>
                 </ul>
             </div>
+
             <div class="card reveal">
-                <h3 class="highlight">// STACK_TECHNIQUE</h3>
-                <div class="tag-cloud">
-                    <span class="tag">PRTG</span> <span class="tag">Proxmox</span>
-                    <span class="tag">Active Directory</span> <span class="tag">IPFire</span>
-                    <span class="tag">Windows Server</span> <span class="tag">PowerShell</span>
+                <h3 class="highlight">02_TOP_SKILLS</h3>
+                <div class="tag-cloud" style="margin-top: 15px;">
+                    <span class="tag">Supervision PRTG</span>
+                    <span class="tag">Active Directory</span>
+                    <span class="tag">Proxmox VE</span>
+                    <span class="tag">Sécurité IPFire</span>
+                    <span class="tag">Cloud Azure/O365</span>
                 </div>
             </div>
         </div>
     </main>
+
     <script src="js/main.js"></script>
 </body>
 </html>
