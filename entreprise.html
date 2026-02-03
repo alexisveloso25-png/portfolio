@@ -7,69 +7,54 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="scanline"></div>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">BIO</a></li>
-                <li><a href="entreprise.html">MISSIONS ENTREPRISE</a></li>
-                <li><a href="formation.html">PROJETS FORMATION</a></li>
-                <li><a href="veille.html">VEILLE CYBER</a></li>
+                <li><a href="index.html">/BIO</a></li>
+                <li><a href="entreprise.html" class="active">/MISSIONS_PRO</a></li>
+                <li><a href="formation.html">/LABS_ACAD</a></li>
+                <li><a href="veille.html">/VEILLE_CYBER</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="reveal">
-            <span class="highlight">// EXPERIENCES_PROFESSIONNELLES : THENEAS</span>
-            <p style="margin-bottom: 40px;">Retrouvez ici mes missions réalisées sur 2 ans d'alternance.</p>
+        <section class="reveal section-title">
+            <span class="highlight">// WORK_LOGS : THENEAS (2024-2026)</span>
+            <h1>EXPÉRIENCES PROFESSIONNELLES</h1>
+            <p>Rapport d'activité sur 2 ans d'alternance en tant qu'apprenti informatique.</p>
         </section>
 
-        <div class="card reveal" style="grid-column: 1 / -1; border-left: 5px solid var(--primary); margin-bottom: 40px;">
-            <span class="tag">PROJET MAJEUR - LICENCE L3</span>
+        <div class="card reveal featured-card">
+            <span class="tag pulse">PROJET_CRITIQUE</span>
             <h3>Solution de Supervision Centralisée (PRTG)</h3>
-            <p>Le projet PRTG a été lancé pour mettre en place une supervision centralisée, plus claire et plus réactive, capable de surveiller en continu les équipements des deux sites. L’objectif est d’améliorer la disponibilité des services, de faciliter le travail de l’équipe informatique et d’anticiper les éventuels problèmes.</p>
+            <p>Mise en place d'un monitoring temps-réel sur deux sites géographiques. Surveillance SNMP, analyse de bande passante et alertes proactives pour garantir une haute disponibilité (99.9%).</p>
+            <div class="tag-cloud">
+                <span class="tag">SNMP</span> <span class="tag">Monitoring</span> <span class="tag">SDR</span>
+            </div>
         </div>
 
         <div class="grid">
             <div class="card reveal">
-                <span class="tag">Système</span>
+                <span class="tag">SYSTÈME</span>
                 <h3>Migration Profwiz</h3>
-                <p>Migration de profils utilisateurs lors de changements de domaine ou de matériel.</p>
+                <p>Automatisation de la migration des profils utilisateurs lors de déploiements de parcs.</p>
             </div>
             <div class="card reveal">
-                <span class="tag">Périphériques</span>
-                <h3>Scanner Toshiba</h3>
-                <p>Configuration de scanners réseau pour les utilisateurs (flux SMB/FTP).</p>
+                <span class="tag">ADMIN</span>
+                <h3>GLPI & Support N2</h3>
+                <p>Optimisation du workflow de ticketing et gestion opérationnelle des actifs.</p>
             </div>
             <div class="card reveal">
-                <span class="tag">Support</span>
-                <h3>GLPI</h3>
-                <p>Gestion opérationnelle du parc informatique et suivi des tickets d'incidents.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Administration</span>
-                <h3>CMD & PowerShell</h3>
-                <p>Utilisation de scripts pour l'automatisation de la maintenance système.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Sécurité</span>
+                <span class="tag">SÉCURITÉ</span>
                 <h3>Pare-feu IPFire</h3>
-                <p>Configuration et administration des règles de filtrage réseau.</p>
+                <p>Durcissement des règles de filtrage et segmentation réseau inter-sites.</p>
             </div>
             <div class="card reveal">
-                <span class="tag">Réseau</span>
-                <h3>Contrôleur Nuclias</h3>
-                <p>Déploiement et gestion d'une infrastructure Wi-Fi centralisée.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Cloud</span>
-                <h3>Office 365</h3>
-                <p>Administration des comptes, des licences et de la sécurité Microsoft 365.</p>
-            </div>
-            <div class="card reveal">
-                <span class="tag">Virtualisation</span>
-                <h3>Proxmox</h3>
-                <p>Installation et configuration de l'hyperviseur pour l'hébergement de VMs.</p>
+                <span class="tag">INFRA</span>
+                <h3>Hyperviseur Proxmox</h3>
+                <p>Déploiement et clustering de machines virtuelles pour services critiques.</p>
             </div>
         </div>
     </main>
