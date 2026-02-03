@@ -14,7 +14,7 @@
         <nav class="nav-content">
             <div class="status-indicator"><span class="pulse"></span> SYSTEM_READY</div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">01_BIO</a></li>
+                <li><a href="index.html" class="active">01_APPRENTI</a></li>
                 <li><a href="entreprise.html">02_MISSIONS</a></li>
                 <li><a href="formation.html">03_LABS</a></li>
                 <li><a href="veille.html">04_VEILLE</a></li>
@@ -54,49 +54,53 @@
         </section>
 
         <section class="panel reveal">
-            <div class="panel-title">TECHNICAL_CORE_COMPETENCIES</div>
-            <div class="skills-catalog">
+            <div class="panel-title">CORE_SKILLS_MATRIX</div>
+            
+            <div class="skills-levels-grid">
+                <div class="skill-group-label">SYSTÈMES & SERVEURS</div>
                 
-                <div class="skill-category">
-                    <h4><span class="icon">🖥️</span> Systèmes & Serveurs</h4>
-                    <ul class="skill-list-pro">
-                        <li>Installation OS (Windows, Linux)</li>
-                        <li>Gestionnaire de serveurs (Active Directory, DNS, DHCP)</li>
-                        <li>Maintenance & Assemblage de PC</li>
-                        <li>Gestion de parc informatique</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h4><span class="icon">🌐</span> Réseaux & IOT</h4>
-                    <ul class="skill-list-pro">
-                        <li>Cisco Netacad IT Essentials</li>
-                        <li>Programmation sur Arduino</li>
-                        <li>Installations audiovisuelles</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h4><span class="icon">⌨️</span> Développement & Bureautique</h4>
-                    <ul class="skill-list-pro">
-                        <li>Bases de programmation (Python, JS)</li>
-                        <li>Suite bureautique (Word, Excel, etc.)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="skills-levels-grid" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
                 <div class="skill-block">
-                    <div class="skill-info"><span>ADMINISTRATION SERVEUR (AD/DNS)</span><span class="pct">85%</span></div>
+                    <div class="skill-info"><span>Active Directory, DNS, DHCP (Windows Server)</span><span class="pct">85%</span></div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
                 </div>
+
                 <div class="skill-block">
-                    <div class="skill-info"><span>MAINTENANCE & INFRASTRUCTURE</span><span class="pct">90%</span></div>
+                    <div class="skill-info"><span>Administration Linux & Windows (Client/Serveur)</span><span class="pct">90%</span></div>
                     <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
                 </div>
+
                 <div class="skill-block">
-                    <div class="skill-info"><span>SÉCURITÉ & RÉSEAUX</span><span class="pct">75%</span></div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                    <div class="skill-info"><span>Gestion de Parc (GLPI) & Maintenance PC</span><span class="pct">95%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                </div>
+
+                <div class="skill-group-label" style="margin-top: 30px;">RÉSEAUX & INFRASTRUCTURE</div>
+
+                <div class="skill-block">
+                    <div class="skill-info"><span>Architecture Cisco (IT Essentials / CCNA)</span><span class="pct">80%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                </div>
+
+                <div class="skill-block">
+                    <div class="skill-info"><span>Programmation Arduino & Systèmes Numériques</span><span class="pct">70%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+                </div>
+
+                <div class="skill-block">
+                    <div class="skill-info"><span>Installations Audiovisuelles Pro</span><span class="pct">85%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="skill-group-label" style="margin-top: 30px;">DÉVELOPPEMENT & BUREAUTIQUE</div>
+
+                <div class="skill-block">
+                    <div class="skill-info"><span>Bases de Programmation (Scripting)</span><span class="pct">65%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 65%;"></div></div>
+                </div>
+
+                <div class="skill-block">
+                    <div class="skill-info"><span>Suite Office (Expertise Excel/Word)</span><span class="pct">90%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
                 </div>
             </div>
         </section>
@@ -133,6 +137,13 @@
         </section>
     </main>
 
-    <script src="js/main.js"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
