@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,76 +6,52 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="scanline"></div>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Bio</a></li>
-                <li><a href="entreprise.html">Expérience</a></li>
-                <li><a href="formation.html">Projets</a></li>
-                <li><a href="veille.html">Veille</a></li>
+                <li><a href="index.html">/BIO</a></li>
+                <li><a href="entreprise.html">/MISSIONS_PRO</a></li>
+                <li><a href="formation.html">/LABS_ACAD</a></li>
+                <li><a href="veille.html" class="active">/VEILLE_CYBER</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
         <section class="reveal">
-            <span class="highlight">// CYBERSECURITY_WATCH_2026</span>
+            <span class="highlight">// CYBER_THREAT_WATCH</span>
             <h1>VEILLE TECHNOLOGIQUE</h1>
-            <p style="color: #8b949e; margin-top: 10px;">Thématique : L'évolution de la Cybersécurité à l'ère de l'Intelligence Artificielle.</p>
+            <p style="color: #64748b;">Focus 2026 : L'IA au service de l'offensive et de la défense.</p>
         </section>
 
-        <section class="reveal" style="margin-top: 50px;">
-            <div class="card">
-                <h3>01. Méthodologie de Veille</h3>
-                <p>Pour rester à jour, j'utilise un système de surveillance automatisé combinant plusieurs outils :</p>
-                <div class="grid" style="margin-top: 20px;">
-                    <div class="tag">Flux RSS (Feedly)</div>
-                    <div class="tag">Google Scholar (Recherche)</div>
-                    <div class="tag">Twitter & LinkedIn (Experts)</div>
-                    <div class="tag">Alertes ANSSI</div>
-                </div>
+        <div class="grid">
+            <div class="card reveal">
+                <h3>Méthodologie d'agrégation</h3>
+                <ul class="info-list" style="margin-top: 15px;">
+                    <li>> Flux RSS (Feedly)</li>
+                    <li>> Bulletins ANSSI & CERT-FR</li>
+                    <li>> Labs de recherche (HuggingFace Security)</li>
+                </ul>
             </div>
-        </section>
-
-        <section class="reveal">
-            <div class="card">
-                <span class="tag">Focus 2025-2026</span>
-                <h3>02. L'IA Générative : Menace ou Bouclier ?</h3>
-                <p>Ma veille se concentre sur la dualité de l'Intelligence Artificielle dans le domaine de la sécurité informatique :</p>
-                
-                <div class="grid" style="margin-top: 20px;">
-                    <div style="background: rgba(255, 0, 0, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255, 0, 0, 0.2);">
-                        <h4 style="color: #ff6b6b;">Côté Menaces</h4>
-                        <ul style="font-size: 0.9rem; color: #8b949e; padding-left: 15px;">
-                            <li>Phishing ultra-réaliste via LLM.</li>
-                            <li>Malwares polymorphes créés par IA.</li>
-                            <li>Deepfakes pour l'ingénierie sociale.</li>
-                        </ul>
-                    </div>
-                    <div style="background: rgba(0, 210, 255, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.2);">
-                        <h4 style="color: var(--primary);">Côté Défense</h4>
-                        <ul style="font-size: 0.9rem; color: #8b949e; padding-left: 15px;">
-                            <li>Analyse comportementale (EDR/XDR).</li>
-                            <li>Réponse automatisée aux incidents (SOAR).</li>
-                            <li>Détection proactive de vulnérabilités.</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="card reveal" style="grid-column: span 1;">
+                <span class="tag">FOCUS_IA</span>
+                <h3>IA Générative : La Menace</h3>
+                <p>Analyse du phishing ultra-réaliste et de la génération de code malveillant polymorphe.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="reveal">
-            <div class="card">
-                <h3>03. Sources Fiables</h3>
-                <div class="grid">
-                    <a href="https://www.ssi.gouv.fr/" class="card" style="text-decoration: none; text-align: center; padding: 15px;">ANSSI</a>
-                    <a href="https://www.cybermalveillance.gouv.fr/" class="card" style="text-decoration: none; text-align: center; padding: 15px;">Cybermalveillance</a>
-                    <a href="https://www.zdnet.fr/" class="card" style="text-decoration: none; text-align: center; padding: 15px;">ZDNet Security</a>
+        <section class="reveal" style="margin-top: 40px;">
+            <div class="card" style="border-left: 4px solid var(--primary);">
+                <h3>Sources de confiance</h3>
+                <div class="tag-cloud" style="margin-top: 10px;">
+                    <a href="https://www.ssi.gouv.fr/" target="_blank" class="tag">ANSSI</a>
+                    <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="tag">Cybermalveillance</a>
+                    <a href="https://thehackernews.com/" target="_blank" class="tag">The Hacker News</a>
                 </div>
             </div>
         </section>
     </main>
-
     <script src="js/main.js"></script>
 </body>
 </html>
