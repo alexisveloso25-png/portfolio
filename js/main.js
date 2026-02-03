@@ -1,26 +1,35 @@
-/**
- * main.js - Portfolio Alexis Veloso
- * Gestion du dynamisme et des animations de la Licence Générale
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialisation de l'animation au scroll
+    // 1. Animation au scroll (Reveal)
     const revealElements = () => {
         const reveals = document.querySelectorAll('.reveal');
-        const windowHeight = window.innerHeight;
-        const revealPoint = 100;
-
         reveals.forEach(el => {
+            const windowHeight = window.innerHeight;
             const revealTop = el.getBoundingClientRect().top;
-            if (revealTop < windowHeight - revealPoint) {
+            if (revealTop < windowHeight - 100) {
                 el.classList.add('active');
             }
         });
     };
 
-    // Déclenchement au scroll et au chargement
     window.addEventListener('scroll', revealElements);
     revealElements();
 
-    console.log("Portfolio d'Alexis Veloso chargé avec succès !");
+    // 2. Effet d'écriture sur les titres Highlight
+    const highlights = document.querySelectorAll('.highlight');
+    highlights.forEach(h => {
+        const originalText = h.innerText;
+        h.innerText = '';
+        let i = 0;
+        const type = () => {
+            if (i < originalText.length) {
+                h.innerText += originalText.charAt(i);
+                i++;
+                setTimeout(type, 50);
+            }
+        };
+        // On lance l'effet au chargement
+        type();
+    });
+
+    console.log("SEC-OPS Terminal: Access Granted for Alexis Veloso");
 });
