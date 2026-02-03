@@ -4,7 +4,7 @@
     --primary: #00f2ff;
     --primary-glow: rgba(0, 242, 255, 0.4);
     --accent: #ff0055;
-    --bg-dark: #1a222f; /* FOND BLEU ACIER - PAS DE NOIR */
+    --bg-dark: #1a222f; /* FOND BLEU ACIER */
     --card-bg: rgba(30, 41, 59, 0.8);
     --border: rgba(0, 242, 255, 0.3);
     --text: #e2e8f0;
@@ -62,7 +62,7 @@ nav a.active, nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--p
 }
 
 .glitch-text {
-    font-size: clamp(2rem, 8vw, 4rem); font-weight: 700; color: var(--white);
+    font-size: clamp(1.8rem, 6vw, 3.5rem); font-weight: 700; color: var(--white);
     text-shadow: 3px 3px var(--accent); margin-bottom: 10px;
 }
 
