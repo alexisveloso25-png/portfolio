@@ -30,66 +30,79 @@
 
     <main class="main-viewport">
         
-        <section class="glass-card hero-section tilt">
-            <div class="hero-inner">
-                <div class="hero-text">
-                    <h1 id="typewriter"></h1>
+        <section class="glass-card hero-terminal">
+            <div class="terminal-header">
+                <div class="term-dots"><span></span><span></span><span></span></div>
+                <div class="term-title">bash — root@alexis_veloso</div>
+            </div>
+            <div class="terminal-body">
+                <div class="term-line"><span class="t-purple">alexis@infra:~$</span> cat welcome_msg.txt</div>
+                <div class="term-output">
+                    <h1 id="typewriter">ALEXIS VELOSO</h1>
                     <p class="role-subtitle">// SYSTEMS_AND_NETWORKS_EXPERT</p>
-                    <div class="intro-box">
-                        <p><strong>Bienvenue sur mon portfolio !</strong><br><br>
-                        Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).
-                        Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. Curieux et motivé, je développe continuellement mes compétences dans le domaine des technologies et du numérique.</p>
-                    </div>
+                    <p class="term-description">
+                        Bienvenue sur mon portfolio !<br><br>
+                        Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR). 
+                        Passionné par l’informatique depuis mon plus jeune âge, j’ai grandi en étant immergé dans cet univers. 
+                        Curieux et motivé, je développe continuellement mes compétences dans le domaine des technologies et du numérique.
+                    </p>
                 </div>
-                <div class="hero-data">
-                    <div class="ping-display">PING: <span id="ping-val">24MS</span></div>
-                    <div class="clock-display" id="clock">00:00:00</div>
-                    <div class="hero-btns">
-                        <a href="assets/cv.pdf" class="btn-cyber"><span>DOWNLOAD_CV</span></a>
-                        <a href="https://linkedin.com/in/alexis-veloso" class="btn-cyber secondary"><span>LINKEDIN</span></a>
-                    </div>
+                <div class="term-line"><span class="t-purple">alexis@infra:~$</span> <span class="cursor">_</span></div>
+            </div>
+            <div class="hero-footer-actions">
+                <div class="system-status">
+                    <span class="t-green"><i class="fas fa-check-circle"></i> PING: <span id="ping-val">24MS</span></span>
+                    <span class="t-green"><i class="far fa-clock"></i> <span id="clock">10:25:36</span></span>
+                </div>
+                <div class="hero-btns-v4">
+                    <a href="assets/cv.pdf" class="btn-action cv"><i class="fas fa-file-pdf"></i> DOWNLOAD_CV</a>
+                    <a href="https://linkedin.com/in/alexis-veloso" target="_blank" class="btn-action lnk"><i class="fab fa-linkedin"></i> LINKEDIN</a>
+                    <a href="assets/lettre.pdf" class="btn-action rec"><i class="fas fa-envelope-open-text"></i> RECOM.DOC</a>
                 </div>
             </div>
         </section>
 
         <div class="dashboard-grid">
             
-            <section class="glass-card profile-v3 tilt">
+            <section class="glass-card profile-v4">
                 <div class="card-tag"><i class="fas fa-fingerprint"></i> BIOMETRIC_DATA</div>
-                <div class="bio-container">
-                    <div class="avatar-box">
-                        <div class="avatar-img">AV</div>
-                        <div class="scan-line-violet"></div>
+                <div class="bio-grid-v4">
+                    <div class="avatar-large">
+                        <div class="avatar-img-v4">AV</div>
+                        <div class="scan-laser"></div>
                     </div>
-                    <div class="bio-info">
-                        <div class="bio-row"><i class="fas fa-id-card"></i> <span>ID:</span> <strong>ALEXIS VELOSO</strong></div>
-                        <div class="bio-row"><i class="fas fa-birthday-cake"></i> <span>AGE:</span> <strong>20 ANS</strong></div>
-                        <div class="bio-row"><i class="fas fa-map-marker-alt"></i> <span>LOC:</span> <strong>LE PERREUX (94)</strong></div>
-                        <div class="bio-row"><i class="fas fa-envelope"></i> <span>MAIL:</span> <strong class="email-text">ALEXIS.VELOSO25@GMAIL.COM</strong></div>
+                    <div class="bio-details-v4">
+                        <div class="detail-item"><span>NAME:</span> <strong>ALEXIS VELOSO</strong></div>
+                        <div class="detail-item"><span>AGE:</span> <strong>20 ANS</strong></div>
+                        <div class="detail-item"><span>LOC:</span> <strong>LE PERREUX (94)</strong></div>
+                        <div class="detail-item"><span>MAIL:</span> <strong class="t-purple">ALEXIS.VELOSO25@GMAIL.COM</strong></div>
                     </div>
                 </div>
             </section>
 
-            <section class="glass-card education-v3 tilt">
-                <div class="card-tag"><i class="fas fa-database"></i> ACADEMIC_LOGS</div>
-                <div class="logs-container">
-                    <div class="log-entry current">
-                        <span class="log-date">2025-26</span>
-                        <div class="log-content">
+            <section class="glass-card academic-v4">
+                <div class="card-tag"><i class="fas fa-route"></i> ACADEMIC_LOGS</div>
+                <div class="stepper-v4">
+                    <div class="step active">
+                        <div class="step-icon"></div>
+                        <div class="step-info">
+                            <span class="step-year">2025-26</span>
                             <strong>LICENCE GÉNÉRALE INFORMATIQUE (SDR)</strong>
                             <p>CNAM - CAMPUS MONTSOURIS</p>
                         </div>
                     </div>
-                    <div class="log-entry">
-                        <span class="log-date">2023-25</span>
-                        <div class="log-content">
+                    <div class="step">
+                        <div class="step-icon"></div>
+                        <div class="step-info">
+                            <span class="step-year">2023-25</span>
                             <strong>BTS SIO OPTION SISR</strong>
                             <p>CAMPUS MONTSOURIS</p>
                         </div>
                     </div>
-                    <div class="log-entry">
-                        <span class="log-date">2020-23</span>
-                        <div class="log-content">
+                    <div class="step">
+                        <div class="step-icon"></div>
+                        <div class="step-info">
+                            <span class="step-year">2020-23</span>
                             <strong>BAC PRO SN OPTION SISR</strong>
                             <p>LYCÉE LOUIS ARMAND - MENTION BIEN</p>
                         </div>
@@ -97,93 +110,60 @@
                 </div>
             </section>
 
-            <section class="glass-card skills-v3 tilt">
+            <section class="glass-card skills-v4">
                 <div class="card-tag"><i class="fas fa-microchip"></i> TECHNICAL_MATRIX</div>
                 <div class="skill-group">
                     <div class="skill-item">
                         <div class="skill-header"><span>WINDOWS SERVER</span> <span class="pct">90%</span></div>
                         <div class="progress-wrap"><div class="progress-fill" style="width: 90%"></div></div>
-                        <div class="skill-details">AD DS, GPO, DNS, DHCP, WDS, WSUS</div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-header"><span>LINUX ADMINISTRATION</span> <span class="pct">85%</span></div>
+                        <div class="skill-header"><span>LINUX ADMIN</span> <span class="pct">85%</span></div>
                         <div class="progress-wrap"><div class="progress-fill" style="width: 85%"></div></div>
-                        <div class="skill-details">DEBIAN, BASH SCRIPTING, NGINX, PERMISSIONS</div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-header"><span>NETWORKING (CCNA)</span> <span class="pct">80%</span></div>
                         <div class="progress-wrap"><div class="progress-fill" style="width: 80%"></div></div>
-                        <div class="skill-details">VLANS, ROUTAGE, OSPF, CISCO IOS, NAT</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header"><span>MONITORING</span> <span class="pct">85%</span></div>
-                        <div class="progress-wrap"><div class="progress-fill" style="width: 85%"></div></div>
-                        <div class="skill-details">PRTG NETWORK MONITOR, CENTREON, SNMP</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header"><span>VIRTUALISATION</span> <span class="pct">75%</span></div>
-                        <div class="progress-wrap"><div class="progress-fill" style="width: 75%"></div></div>
-                        <div class="skill-details">PROXMOX VE, VMWARE ESXI, VCENTER</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header"><span>CYBERSÉCURITÉ</span> <span class="pct">70%</span></div>
-                        <div class="progress-wrap"><div class="progress-fill" style="width: 70%"></div></div>
-                        <div class="skill-details">HARDENING, VPN IPSEC, FIREWALLING (STORM_SHIELD)</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header"><span>SAUVEGARDE & DÉPLOIEMENT</span> <span class="pct">65%</span></div>
-                        <div class="progress-wrap"><div class="progress-fill" style="width: 65%"></div></div>
-                        <div class="skill-details">VEEAM, FOG PROJECT, CLONZILLA</div>
                     </div>
                 </div>
             </section>
 
-            <section class="glass-card core-v3 tilt">
+            <section class="glass-card human-v4">
                 <div class="card-tag"><i class="fas fa-brain"></i> HUMAN_CORE</div>
-                <div class="core-grid">
-                    <div class="core-node"><span>CURIOSITÉ TECH</span></div>
-                    <div class="core-node"><span>AUTONOMIE</span></div>
-                    <div class="core-node"><span>ESPRIT D'ÉQUIPE</span></div>
-                    <div class="core-node"><span>ADAPTABILITÉ</span></div>
-                    <div class="core-node"><span>RIGUEUR PRO</span></div>
-                    <div class="core-node"><span>RÉSOLUTION PANNES</span></div>
-                    <div class="core-node"><span>VEILLE TECH</span></div>
+                <div class="core-v4-grid">
+                    <div class="core-card"><i class="fas fa-lightbulb"></i><span>CURIOSITÉ TECH</span></div>
+                    <div class="core-card"><i class="fas fa-user-check"></i><span>AUTONOMIE</span></div>
+                    <div class="core-card"><i class="fas fa-users"></i><span>ESPRIT D'ÉQUIPE</span></div>
+                    <div class="core-card"><i class="fas fa-sync-alt"></i><span>ADAPTABILITÉ</span></div>
+                    <div class="core-card"><i class="fas fa-search"></i><span>RIGUEUR PRO</span></div>
+                    <div class="core-card"><i class="fas fa-tools"></i><span>DÉPANNAGE</span></div>
+                    <div class="core-card"><i class="fas fa-shield-alt"></i><span>ÉTHIQUE CYBER</span></div>
+                    <div class="core-card"><i class="fas fa-comments"></i><span>COMMUNICATION</span></div>
                 </div>
             </section>
         </div>
 
-        <section class="glass-card certs-v3 tilt">
+        <section class="glass-card certs-v4">
             <div class="card-tag"><i class="fas fa-certificate"></i> VALIDATED_CERTS</div>
-            <div class="cert-row">
-                <button class="cert-item"><i class="fas fa-shield-virus"></i> MOOC ANSSI</button>
-                <button class="cert-item"><i class="fas fa-user-shield"></i> RGPD CNIL</button>
-                <button class="cert-item active"><i class="fas fa-network-wired"></i> CCNA V7 (COURS)</button>
-                <button class="cert-item"><i class="fas fa-check-circle"></i> PIX CERTIF</button>
-                <button class="cert-item"><i class="fas fa-server"></i> CISCO IT ESSENTIALS</button>
+            <div class="certs-container-v4">
+                <div class="cert-box-v4">
+                    <div class="cert-main"><i class="fas fa-shield-virus"></i><span>MOOC ANSSI</span></div>
+                    <a href="assets/anssi.pdf" class="cert-dl"><i class="fas fa-download"></i></a>
+                </div>
+                <div class="cert-box-v4">
+                    <div class="cert-main"><i class="fas fa-user-shield"></i><span>RGPD CNIL</span></div>
+                    <a href="assets/cnil.pdf" class="cert-dl"><i class="fas fa-download"></i></a>
+                </div>
+                <div class="cert-box-v4 active">
+                    <div class="cert-main"><i class="fas fa-network-wired"></i><span>CCNA V7</span></div>
+                    <a href="assets/ccna.pdf" class="cert-dl"><i class="fas fa-download"></i></a>
+                </div>
+                <div class="cert-box-v4">
+                    <div class="cert-main"><i class="fas fa-server"></i><span>IT ESSENTIALS</span></div>
+                    <a href="#" class="cert-dl"><i class="fas fa-download"></i></a>
+                </div>
             </div>
         </section>
-
-        <section class="glass-card contact-v3 tilt">
-            <div class="card-tag"><i class="fas fa-satellite-dish"></i> SECURE_CONTACT</div>
-            <form class="uplink-form">
-                <div class="form-split">
-                    <div class="input-box">
-                        <label>SENDER_ID</label>
-                        <input type="text" placeholder="NOM_PRENOM" required>
-                    </div>
-                    <div class="input-box">
-                        <label>RETURN_PATH</label>
-                        <input type="email" placeholder="EMAIL_ADRESS" required>
-                    </div>
-                </div>
-                <div class="input-box full">
-                    <label>DATA_STREAM</label>
-                    <textarea placeholder="MESSAGE_ENCRYPTED..." rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit-v3">INITIALIZE_UPLINK_TRANSMISSION</button>
-            </form>
-        </section>
-
     </main>
 
     <footer class="terminal-footer">
