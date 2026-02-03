@@ -3,146 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // CYBER_INFRA</title>
+    <title>ALEXIS_VELOSO // INFRA_PORTAL</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="laser-scanner"></div>
-    <div class="vignette"></div>
+    <div class="scanline"></div>
 
     <header class="main-header">
         <div class="header-left">
-            <div class="pulse-container">
-                <span class="status-dot"></span>
-                <div class="pulse-ring"></div>
-            </div>
-            <span class="sys-title">SYSTEM_DASHBOARD // ALEXIS_VELOSO</span>
+            <span class="status-dot pulse"></span>
+            <span class="sys-title">SYSTEM_DASHBOARD // USER: ALEXIS_VELOSO</span>
         </div>
         <nav class="nav-links">
-            <a href="index.html" class="active">01_IDENT</a>
-            <a href="entreprise.html">02_MISSION</a>
-            <a href="formation.html">03_EDU</a>
+            <a href="index.html" class="active">[ 01_BIO ]</a>
+            <a href="entreprise.html">[ 02_MISSIONS ]</a>
+            <a href="formation.html">[ 03_FORMATION ]</a>
+            <a href="veille.html">[ 04_VEILLE ]</a>
         </nav>
-        <div id="clock">00:00:00</div>
+        <div class="header-right">
+            <div id="clock">00:00:00</div>
+        </div>
     </header>
 
     <main class="container">
-        <section class="hero-section">
-            <div class="hero-content">
-                <div class="terminal-tag">AUTH_USER: SUCCESS</div>
-                <h1 id="typewriter"></h1>
-                <p class="hero-subtitle">> ÉTUDIANT EN LICENCE SDR // SPÉCIALISATION INFRASTRUCTURES & SÉCURITÉ</p>
-                <div class="hero-desc">
-                    <span class="bracket">[</span>
-                    Bienvenue sur mon portfolio ! Je m’appelle Alexis Veloso, passionné par l’informatique depuis mon plus jeune âge. 
-                    En tant qu'étudiant en Licence Générale Informatique (SDR), je développe continuellement mes compétences dans 
-                    le domaine des technologies, du numérique et de la sécurisation des systèmes.
-                    <span class="bracket">]</span>
+        
+        <section class="module hero-module">
+            <div class="module-content">
+                <div class="terminal-header-title">TERMINAL_ID: 0x7E4</div>
+                <h1 id="typewriter" class="glitch-text"></h1>
+                <p class="subtitle">> L3_INFORMATIQUE_SDR // SYSTEMS_AND_NETWORKS_EXPERT</p>
+                
+                <div class="intro-box">
+                    <p class="terminal-prompt">guest@portfolio:~$ <span class="command">run about_me.sh</span></p>
+                    <p class="main-text">
+                        Bienvenue sur mon portfolio ! Je m’appelle Alexis Veloso, étudiant en Licence Générale Informatique (SDR).
+                        Passionné par l’informatique depuis mon plus jeune âge, je développe continuellement mes compétences dans la gestion d'infrastructures et la sécurité.
+                    </p>
                 </div>
-                <div class="hero-actions">
-                    <a href="assets/cv.pdf" class="btn-laser">GET_CV.EXE</a>
-                    <a href="assets/recommandation.pdf" class="btn-outline">RECOMMENDATION_DOC</a>
-                    <a href="https://linkedin.com" class="btn-outline">LINKEDIN_PROFILE</a>
+
+                <div class="btn-group">
+                    <a href="assets/cv.pdf" class="btn-primary" target="_blank">DOWNLOAD_CV</a>
+                    <a href="https://linkedin.com/in/alexis-veloso" class="btn-secondary" target="_blank">LINKEDIN</a>
                 </div>
             </div>
         </section>
 
-        <div class="dashboard-grid">
-            <div class="side-col">
-                <div class="card id-card">
-                    <div class="card-header">// USER_DATA</div>
-                    <div class="id-layout">
-                        <div class="avatar-box">
-                            AV
-                            <div class="avatar-line"></div>
-                        </div>
-                        <div class="id-details">
-                            <div class="id-item"><span class="lbl">AGE:</span> 20_YRS</div>
-                            <div class="id-item"><span class="lbl">LOC:</span> LE_PERREUX_94</div>
-                            <div class="id-item"><span class="lbl">STATUS:</span> ACTIVE_STUDENT</div>
+        <div class="grid-layout">
+            <div class="col-left">
+                <div class="module">
+                    <div class="module-header">USER_IDENTIFICATION</div>
+                    <div class="id-badge">
+                        <div class="avatar">AV<div class="avatar-scan"></div></div>
+                        <div class="id-info">
+                            <div class="info-row"><span class="label">AGE</span><span class="val">20_YRS</span></div>
+                            <div class="info-row"><span class="label">LOC</span><span class="val">LE_PERREUX_94</span></div>
+                            <div class="info-row"><span class="label">MAIL</span><span class="val small">alexis.veloso25@gmail.com</span></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">// HUMAN_RESOURCES (SOFT_SKILLS)</div>
-                    <div class="soft-skills-grid">
-                        <div class="soft-tag">CURIEUX</div>
-                        <div class="soft-tag">MOTIVÉ</div>
-                        <div class="soft-tag">AUTODIDACTE</div>
-                        <div class="soft-tag">ESPRIT_EQUIPE</div>
-                        <div class="soft-tag">RIGOUREUX</div>
-                        <div class="soft-tag">RÉACTIF</div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">// CONTACT_CHANNEL</div>
-                    <div class="contact-links">
-                        <p>MAIL: alexis.veloso25@gmail.com</p>
-                        <p>TEL: 07.71.82.48.09</p>
+                <div class="module">
+                    <div class="module-header">HUMAN_CORE_SKILLS</div>
+                    <div class="soft-skills-list">
+                        <div class="soft-item">
+                            <span class="soft-title">CURIOSITÉ</span>
+                            <p>Veille technologique quotidienne sur les vulnérabilités 0-day.</p>
+                        </div>
+                        <div class="soft-item">
+                            <span class="soft-title">AUTONOMIE</span>
+                            <p>Diagnostic et résolution de pannes complexes via analyse de logs.</p>
+                        </div>
+                        <div class="soft-item">
+                            <span class="soft-title">COMMUNICATION</span>
+                            <p>Rédaction de documentations techniques et schémas réseau.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="main-col">
-                <div class="card">
-                    <div class="card-header">// TECHNICAL_CORE_COMPETENCES</div>
-                    <div class="skills-wrapper">
-                        <div class="skill-row">
-                            <div class="skill-info"><span>WINDOWS_SERVER_AD</span><span>90%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+            <div class="col-right">
+                <div class="module">
+                    <div class="module-header">TECHNICAL_HARDWARE_STACK</div>
+                    <div class="skill-stack">
+                        <div class="skill-item">
+                            <div class="skill-top"><span>WINDOWS_SERVER</span><span>90%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
+                            <p class="skill-desc">Server 2022, Active Directory (GPO, OU), DNS/DHCP, WDS.</p>
                         </div>
-                        <div class="skill-row">
-                            <div class="skill-info"><span>LINUX_DEBIAN_UBUNTU</span><span>85%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                        <div class="skill-item">
+                            <div class="skill-top"><span>LINUX_ADMIN</span><span>85%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                            <p class="skill-desc">Debian/Ubuntu, Scripting Bash, Hardening SSH.</p>
                         </div>
-                        <div class="skill-row">
-                            <div class="skill-info"><span>CISCO_NETWORKING_CCNA</span><span>80%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
-                        </div>
-                        <div class="skill-row">
-                            <div class="skill-info"><span>VMWARE_PROXMOX_VIRTUAL</span><span>75%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="75%"></div></div>
-                        </div>
-                        <div class="skill-row">
-                            <div class="skill-info"><span>PROGRAMMATION_BASICS</span><span>70%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="70%"></div></div>
-                        </div>
-                        <div class="skill-row">
-                            <div class="skill-info"><span>CYBERSECURITY_POLICIES</span><span>85%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                        <div class="skill-item">
+                            <div class="skill-top"><span>NETWORKING_SECURITY</span><span>80%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                            <p class="skill-desc">Switch/Router Cisco, VLANs, ACLs, VPN IPsec/SSL.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">// EDUCATION_PATHWAY</div>
-                    <div class="timeline-v2">
-                        <div class="step current">
-                            <div class="step-year">2025-2026</div>
-                            <div class="step-txt"><strong>LICENCE SDR</strong><br>Campus Montsouris</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-year">2023-2025</div>
-                            <div class="step-txt"><strong>BTS SIO SISR</strong><br>Campus Montsouris</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-year">2020-2023</div>
-                            <div class="step-txt"><strong>BAC PRO SN</strong><br>Lycée Louis Armand</div>
-                        </div>
+                <div class="module">
+                    <div class="module-header">LATEST_SYSTEM_LOGS</div>
+                    <div class="alternance-box">
+                        <span class="log-tag">[MISSION_LIVE]</span>
+                        <p>En mission chez <strong>THENEAS</strong> : Support N2/N3, migration de parcs et monitoring PRTG.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="certs-footer">
-            <div class="cert-item">RGPD_05</div>
-            <div class="cert-item">CISCO_NET</div>
-            <div class="cert-item">CCNA_EN_COURS</div>
-            <div class="cert-item">PIX_350</div>
-        </div>
+        <footer class="system-logs">
+            <div class="log-line">>> [LOG] UI_MODE: LASER_SCAN_ENABLED</div>
+            <div class="log-line">>> [LOG] STATUS: ALTERNANCE_IN_PROGRESS</div>
+        </footer>
     </main>
 
     <script src="js/script.js"></script>
