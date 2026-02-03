@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexis Veloso | Portfolio L3 Informatique</title>
+    <title>Alexis Veloso | Cyber-Expert SDR</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">BIO</a></li>
-                <li><a href="entreprise.html">MISSIONS ENTREPRISE</a></li>
-                <li><a href="formation.html">PROJETS FORMATION</a></li>
-                <li><a href="veille.html">VEILLE CYBER</a></li>
+                <li><a href="index.html" class="active">/ROOT/BIO</a></li>
+                <li><a href="entreprise.html">/MISSIONS_PRO</a></li>
+                <li><a href="formation.html">/LABS_FORMATION</a></li>
+                <li><a href="veille.html">/CYBER_WATCH</a></li>
             </ul>
         </nav>
     </header>
@@ -22,45 +22,51 @@
         <section class="reveal hero-section">
             <div class="terminal-header">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">system_status: active</span>
+                <span class="terminal-title" style="font-family: 'Fira Code'; font-size: 0.8rem; color: #8b949e; margin-left: 10px;">
+                    status: connected | session_id: 0x250505
+                </span>
             </div>
             <div class="hero-content">
                 <h1 class="glitch-text">ALEXIS VELOSO</h1>
                 <h2 class="highlight">Expert Systèmes, Données & Réseaux (SDR)</h2>
-                <p class="hero-sub">
-                    Apprenti chez <span class="white">THENEAS</span> | Étudiant en <span class="white">Licence Générale Informatique</span> au Campus Montsouris.
+                <p class="hero-sub" style="margin: 20px 0;">
+                    Apprenti Administrateur chez <span style="color: var(--primary);">THENEAS</span> | 
+                    L3 Informatique au <span style="color: var(--primary);">Campus Montsouris</span>. <br>
+                    Passionné par l'architecture d'infrastructure et la sécurisation des flux de données.
                 </p>
-                <div class="hero-stats">
-                    <div class="stat-item"><strong>09</strong><br>Missions Pro</div>
-                    <div class="stat-item"><strong>08</strong><br>Projets Académiques</div>
-                    <div class="stat-item"><strong>L3</strong><br>Niveau Actuel</div>
+                
+                <div class="hero-stats" style="display: flex; gap: 40px; margin: 30px 0;">
+                    <div class="stat-item"><strong style="color: var(--primary); font-size: 1.5rem;">09</strong><br><small>Missions Pro</small></div>
+                    <div class="stat-item"><strong style="color: var(--primary); font-size: 1.5rem;">08</strong><br><small>Projets Lab</small></div>
+                    <div class="stat-item"><strong style="color: var(--accent); font-size: 1.5rem;">L3</strong><br><small>Niveau</small></div>
                 </div>
-                <div style="margin-top: 30px;">
-                    <a href="entreprise.html" class="btn">Parcourir mes travaux</a>
-                    <a href="assets/cv.pdf" class="btn outline">Consulter CV</a>
+
+                <div class="cta-group">
+                    <a href="entreprise.html" class="btn">_ACCÉDER_AUX_LOGS</a>
+                    <a href="assets/cv.pdf" class="btn outline">_DOWNLOAD_CV</a>
                 </div>
             </div>
         </section>
 
-        <div class="grid" style="margin-top: 40px;">
+        <div class="grid">
             <div class="card reveal">
-                <h3 class="highlight">// MON_PROFIL</h3>
-                <ul class="info-list">
-                    <li><strong>📍 Localisation:</strong> Perreux-Sur-Marne (94)</li>
-                    <li><strong>📧 E-mail:</strong> alexis.veloso25@gmail.com</li>
-                    <li><strong>📞 Contact:</strong> 07 71 82 48 09</li>
-                    <li><strong>🎂 Naissance:</strong> 25/05/2005</li>
+                <h3 class="highlight">// IDENTITÉ_RÉSEAU</h3>
+                <ul class="info-list" style="list-style: none; font-family: 'Fira Code'; font-size: 0.9rem; margin-top: 15px;">
+                    <li>> <strong>Location:</strong> Perreux-Sur-Marne</li>
+                    <li>> <strong>Mail:</strong> alexis.veloso25@gmail.com</li>
+                    <li>> <strong>Tel:</strong> 07 71 82 48 09</li>
+                    <li>> <strong>DOB:</strong> 25.05.2005</li>
                 </ul>
             </div>
             <div class="card reveal">
-                <h3 class="highlight">// SPÉCIALITÉS_SDR</h3>
-                <p>Spécialisé dans l'administration d'infrastructures complexes :</p>
+                <h3 class="highlight">// STACK_TECHNIQUE</h3>
+                <p style="font-size: 0.85rem; margin-bottom: 15px;">Infrastructures & Sécurité :</p>
                 <div class="tag-cloud">
-                    <span class="tag">Supervision PRTG</span>
-                    <span class="tag">Virtualisation Proxmox</span>
+                    <span class="tag">PRTG Monitor</span>
+                    <span class="tag">Proxmox VE</span>
                     <span class="tag">Active Directory</span>
-                    <span class="tag">Cloud O365</span>
-                    <span class="tag">Sécurité IPFire</span>
+                    <span class="tag">IPFire FW</span>
+                    <span class="tag">PowerShell</span>
                 </div>
             </div>
         </div>
