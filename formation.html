@@ -1,46 +1,87 @@
-<main class="container">
-    <h2 class="reveal highlight">// PARCOURS_ACADÉMIQUE : CAMPUS_MONTSOURIS</h2>
-    
-    <div class="grid">
-        <div class="card reveal">
-            <span class="tag">Droits</span>
-            <h3>Gestion des ACL / Partages</h3>
-            <p>Configuration des permissions d'accès aux dossiers et gestion des partages réseau.</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation | Alexis Veloso</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">BIO</a></li>
+                <li><a href="entreprise.html">MISSIONS ENTREPRISE</a></li>
+                <li><a href="formation.html">PROJETS FORMATION</a></li>
+                <li><a href="veille.html">VEILLE CYBER</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="reveal">
+            <h2 class="highlight">// ACADEMIC_PROJECTS : BTS_SIO_SISR_&_L3</h2>
+            <p style="margin-bottom: 40px; color: #888;">Retrouvez ici les 8 activités majeures réalisées durant mon parcours au Campus Montsouris.</p>
+        </section>
+
+        <div class="grid">
+            
+            <div class="card reveal" style="grid-column: 1 / -1; border-color: var(--primary);">
+                <span class="tag">PROJET MAJEUR L3</span>
+                <h3>Supervision Centralisée Multi-sites (PRTG)</h3>
+                <p>Le projet PRTG a été lancé pour mettre en place une supervision centralisée, plus claire et plus réactive, capable de surveiller en continu les équipements des deux sites. L’objectif est d’améliorer la disponibilité des services, de faciliter le travail de l’équipe informatique et d’anticiper les éventuels problèmes.</p>
+                <ul style="margin-top:15px; font-size: 0.9rem; color: #8b949e; padding-left: 20px;">
+                    <li>Mise en place de sondes SNMP/WMI pour serveurs et switchs.</li>
+                    <li>Configuration d'alertes automatiques (Mail/SMS) sur seuils critiques.</li>
+                    <li>Création de tableaux de bord en temps réel.</li>
+                </ul>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Sécurité</span>
+                <h3>Sécurisation WSUS</h3>
+                <p>Déploiement de Windows Server Update Services pour le contrôle et le test des correctifs avant déploiement, limitant les vulnérabilités 0-day.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Réseau</span>
+                <h3>Segmentation VLAN 802.1Q</h3>
+                <p>Isolation des flux (VoIP, WiFi, Management) et sécurisation des échanges inter-VLAN.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Système</span>
+                <h3>Gestion des ACL & Partages</h3>
+                <p>Mise en place de permissions fines sur les serveurs de fichiers pour garantir la confidentialité des données.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Système</span>
+                <h3>Gestion de Stockage NTFS</h3>
+                <p>Optimisation des quotas de disque, compression et gestion de la structure NTFS.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Réseau</span>
+                <h3>Routage Entre Sites Distants</h3>
+                <p>Configuration de l'interconnexion réseau pour permettre la communication entre deux infrastructures géographiquement séparées.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Réseau</span>
+                <h3>Paramétrage DHCP Serveur/Routeur</h3>
+                <p>Configuration d'étendues DHCP sur Windows Server et routeurs Cisco pour une attribution dynamique sécurisée.</p>
+            </div>
+
+            <div class="card reveal">
+                <span class="tag">Sécurité</span>
+                <h3>Chiffrement EFS & Agent Récupération</h3>
+                <p>Mise en œuvre du chiffrement local et création d'agents de récupération de certificats (DRA).</p>
+            </div>
+
         </div>
-        <div class="card reveal">
-            <span class="tag">Stockage</span>
-            <h3>Gestion du disque / NTFS</h3>
-            <p>Optimisation du stockage et gestion des partitions au format NTFS.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Infrastructure</span>
-            <h3>Routage Inter-sites</h3>
-            <p>Mise en place d'un routage statique/dynamique entre deux sites distants.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Mises à jour</span>
-            <h3>Windows Server & WSUS</h3>
-            <p>Configuration et gestion d'un serveur de mise à jour centralisé (WSUS).</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Certificats</span>
-            <h3>Agent de récupération (EFS)</h3>
-            <p>Création et gestion d'un agent de récupération pour les fichiers chiffrés via EFS.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Services IP</span>
-            <h3>Paramétrage DHCP</h3>
-            <p>Installation et configuration du service DHCP sur serveurs et routeurs.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Segmentation</span>
-            <h3>Création et gestion de VLAN</h3>
-            <p>Isolation des flux réseau pour améliorer la sécurité et les performances.</p>
-        </div>
-        <div class="card reveal">
-            <span class="tag">Virtualisation Lab</span>
-            <h3>Oracle VirtualBox</h3>
-            <p>Mise en place de maquettes de test pour simuler des infrastructures réseaux.</p>
-        </div>
-    </div>
-</main>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
