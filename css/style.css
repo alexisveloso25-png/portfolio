@@ -1,97 +1,293 @@
-/* --- ACADEMIC PIPELINE CENTRÉ --- */
+/* --- CONFIGURATION GLOBALE & VARIABLES --- */
+:root {
+    --primary: #a855f7;
+    --primary-glow: rgba(168, 85, 247, 0.4);
+    --bg-dark: #030208;
+    --glass: rgba(12, 10, 25, 0.9);
+    --border-glass: rgba(168, 85, 247, 0.2);
+    --font-main: 'JetBrains Mono', monospace;
+    --green: #4ade80;
+    --text-dim: #888;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    background: var(--bg-dark); 
+    color: #e2e8f0; 
+    font-family: var(--font-main); 
+    text-transform: uppercase; 
+    padding-bottom: 80px;
+    overflow-x: hidden;
+}
+
+/* --- EFFETS DE FOND --- */
+.background-glow { 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: radial-gradient(circle at 10% 10%, #1a1033 0%, transparent 40%); 
+    z-index: -2; 
+}
+
+/* --- HEADER & NAVIGATION --- */
+.main-header { 
+    padding: 1rem 2rem; 
+    background: rgba(0,0,0,0.9); 
+    border-bottom: 1px solid var(--border-glass); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
+
+.header-content { 
+    display: flex; 
+    justify-content: space-between; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    align-items: center; 
+}
+
+.brand { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+.status-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+.pulse { animation: pulse-glow 2s infinite; }
+
+.glass-nav { display: flex; gap: 20px; }
+.glass-nav a { 
+    text-decoration: none; 
+    color: var(--text-dim); 
+    font-size: 0.7rem; 
+    transition: 0.3s; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+}
+.glass-nav a.active, .glass-nav a:hover { color: var(--primary); }
+
+/* --- CONTENEUR PRINCIPAL --- */
+.main-viewport { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 40px 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px; 
+}
+
+.dashboard-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px; 
+}
+
+/* --- CARTES VITRÉES (GLASSMORPISM) --- */
+.glass-card { 
+    background: var(--glass); 
+    border: 1px solid var(--border-glass); 
+    border-radius: 20px; 
+    padding: 30px; 
+    position: relative; 
+    backdrop-filter: blur(10px);
+}
+
+.card-tag { 
+    position: absolute; 
+    top: 0; left: 20px; 
+    background: var(--primary); 
+    color: #000; 
+    padding: 3px 12px; 
+    font-size: 0.6rem; 
+    font-weight: 900; 
+    border-radius: 0 0 8px 8px; 
+}
+
+/* --- TERMINAL D'ACCUEIL --- */
+.hero-terminal { padding: 0 !important; overflow: hidden; background: #0a0514; }
+.terminal-header { 
+    background: rgba(255,255,255,0.05); 
+    padding: 10px 20px; 
+    display: flex; 
+    gap: 8px; 
+    border-bottom: 1px solid var(--border-glass); 
+}
+.term-dots span { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.term-dots span:nth-child(1) { background: #ff5f56; }
+.term-dots span:nth-child(2) { background: #ffbd2e; }
+.term-dots span:nth-child(3) { background: #27c93f; }
+.term-title { font-size: 0.6rem; color: #666; margin-left: 10px; }
+
+.terminal-body { padding: 30px; text-transform: none; line-height: 1.6; }
+.t-purple { color: var(--primary); font-weight: bold; }
+.role-subtitle { color: var(--primary); font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+.term-description p { margin-bottom: 15px; color: #ccc; font-size: 0.9rem; }
+
+.hero-btns-v4 { display: flex; gap: 15px; margin-top: 25px; }
+.btn-action { 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    font-size: 0.7rem; 
+    text-decoration: none; 
+    font-weight: 800; 
+    border: 1px solid var(--border-glass); 
+    color: #fff; 
+    transition: 0.3s;
+}
+.btn-action.cv { background: var(--primary); color: #000; border: none; }
+.btn-action:hover { transform: translateY(-3px); box-shadow: 0 5px 15px var(--primary-glow); }
+
+/* --- SECTION BIOMÉTRIQUE CENTRÉE --- */
+.bio-layout-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.avatar-large {
+    width: 140px; height: 140px; 
+    border: 2px solid var(--primary); 
+    border-radius: 50%;
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 3rem; 
+    background: #000; 
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+}
+
+.scan-laser {
+    position: absolute; width: 100%; height: 2px; 
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary); 
+    animation: laser-move 3s infinite linear;
+}
+
+@keyframes laser-move { 0%, 100% { top: 0%; } 50% { top: 100%; } }
+
+.bio-info-centered { width: 100%; max-width: 320px; }
+.detail-item-v4 {
+    display: flex; justify-content: space-between; font-size: 0.75rem;
+    padding: 10px 0; border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+}
+.detail-item-v4 span { color: var(--text-dim); }
+
+/* --- PIPELINE ACADÉMIQUE CENTRÉ --- */
 .pipeline-centered {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
     text-align: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .pipeline-item-v4 {
     padding: 15px;
     border-radius: 12px;
     width: 100%;
-    transition: 0.3s;
 }
 
-.pipeline-item-v4.active {
-    background: rgba(168, 85, 247, 0.05);
-    border: 1px solid var(--border-glass);
-}
-
-.pipe-year {
-    font-size: 0.7rem;
-    color: var(--primary);
-    font-weight: 800;
-}
-
-.pipe-title {
-    font-size: 0.9rem;
-    color: #fff;
-    margin: 5px 0;
-}
-
-.pipe-sub {
-    font-size: 0.7rem;
-    color: #888;
-    text-transform: none;
-}
+.pipe-year { font-size: 0.7rem; color: var(--primary); font-weight: 800; }
+.pipe-title { font-size: 0.9rem; color: #fff; margin: 5px 0; }
+.pipe-sub { font-size: 0.75rem; color: #666; text-transform: none; }
 
 .pipe-separator {
-    width: 2px;
-    height: 20px;
+    width: 2px; height: 30px;
     background: linear-gradient(to bottom, var(--primary), transparent);
 }
 
-/* --- AJUSTEMENTS HUB EXPERTISE --- */
-.skills-wrapper-v4 {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Garde 2 colonnes pour les compétences */
-    gap: 15px;
+/* --- HUB D'EXPERTISE (TECH + CERTS + QUALITÉS) --- */
+.expertise-grid { 
+    display: grid; 
+    grid-template-columns: 2fr 1fr; 
+    gap: 40px; 
+    margin-top: 15px; 
 }
 
-.cert-row-v4 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-glass);
-    margin-bottom: 8px;
-    font-size: 0.65rem;
+.sub-title { 
+    font-size: 0.7rem; 
+    color: var(--primary); 
+    margin-bottom: 20px; 
+    letter-spacing: 2px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
 }
 
-.cert-row-v4 i {
-    color: var(--primary);
+/* Matrice Technique */
+.skills-wrapper-v4 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.skill-container { 
+    background: rgba(255,255,255,0.02); 
+    padding: 18px; 
+    border-radius: 12px; 
+    border: 1px solid rgba(168,85,247,0.1); 
+}
+.skill-header { display: flex; justify-content: space-between; font-size: 0.65rem; color: #fff; font-weight: 800; }
+.prog-bar-v4 { height: 4px; background: #000; border-radius: 10px; margin: 12px 0; overflow: hidden; }
+.prog-fill-v4 { height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+.detail-tag { 
+    font-size: 0.55rem; color: #666; margin-right: 5px; 
+    border: 1px solid rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; 
 }
 
-.soft-skills-v4 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center; /* Centre les qualités */
+/* Colonne de Droite */
+.side-column { display: flex; flex-direction: column; gap: 30px; }
+
+/* Certifications */
+.certs-list-v4 { display: flex; flex-direction: column; gap: 10px; }
+.cert-row-v4 { 
+    display: flex; justify-content: space-between; align-items: center; 
+    background: rgba(255,255,255,0.03); padding: 12px 15px; 
+    border-radius: 8px; border: 1px solid var(--border-glass); 
+    font-size: 0.65rem; 
+}
+.cert-row-v4.active { border-color: var(--primary); color: #fff; }
+.cert-row-v4 i { color: var(--primary); }
+
+/* Qualités Humaines */
+.soft-skills-v4 { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; }
+.soft-tag { 
+    font-size: 0.55rem; padding: 6px 12px; 
+    border-radius: 20px; border: 1px solid var(--border-glass); 
+    background: rgba(255,255,255,0.02); color: #888; 
+}
+.soft-tag.active { border-color: var(--primary); color: var(--primary); background: rgba(168, 85, 247, 0.1); }
+
+/* --- FOOTER --- */
+.footer-v4 { 
+    position: fixed; 
+    bottom: 0; left: 0; 
+    width: 100%; 
+    background: #000; 
+    padding: 15px 30px; 
+    border-top: 1px solid var(--border-glass); 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.6rem; 
+    z-index: 101; 
 }
 
-.soft-tag {
-    font-size: 0.6rem;
-    padding: 6px 12px;
-    border: 1px solid var(--border-glass);
-    border-radius: 20px;
-    color: #888;
+.stat-node { display: flex; align-items: center; gap: 8px; color: #666; }
+.t-green { color: var(--green); font-weight: 800; }
+
+@keyframes pulse-glow {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
-.soft-tag.active {
-    color: var(--primary);
-    border-color: var(--primary);
-    background: rgba(168, 85, 247, 0.1);
-}
-
-.t-dim { color: #555; font-size: 0.5rem; }
-
-/* Responsive */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 900px) {
-    .skills-wrapper-v4 { grid-template-columns: 1fr; }
+    .dashboard-grid, .expertise-grid, .skills-wrapper-v4 {
+        grid-template-columns: 1fr;
+    }
+    .header-content { flex-direction: column; gap: 15px; }
+    .main-viewport { padding: 20px 15px; }
 }
