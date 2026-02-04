@@ -58,6 +58,7 @@
         .tag-red { background: #ef4444; color: white; }
         .tag-blue { background: #3b82f6; color: white; }
         .tag-purple { background: var(--purple); color: white; }
+        .tag-gold { background: #d4af37; color: black; }
 
         .analysis-highlight {
             border-left: 4px solid var(--accent);
@@ -74,6 +75,30 @@
             font-size: 0.8rem;
             margin: 5px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Nouveaux styles pour le catalogue */
+        .example-card {
+            border-top: 2px solid var(--accent);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            font-size: 0.85rem;
+        }
+        .tech-release {
+            border: 1px dashed var(--accent);
+            padding: 15px;
+            position: relative;
+        }
+        .tech-release::before {
+            content: "NEW_2026";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            font-weight: 800;
         }
     </style>
 </head>
@@ -154,9 +179,57 @@
             </div>
         </section>
 
+        <section class="card section-spacing">
+            <div class="badge">03_CATALOGUE_D_EXEMPLES_REELS</div>
+            <div class="veille-grid">
+                <div class="example-card">
+                    <h4 class="t-purple">#1 Fuite de données Cloud (S3)</h4>
+                    <p>Découverte d'un bucket AWS mal configuré chez un concurrent. 
+                       <strong>Action :</strong> Audit immédiat des politiques IAM de l'entreprise pour prévenir le "Public Access".</p>
+                </div>
+                <div class="example-card">
+                    <h4 class="t-purple">#2 Vulnérabilité Exchange (ProxyShell)</h4>
+                    <p>Alerte via flux RSS sur une RCE critique. 
+                       <strong>Action :</strong> Isolation du serveur mail et déploiement du patch d'urgence en moins de 4h.</p>
+                </div>
+                <div class="example-card">
+                    <h4 class="t-purple">#3 Phishing par Deepfake</h4>
+                    <p>Analyse d'une nouvelle méthode d'arnaque au président via IA vocale. 
+                       <strong>Action :</strong> Création d'une note de sensibilisation interne sur les risques de l'IA.</p>
+                </div>
+                <div class="example-card">
+                    <h4 class="t-purple">#4 Supply Chain Attack</h4>
+                    <p>Étude du cas XZ Utils (backdoor). 
+                       <strong>Action :</strong> Vérification des checksums et des versions de bibliothèques Open Source utilisées en dev.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card section-spacing">
+            <div class="badge">04_HORIZON_2026_EMERGING_TECH</div>
+            <div class="veille-grid">
+                <div class="tech-release">
+                    <h4 style="color: var(--accent);">Post-Quantum Crypto (PQC)</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Standardisation finale des algorithmes résistants aux ordinateurs quantiques par le NIST. <strong>Impact :</strong> Migration nécessaire des certificats SSL/TLS.</p>
+                </div>
+                <div class="tech-release">
+                    <h4 style="color: var(--accent);">Wi-Fi 8 (IEEE 802.11bn)</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Premiers déploiements industriels focus sur l'Ultra-High Reliability (UHR) plutôt que le simple débit. <strong>Impact :</strong> Latence < 2ms pour l'IoT.</p>
+                </div>
+                <div class="tech-release">
+                    <h4 style="color: var(--accent);">AI Security Agents (Autonomous SOC)</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Agents IA capables de patcher des failles de code en temps réel sans intervention humaine. <strong>Impact :</strong> Accélération radicale du cycle CI/CD.</p>
+                </div>
+                <div class="tech-release">
+                    <h4 style="color: var(--accent);">Carbon-Aware Computing</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">OS capables de moduler la charge CPU en fonction de l'intensité carbone du réseau électrique local. <strong>Impact :</strong> GreenOps obligatoire en entreprise.</p>
+                </div>
+            </div>
+        </section>
+
         <div class="veille-grid">
             <section class="card" style="grid-column: span 2;">
-                <div class="badge" style="background: var(--accent); color: #000;">03_ANALYSE_FOCUS_2026</div>
+                <div class="badge" style="background: var(--accent); color: #000;">05_ANALYSE_FOCUS_2026</div>
                 <div class="analysis-highlight">
                     <h3 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-biohazard"></i> La menace "Living off the Land" (LotL)</h3>
                     <p style="font-size: 0.9rem; line-height: 1.6;">
@@ -183,7 +256,7 @@
 
     <footer class="status-footer">
         <div class="footer-segment"><span class="online-dot pulse"></span> SCANNER: <span class="t-green">ACTIVE</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // VEILLE_V4</div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // VEILLE_V2026</div>
     </footer>
 </body>
 </html>
