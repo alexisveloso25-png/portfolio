@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // MISSIONS_THENEAS</title>
+    <title>ALEXIS_VELOSO // ENTREPRISE_THENEAS</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -22,7 +22,7 @@
             box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Bouton Fiche Mission - Amélioré pour le centrage */
+        /* Bouton Fiche Mission - Centrage */
         .btn-mission-container {
             display: flex;
             justify-content: center;
@@ -62,7 +62,6 @@
         .log-line { margin-bottom: 2px; }
         .log-time { color: var(--purple); }
 
-        /* --- OPTION 5 : Statut Adhérents --- */
         .status-indicator {
             display: inline-block;
             width: 8px;
@@ -73,16 +72,17 @@
 
         /* Styles existants conservés */
         .project-card { 
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
-            cursor: pointer; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 4px;
             display: flex; 
             flex-direction: column;
             justify-content: space-between;
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--purple) !important; box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent) !important; }
         small { color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; letter-spacing: 1px; }
-        .sensor-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px; margin-top: 5px; display: inline-block; min-width: 120px; border-radius: 20px; text-align: center; }
-        .alert-text { color: #ff4444; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -143,11 +143,11 @@
             </div>
         </section>
 
-        <section class="section-spacing">
+        <section class="card section-spacing">
             <div class="badge" style="margin-bottom: 20px;">MISSIONS</div>
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 
-                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                <div class="project-card">
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
@@ -162,7 +162,7 @@
                     </div>
                 </div>
 
-                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                <div class="project-card">
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
 
-                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                <div class="project-card">
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
@@ -220,15 +220,7 @@
                         </div>
 
                         <div id="log-container">
-                            <div class="log-line"><span class="log-time">[21:04:12]</span> Checking Core Switch... <span class="t-green">OK</span></div>
-                            <div class="log-line"><span class="log-time">[21:04:45]</span> Sensor 124 report: Stable</div>
-                            <div class="log-line"><span class="log-time">[21:05:01]</span> VPN Tunnel 'Fidesco' active</div>
-                        </div>
-
-                        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <div class="sensor-box"><small>SYSTEM ANALYZER</small><div style="color: var(--green); font-family: 'JetBrains Mono';"><i class="fas fa-microchip"></i> <span>STABLE</span></div></div>
-                            <div class="sensor-box"><small>TRAFFIC LOG</small><div style="color: var(--accent); font-family: 'JetBrains Mono';"><i class="fas fa-exchange-alt"></i> <span>OPTIMAL</span></div></div>
-                        </div>
+                            </div>
                     </div>
                 </div>
 
