@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // INFRA_PORTAL_V4</title>
+    <title>ALEXIS_VELOSO // PORTFOLIO_V4</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -24,28 +24,35 @@
     <main class="wrapper">
         <section class="terminal-window hero-large">
             <div class="terminal-header">
-                <div class="terminal-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+                <div class="terminal-controls">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-title-inline">bash — root@alexis_veloso</div>
                 </div>
-                <div class="terminal-title">bash — root@alexis_veloso — 120x40</div>
             </div>
-            <div class="terminal-body">
+            <div class="terminal-body extended-padding">
                 <div class="terminal-prompt">
                     <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">cat intro_expert.txt</span>
                 </div>
-                <h1 class="hero-name">ALEXIS VELOSO</h1>
-                <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
-                <div class="hero-text-large">
-                    <p>Bienvenue sur mon portfolio !</p>
-                    <p>Je m'appelle <strong>Alexis Veloso</strong>, étudiant en Licence Générale Informatique (SDR).</p>
-                    <p>Passionné par l'informatique depuis mon plus jeune âge, j'ai grandi en étant immergé dans cet univers.</p>
+                
+                <div class="content-block">
+                    <h1 class="hero-name">ALEXIS VELOSO</h1>
+                    <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
+                    
+                    <div class="hero-text-large">
+                        <p>> Bienvenue sur mon portfolio !</p>
+                        <p>> Je m'appelle <strong>Alexis Veloso</strong>, étudiant en Licence Générale Informatique (SDR).</p>
+                        <p>> Passionné par l'informatique depuis mon plus jeune âge, j'ai grandi en étant immergé dans cet univers.</p>
+                    </div>
                 </div>
-                <div class="terminal-actions">
-                    <a href="#" class="term-btn">CV</a>
-                    <a href="#" class="term-btn">LINKEDIN</a>
-                    <a href="#" class="term-btn">RECOMMANDATIONS</a>
+
+                <div class="terminal-actions-modern">
+                    <a href="#" class="btn-cyber-outline"><span>CV</span></a>
+                    <a href="#" class="btn-cyber-outline"><span>LINKEDIN</span></a>
+                    <a href="#" class="btn-cyber-outline"><span>RECOMMANDATIONS</span></a>
                 </div>
             </div>
         </section>
@@ -66,7 +73,6 @@
                         <p><span class="label-red">MAIL :</span> alexis.veloso25@gmail.com</p>
                         <p><span class="label-red">TEL :</span> 0771824809</p>
                         <p><span class="label-red">STATUS :</span> ACTIVE</p>
-                        
                         <div class="mini-console">
                             <div class="console-text t-green">
                                 [ OK ] BIOS_CHECKSUM_VERIFIED<br>
@@ -78,7 +84,7 @@
                     </div>
                 </div>
             </section>
-
+            
             <section class="card">
                 <div class="badge">ACADEMIC_LOGS</div>
                 <div class="timeline">
@@ -146,65 +152,34 @@
                     <div class="soft-item"><i class="fas fa-clock"></i> PONCTUEL</div>
                 </div>
             </section>
-
             <section class="card">
                 <div class="badge">VALIDATIONS</div>
                 <div class="cert-list">
-                    <div class="cert-row">
-                        <span><i class="fas fa-shield-halved"></i> CCNA EN COURS</span>
-                        <span class="status-tag">IN_PROGRESS</span>
-                    </div>
-                    <div class="cert-row">
-                        <span><i class="fas fa-file-contract"></i> ATTESTATION RGPD</span>
-                        <i class="fas fa-check-circle t-green"></i>
-                    </div>
-                    <div class="cert-row">
-                        <span><i class="fas fa-certificate"></i> PIX CERTIFIED</span>
-                        <i class="fas fa-check-circle t-green"></i>
-                    </div>
-                    <div class="cert-row">
-                        <span><i class="fas fa-graduation-cap"></i> CISCO NETACAD IT</span>
-                        <span class="status-tag">SOON</span>
-                    </div>
+                    <div class="cert-row"><span>CCNA EN COURS</span><span class="status-tag">IN_PROGRESS</span></div>
+                    <div class="cert-row"><span>ATTESTATION RGPD</span><i class="fas fa-check-circle t-green"></i></div>
+                    <div class="cert-row"><span>PIX CERTIFIED</span><i class="fas fa-check-circle t-green"></i></div>
+                    <div class="cert-row"><span>CISCO NETACAD IT</span><span class="status-tag">SOON</span></div>
                 </div>
             </section>
         </div>
 
-        <section class="card contact-section">
+        <section class="card">
             <div class="badge">ESTABLISH_CONNECTION</div>
-            <div class="contact-container">
-                <form class="contact-form">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label>SOURCE_ID</label>
-                            <input type="text" placeholder="NOM COMPLET" required>
-                        </div>
-                        <div class="input-group">
-                            <label>RETURN_PATH</label>
-                            <input type="email" placeholder="EMAIL" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>DATA_PACKET</label>
-                        <textarea rows="5" placeholder="SAISISSEZ VOTRE MESSAGE..."></textarea>
-                    </div>
-                    <button type="submit" class="cyber-button">
-                        <span class="btn-glitch">TRANSMIT_DATA</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="input-group"><label>SOURCE_ID</label><input type="text" placeholder="NOM COMPLET" required></div>
+                    <div class="input-group"><label>RETURN_PATH</label><input type="email" placeholder="EMAIL" required></div>
+                </div>
+                <div class="input-group"><label>DATA_PACKET</label><textarea rows="5" placeholder="MESSAGE..."></textarea></div>
+                <button type="submit" class="cyber-button">TRANSMIT_DATA <i class="fas fa-paper-plane"></i></button>
+            </form>
         </section>
     </main>
 
     <footer class="status-footer">
-        <div class="footer-segment">
-            <span class="online-dot pulse"></span>
-            <span>SYSTEM: ONLINE</span>
-        </div>
+        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: ONLINE</div>
         <div class="footer-segment">PING: 24MS</div>
         <div class="footer-segment">CPU: 14%</div>
-        <div class="footer-segment">LATENCE: 1.2MS</div>
         <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
     </footer>
 </body>
