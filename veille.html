@@ -3,117 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDR_OS // VEILLE_TECHNOLOGIQUE</title>
+    <title>ALEXIS_VELOSO // VEILLE_TECH</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Animation d'écriture type terminal */
+        .terminal-typing {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--accent);
+            white-space: nowrap;
+            letter-spacing: 0.15em;
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
+
+        /* Grid Spécifique Veille */
+        .veille-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .source-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .source-card:hover {
+            border-color: var(--accent);
+            background: rgba(147, 51, 234, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .tag-red { background: #ef4444; color: white; }
+        .tag-blue { background: #3b82f6; color: white; }
+        .tag-purple { background: var(--purple); color: white; }
+
+        .analysis-highlight {
+            border-left: 4px solid var(--accent);
+            background: rgba(147, 51, 234, 0.1);
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <div class="radar"></div>
-    <header>
-        <nav class="nav-content">
-            <div class="status-indicator">● THREAT_INTELLIGENCE_CENTER</div>
-            <ul class="nav-links">
-                <li><a href="index.html">01_BIO</a></li>
-                <li><a href="entreprise.html">02_MISSIONS</a></li>
-                <li><a href="formation.html">03_FORMATION</a></li>
-                <li><a href="veille.html" class="active">04_VEILLE</a></li>
-            </ul>
+    <div class="circuit-bg"></div>
+    <div class="scanline-global"></div>
+
+    <header class="top-bar">
+        <div class="brand">USER: ALEXIS_VELOSO / <span>THREAT_INTEL</span></div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
+            <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
+            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
+            <a href="veille.html" style="color: var(--accent);"><i class="fas fa-eye"></i> VEILLE</a>
         </nav>
     </header>
 
-    <main class="container">
-        <section class="hero-section reveal">
-            <h1 class="glitch-text" data-text="VEILLE_STRATÉGIQUE">VEILLE_STRATÉGIQUE</h1>
-            <p class="subtitle">// Surveillance active de l'écosystème Cybersécurité & Infrastructure</p>
-        </section>
-
-        <section class="panel reveal highlight">
-            <div class="panel-title">01_MÉTHODOLOGIE_DE_COLLECTE</div>
-            <div class="method-grid">
-                <div class="method-card">
-                    <span class="method-icon">📡</span>
-                    <div class="method-info">
-                        <strong>Flux RSS & Agrégateurs</strong>
-                        <p>Utilisation de <em>Feedly</em> pour centraliser plus de 20 sources spécialisées (ANSSI, Le Monde Informatique, BleepingComputer).</p>
+    <main class="wrapper">
+        <section class="terminal-window card section-spacing">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                     </div>
+                    <div class="terminal-title-inline">monitor — stealth_mode.sh</div>
                 </div>
-                <div class="method-card">
-                    <span class="method-icon">🐦</span>
-                    <div class="method-info">
-                        <strong>Réseaux Sociaux Tech</strong>
-                        <p>Suivi de comptes d'experts et chercheurs en cybersécurité sur X (Twitter) et LinkedIn (Infosec).</p>
-                    </div>
-                </div>
-                <div class="method-card">
-                    <span class="method-icon">🎙️</span>
-                    <div class="method-info">
-                        <strong>Podcasts & Newsletters</strong>
-                        <p>Écoute hebdomadaire de <em>"No Limit Secu"</em> et lecture de la newsletter <em>"Actu Cyber"</em>.</p>
-                    </div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-prompt"><span class="t-green">alexis@intel</span>:<span class="t-purple">~</span>$ <span class="t-white">./start_veille_strat.sh</span></div>
+                <div class="content-block">
+                    <h1 class="hero-name">
+                        <span class="terminal-typing">VEILLE_STRATÉGIQUE</span>
+                    </h1>
+                    <p class="hero-role">// SURVEILLANCE ACTIVE DE L'ÉCOSYSTÈME CYBER & INFRA</p>
                 </div>
             </div>
         </section>
 
-        <div class="grid-main">
-            <div class="left-col reveal">
-                <div class="panel">
-                    <div class="panel-title">02_SOURCES_DE_RÉFÉRENCE</div>
-                    <div class="sources-list-expert">
-                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-item-pro">
-                            <div class="source-header">
-                                <span class="tag-red">ALERTE CRITIQUE</span>
-                                <strong>CERT-FR / ANSSI</strong>
-                            </div>
-                            <p>Analyse des bulletins d'alerte officiels pour application des correctifs de sécurité immédiats.</p>
-                        </a>
-                        <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="source-item-pro">
-                            <div class="source-header">
-                                <span class="tag-blue">PRÉVENTION</span>
-                                <strong>CYBERMALVEILLANCE.GOUV</strong>
-                            </div>
-                            <p>Guide de bonnes pratiques pour la sensibilisation des utilisateurs chez THENEAS.</p>
-                        </a>
-                        <a href="https://www.silicon.fr/" target="_blank" class="source-item-pro">
-                            <div class="source-header">
-                                <span class="tag-purple">INFRA</span>
-                                <strong>SILICON.FR</strong>
-                            </div>
-                            <p>Veille sur les infrastructures IT, le Cloud Computing et le Edge Networking.</p>
-                        </a>
-                    </div>
+        <section class="card section-spacing">
+            <div class="badge">01_MÉTHODOLOGIE_DE_COLLECTE</div>
+            <div class="veille-grid">
+                <div class="project-card">
+                    <i class="fas fa-rss t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--accent);">Flux RSS & Agrégateurs</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Utilisation de <strong>Feedly</strong> pour centraliser +20 sources (ANSSI, BleepingComputer, LMI). Automatisation des alertes critiques via Webhooks.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fab fa-twitter t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--accent);">Réseaux Sociaux Tech</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Suivi en temps réel des chercheurs en sécurité (OSINT) sur X et LinkedIn. Monitoring des vulnérabilités 0-day dès leur parution.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-microphone-alt t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--accent);">Podcasts & Newsletters</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Écoute de <em>"No Limit Secu"</em> et <em>"CyberEnjeux"</em>. Analyse hebdomadaire des récapitulatifs de la newsletter <em>"Actu Cyber"</em>.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="right-col reveal">
-                <div class="panel">
-                    <div class="panel-title">03_ANALYSE_FOCUS_2026</div>
-                    <div class="analysis-box">
-                        <h4 class="cyber-title">La menace "Living off the Land" (LotL)</h4>
-                        <p class="analysis-text">
-                            <strong>Définition :</strong> Utilisation d'outils légitimes du système (PowerShell, WMI) pour mener une attaque sans fichiers (fileless).
-                        </p>
-                        <p class="analysis-text">
-                            <strong>Analyse :</strong> Ces attaques sont difficilement détectables par les antivirus classiques car elles n'utilisent pas de malwares connus.
-                        </p>
-                        <div class="impact-shield">
-                            <strong>Impact Pro :</strong> Renforcement de la surveillance des scripts PowerShell via GPO et analyse des logs ESET Endpoint chez THENEAS.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-title">OUTILS_D_ANALYSE</div>
-                    <div class="tools-tag-cloud">
-                        <span>VirusTotal</span>
-                        <span>URLVoid</span>
-                        <span>HaveIBeenPwned</span>
-                        <span>CyberChef</span>
-                    </div>
-                </div>
+        <section class="card section-spacing">
+            <div class="badge">02_SOURCES_DE_RÉFÉRENCE</div>
+            <div class="veille-grid" style="margin-top: 20px;">
+                <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-card">
+                    <span class="tag tag-red">Alerte Critique</span>
+                    <h4 style="color: #fff;">CERT-FR / ANSSI</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Veille institutionnelle : bulletins d'alerte officiels et rapports de menaces étatiques.</p>
+                </a>
+                <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="source-card">
+                    <span class="tag tag-blue">Prévention</span>
+                    <h4 style="color: #fff;">CYBERMALVEILLANCE.GOUV</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Ressources de sensibilisation et tendances des attaques sur le territoire national.</p>
+                </a>
+                <a href="https://www.silicon.fr/" target="_blank" class="source-card">
+                    <span class="tag tag-purple">Infrastructure</span>
+                    <h4 style="color: #fff;">SILICON.FR</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim);">Actualités sur le Cloud, le Edge Computing et les innovations hardware serveur.</p>
+                </a>
             </div>
+        </section>
+
+        <div class="veille-grid">
+            <section class="card" style="grid-column: span 2;">
+                <div class="badge" style="background: var(--accent); color: #000;">03_ANALYSE_FOCUS_2026</div>
+                <div class="analysis-highlight">
+                    <h3 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-biohazard"></i> La menace "Living off the Land" (LotL)</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.6;">
+                        <strong>Concept :</strong> Utilisation détournée d'outils d'administration légitimes (PowerShell, WMI, Bitsadmin) pour exécuter des actions malveillantes sans injecter de fichiers sur le disque (Fileless).<br><br>
+                        <strong>Détection :</strong> Nécessite une analyse comportementale avancée (EDR/XDR) plutôt que des signatures classiques.<br><br>
+                        <strong>Application chez THENEAS :</strong> Mise en place de politiques de restriction d'exécution (AppLocker), surveillance accrue des journaux d'événements 4688 et scripts bloqués via ESET.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="badge">OUTILS_D_ANALYSE</div>
+                <div style="margin-top: 20px;">
+                    <span class="tool-badge"><i class="fas fa-search"></i> VirusTotal</span>
+                    <span class="tool-badge"><i class="fas fa-link"></i> URLVoid</span>
+                    <span class="tool-badge"><i class="fas fa-user-shield"></i> HIBP</span>
+                    <span class="tool-badge"><i class="fas fa-flask"></i> CyberChef</span>
+                    <span class="tool-badge"><i class="fas fa-code"></i> Any.Run</span>
+                    <span class="tool-badge"><i class="fas fa-shield-alt"></i> Talos Intelligence</span>
+                </div>
+            </section>
         </div>
     </main>
 
-    <script src="js/main.js"></script>
+    <footer class="status-footer">
+        <div class="footer-segment"><span class="online-dot pulse"></span> SCANNER: <span class="t-green">ACTIVE</span></div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // VEILLE_V4</div>
+    </footer>
 </body>
 </html>
