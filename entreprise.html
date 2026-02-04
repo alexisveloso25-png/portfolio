@@ -22,10 +22,16 @@
             box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Bouton Fiche Mission */
+        /* Bouton Fiche Mission - Amélioré pour le centrage */
+        .btn-mission-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
+        }
+
         .btn-mission {
             display: inline-block;
-            margin-top: 15px;
             padding: 8px 15px;
             border: 1px solid var(--accent);
             color: var(--accent);
@@ -34,6 +40,7 @@
             font-weight: bold;
             transition: all 0.3s;
             text-transform: uppercase;
+            text-align: center;
         }
         .btn-mission:hover {
             background: var(--accent);
@@ -65,7 +72,13 @@
         }
 
         /* Styles existants conservés */
-        .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer; }
+        .project-card { 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
+            cursor: pointer; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+        }
         .project-card:hover { transform: translateY(-5px); border-color: var(--purple) !important; box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
         small { color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; letter-spacing: 1px; }
         .sensor-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px; margin-top: 5px; display: inline-block; min-width: 120px; border-radius: 20px; text-align: center; }
@@ -81,7 +94,7 @@
         <nav class="nav-links">
             <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
             <a href="entreprise.html" style="color: var(--accent);"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
-            <a href="#"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
+            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
         </nav>
     </header>
 
@@ -135,36 +148,48 @@
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between;">
-                        <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
-                        <span class="v-year">BTS_01</span>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
+                            <span class="v-year">BTS_01</span>
+                        </div>
+                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Ticketing et gestion d'inventaire ITIL.</p>
                     </div>
-                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
-                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Ticketing et gestion d'inventaire ITIL.</p>
-                    <a href="#" class="btn-mission">Fiche Mission</a>
+                    <div class="btn-mission-container">
+                        <a href="#" class="btn-mission">Fiche Mission</a>
+                    </div>
                 </div>
 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between;">
-                        <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
-                        <span class="v-year">BTS_02</span>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
+                            <span class="v-year">BTS_02</span>
+                        </div>
+                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Administration Cloud et identités hybrides.</p>
                     </div>
-                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
-                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Administration Cloud et identités hybrides.</p>
-                    <a href="#" class="btn-mission">Fiche Mission</a>
+                    <div class="btn-mission-container">
+                        <a href="#" class="btn-mission">Fiche Mission</a>
+                    </div>
                 </div>
 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between;">
-                        <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
-                        <span class="v-year">BTS_03</span>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
+                            <span class="v-year">BTS_03</span>
+                        </div>
+                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de clusters et isolations de services.</p>
                     </div>
-                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
-                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de clusters et isolations de services.</p>
-                    <a href="#" class="btn-mission">Fiche Mission</a>
+                    <div class="btn-mission-container">
+                        <a href="#" class="btn-mission">Fiche Mission</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -173,18 +198,26 @@
             <div class="badge" style="background: var(--purple);">SUPERVISION_SYSTEM_DASHBOARD</div>
             
             <div class="supervision-layout" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
-                <div class="noc-screen" style="flex: 1; min-width: 300px;">
+                <div class="noc-screen" style="flex: 2; min-width: 300px;">
                     <div style="border: 1px solid var(--purple); padding: 15px; background: rgba(147, 51, 234, 0.05);">
                         <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--purple); padding-bottom: 5px; margin-bottom: 10px;">
                             <span class="t-purple">PRTG_LIVE_FEED</span>
                             <span class="online-dot pulse"></span>
                         </div>
-                        <h3 class="v-title">SDR // SUPERVISION EXPERT</h3>
+                        <h3 class="v-title">PRTG // NETWORK MONITORING OBJECTIFS</h3>
                         
-                        <ul style="list-style: none; padding: 0; margin-top: 15px; font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Observation en temps réels</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Centralisation des données réseaux</li>
-                        </ul>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
+                                <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Surveillance en temps réel</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-bell t-green"></i> Alerting proactive (SMS/Mail)</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-chart-line t-green"></i> Analyse de bande passante</li>
+                            </ul>
+                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
+                                <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Historisation des données</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-network-wired t-green"></i> Mapping de l'infrastructure</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-file-alt t-green"></i> Rapports de disponibilité</li>
+                            </ul>
+                        </div>
 
                         <div id="log-container">
                             <div class="log-line"><span class="log-time">[21:04:12]</span> Checking Core Switch... <span class="t-green">OK</span></div>
@@ -193,12 +226,13 @@
                         </div>
 
                         <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <div class="sensor-box"><small>SENSOR: DISK</small><div style="color: var(--accent); font-family: 'JetBrains Mono';"><i class="fas fa-hdd"></i> <span class="alert-text">75% USED</span></div></div>
+                            <div class="sensor-box"><small>SYSTEM ANALYZER</small><div style="color: var(--green); font-family: 'JetBrains Mono';"><i class="fas fa-microchip"></i> <span>STABLE</span></div></div>
+                            <div class="sensor-box"><small>TRAFFIC LOG</small><div style="color: var(--accent); font-family: 'JetBrains Mono';"><i class="fas fa-exchange-alt"></i> <span>OPTIMAL</span></div></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="noc-metrics" style="width: 200px; display: flex; flex-direction: column; gap: 10px;">
+                <div class="noc-metrics" style="flex: 0.5; min-width: 180px; display: flex; flex-direction: column; gap: 10px;">
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div></div>
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div></div>
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);"><small>SENSORS</small><div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div></div>
