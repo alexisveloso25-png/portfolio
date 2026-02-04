@@ -247,3 +247,27 @@ body {
     .profile-card, .academic-card { min-height: auto; padding: 45px 20px; }
     .bio-flex { flex-direction: column; text-align: center; }
 }
+/* Animation d'écriture type terminal */
+.terminal-typing {
+    display: inline-block;
+    overflow: hidden; /* Cache le texte non écrit */
+    border-right: 3px solid var(--accent); /* Le curseur clignotant */
+    white-space: nowrap; /* Empêche le retour à la ligne pendant l'animation */
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: 
+        typing 3.5s steps(30, end),
+        blink-caret .75s step-end infinite;
+}
+
+/* L'effet d'écriture */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Le clignotement du curseur */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent) }
+}
