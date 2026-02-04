@@ -291,3 +291,83 @@ body {
     .header-content { flex-direction: column; gap: 15px; }
     .main-viewport { padding: 20px 15px; }
 }
+
+/* --- CONTACT SECTION STYLE --- */
+.contact-section {
+    margin-top: 2rem;
+    padding: 2rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.contact-methods {
+    margin-top: 1.5rem;
+}
+
+.method-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+/* Formulaire Stylisé */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--t-purple, #a855f7); /* Ajuste selon tes variables */
+    letter-spacing: 1px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #22c55e; /* Ton vert t-green */
+    background: rgba(34, 197, 94, 0.05);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+.contact-form .btn-action {
+    align-self: flex-start;
+    cursor: pointer;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
