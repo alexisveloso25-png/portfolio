@@ -1,4 +1,4 @@
-/* --- VARIABLES --- */
+/* --- CONFIGURATION & VARIABLES --- */
 :root {
     --primary: #a855f7;
     --primary-glow: rgba(168, 85, 247, 0.4);
@@ -10,7 +10,6 @@
     --text-dim: #888;
 }
 
-/* --- RESET & BASE --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { 
@@ -23,24 +22,21 @@ body {
 }
 
 .background-glow { 
-    position: fixed; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%; 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: radial-gradient(circle at 10% 10%, #1a1033 0%, transparent 40%); 
     z-index: -2; 
 }
 
 /* --- HEADER --- */
 .main-header { 
-    padding: 1rem 2rem; 
-    background: rgba(0,0,0,0.9); 
+    padding: 1rem 2rem; background: rgba(0,0,0,0.9); 
     border-bottom: 1px solid var(--border-glass); 
     position: sticky; top: 0; z-index: 100; 
 }
 .header-content { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; align-items: center; }
 .brand { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
 .status-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
-.pulse { animation: pulse 2s infinite; }
+.pulse { animation: pulse-glow 2s infinite; }
 
 .glass-nav { display: flex; gap: 20px; }
 .glass-nav a { 
@@ -49,9 +45,10 @@ body {
 }
 .glass-nav a.active, .glass-nav a:hover { color: var(--primary); }
 
-/* --- GRID & CARDS --- */
+/* --- CONTENEUR --- */
 .main-viewport { max-width: 1200px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 30px; }
 
+/* --- CARTES GLASS --- */
 .glass-card { 
     background: var(--glass); border: 1px solid var(--border-glass); 
     border-radius: 20px; padding: 30px; position: relative; backdrop-filter: blur(10px);
@@ -68,14 +65,8 @@ body {
 .term-dots span:nth-child(1) { background: #ff5f56; }
 .term-dots span:nth-child(2) { background: #ffbd2e; }
 .term-dots span:nth-child(3) { background: #27c93f; }
-.term-title { font-size: 0.6rem; color: #666; margin-left: 10px; }
-
 .terminal-body { padding: 30px; text-transform: none; line-height: 1.6; }
-.t-purple { color: var(--primary); font-weight: bold; }
-.t-green { color: var(--green); }
-.role-subtitle { color: var(--primary); font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* --- TYPING EFFECT --- */
 .typing-effect {
     display: inline-block; overflow: hidden; border-right: 3px solid var(--green);
     white-space: nowrap; margin: 0; letter-spacing: 2px;
@@ -84,27 +75,31 @@ body {
 @keyframes typing { from { width: 0 } to { width: 100% } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--green); } }
 
+.t-purple { color: var(--primary); font-weight: bold; }
+.t-green { color: var(--green); }
+.role-subtitle { color: var(--primary); font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+
 /* --- BUTTONS --- */
 .hero-btns-v4 { display: flex; gap: 15px; margin-top: 25px; }
 .btn-action { 
     padding: 12px 24px; border-radius: 8px; font-size: 0.7rem; 
     text-decoration: none; font-weight: 800; border: 1px solid var(--border-glass); 
-    color: #fff; transition: 0.3s; cursor: pointer;
+    color: #fff; transition: 0.3s;
 }
-.btn-action.cv { background: var(--primary); color: #000; border: none; }
+.btn-action.cv { background: var(--primary); color: #000; border: none; cursor: pointer; }
 .btn-action:hover { transform: translateY(-3px); box-shadow: 0 5px 15px var(--primary-glow); }
 
-/* --- FORMATION PIPELINE --- */
-.pipeline-centered { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.pipeline-item-v4 { padding: 15px; width: 100%; }
+/* --- PIPELINE FORMATION --- */
+.pipeline-centered { display: flex; flex-direction: column; align-items: center; }
+.pipeline-item-v4 { padding: 15px; text-align: center; }
 .pipe-year { color: var(--primary); font-weight: 800; font-size: 0.7rem; }
 .pipe-title { font-size: 0.9rem; margin: 5px 0; }
 .pipe-sub { font-size: 0.75rem; color: #666; text-transform: none; }
 .pipe-separator { width: 2px; height: 30px; background: linear-gradient(to bottom, var(--primary), transparent); }
 
 /* --- EXPERTISE GRID --- */
-.expertise-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 15px; }
-.sub-title { font-size: 0.7rem; color: var(--primary); margin-bottom: 20px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+.expertise-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+.sub-title { font-size: 0.7rem; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; letter-spacing: 2px; }
 
 .skills-wrapper-v4 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .skill-container { background: rgba(255,255,255,0.02); padding: 18px; border-radius: 12px; border: 1px solid rgba(168,85,247,0.1); }
@@ -113,32 +108,47 @@ body {
 .prog-fill-v4 { height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
 .detail-tag { font-size: 0.55rem; color: #666; margin-right: 5px; border: 1px solid rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; }
 
-/* --- CONTACT SECTION --- */
+/* --- SIDE COLUMN (CERTS & SOFT) --- */
+.side-column { display: flex; flex-direction: column; gap: 30px; }
+.certs-list-v4 { display: flex; flex-direction: column; gap: 10px; }
+.cert-row-v4 { 
+    display: flex; justify-content: space-between; align-items: center; 
+    background: rgba(255,255,255,0.03); padding: 12px 15px; border-radius: 8px; 
+    border: 1px solid var(--border-glass); font-size: 0.65rem; 
+}
+.cert-row-v4.active { border-color: var(--primary); color: #fff; }
+
+.soft-skills-v4 { display: flex; flex-wrap: wrap; gap: 8px; }
+.soft-tag { 
+    font-size: 0.55rem; padding: 6px 12px; border-radius: 20px; 
+    border: 1px solid var(--border-glass); background: rgba(255,255,255,0.02); color: #888; 
+}
+.soft-tag.active { border-color: var(--primary); color: var(--primary); background: rgba(168, 85, 247, 0.1); }
+
+/* --- CONTACT --- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.method-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.8rem; text-transform: none; }
 .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
 .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
 .input-group label { font-size: 0.7rem; color: var(--primary); }
 .contact-form input, .contact-form textarea {
     background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    padding: 0.8rem; color: #fff; font-family: var(--font-main); border-radius: 4px; outline: none;
+    padding: 0.8rem; color: #fff; font-family: var(--font-main); border-radius: 4px;
 }
-.contact-form input:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(74, 222, 128, 0.2); }
+.contact-form input:focus { outline: none; border-color: var(--green); background: rgba(74, 222, 128, 0.05); }
 
-/* --- FOOTER --- */
+/* --- FOOTER & STATUS --- */
 .footer-v4 { 
-    position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.9);
+    position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.9); 
     padding: 15px 30px; border-top: 1px solid var(--border-glass); z-index: 1000;
 }
-.status-bar { display: flex; gap: 40px; font-size: 0.6rem; }
+.status-bar { display: flex; gap: 30px; font-size: 0.6rem; }
 .stat-node { display: flex; align-items: center; gap: 8px; color: #666; }
-.pulse-green { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+.pulse-green { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); animation: pulse-glow 2s infinite; }
 
-@keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes pulse-glow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-    .expertise-grid, .contact-grid, .skills-wrapper-v4 { grid-template-columns: 1fr; }
-    .header-content { flex-direction: column; gap: 10px; }
-    .typing-effect { font-size: 1.2rem; }
+    .dashboard-grid, .expertise-grid, .contact-grid, .skills-wrapper-v4 { grid-template-columns: 1fr; }
+    .header-content { flex-direction: column; gap: 15px; }
 }
