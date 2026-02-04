@@ -3,103 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // VEILLE_TECH</title>
+    <title>ALEXIS_VELOSO // INTELLIGENCE_CENTER</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Animation d'écriture type terminal */
+        :root {
+            --accent: #a855f7;
+            --purple: #7c3aed;
+            --bg: #0a0a0c;
+            --card-bg: rgba(20, 20, 25, 0.8);
+            --t-green: #22c55e;
+        }
+
+        /* --- Animations & Global --- */
+        body { background: var(--bg); color: #e2e8f0; overflow-x: hidden; }
+        
         .terminal-typing {
             display: inline-block;
             overflow: hidden;
             border-right: 3px solid var(--accent);
             white-space: nowrap;
-            letter-spacing: 0.15em;
-            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
         }
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
 
-        /* Grid Spécifique Veille */
+        /* --- Navigation Dynamique (Tabs) --- */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #fff;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--accent);
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+        .tab-content { display: none; animation: fadeIn 0.5s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Cartes Interactives --- */
         .veille-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            gap: 20px;
         }
 
-        .source-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .interactive-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            position: relative;
+            transition: 0.4s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .interactive-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .interactive-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .interactive-card:hover::after { left: 100%; }
+
+        /* --- News Ticker --- */
+        .news-ticker {
+            background: #111;
+            border: 1px solid var(--accent);
+            padding: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .ticker-label { background: var(--accent); color: #000; padding: 2px 8px; margin-right: 15px; font-weight: 800; font-size: 0.7rem; }
+        #live-news { font-size: 0.85rem; color: var(--t-green); }
+
+        /* --- Chart Section --- */
+        .chart-container {
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 4px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            margin-top: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .source-card:hover {
-            border-color: var(--accent);
-            background: rgba(147, 51, 234, 0.05);
-            transform: translateY(-5px);
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 2px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-
+        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
         .tag-red { background: #ef4444; color: white; }
-        .tag-blue { background: #3b82f6; color: white; }
-        .tag-purple { background: var(--purple); color: white; }
-        .tag-gold { background: #d4af37; color: black; }
-
-        .analysis-highlight {
-            border-left: 4px solid var(--accent);
-            background: rgba(147, 51, 234, 0.1);
-            padding: 20px;
-            margin-top: 15px;
-        }
-
-        .tool-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Nouveaux styles pour le catalogue */
-        .example-card {
-            border-top: 2px solid var(--accent);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            font-size: 0.85rem;
-        }
-        .tech-release {
-            border: 1px dashed var(--accent);
-            padding: 15px;
-            position: relative;
-        }
-        .tech-release::before {
-            content: "NEW_2026";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            background: var(--accent);
-            color: #000;
-            font-size: 0.6rem;
-            padding: 2px 5px;
-            font-weight: 800;
-        }
     </style>
 </head>
 <body>
@@ -107,156 +122,176 @@
     <div class="scanline-global"></div>
 
     <header class="top-bar">
-        <div class="brand">USER: ALEXIS_VELOSO / <span>THREAT_INTEL</span></div>
+        <div class="brand">ALEXIS_VELOSO // <span id="clock">00:00:00</span></div>
         <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
-            <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
-            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
-            <a href="veille.html" style="color: var(--accent);"><i class="fas fa-eye"></i> VEILLE</a>
+            <a href="index.html"><i class="fas fa-terminal"></i> ACCUEIL</a>
+            <a href="veille.html" style="color: var(--accent);"><i class="fas fa-eye"></i> VEILLE_V2</a>
         </nav>
     </header>
 
     <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots">
-                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                    </div>
-                    <div class="terminal-title-inline">monitor — stealth_mode.sh</div>
-                </div>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-prompt"><span class="t-green">alexis@intel</span>:<span class="t-purple">~</span>$ <span class="t-white">./start_veille_strat.sh</span></div>
-                <div class="content-block">
-                    <h1 class="hero-name">
-                        <span class="terminal-typing">VEILLE_STRATÉGIQUE</span>
-                    </h1>
-                    <p class="hero-role">// SURVEILLANCE ACTIVE DE L'ÉCOSYSTÈME CYBER & INFRA</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge">01_MÉTHODOLOGIE_DE_COLLECTE</div>
-            <div class="veille-grid">
-                <div class="project-card">
-                    <i class="fas fa-rss t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--accent);">Flux RSS & Agrégateurs</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Utilisation de <strong>Feedly</strong> pour centraliser +20 sources (ANSSI, BleepingComputer, LMI). Automatisation des alertes critiques via Webhooks.</p>
-                </div>
-                <div class="project-card">
-                    <i class="fab fa-twitter t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--accent);">Réseaux Sociaux Tech</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Suivi en temps réel des chercheurs en sécurité (OSINT) sur X et LinkedIn. Monitoring des vulnérabilités 0-day dès leur parution.</p>
-                </div>
-                <div class="project-card">
-                    <i class="fas fa-microphone-alt t-purple" style="font-size: 1.5rem; margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--accent);">Podcasts & Newsletters</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-dim);">Écoute de <em>"No Limit Secu"</em> et <em>"CyberEnjeux"</em>. Analyse hebdomadaire des récapitulatifs de la newsletter <em>"Actu Cyber"</em>.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge">02_SOURCES_DE_RÉFÉRENCE</div>
-            <div class="veille-grid" style="margin-top: 20px;">
-                <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-card">
-                    <span class="tag tag-red">Alerte Critique</span>
-                    <h4 style="color: #fff;">CERT-FR / ANSSI</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Veille institutionnelle : bulletins d'alerte officiels et rapports de menaces étatiques.</p>
-                </a>
-                <a href="https://www.cybermalveillance.gouv.fr/" target="_blank" class="source-card">
-                    <span class="tag tag-blue">Prévention</span>
-                    <h4 style="color: #fff;">CYBERMALVEILLANCE.GOUV</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Ressources de sensibilisation et tendances des attaques sur le territoire national.</p>
-                </a>
-                <a href="https://www.silicon.fr/" target="_blank" class="source-card">
-                    <span class="tag tag-purple">Infrastructure</span>
-                    <h4 style="color: #fff;">SILICON.FR</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Actualités sur le Cloud, le Edge Computing et les innovations hardware serveur.</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge">03_CATALOGUE_D_EXEMPLES_REELS</div>
-            <div class="veille-grid">
-                <div class="example-card">
-                    <h4 class="t-purple">#1 Fuite de données Cloud (S3)</h4>
-                    <p>Découverte d'un bucket AWS mal configuré chez un concurrent. 
-                       <strong>Action :</strong> Audit immédiat des politiques IAM de l'entreprise pour prévenir le "Public Access".</p>
-                </div>
-                <div class="example-card">
-                    <h4 class="t-purple">#2 Vulnérabilité Exchange (ProxyShell)</h4>
-                    <p>Alerte via flux RSS sur une RCE critique. 
-                       <strong>Action :</strong> Isolation du serveur mail et déploiement du patch d'urgence en moins de 4h.</p>
-                </div>
-                <div class="example-card">
-                    <h4 class="t-purple">#3 Phishing par Deepfake</h4>
-                    <p>Analyse d'une nouvelle méthode d'arnaque au président via IA vocale. 
-                       <strong>Action :</strong> Création d'une note de sensibilisation interne sur les risques de l'IA.</p>
-                </div>
-                <div class="example-card">
-                    <h4 class="t-purple">#4 Supply Chain Attack</h4>
-                    <p>Étude du cas XZ Utils (backdoor). 
-                       <strong>Action :</strong> Vérification des checksums et des versions de bibliothèques Open Source utilisées en dev.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge">04_HORIZON_2026_EMERGING_TECH</div>
-            <div class="veille-grid">
-                <div class="tech-release">
-                    <h4 style="color: var(--accent);">Post-Quantum Crypto (PQC)</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Standardisation finale des algorithmes résistants aux ordinateurs quantiques par le NIST. <strong>Impact :</strong> Migration nécessaire des certificats SSL/TLS.</p>
-                </div>
-                <div class="tech-release">
-                    <h4 style="color: var(--accent);">Wi-Fi 8 (IEEE 802.11bn)</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Premiers déploiements industriels focus sur l'Ultra-High Reliability (UHR) plutôt que le simple débit. <strong>Impact :</strong> Latence < 2ms pour l'IoT.</p>
-                </div>
-                <div class="tech-release">
-                    <h4 style="color: var(--accent);">AI Security Agents (Autonomous SOC)</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">Agents IA capables de patcher des failles de code en temps réel sans intervention humaine. <strong>Impact :</strong> Accélération radicale du cycle CI/CD.</p>
-                </div>
-                <div class="tech-release">
-                    <h4 style="color: var(--accent);">Carbon-Aware Computing</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-dim);">OS capables de moduler la charge CPU en fonction de l'intensité carbone du réseau électrique local. <strong>Impact :</strong> GreenOps obligatoire en entreprise.</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="veille-grid">
-            <section class="card" style="grid-column: span 2;">
-                <div class="badge" style="background: var(--accent); color: #000;">05_ANALYSE_FOCUS_2026</div>
-                <div class="analysis-highlight">
-                    <h3 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-biohazard"></i> La menace "Living off the Land" (LotL)</h3>
-                    <p style="font-size: 0.9rem; line-height: 1.6;">
-                        <strong>Concept :</strong> Utilisation détournée d'outils d'administration légitimes (PowerShell, WMI, Bitsadmin) pour exécuter des actions malveillantes sans injecter de fichiers sur le disque (Fileless).<br><br>
-                        <strong>Détection :</strong> Nécessite une analyse comportementale avancée (EDR/XDR) plutôt que des signatures classiques.<br><br>
-                        <strong>Application chez THENEAS :</strong> Mise en place de politiques de restriction d'exécution (AppLocker), surveillance accrue des journaux d'événements 4688 et scripts bloqués via ESET.
-                    </p>
-                </div>
-            </section>
-
-            <section class="card">
-                <div class="badge">OUTILS_D_ANALYSE</div>
-                <div style="margin-top: 20px;">
-                    <span class="tool-badge"><i class="fas fa-search"></i> VirusTotal</span>
-                    <span class="tool-badge"><i class="fas fa-link"></i> URLVoid</span>
-                    <span class="tool-badge"><i class="fas fa-user-shield"></i> HIBP</span>
-                    <span class="tool-badge"><i class="fas fa-flask"></i> CyberChef</span>
-                    <span class="tool-badge"><i class="fas fa-code"></i> Any.Run</span>
-                    <span class="tool-badge"><i class="fas fa-shield-alt"></i> Talos Intelligence</span>
-                </div>
-            </section>
+        <div class="news-ticker">
+            <span class="ticker-label">LIVE_THREATS</span>
+            <div id="live-news">Initialisation du flux de données...</div>
         </div>
+
+        <section class="terminal-window card section-spacing">
+            <div class="terminal-body">
+                <div class="terminal-prompt"><span class="t-green">alexis@intel</span>:<span class="t-purple">~</span>$ ./display_dashboard.py</div>
+                <h1 class="hero-name"><span class="terminal-typing">VEILLE_INTEL_CENTER</span></h1>
+                <p class="hero-role">// INTERFACE DYNAMIQUE DE SURVEILLANCE TECHNOLOGIQUE</p>
+            </div>
+        </section>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab(event, 'sources')">01. SOURCES</button>
+            <button class="tab-btn" onclick="openTab(event, 'exemples')">02. EXEMPLES</button>
+            <button class="tab-btn" onclick="openTab(event, 'futur')">03. HORIZON 2026</button>
+            <button class="tab-btn" onclick="openTab(event, 'analyse')">04. DATA_ANALYTICS</button>
+        </div>
+
+        <div id="sources" class="tab-content active">
+            <div class="veille-grid">
+                <div class="interactive-card">
+                    <span class="tag tag-red">Flux RSS</span>
+                    <h3>ANSSI / CERT-FR</h3>
+                    <p>Récupération automatique des bulletins d'alerte et avis de sécurité.</p>
+                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="t-purple">Consulter la source ></a>
+                </div>
+                <div class="interactive-card">
+                    <span class="tag tag-red" style="background:#3b82f6">Réseaux</span>
+                    <h3>OSINT / X-Tech</h3>
+                    <p>Monitoring des comptes de chercheurs en cybersécurité (Crowdstrike, Mandiant).</p>
+                </div>
+                <div class="interactive-card">
+                    <span class="tag tag-red" style="background:#7c3aed">Web</span>
+                    <h3>BleepingComputer</h3>
+                    <p>Actualité internationale sur les malwares et les fuites de données.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="exemples" class="tab-content">
+            <div class="veille-grid">
+                <div class="interactive-card" onclick="alert('Détails: Fuite de données via bucket S3 exposé.')">
+                    <h4 class="t-purple">Exemple #1</h4>
+                    <p><strong>Menace :</strong> Cloud Misconfiguration</p>
+                    <p>Analyse des permissions IAM défaillantes chez un acteur E-commerce.</p>
+                </div>
+                <div class="interactive-card">
+                    <h4 class="t-purple">Exemple #2</h4>
+                    <p><strong>Menace :</strong> Ransomware as a Service (RaaS)</p>
+                    <p>Étude des méthodes de déploiement de LockBit 4.0.</p>
+                </div>
+                <div class="interactive-card">
+                    <h4 class="t-purple">Exemple #3</h4>
+                    <p><strong>Menace :</strong> Zero-Day MoveIT</p>
+                    <p>Veille réactive lors de l'exploitation massive de la faille de transfert de fichiers.</p>
+                </div>
+                <div class="interactive-card">
+                    <h4 class="t-purple">Exemple #4</h4>
+                    <p><strong>Menace :</strong> Social Engineering IA</p>
+                    <p>Simulation de phishing utilisant des voix clonées par IA.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="futur" class="tab-content">
+            <div class="veille-grid">
+                <div class="interactive-card" style="border-style: dashed;">
+                    <h3 class="t-green">Post-Quantum Crypto</h3>
+                    <p>Standardisation NIST 2026. Préparation au passage vers Kyber et Dilithium.</p>
+                </div>
+                <div class="interactive-card" style="border-style: dashed;">
+                    <h3 class="t-green">Wi-Fi 8 (802.11bn)</h3>
+                    <p>Amélioration radicale de la gestion de la congestion réseau en milieu dense.</p>
+                </div>
+                <div class="interactive-card" style="border-style: dashed;">
+                    <h3 class="t-green">6G Architecture</h3>
+                    <p>Exploration des premières spécifications pour l'intégration IA native.</p>
+                </div>
+                <div class="interactive-card" style="border-style: dashed;">
+                    <h3 class="t-green">Cyber-Défense Autonome</h3>
+                    <p>Systèmes d'auto-remédiation capables de réécrire des règles de firewall dynamiquement.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="analyse" class="tab-content">
+            <div class="chart-container">
+                <h3 style="text-align: center; margin-bottom: 15px;">Répartition Menaces Surveillées</h3>
+                <canvas id="threatChart"></canvas>
+            </div>
+            <div class="analysis-highlight" style="margin-top: 30px;">
+                <h3><i class="fas fa-microchip"></i> Note de Synthèse 2026</h3>
+                <p>La convergence entre l'IA générative et l'automatisation offensive force les équipes de défense à adopter des solutions **XDR** pilotées par IA pour réduire le temps moyen de détection (MTTD).</p>
+            </div>
+        </div>
+
     </main>
 
     <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> SCANNER: <span class="t-green">ACTIVE</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // VEILLE_V2026</div>
+        <div class="footer-segment"><span class="online-dot pulse"></span> STATUT: <span class="t-green">SCANNING_ACTIVE</span></div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // V2.0.26</div>
     </footer>
+
+    <script>
+        // 1. Horloge temps réel
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+
+        // 2. Gestion des Onglets
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // 3. News Ticker Dynamique
+        const news = [
+            "ALERT: Nouvelle vulnérabilité Zero-day détectée sur Linux Kernel.",
+            "INFO: Le NIST publie les standards finaux pour la cryptographie post-quantique.",
+            "WARNING: Campagne de phishing massive ciblant les secteurs publics.",
+            "TECH: Sortie des premiers équipements certifiés Wi-Fi 8."
+        ];
+        let newsIdx = 0;
+        setInterval(() => {
+            document.getElementById('live-news').innerText = news[newsIdx];
+            newsIdx = (newsIdx + 1) % news.length;
+        }, 4000);
+
+        // 4. Graphique Radar (Chart.js)
+        const ctx = document.getElementById('threatChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Malware', 'Phishing', 'Cloud Security', 'IoT Threats', 'AI Attacks', 'Network'],
+                datasets: [{
+                    label: 'Intensité de Veille',
+                    data: [85, 90, 70, 60, 95, 80],
+                    backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                    borderColor: '#a855f7',
+                    pointBackgroundColor: '#fff'
+                }]
+            },
+            options: {
+                scales: {
+                    r: { grid: { color: 'rgba(255,255,255,0.1)' }, angleLines: { color: 'rgba(255,255,255,0.1)' } }
+                },
+                plugins: { legend: { labels: { color: '#fff' } } }
+            }
+        });
+    </script>
 </body>
 </html>
