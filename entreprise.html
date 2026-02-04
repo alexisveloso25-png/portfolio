@@ -28,7 +28,7 @@
 
         /* Amélioration du contraste pour les balises <small> */
         small {
-            color: rgba(255, 255, 255, 0.85) !important; /* Blanc cassé pour lisibilité */
+            color: rgba(255, 255, 255, 0.85) !important;
             font-weight: 500;
             letter-spacing: 1px;
         }
@@ -40,7 +40,7 @@
             margin-top: 5px;
             display: inline-block;
             min-width: 120px;
-            border-radius: 20px; /* Forme de bulle demandée */
+            border-radius: 20px;
             text-align: center;
         }
 
@@ -122,7 +122,7 @@
         </section>
 
         <section class="section-spacing">
-            <div class="badge" style="margin-bottom: 20px;">CATALOGUE_PROJETS_BTS</div>
+            <div class="badge" style="margin-bottom: 20px;">MISSIONS</div>
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
@@ -151,7 +151,7 @@
                     <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
                     <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Déploiement et gestion d'une infrastructure virtualisée pour optimiser les ressources et isoler les services critiques.</p>
                 </div>
-                </div>
+            </div>
         </section>
 
         <section class="card section-spacing" style="background: rgba(0,0,0,0.4); border: 1px solid var(--purple);">
@@ -176,10 +176,6 @@
 
                         <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
                             <div class="sensor-box">
-                                <small>SENSOR: PING</small>
-                                <div style="color: var(--green); font-family: 'JetBrains Mono';"><i class="fas fa-signal"></i> 1ms [OK]</div>
-                            </div>
-                            <div class="sensor-box">
                                 <small>SENSOR: DISK</small>
                                 <div style="color: var(--accent); font-family: 'JetBrains Mono';">
                                     <i class="fas fa-hdd"></i> <span class="alert-text">75% USED</span>
@@ -201,6 +197,10 @@
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);">
                         <small>SENSORS</small>
                         <div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;">
+                        <small>PING</small>
+                        <div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div>
                     </div>
                 </div>
             </div>
