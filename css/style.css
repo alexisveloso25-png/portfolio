@@ -1,6 +1,6 @@
 /* ========================================
-    PORTFOLIO V4 - VERSION FINALE COMPLETE
-    ======================================== */
+    PORTFOLIO V4 - VERSION AMELIORÉE
+   ======================================== */
 
 :root {
     --bg: #05050a;
@@ -93,19 +93,41 @@ body {
     color: white; padding: 3px 15px; font-size: 0.65rem; font-weight: 800;
 }
 
-/* --- PROFIL & SCANNER --- */
+/* --- PROFIL INTERACTIF --- */
+.interactive-profile {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+}
+.interactive-profile:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(163, 102, 255, 0.15);
+    border-color: var(--accent);
+}
 .bio-flex { display: flex; gap: 40px; align-items: flex-start; }
 .scanner-container {
     position: relative; width: 160px; height: 160px; border: 2px solid var(--accent);
     background: rgba(163, 102, 255, 0.05); overflow: hidden; flex-shrink: 0;
 }
-.avatar-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 800; }
+.avatar-box { 
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; 
+    font-size: 3.5rem; font-weight: 800; background: linear-gradient(45deg, #0d0d1a, #1a1a3a);
+}
 .laser-line {
     position: absolute; top: 0; left: 0; width: 100%; height: 4px;
     background: var(--accent); box-shadow: 0 0 15px var(--accent);
     animation: scanLine 3s infinite ease-in-out;
+    z-index: 3;
 }
 @keyframes scanLine { 0%, 100% { top: 0; } 50% { top: 100%; } }
+
+.glitch-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent 0%, rgba(163, 102, 255, 0.05) 1px, transparent 2px);
+    pointer-events: none;
+}
+
+.data-row { margin-bottom: 8px; transition: 0.2s; padding: 2px 0; }
+.interactive-profile:hover .data-row { transform: translateX(5px); }
+.data-val { color: var(--white); font-weight: 500; }
 .label-red { color: var(--red); font-weight: 800; margin-right: 12px; }
 .mini-console { background: #000; padding: 15px; border-left: 3px solid var(--green); margin-top: 25px; }
 
@@ -124,13 +146,18 @@ body {
 .v-title { font-size: 1.1rem; margin: 5px 0; }
 .v-school { font-size: 0.85rem; color: var(--text-dim); }
 
-/* --- SKILLS MATRIX --- */
+/* --- SKILLS MATRIX & DETAILS --- */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; }
+.skill-item { display: flex; flex-direction: column; }
 .s-head { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
 .s-bar { height: 10px; background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; position: relative; }
 .s-fill {
     height: 100%; background: linear-gradient(90deg, var(--accent), #d1b3ff);
     box-shadow: 0 0 15px var(--accent-glow); animation: fillIn 2.5s ease-out forwards;
+}
+.s-details {
+    font-size: 0.7rem; color: var(--accent); margin-top: 8px; 
+    letter-spacing: 1px; font-weight: 500; opacity: 0.8;
 }
 @keyframes fillIn { from { width: 0; } }
 .anim-90 { width: 90%; } .anim-85 { width: 85%; } .anim-80 { width: 80%; } .anim-55 { width: 55%; }
@@ -141,7 +168,12 @@ body {
     background: rgba(163, 102, 255, 0.05); border: 1px solid var(--accent);
     padding: 8px 15px; font-size: 0.75rem; font-weight: bold; transition: 0.3s;
 }
-.soft-tag:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
+.soft-tag:hover { 
+    background: var(--accent); 
+    color: #000; 
+    box-shadow: 0 0 15px var(--accent);
+    transform: translateY(-3px);
+}
 
 .cert-list { display: flex; flex-direction: column; gap: 12px; }
 .cert-row {
