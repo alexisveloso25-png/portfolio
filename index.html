@@ -9,80 +9,67 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="scanline"></div>
+    <div class="scanline-global"></div>
 
     <header class="top-bar">
         <div class="brand">USER: ALEXIS_VELOSO / <span>L3_SDR_STUDENT</span></div>
         <nav class="nav-links">
-            <a href="#"><i class="fas fa-microchip"></i> APPRENTI</a>
+            <a href="#"><i class="fas fa-terminal"></i> BIO</a>
             <a href="#"><i class="fas fa-network-wired"></i> MISSIONS</a>
             <a href="#"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
         </nav>
     </header>
 
     <main class="wrapper">
-        <section class="card terminal-hero">
-            <div class="card-header"><span class="dots"></span> BASH — ROOT@ALEXIS_VELOSO</div>
-            <div class="card-content">
-                <div class="cmd-line">alexis@infra:~$ cat welcome.txt</div>
-                <h1 class="glitch">ALEXIS VELOSO</h1>
-                <p class="role-tag">// SYSTEMS_AND_NETWORKS_EXPERT</p>
-                <p class="main-desc">
-                    Étudiant en Licence Générale Informatique (SDR), passionné par l'infrastructure et la cybersécurité. 
-                    En recherche constante de nouveaux défis techniques.
+        <section class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="terminal-title">bash — root@alexis_veloso</div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-prompt">
+                    <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">cat welcome.txt</span>
+                </div>
+                <h1 class="hero-name">ALEXIS VELOSO</h1>
+                <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
+                <p class="hero-text">
+                    Étudiant en Licence Générale Informatique (SDR), passionné par l'administration système et la cybersécurité.
                 </p>
-                <div class="btn-group">
-                    <a href="#" class="btn-neon">CV.SYS</a>
-                    <a href="#" class="btn-neon">LINKEDIN</a>
-                    <a href="#" class="btn-neon">RECOM.DOC</a>
+                <div class="terminal-actions">
+                    <a href="#" class="term-btn">CV.SYS</a>
+                    <a href="#" class="term-btn">LINKEDIN.URL</a>
+                    <a href="#" class="term-btn">RECOM.DOC</a>
                 </div>
             </div>
         </section>
-        <section class="terminal-window">
-    <div class="terminal-header">
-        <div class="terminal-dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-        </div>
-        <div class="terminal-title">bash — root@alexis_veloso — 80x24</div>
-    </div>
-
-    <div class="terminal-body">
-        <div class="terminal-prompt">
-            <span class="user">alexis@infra</span>:<span class="dir">~</span>$ <span class="cmd">cat welcome.txt</span>
-        </div>
-        
-        <div class="terminal-content">
-            <h1 class="hero-name">ALEXIS VELOSO</h1>
-            <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
-            <p class="hero-text">
-                Bienvenue sur mon portail d'infrastructure. <br>
-                Étudiant en Licence Générale Informatique (SDR), passionné par l'administration système et la cybersécurité.
-            </p>
-        </div>
-
-        <div class="terminal-actions">
-            <a href="#" class="term-btn">CV.SYS</a>
-            <a href="#" class="term-btn">LINKEDIN.URL</a>
-            <a href="#" class="term-btn">RECOM.DOC</a>
-        </div>
-    </div>
-</section>
 
         <div class="grid-layout">
             <section class="card">
                 <div class="badge">PROFIL_ID</div>
                 <div class="bio-flex">
-                    <div class="avatar">AV</div>
+                    <div class="scanner-container">
+                        <div class="avatar-box">AV</div>
+                        <div class="laser-line"></div>
+                    </div>
                     <div class="bio-data">
                         <p><span class="label">NOM:</span> VELOSO ALEXIS</p>
                         <p><span class="label">LOC:</span> PARIS, FR</p>
                         <p><span class="label">STATUS:</span> ACTIVE</p>
+                        <p><span class="label">ROLE:</span> DEV_FULLSTACK</p>
+                        <p><span class="label">MAIL:</span> alexis.veloso25@gmail.com</p>
+                        <p><span class="label">TEL:</span> 0771824809</p>
+                        
                         <div class="mini-console">
-                            > ANALYZING_BIO...<br>
-                            > ROLE: DEV_FULLSTACK<br>
-                            > MAIL: alexis.veloso25@gmail.com
+                            <div class="console-text">
+                                > ANALYZING_BIO_STREAM...<br>
+                                > ENCRYPTING_DATA...<br>
+                                > ACCESS_GRANTED
+                            </div>
+                            <a href="#" class="download-link"><i class="fas fa-download"></i> TÉLÉCHARGER</a>
                         </div>
                     </div>
                 </div>
@@ -112,33 +99,23 @@
             <div class="skills-grid">
                 <div class="skill-item">
                     <div class="s-head"><span>WINDOWS SERVER</span><span>90%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 90%"></div></div>
+                    <div class="s-bar"><div class="s-fill anim-90"></div></div>
                     <div class="s-tags"><span>AD DS</span><span>GPO</span><span>DNS/DHCP</span></div>
                 </div>
                 <div class="skill-item">
                     <div class="s-head"><span>LINUX SERVER</span><span>85%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 85%"></div></div>
+                    <div class="s-bar"><div class="s-fill anim-85"></div></div>
                     <div class="s-tags"><span>DEBIAN</span><span>BASH</span><span>NGINX</span></div>
                 </div>
                 <div class="skill-item">
-                    <div class="s-head"><span>RÉSEAUX (CCNA)</span><span>80%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 80%"></div></div>
-                    <div class="s-tags"><span>VLAN</span><span>ROUTAGE</span><span>VPN</span></div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>VIRTUALISATION</span><span>85%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 85%"></div></div>
-                    <div class="s-tags"><span>PROXMOX</span><span>VMWARE</span><span>DOCKER</span></div>
-                </div>
-                <div class="skill-item">
                     <div class="s-head"><span>BASE DE PROGRAMMATION</span><span>55%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 55%"></div></div>
+                    <div class="s-bar"><div class="s-fill anim-55"></div></div>
                     <div class="s-tags"><span>HTML</span><span>CSS</span><span>PHP</span><span>DOCKER</span><span>C</span></div>
                 </div>
                 <div class="skill-item">
-                    <div class="s-head"><span>OFFICE 365</span><span>80%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 80%"></div></div>
-                    <div class="s-tags"><span>EXCHANGE</span><span>AZURE AD</span></div>
+                    <div class="s-head"><span>VIRTUALISATION</span><span>85%</span></div>
+                    <div class="s-bar"><div class="s-fill anim-85"></div></div>
+                    <div class="s-tags"><span>PROXMOX</span><span>VMWARE</span><span>DOCKER</span></div>
                 </div>
             </div>
         </section>
@@ -146,22 +123,50 @@
         <div class="grid-layout">
             <section class="card">
                 <div class="badge">HUMAN_CORE</div>
-                <div class="soft-skills">
-                    <span>AUTONOMIE</span><span>RIGUEUR</span><span>CURIOSITÉ</span><span>ADAPTABILITÉ</span>
+                <div class="soft-skills-v4">
+                    <div class="soft-item"><i class="fas fa-brain"></i> AUTONOMIE</div>
+                    <div class="soft-item"><i class="fas fa-sync"></i> ADAPTABILITÉ</div>
+                    <div class="soft-item"><i class="fas fa-check-double"></i> RIGUEUR</div>
+                    <div class="soft-item"><i class="fas fa-users"></i> ESPRIT D'ÉQUIPE</div>
+                    <div class="soft-item"><i class="fas fa-search"></i> CURIOSITÉ</div>
                 </div>
             </section>
+
             <section class="card">
                 <div class="badge">VALIDATIONS</div>
-                <div class="cert-row"><i class="fas fa-check-circle"></i> CCNA EN COURS</div>
-                <div class="cert-row"><i class="fas fa-check-circle"></i> ATTESTATION RGPD</div>
-                <div class="cert-row"><i class="fas fa-check-circle"></i> PIX CERTIFIED</div>
+                <div class="cert-list">
+                    <div class="cert-row"><i class="fas fa-shield-alt t-purple"></i> CCNA EN COURS <span class="status-tag">PENDING</span></div>
+                    <div class="cert-row"><i class="fas fa-shield-alt t-purple"></i> ATTESTATION RGPD <i class="fas fa-check t-green"></i></div>
+                    <div class="cert-row"><i class="fas fa-shield-alt t-purple"></i> PIX CERTIFIED <i class="fas fa-check t-green"></i></div>
+                    <div class="cert-row"><i class="fas fa-shield-alt t-purple"></i> CISCO NETACAD IT <span class="status-tag">SOON</span></div>
+                </div>
             </section>
         </div>
+
+        <section class="card">
+            <div class="badge">INITIALIZE_CONTACT</div>
+            <form class="contact-form">
+                <div class="form-grid">
+                    <div class="input-box">
+                        <label>SOURCE_ID</label>
+                        <input type="text" placeholder="NOM">
+                    </div>
+                    <div class="input-box">
+                        <label>RETURN_PATH</label>
+                        <input type="email" placeholder="EMAIL">
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label>DATA_STREAM</label>
+                    <textarea rows="4" placeholder="MESSAGE..."></textarea>
+                </div>
+                <button type="submit" class="btn-send">TRANSMIT_DATA <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </section>
     </main>
 
     <footer class="status-footer">
         <div class="f-item"><span class="online-dot"></span> SYSTEM: ONLINE</div>
-        <div class="f-item">PING: 24MS</div>
         <div class="f-item">ALEXIS_VELOSO // PORTFOLIO_V4</div>
     </footer>
 </body>
