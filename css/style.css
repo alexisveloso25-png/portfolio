@@ -148,3 +148,77 @@ body {
     animation: globalScan 8s linear infinite;
 }
 @keyframes globalScan { from { top: 0; } to { top: 100%; } }
+
+/* --- AMÉLIORATIONS TERMINAL --- */
+.terminal-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espace entre les ronds et le titre */
+}
+
+.terminal-title-inline {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.extended-padding {
+    padding: 60px 45px; /* Plus d'espace à l'intérieur du terminal */
+}
+
+.content-block {
+    margin: 40px 0; /* Espace entre le prompt et le titre principal */
+}
+
+/* --- DESIGN DES BOUTONS TERMINAL (MODERNE) --- */
+.terminal-actions-modern {
+    display: flex;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.btn-cyber-outline {
+    position: relative;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border: 1px solid rgba(163, 102, 255, 0.4);
+    overflow: hidden;
+    transition: 0.4s all;
+}
+
+.btn-cyber-outline span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-cyber-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transition: 0.4s;
+    z-index: 1;
+}
+
+.btn-cyber-outline:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(163, 102, 255, 0.4);
+}
+
+.btn-cyber-outline:hover::before {
+    left: 0;
+}
+
+.btn-cyber-outline:hover span {
+    color: #000; /* Texte devient noir sur fond violet au survol */
+}
+
+/* [Conserver tout le reste du CSS précédent pour les barres de progression, le scan, etc.] */
