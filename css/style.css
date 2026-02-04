@@ -1,83 +1,150 @@
+/* --- CONFIGURATION GLOBALE --- */
 :root {
     --bg: #05050a;
     --card-bg: #0d0d1a;
     --accent: #a366ff;
+    --red: #ff4d4d;
     --white: #ffffff;
     --green: #00ff9d;
+    --text-dim: #b0b0d0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--white); font-family: 'JetBrains Mono', monospace; }
+body { 
+    background: var(--bg); 
+    color: var(--white); 
+    font-family: 'JetBrains Mono', monospace; 
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-.wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px 100px 20px; }
+.wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px 120px 20px; }
 
-/* REUTILISATION DES CARTES */
+/* --- TERMINAL HERO (GRIS/BLANC/VIOLET) --- */
+.hero-large {
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 40px rgba(163, 102, 255, 0.15);
+}
+.terminal-header {
+    background: rgba(163, 102, 255, 0.1);
+    padding: 15px 25px;
+    display: flex; align-items: center;
+    border-bottom: 1px solid rgba(163, 102, 255, 0.2);
+}
+.terminal-dots { display: flex; gap: 10px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+.terminal-title { flex-grow: 1; text-align: center; font-size: 0.75rem; color: #888; letter-spacing: 1px; }
+
+.terminal-body { padding: 40px; }
+.hero-name { font-size: 4rem; letter-spacing: -2px; margin-bottom: 10px; text-shadow: 0 0 20px rgba(163, 102, 255, 0.5); }
+.hero-role { color: var(--accent); font-weight: 800; font-size: 1.2rem; margin-bottom: 25px; }
+.hero-text-large { font-size: 1.1rem; margin-bottom: 35px; }
+.hero-text-large p { margin-bottom: 8px; }
+
+.term-btn {
+    display: inline-block; padding: 10px 22px; border: 1px solid var(--accent);
+    color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.85rem;
+    margin-right: 15px; transition: 0.3s;
+}
+.term-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 20px var(--accent); }
+
+/* --- CARTES & GRILLE --- */
+.grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .card {
     background: var(--card-bg);
     border: 1px solid rgba(163, 102, 255, 0.2);
-    border-radius: 8px; padding: 30px; margin-bottom: 30px; position: relative;
+    border-radius: 8px; padding: 35px; margin-bottom: 30px; position: relative;
 }
 .badge {
-    position: absolute; top: -10px; left: 20px;
-    background: var(--accent); color: white; padding: 2px 10px; font-size: 0.6rem; font-weight: bold;
+    position: absolute; top: -12px; left: 25px;
+    background: var(--accent); color: white; padding: 3px 15px; font-size: 0.65rem; font-weight: 800;
 }
 
-/* SCANNER ANIMATION */
+/* --- PROFIL ID AVEC SCANNER --- */
+.bio-flex { display: flex; gap: 40px; align-items: center; }
 .scanner-container {
-    position: relative; width: 120px; height: 120px; border: 2px solid var(--accent);
-    overflow: hidden; background: rgba(163, 102, 255, 0.05);
+    position: relative; width: 160px; height: 160px; border: 2px solid var(--accent);
+    background: rgba(163, 102, 255, 0.05); overflow: hidden;
 }
-.avatar-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 800; }
+.avatar-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 800; }
 .laser-line {
     position: absolute; top: 0; left: 0; width: 100%; height: 4px;
     background: var(--accent); box-shadow: 0 0 15px var(--accent);
-    animation: scanMove 2.5s infinite ease-in-out;
+    animation: scanLine 3s infinite ease-in-out;
 }
-@keyframes scanMove { 0%, 100% { top: 0; } 50% { top: 100%; } }
+@keyframes scanLine { 0%, 100% { top: 0; } 50% { top: 100%; } }
 
-/* SOFT SKILLS DESIGN */
-.soft-skills-v4 { display: flex; flex-direction: column; gap: 15px; }
-.soft-item {
-    background: rgba(163, 102, 255, 0.05);
-    border-left: 3px solid var(--accent);
-    padding: 10px 15px;
-    font-size: 0.85rem;
-    transition: 0.3s;
+.label-red { color: var(--red); font-weight: 800; margin-right: 12px; }
+.mini-console { background: #000; padding: 15px; border-left: 3px solid var(--green); margin-top: 25px; }
+.console-text { font-size: 0.75rem; line-height: 1.6; }
+.download-link { 
+    color: var(--green); text-decoration: none; border: 1px solid var(--green);
+    padding: 6px 12px; font-size: 0.7rem; font-weight: bold; margin-top: 15px; display: inline-block;
 }
-.soft-item:hover { background: rgba(163, 102, 255, 0.15); transform: translateX(5px); }
-.soft-item i { margin-right: 10px; color: var(--accent); }
 
-/* CERTIFICATIONS DESIGN */
-.cert-list { display: flex; flex-direction: column; gap: 12px; }
-.cert-row {
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(0,0,0,0.3); padding: 10px 15px; border: 1px solid rgba(163, 102, 255, 0.1);
+/* --- SKILLS MATRIX (DYNAMIQUE) --- */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; }
+.s-head { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.85rem; }
+.s-bar { height: 10px; background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; margin: 8px 0; }
+.s-fill { 
+    height: 100%; background: linear-gradient(90deg, var(--accent), #d1b3ff);
+    box-shadow: 0 0 15px var(--accent);
+    animation: fillIn 2s ease-out forwards, shimmer 2s infinite linear;
+    background-size: 200% 100%;
 }
-.status-tag { font-size: 0.6rem; color: #888; border: 1px solid #444; padding: 2px 5px; }
-
-/* TERMINAL & SKILLS (Precedemment définis) */
-.terminal-window { background: var(--card-bg); border: 1px solid var(--accent); border-radius: 10px; overflow: hidden; }
-.terminal-header { background: rgba(163, 102, 255, 0.1); padding: 10px; border-bottom: 1px solid rgba(163, 102, 255, 0.2); }
-.terminal-dots { display: flex; gap: 5px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; }
-.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-.terminal-body { padding: 25px; }
-.hero-name { font-size: 3rem; text-shadow: 0 0 15px var(--accent); }
-.hero-role { color: var(--accent); font-weight: bold; }
-.label { color: var(--accent); font-weight: bold; margin-right: 10px; }
-
-.grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-.bio-flex { display: flex; gap: 25px; }
-.mini-console { background: #000; padding: 15px; border-left: 3px solid var(--green); margin-top: 15px; }
-.console-text { color: var(--green); font-size: 0.75rem; }
-.download-link { color: var(--green); text-decoration: none; border: 1px solid var(--green); padding: 5px; margin-top: 10px; display: inline-block; font-size: 0.7rem; }
-
-.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.s-bar { height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
-.s-fill { height: 100%; background: var(--accent); animation: fillIn 2s ease-out forwards; box-shadow: 0 0 10px var(--accent); }
 @keyframes fillIn { from { width: 0; } }
-.anim-90 { width: 90%; } .anim-85 { width: 85%; } .anim-55 { width: 55%; }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
-.t-green { color: var(--green); } .t-purple { color: var(--accent); }
-.status-footer { position: fixed; bottom: 0; width: 100%; background: #000; padding: 10px; font-size: 0.7rem; border-top: 1px solid rgba(163, 102, 255, 0.3); display: flex; gap: 20px; }
-.online-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; }
+.s-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.s-tags span { font-size: 0.6rem; background: rgba(163, 102, 255, 0.1); padding: 2px 8px; border: 1px solid rgba(163, 102, 255, 0.2); }
+
+.anim-90 { width: 90%; } .anim-85 { width: 85%; } .anim-80 { width: 80%; } .anim-55 { width: 55%; }
+
+/* --- QUALITÉS & CERTIFICATIONS --- */
+.soft-skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.soft-item { background: rgba(163, 102, 255, 0.05); border-left: 3px solid var(--accent); padding: 12px; font-size: 0.8rem; font-weight: bold; }
+.soft-item i { color: var(--accent); margin-right: 10px; }
+
+.cert-list { display: flex; flex-direction: column; gap: 12px; }
+.cert-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 12px 20px; border: 1px solid rgba(163, 102, 255, 0.1); }
+.status-tag { font-size: 0.65rem; color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px; }
+
+/* --- CONTACT SECTION --- */
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.input-group label { display: block; font-size: 0.7rem; color: var(--accent); font-weight: bold; margin-bottom: 8px; }
+.input-group input, .input-group textarea {
+    width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(163, 102, 255, 0.3);
+    padding: 15px; color: white; font-family: inherit; transition: 0.3s;
+}
+.input-group input:focus, .input-group textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 10px rgba(163, 102, 255, 0.2); }
+
+.cyber-button {
+    background: transparent; border: 1px solid var(--accent); color: var(--accent);
+    padding: 18px; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 15px;
+}
+.cyber-button:hover { background: var(--accent); color: white; box-shadow: 0 0 30px var(--accent); }
+
+/* --- FOOTER STATUS BAR --- */
+.status-footer {
+    position: fixed; bottom: 0; width: 100%; background: #000;
+    padding: 12px 40px; border-top: 1px solid rgba(163, 102, 255, 0.3);
+    display: flex; gap: 35px; font-size: 0.75rem; font-weight: bold; color: #777; z-index: 100;
+}
+.footer-segment { display: flex; align-items: center; }
+.footer-right { margin-left: auto; color: var(--accent); }
+.online-dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; margin-right: 10px; box-shadow: 0 0 10px var(--green); }
+.pulse { animation: pulseAnim 2s infinite; }
+@keyframes pulseAnim { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+/* --- GLOBAL ANIMATIONS --- */
+.scanline-global {
+    width: 100%; height: 2px; background: rgba(163, 102, 255, 0.05);
+    position: fixed; top: 0; z-index: 1000; pointer-events: none;
+    animation: globalScan 8s linear infinite;
+}
+@keyframes globalScan { from { top: 0; } to { top: 100%; } }
