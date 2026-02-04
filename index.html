@@ -61,19 +61,23 @@
                         <div class="avatar-box">AV</div>
                         <div class="laser-line"></div>
                         <div class="glitch-overlay"></div>
+                        <div class="shimmer"></div>
                     </div>
                     <div class="bio-data">
                         <div class="data-row"><span class="label-red">NOM :</span> <span class="data-val">VELOSO</span></div>
                         <div class="data-row"><span class="label-red">PRENOM :</span> <span class="data-val">ALEXIS</span></div>
                         <div class="data-row"><span class="label-red">LOC :</span> <span class="data-val">PARIS, FR</span></div>
                         <div class="data-row"><span class="label-red">ROLE :</span> <span class="data-val">ADMIN RÉSEAUX</span></div>
-                        <div class="data-row"><span class="label-red">MAIL :</span> <span class="data-val">alexis.veloso25@gmail.com</span></div>
+                        <div class="data-row"><span class="label-red">MAIL :</span> <span class="data-val accent-link">alexis.veloso25@gmail.com</span></div>
                         <div class="data-row"><span class="label-red">TEL :</span> <span class="data-val">0771824809</span></div>
-                        <div class="data-row"><span class="label-red">STATUS :</span> <span class="data-val t-green">ACTIVE</span></div>
+                        <div class="data-row"><span class="label-red">STATUS :</span> <span class="data-val t-green">ACTIVE_NODE</span></div>
+                        
                         <div class="mini-console">
+                            <div class="console-header">SYSTEM_LOG</div>
                             <div class="console-text t-green">
-                                [ OK ] IDENTITY_CONFIRMED<br>
-                                > SCAN FINI
+                                <span class="console-cursor">></span> [ OK ] IDENTITY_CONFIRMED<br>
+                                <span class="console-cursor">></span> [ OK ] SECURE_CONNECTION_ESTABLISHED<br>
+                                <span class="console-cursor">></span> SCAN COMPLETED_
                             </div>
                         </div>
                     </div>
@@ -168,10 +172,10 @@
             <section class="card">
                 <div class="badge">VALIDATIONS</div>
                 <div class="cert-list">
-                    <div class="cert-row"><span>CCNA en COURS</span><span class="t-purple">PENDING</span></div>
-                    <div class="cert-row"><span>Attestation RGPD</span><i class="fas fa-check t-green"></i></div>
-                    <div class="cert-row"><span>PIX CERTIFIED</span><i class="fas fa-check t-green"></i></div>
-                    <div class="cert-row"><span>CISCO NETACAD IT</span><i class="fas fa-check t-green"></i></div>
+                    <div class="cert-row"><span>CCNA en COURS</span><span class="t-purple shadow-text">PENDING</span></div>
+                    <div class="cert-row"><span>Attestation RGPD</span><i class="fas fa-check-circle t-green"></i></div>
+                    <div class="cert-row"><span>PIX CERTIFIED</span><i class="fas fa-check-circle t-green"></i></div>
+                    <div class="cert-row"><span>CISCO NETACAD IT</span><i class="fas fa-check-circle t-green"></i></div>
                 </div>
             </section>
         </div>
@@ -190,11 +194,14 @@
     </main>
 
     <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: ONLINE</div>
-        <div class="footer-segment">PING: 24MS</div>
-        <div class="footer-segment">CPU: 12%</div>
-        <div class="footer-segment">LATENCE: 1.2MS</div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
+        <div class="footer-segment active"><span class="online-dot pulse"></span> SYSTEM: ONLINE</div>
+        <div class="footer-segment"><i class="fas fa-wifi"></i> PING: 24MS</div>
+        <div class="footer-segment">
+            <i class="fas fa-microchip"></i> CPU: 12%
+            <div class="mini-load-bar"><div class="load-fill" style="width: 12%"></div></div>
+        </div>
+        <div class="footer-segment"><i class="fas fa-database"></i> RAM: 4.2GB</div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // <span class="version-tag">STABLE_V4.2</span></div>
     </footer>
 </body>
 </html>
