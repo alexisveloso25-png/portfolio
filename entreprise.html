@@ -7,6 +7,46 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Optimisation UI/UX : Contraste et Interactivité */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Effet de survol : illumination en violet/vert */
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple) !important;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+        }
+
+        .project-card:nth-child(even):hover {
+            border-color: var(--green) !important;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Amélioration du contraste pour les balises <small> */
+        small {
+            color: rgba(255, 255, 255, 0.85) !important; /* Blanc cassé pour lisibilité */
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .sensor-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            margin-top: 5px;
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .alert-text {
+            color: #ff4444;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="circuit-bg"></div>
@@ -79,26 +119,45 @@
             </div>
         </section>
 
-        <section class="card section-spacing">
-            <div class="badge">TECH_STACK</div>
-            <div class="soft-skills-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
-                <div class="soft-tag"><span>VIRTUALISATION PROXMOX</span></div>
-            </div>
-        </section>
-
         <section class="section-spacing">
             <div class="badge" style="margin-bottom: 20px;">CATALOGUE_PROJETS_BTS</div>
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
+                        <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
                         <span class="v-year">BTS_01</span>
                     </div>
-                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Installation et configuration d'un environnement virtualisé sous Proxmox pour l'hébergement de serveurs critiques et optimisation des ressources du groupement.</p>
+                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Utilisation de GLPI pour la gestion du parc informatique et le traitement des incidents via un système de ticketing structuré.</p>
                 </div>
 
+                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
+                        <span class="v-year">BTS_02</span>
+                    </div>
+                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Administration complète de la suite Office 365 : gestion des utilisateurs, des groupes et des licences cloud.</p>
+                </div>
+
+                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
+                        <span class="v-year">BTS_03</span>
+                    </div>
+                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Déploiement et gestion d'une infrastructure virtualisée pour optimiser les ressources et isoler les services critiques.</p>
+                </div>
+
+                <div class="project-card card" style="border-top: 3px solid var(--accent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <i class="fas fa-network-wired t-purple" style="font-size: 1.5rem;"></i>
+                        <span class="v-year">BTS_04</span>
+                    </div>
+                    <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Monitoring PRTG</h3>
+                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Mise en place d'une solution de supervision complète pour assurer la haute disponibilité des équipements réseaux.</p>
+                </div>
             </div>
         </section>
 
@@ -113,27 +172,29 @@
                             <span class="online-dot pulse"></span>
                         </div>
                         <h3 class="v-title">SDR // SUPERVISION EXPERT</h3>
-                        <p class="v-school" style="margin-top: 10px;"><strong>Objectifs de Maintenance</strong></p>
+                        
                         <ul style="list-style: none; padding: 0; margin-top: 15px; font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check-circle t-green"></i> Garrantir la disponibilité et les performance optimal</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check-circle t-green"></i> Garantir la sécurité</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check-circle t-green"></i> Formation interne</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check-circle t-green"></i> Garantir la disponibilité et les performances optimales</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-shield-alt t-green"></i> Garantir la sécurité</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-user-graduate t-green"></i> Formation interne</li>
                         </ul>
-                    </div>
-                </div>
 
-                <div class="noc-metrics" style="width: 250px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);">
-                        <small>SENSORS_STATUS</small>
-                        <div style="display: flex; gap: 10px; margin-top: 5px;">
-                            <div style="border: 1px solid var(--green); padding: 5px 10px; font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--green);">
-                                <i class="fas fa-signal"></i> PING
+                        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div class="sensor-box">
+                                <small>SENSOR: PING</small>
+                                <div style="color: var(--green); font-family: 'JetBrains Mono';"><i class="fas fa-signal"></i> 1ms [OK]</div>
                             </div>
-                            <div style="border: 1px solid var(--accent); padding: 5px 10px; font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--accent);">
-                                <i class="fas fa-hdd"></i> ESPACE DISQUE
+                            <div class="sensor-box">
+                                <small>SENSOR: DISK</small>
+                                <div style="color: var(--accent); font-family: 'JetBrains Mono';">
+                                    <i class="fas fa-hdd"></i> <span class="alert-text">75% USED</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="noc-metrics" style="width: 200px; display: flex; flex-direction: column; gap: 10px;">
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);">
                         <small>UPTIME</small>
                         <div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div>
@@ -141,6 +202,10 @@
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);">
                         <small>LATENCY</small>
                         <div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);">
+                        <small>SENSORS</small>
+                        <div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVE</div>
                     </div>
                 </div>
             </div>
