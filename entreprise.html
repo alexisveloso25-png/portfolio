@@ -8,46 +8,68 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Optimisation UI/UX : Contraste et Interactivité */
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
+        /* --- OPTION 4 : Design des Barres de Progression --- */
+        .skill-bar-container {
+            background: rgba(255, 255, 255, 0.1);
+            height: 6px;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            background: var(--accent);
+            height: 100%;
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Effet de survol : illumination en violet/vert */
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--purple) !important;
-            box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
-        }
-
-        .project-card:nth-child(even):hover {
-            border-color: var(--green) !important;
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-        }
-
-        /* Amélioration du contraste pour les balises <small> */
-        small {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .sensor-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px;
-            margin-top: 5px;
+        /* Bouton Fiche Mission */
+        .btn-mission {
             display: inline-block;
-            min-width: 120px;
-            border-radius: 20px;
-            text-align: center;
+            margin-top: 15px;
+            padding: 8px 15px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-mission:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent);
         }
 
-        .alert-text {
-            color: #ff4444;
-            font-weight: bold;
+        /* --- OPTION 3 : Style du terminal de Logs --- */
+        #log-container {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            height: 100px;
+            overflow: hidden;
+            color: #aaa;
+            border-top: 1px solid rgba(147, 51, 234, 0.3);
+            padding-top: 10px;
+            margin-top: 15px;
         }
+        .log-line { margin-bottom: 2px; }
+        .log-time { color: var(--purple); }
+
+        /* --- OPTION 5 : Statut Adhérents --- */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        /* Styles existants conservés */
+        .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer; }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--purple) !important; box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
+        small { color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; letter-spacing: 1px; }
+        .sensor-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px; margin-top: 5px; display: inline-block; min-width: 120px; border-radius: 20px; text-align: center; }
+        .alert-text { color: #ff4444; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -68,17 +90,13 @@
             <div class="terminal-header">
                 <div class="terminal-controls">
                     <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                     </div>
                     <div class="terminal-title-inline">bash — info_entreprise.sh</div>
                 </div>
             </div>
             <div class="terminal-body">
-                <div class="terminal-prompt">
-                    <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./display_company_info.sh</span>
-                </div>
+                <div class="terminal-prompt"><span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./display_company_info.sh</span></div>
                 <div class="content-block">
                     <h1 class="hero-name">THENEAS</h1>
                     <p class="hero-role">// GEIE - GROUPEMENT EUROPÉEN D'INTÉRÊT ÉCONOMIQUE</p>
@@ -90,32 +108,23 @@
             </div>
         </section>
 
-        <div class="grid-layout section-spacing">
-            <section class="card" style="text-align: center;">
-                <div class="badge">INFRA_STATS</div>
-                <h2 style="font-size: 2.5rem; color: var(--accent);">450+</h2>
-                <p class="v-school">PC OPÉRATIONNELS</p>
-            </section>
-            <section class="card" style="text-align: center;">
-                <div class="badge">NETWORK_SCOPE</div>
-                <h2 style="font-size: 2.5rem; color: var(--accent);">MULTI</h2>
-                <p class="v-school">ADHÉRENTS EUROPE</p>
-            </section>
-        </div>
-
         <section class="card section-spacing">
             <div class="badge">ADHÉRENTS_GROUP</div>
-            <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px;">
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; text-align: center; background: rgba(255,255,255,0.03); border-radius: 4px;">
+            <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
                     <span style="font-weight: 800; color: var(--accent);">GROUPE ROCHER</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; text-align: center; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
                     <span style="font-weight: 800; color: var(--accent);">FIDESCO</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; text-align: center; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
                     <span style="font-weight: 800; color: var(--accent);">SAJE</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; text-align: center; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
                     <span style="font-weight: 800; color: var(--accent);">AVM</span>
                 </div>
             </div>
@@ -126,30 +135,36 @@
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="display: flex; justify-content: space-between;">
                         <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
                         <span class="v-year">BTS_01</span>
                     </div>
                     <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Utilisation de GLPI pour la gestion du parc informatique et le traitement des incidents via un système de ticketing structuré.</p>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Ticketing et gestion d'inventaire ITIL.</p>
+                    <a href="#" class="btn-mission">Fiche Mission</a>
                 </div>
 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="display: flex; justify-content: space-between;">
                         <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
                         <span class="v-year">BTS_02</span>
                     </div>
                     <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Administration complète de la suite Office 365 : gestion des utilisateurs, des groupes et des licences cloud.</p>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Administration Cloud et identités hybrides.</p>
+                    <a href="#" class="btn-mission">Fiche Mission</a>
                 </div>
 
                 <div class="project-card card" style="border-top: 3px solid var(--accent);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="display: flex; justify-content: space-between;">
                         <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
                         <span class="v-year">BTS_03</span>
                     </div>
                     <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);">Déploiement et gestion d'une infrastructure virtualisée pour optimiser les ressources et isoler les services critiques.</p>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de clusters et isolations de services.</p>
+                    <a href="#" class="btn-mission">Fiche Mission</a>
                 </div>
             </div>
         </section>
@@ -167,41 +182,27 @@
                         <h3 class="v-title">SDR // SUPERVISION EXPERT</h3>
                         
                         <ul style="list-style: none; padding: 0; margin-top: 15px; font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check-circle t-green"></i> Garantir la disponibilité et les performances optimales</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-shield-alt t-green"></i> Garantir la sécurité</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-user-graduate t-green"></i> Formation interne</li>
                             <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Observation en temps réels</li>
                             <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Centralisation des données réseaux</li>
                         </ul>
 
+                        <div id="log-container">
+                            <div class="log-line"><span class="log-time">[21:04:12]</span> Checking Core Switch... <span class="t-green">OK</span></div>
+                            <div class="log-line"><span class="log-time">[21:04:45]</span> Sensor 124 report: Stable</div>
+                            <div class="log-line"><span class="log-time">[21:05:01]</span> VPN Tunnel 'Fidesco' active</div>
+                        </div>
+
                         <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <div class="sensor-box">
-                                <small>SENSOR: DISK</small>
-                                <div style="color: var(--accent); font-family: 'JetBrains Mono';">
-                                    <i class="fas fa-hdd"></i> <span class="alert-text">75% USED</span>
-                                </div>
-                            </div>
+                            <div class="sensor-box"><small>SENSOR: DISK</small><div style="color: var(--accent); font-family: 'JetBrains Mono';"><i class="fas fa-hdd"></i> <span class="alert-text">75% USED</span></div></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="noc-metrics" style="width: 200px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);">
-                        <small>UPTIME</small>
-                        <div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);">
-                        <small>LATENCY</small>
-                        <div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);">
-                        <small>SENSORS</small>
-                        <div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;">
-                        <small>PING</small>
-                        <div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div>
-                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);"><small>SENSORS</small><div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;"><small>PING</small><div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div></div>
                 </div>
             </div>
         </section>
@@ -209,15 +210,33 @@
         <section class="card section-spacing" style="border-left: 4px solid var(--accent);">
             <div class="badge">INFRASTRUCTURE_HEALTH</div>
             <p style="font-size: 0.9rem; font-style: italic; color: var(--text-dim);">
-                "Inspiré des principes Agile, j'ai privilégié une approche itérative, décomposant le projet en phases successives et gérables. Cette méthode m'a permis d'avancer pas à pas, de vérifier régulièrement l'adéquation des réalisations avec les objectifs fixés et d'apporter les ajustements nécessaires en cours de route."
+                "Inspiré des principes Agile, j'ai privilégié une approche itérative, décomposant le projet en phases successives et gérables. Cette méthode m'a permis d'avancer pas à pas..."
             </p>
         </section>
     </main>
 
     <footer class="status-footer">
         <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: <span class="t-green">ONLINE</span></div>
-        <div class="footer-segment">MISSION_MODE: <span class="t-green">ACTIVE</span></div>
         <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
     </footer>
+
+    <script>
+        const logs = [
+            "Syncing with Azure AD...",
+            "Backup Job #84 completed.",
+            "Analyzing PRTG traffic spikes...",
+            "Proxmox Node 2: Resources OK",
+            "New ticket in GLPI: #4582",
+            "Network Topology refresh..."
+        ];
+        setInterval(() => {
+            const container = document.getElementById('log-container');
+            const time = new Date().toLocaleTimeString();
+            const log = logs[Math.floor(Math.random() * logs.length)];
+            container.innerHTML += `<div class="log-line"><span class="log-time">[${time}]</span> ${log}</div>`;
+            if(container.childNodes.length > 8) container.removeChild(container.firstChild);
+            container.scrollTop = container.scrollHeight;
+        }, 3000);
+    </script>
 </body>
 </html>
