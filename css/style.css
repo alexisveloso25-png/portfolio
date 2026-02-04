@@ -371,3 +371,76 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* --- ANIMATION ÉCRITURE TERMINAL (TYPING EFFECT) --- */
+.typing-effect {
+    display: inline-block;
+    overflow: hidden; /* Cache le texte non écrit */
+    border-right: 3px solid #22c55e; /* Le curseur qui clignote */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    margin: 0;
+    letter-spacing: 2px;
+    animation: 
+        typing 3.5s steps(30, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+/* Effet d'écriture */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Clignotement du curseur */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #22c55e; }
+}
+
+/* --- STYLE DU FOOTER MONITORING --- */
+.footer-v4 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: flex-start; /* Aligne tout sur une ligne */
+    gap: 40px; /* Espace entre les infos */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stat-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pulse-green {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+/* Couleurs de texte globales pour ton thème */
+.t-green { color: #22c55e; }
+.t-purple { color: #a855f7; }
