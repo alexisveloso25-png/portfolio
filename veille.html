@@ -3,23 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // INTELLIGENCE_CENTER</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>ALEXIS_VELOSO // THREAT_INTELLIGENCE_CENTER</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
+        /* --- VARIABLES ET THÈME --- */
         :root {
             --accent: #a855f7;
             --purple: #7c3aed;
             --bg: #0a0a0c;
-            --card-bg: rgba(20, 20, 25, 0.8);
+            --card-bg: rgba(20, 20, 25, 0.95);
             --t-green: #22c55e;
+            --text-dim: #94a3b8;
+            --white: #ffffff;
         }
 
-        /* --- Animations & Global --- */
-        body { background: var(--bg); color: #e2e8f0; overflow-x: hidden; }
-        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            background: var(--bg); 
+            color: #e2e8f0; 
+            font-family: 'JetBrains Mono', monospace; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- EFFETS DE FOND --- */
+        .scanline-global {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 1000;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .top-bar {
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid var(--accent);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .brand { font-weight: 800; letter-spacing: 2px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 20px; font-size: 0.8rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- TERMINAL STYLE --- */
+        .terminal-window {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .terminal-prompt { color: var(--t-green); margin-bottom: 10px; }
         .terminal-typing {
             display: inline-block;
             overflow: hidden;
@@ -30,256 +73,235 @@
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
 
-        /* --- Navigation Dynamique (Tabs) --- */
-        .tab-container {
+        /* --- TICKER NEWS --- */
+        .news-ticker {
+            background: #000;
+            border: 1px solid #222;
+            padding: 12px;
+            margin-bottom: 30px;
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
+            align-items: center;
+            border-left: 4px solid var(--accent);
+        }
+        .ticker-label { color: var(--accent); font-weight: 800; margin-right: 15px; font-size: 0.7rem; }
+        #live-news { font-size: 0.8rem; color: var(--t-green); }
+
+        /* --- TABS --- */
+        .tab-container {
+            display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 15px; flex-wrap: wrap;
         }
         .tab-btn {
-            background: transparent;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             color: #fff;
-            padding: 8px 15px;
+            padding: 12px 24px;
             cursor: pointer;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: inherit;
             transition: 0.3s;
         }
-        .tab-btn.active {
-            background: var(--accent);
-            color: #000;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-        }
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-btn.active { background: var(--accent); color: #000; font-weight: 800; }
 
-        /* --- Cartes Interactives --- */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- GRID & CARDS --- */
         .veille-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
         }
-
         .interactive-card {
             background: var(--card-bg);
             border: 1px solid rgba(255,255,255,0.05);
-            padding: 20px;
+            padding: 30px;
             position: relative;
-            transition: 0.4s;
-            cursor: pointer;
-            overflow: hidden;
+            transition: 0.3s;
         }
-
         .interactive-card:hover {
             border-color: var(--accent);
-            transform: scale(1.02);
-            background: rgba(168, 85, 247, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.1);
         }
+        .interactive-card h4 { color: var(--accent); margin-bottom: 15px; font-size: 1.1rem; }
+        .interactive-card p { font-size: 0.85rem; color: var(--text-dim); text-align: justify; }
+        .tag { position: absolute; top: 15px; right: 15px; font-size: 0.6rem; background: #222; padding: 2px 8px; border-radius: 3px; color: var(--accent); }
 
-        .interactive-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
-            transition: 0.5s;
-        }
-        .interactive-card:hover::after { left: 100%; }
-
-        /* --- News Ticker --- */
-        .news-ticker {
-            background: #111;
-            border: 1px solid var(--accent);
-            padding: 10px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-        }
-        .ticker-label { background: var(--accent); color: #000; padding: 2px 8px; margin-right: 15px; font-weight: 800; font-size: 0.7rem; }
-        #live-news { font-size: 0.85rem; color: var(--t-green); }
-
-        /* --- Chart Section --- */
-        .chart-container {
+        /* --- CHART --- */
+        .chart-wrapper {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            padding: 40px;
+            border: 1px solid #222;
+            max-width: 600px;
+            margin: 40px auto;
         }
-
-        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
-        .tag-red { background: #ef4444; color: white; }
     </style>
 </head>
 <body>
-    <div class="circuit-bg"></div>
     <div class="scanline-global"></div>
 
     <header class="top-bar">
-        <div class="brand">ALEXIS_VELOSO // <span id="clock">00:00:00</span></div>
+        <div class="brand">ALEXIS_VELOSO // <span id="clock" style="color:var(--accent)">00:00:00</span></div>
         <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-terminal"></i> ACCUEIL</a>
-            <a href="veille.html" style="color: var(--accent);"><i class="fas fa-eye"></i> VEILLE_V2</a>
+            <a href="#"><i class="fas fa-home"></i> ACCUEIL</a>
+            <a href="#" style="color:var(--accent)"><i class="fas fa-eye"></i> VEILLE_STRAT</a>
         </nav>
     </header>
 
     <main class="wrapper">
         <div class="news-ticker">
-            <span class="ticker-label">LIVE_THREATS</span>
-            <div id="live-news">Initialisation du flux de données...</div>
+            <span class="ticker-label">[ALERTE_RÉSEAU]</span>
+            <div id="live-news">Chargement des flux de menaces...</div>
         </div>
 
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-body">
-                <div class="terminal-prompt"><span class="t-green">alexis@intel</span>:<span class="t-purple">~</span>$ ./display_dashboard.py</div>
-                <h1 class="hero-name"><span class="terminal-typing">VEILLE_INTEL_CENTER</span></h1>
-                <p class="hero-role">// INTERFACE DYNAMIQUE DE SURVEILLANCE TECHNOLOGIQUE</p>
-            </div>
+        <section class="terminal-window">
+            <div class="terminal-prompt">alexis@intel:~/veille$ ./run_analysis.sh</div>
+            <h1 class="terminal-typing" style="font-size: 2rem; color: var(--white);">INTELLIGENCE_CENTER_2026</h1>
+            <p style="color: var(--text-dim); margin-top: 10px;">// Base de connaissances active : 8 exemples réels & 8 technologies émergentes.</p>
         </section>
 
         <div class="tab-container">
-            <button class="tab-btn active" onclick="openTab(event, 'sources')">01. SOURCES</button>
-            <button class="tab-btn" onclick="openTab(event, 'exemples')">02. EXEMPLES</button>
-            <button class="tab-btn" onclick="openTab(event, 'futur')">03. HORIZON 2026</button>
-            <button class="tab-btn" onclick="openTab(event, 'analyse')">04. DATA_ANALYTICS</button>
+            <button class="tab-btn active" onclick="openTab(event, 'exemples')">01_EXEMPLES_REELS</button>
+            <button class="tab-btn" onclick="openTab(event, 'futur')">02_TECHNOLOGIES_2026</button>
+            <button class="tab-btn" onclick="openTab(event, 'stats')">03_DATA_STATS</button>
         </div>
 
-        <div id="sources" class="tab-content active">
+        <div id="exemples" class="tab-content active">
             <div class="veille-grid">
                 <div class="interactive-card">
-                    <span class="tag tag-red">Flux RSS</span>
-                    <h3>ANSSI / CERT-FR</h3>
-                    <p>Récupération automatique des bulletins d'alerte et avis de sécurité.</p>
-                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="t-purple">Consulter la source ></a>
+                    <span class="tag">CLOUD</span>
+                    <h4>1. Fuite S3 par Misconfiguration</h4>
+                    <p>Ce cas analyse l'exposition de données sensibles due à des permissions mal configurées sur le cloud Amazon Web Services. J'ai étudié comment une simple erreur de politique IAM peut rendre des fichiers critiques accessibles à n'importe qui sur Internet. Ma veille s'est portée sur l'automatisation de la détection via AWS Config et le blocage immédiat des accès publics. Cette surveillance permet d'appliquer le principe du moindre privilège de manière proactive. C'est un pilier fondamental de la sécurité Cloud actuelle.</p>
                 </div>
                 <div class="interactive-card">
-                    <span class="tag tag-red" style="background:#3b82f6">Réseaux</span>
-                    <h3>OSINT / X-Tech</h3>
-                    <p>Monitoring des comptes de chercheurs en cybersécurité (Crowdstrike, Mandiant).</p>
+                    <span class="tag">MALWARE</span>
+                    <h4>2. Évolution du RaaS (LockBit)</h4>
+                    <p>Le Ransomware-as-a-Service (RaaS) permet à des criminels d'utiliser des infrastructures de chiffrement sophistiquées par abonnement. J'ai suivi l'évolution des tactiques de LockBit, notamment l'utilisation de la double extorsion (chiffrement et menace de publication). Ma veille a permis d'identifier l'importance des sauvegardes "Air-Gapped" pour garantir une restauration sans payer de rançon. L'analyse des vecteurs d'entrée montre que l'exploitation des accès VPN reste leur méthode favorite. Anticiper ces TTPs est vital pour la défense périmétrique.</p>
                 </div>
                 <div class="interactive-card">
-                    <span class="tag tag-red" style="background:#7c3aed">Web</span>
-                    <h3>BleepingComputer</h3>
-                    <p>Actualité internationale sur les malwares et les fuites de données.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="exemples" class="tab-content">
-            <div class="veille-grid">
-                <div class="interactive-card" onclick="alert('Détails: Fuite de données via bucket S3 exposé.')">
-                    <h4 class="t-purple">Exemple #1</h4>
-                    <p><strong>Menace :</strong> Cloud Misconfiguration</p>
-                    <p>Analyse des permissions IAM défaillantes chez un acteur E-commerce.</p>
+                    <span class="tag">SUPPLY_CHAIN</span>
+                    <h4>3. Faille Zero-Day MoveIT</h4>
+                    <p>La faille MoveIT a démontré la vulnérabilité des logiciels de transfert de fichiers utilisés par les grandes entreprises. J'ai analysé comment une injection SQL a permis l'exfiltration massive de données sur des milliers de serveurs mondiaux. Cette veille m'a appris l'importance cruciale de la gestion des correctifs d'urgence et de l'audit des tiers. Le suivi en temps réel via le CERT-FR a été indispensable pour appliquer les mesures d'atténuation. Cela souligne que la sécurité dépend aussi de la robustesse des logiciels partenaires.</p>
                 </div>
                 <div class="interactive-card">
-                    <h4 class="t-purple">Exemple #2</h4>
-                    <p><strong>Menace :</strong> Ransomware as a Service (RaaS)</p>
-                    <p>Étude des méthodes de déploiement de LockBit 4.0.</p>
+                    <span class="tag">SOCIAL_ENG</span>
+                    <h4>4. Phishing par Deepfake Vocal</h4>
+                    <p>Le clonage vocal par IA est devenu une arme redoutable pour les arnaques au président ou au virement bancaire. J'ai étudié des cas où l'identité d'un dirigeant a été imitée pour manipuler des employés financiers. Ma veille se concentre sur les nouveaux protocoles de vérification "hors canal" pour valider les ordres sensibles. Il s'agit de sensibiliser les équipes à la possibilité que la voix au téléphone ne soit pas humaine. La défense doit désormais intégrer une méfiance technologique vis-à-vis des médias numériques.</p>
                 </div>
                 <div class="interactive-card">
-                    <h4 class="t-purple">Exemple #3</h4>
-                    <p><strong>Menace :</strong> Zero-Day MoveIT</p>
-                    <p>Veille réactive lors de l'exploitation massive de la faille de transfert de fichiers.</p>
+                    <span class="tag">DEVSEC</span>
+                    <h4>5. Secret Leak sur GitHub</h4>
+                    <p>L'exposition accidentelle de clés d'API et de mots de passe dans le code source public est une erreur fréquente. J'ai analysé l'efficacité d'outils comme Gitleaks ou Trufflehog pour scanner les dépôts Git avant chaque déploiement. Ma veille montre qu'un secret exposé est exploité en moyenne en moins de 10 minutes par des bots malveillants. La solution étudiée repose sur l'utilisation de gestionnaires de secrets comme HashiCorp Vault. Sécuriser le cycle de vie du développement est aujourd'hui une priorité absolue.</p>
                 </div>
                 <div class="interactive-card">
-                    <h4 class="t-purple">Exemple #4</h4>
-                    <p><strong>Menace :</strong> Social Engineering IA</p>
-                    <p>Simulation de phishing utilisant des voix clonées par IA.</p>
+                    <span class="tag">ENDPOINT</span>
+                    <h4>6. Attaque Living off the Land</h4>
+                    <p>Les attaques "LotL" utilisent des outils système légitimes (PowerShell, WMI) pour échapper à la détection des antivirus. J'ai étudié comment les attaquants exécutent des scripts en mémoire sans jamais copier de fichier malveillant sur le disque. Ma veille a porté sur le logging avancé des événements Windows pour repérer des comportements de commande anormaux. L'activation de l'AMSI (Antimalware Scan Interface) est une des protections clés analysées. Cette technique prouve que même les outils de confiance peuvent être retournés contre le système.</p>
+                </div>
+                <div class="interactive-card">
+                    <span class="tag">IOT</span>
+                    <h4>7. Botnet Mirai & Objets Connectés</h4>
+                    <p>L'insécurité chronique de l'Internet des Objets (IoT) facilite la création de botnets massifs pour des attaques DDoS. J'ai analysé le fonctionnement de Mirai qui cible les équipements ayant des mots de passe par défaut en Telnet. Ma veille préconise une segmentation réseau stricte (VLAN) pour isoler les périphériques IoT du réseau interne critique. J'ai aussi suivi l'évolution des réglementations européennes imposant une sécurité native sur ces objets. La protection globale passe par une hygiène stricte du parc de périphériques connectés.</p>
+                </div>
+                <div class="interactive-card">
+                    <span class="tag">IDENTITY</span>
+                    <h4>8. Attaque par MFA Fatigue</h4>
+                    <p>La fatigue MFA exploite la psychologie humaine en envoyant des vagues de notifications de connexion jusqu'à l'erreur. J'ai étudié comment des groupes comme Lapsus$ ont réussi à infiltrer des géants de la tech grâce à cette méthode simple. Ma veille a démontré l'inefficacité du simple "Approuver/Refuser" au profit de l'authentification par code (Number Matching). J'ai mis en avant l'utilisation de clés physiques FIDO2 pour une protection ultime contre le phishing. L'identité numérique est devenue la nouvelle frontière de la cybersécurité.</p>
                 </div>
             </div>
         </div>
 
         <div id="futur" class="tab-content">
             <div class="veille-grid">
-                <div class="interactive-card" style="border-style: dashed;">
-                    <h3 class="t-green">Post-Quantum Crypto</h3>
-                    <p>Standardisation NIST 2026. Préparation au passage vers Kyber et Dilithium.</p>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>1. Cryptographie Post-Quantique</h4>
+                    <p>En 2026, la migration vers des algorithmes résistants aux ordinateurs quantiques est une priorité nationale. Ma veille suit le déploiement des standards ML-KEM et ML-DSA pour sécuriser les communications futures. Cette technologie empêche les attaquants de récolter des données aujourd'hui pour les déchiffrer demain. L'enjeu est de mettre à jour les piles logicielles (TLS, SSH) avant l'arrivée de la menace quantique. C'est un changement d'infrastructure majeur pour la souveraineté numérique.</p>
                 </div>
-                <div class="interactive-card" style="border-style: dashed;">
-                    <h3 class="t-green">Wi-Fi 8 (802.11bn)</h3>
-                    <p>Amélioration radicale de la gestion de la congestion réseau en milieu dense.</p>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>2. Wi-Fi 8 (802.11bn)</h4>
+                    <p>Le Wi-Fi 8 marque une rupture en se concentrant sur la fiabilité extrême plutôt que sur le débit brut. Ma veille analyse les capacités de l'UHR (Ultra High Reliability) pour réduire la latence sous les 2 millisecondes. Cette technologie est cruciale pour l'industrie 4.0 et les réseaux de capteurs haute densité en entreprise. Elle permet une stabilité de connexion comparable au filaire dans des environnements saturés. Son déploiement transformera la connectivité au sein des bâtiments intelligents.</p>
                 </div>
-                <div class="interactive-card" style="border-style: dashed;">
-                    <h3 class="t-green">6G Architecture</h3>
-                    <p>Exploration des premières spécifications pour l'intégration IA native.</p>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>3. SOC Autonome via IA Générative</h4>
+                    <p>Les centres de cybersécurité utilisent désormais l'IA pour générer automatiquement des réponses aux incidents en temps réel. Ma veille explore comment ces systèmes peuvent isoler des hôtes ou modifier des règles firewall sans intervention humaine. L'objectif est de réduire le temps moyen de réponse (MTTR) de quelques heures à quelques secondes. L'analyste humain se concentre alors sur la supervision et l'amélioration des modèles d'IA. C'est une mutation profonde du métier d'analyste cybersécurité.</p>
                 </div>
-                <div class="interactive-card" style="border-style: dashed;">
-                    <h3 class="t-green">Cyber-Défense Autonome</h3>
-                    <p>Systèmes d'auto-remédiation capables de réécrire des règles de firewall dynamiquement.</p>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>4. GreenOps & Carbon-Aware Computing</h4>
+                    <p>En 2026, l'optimisation énergétique des serveurs devient un critère de performance au même titre que la sécurité. Ma veille suit les logiciels capables de déplacer des charges de calcul vers des data centers utilisant des énergies renouvelables. Le Carbon-Aware Computing permet de moduler la consommation des processeurs selon l'intensité carbone du réseau électrique. Cette approche allie responsabilité écologique et réduction des coûts opérationnels pour l'entreprise. L'informatique durable est désormais un enjeu stratégique majeur.</p>
+                </div>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>5. Edge Computing 6G-Ready</h4>
+                    <p>L'arrivée des premières infrastructures 6G permet de décentraliser le traitement des données au plus près de l'utilisateur. Ma veille analyse comment le Edge Computing réduit les besoins en bande passante vers le cloud centralisé. Cette architecture est indispensable pour la réactivité des véhicules autonomes et des systèmes médicaux connectés. L'enjeu technique réside dans la sécurisation de ces micro-nœuds de calcul dispersés géographiquement. Elle redéfinit complètement la topologie des réseaux informatiques d'entreprise.</p>
+                </div>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>6. Stockage de Données sur ADN</h4>
+                    <p>Le stockage biologique sur ADN synthétique quitte le stade expérimental pour l'archivage de données froides à très long terme. Cette technologie offre une densité de stockage et une durée de vie inégalées par les supports magnétiques. Ma veille suit les avancées sur les lecteurs de séquençage rapides permettant de récupérer ces informations. Bien que complexe, c'est la seule solution viable face à l'explosion exponentielle de la donnée mondiale. C'est une révolution pour la préservation de l'histoire numérique de l'humanité.</p>
+                </div>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>7. Micro-segmentation Zero Trust</h4>
+                    <p>La sécurité périmétrique classique laisse place à une micro-segmentation dynamique basée sur l'identité. En 2026, chaque flux réseau est vérifié et chiffré individuellement, rendant les mouvements latéraux impossibles. Ma veille documente l'implémentation de contrôleurs d'accès intelligents qui s'adaptent au contexte de l'utilisateur. Cette technologie assure que même si un poste est compromis, l'attaquant reste confiné. C'est l'application concrète du paradigme "Never Trust, Always Verify".</p>
+                </div>
+                <div class="interactive-card" style="border-left: 4px solid var(--accent);">
+                    <h4>8. Jumeaux Numériques de Réseau</h4>
+                    <p>Les Digital Twins permettent de créer une copie virtuelle exacte d'une infrastructure pour tester des scénarios d'attaque. Ma veille porte sur l'utilisation de ces simulations pour valider des mises à jour critiques sans interruption de service. Ces jumeaux numériques permettent d'identifier les failles structurelles avant qu'elles ne soient exploitées réellement. Ils servent également de plateforme d'entraînement réaliste pour les équipes de réponse aux incidents. C'est un outil de gestion des risques d'une précision chirurgicale.</p>
                 </div>
             </div>
         </div>
 
-        <div id="analyse" class="tab-content">
-            <div class="chart-container">
-                <h3 style="text-align: center; margin-bottom: 15px;">Répartition Menaces Surveillées</h3>
+        <div id="stats" class="tab-content">
+            <div class="chart-wrapper">
+                <h3 style="text-align:center; margin-bottom:20px;">Indice de Menaces 2026</h3>
+                
                 <canvas id="threatChart"></canvas>
-            </div>
-            <div class="analysis-highlight" style="margin-top: 30px;">
-                <h3><i class="fas fa-microchip"></i> Note de Synthèse 2026</h3>
-                <p>La convergence entre l'IA générative et l'automatisation offensive force les équipes de défense à adopter des solutions **XDR** pilotées par IA pour réduire le temps moyen de détection (MTTD).</p>
             </div>
         </div>
 
     </main>
 
-    <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> STATUT: <span class="t-green">SCANNING_ACTIVE</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // V2.0.26</div>
+    <footer style="text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.7rem; border-top: 1px solid #111;">
+        ALEXIS_VELOSO // VEILLE_V2026 // <span class="t-green">SYSTEM_STABLE</span>
     </footer>
 
     <script>
-        // 1. Horloge temps réel
+        // Horloge
         function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
 
-        // 2. Gestion des Onglets
+        // Onglets
         function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
+            let i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
+            for (i = 0; i < tabcontent.length; i++) tabcontent[i].classList.remove("active");
             tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
+            for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
 
-        // 3. News Ticker Dynamique
+        // Ticker Alertes
         const news = [
-            "ALERT: Nouvelle vulnérabilité Zero-day détectée sur Linux Kernel.",
-            "INFO: Le NIST publie les standards finaux pour la cryptographie post-quantique.",
-            "WARNING: Campagne de phishing massive ciblant les secteurs publics.",
-            "TECH: Sortie des premiers équipements certifiés Wi-Fi 8."
+            "ALERT: Campagne de phishing ciblant le secteur financier.",
+            "TECH: Microsoft déploie les patchs post-quantiques sur Azure.",
+            "INFO: Le standard Wi-Fi 8 officiellement ratifié par l'IEEE.",
+            "WARNING: Vulnérabilité critique détectée sur les agents IA de SOC."
         ];
-        let newsIdx = 0;
+        let nIdx = 0;
         setInterval(() => {
-            document.getElementById('live-news').innerText = news[newsIdx];
-            newsIdx = (newsIdx + 1) % news.length;
+            document.getElementById('live-news').innerText = news[nIdx];
+            nIdx = (nIdx + 1) % news.length;
         }, 4000);
 
-        // 4. Graphique Radar (Chart.js)
+        // Graphique
         const ctx = document.getElementById('threatChart').getContext('2d');
         new Chart(ctx, {
             type: 'radar',
             data: {
-                labels: ['Malware', 'Phishing', 'Cloud Security', 'IoT Threats', 'AI Attacks', 'Network'],
+                labels: ['Cloud', 'AI Threats', 'Quantum', 'IoT', 'Network', 'Identity'],
                 datasets: [{
-                    label: 'Intensité de Veille',
-                    data: [85, 90, 70, 60, 95, 80],
+                    label: 'Focus (%)',
+                    data: [90, 95, 80, 70, 85, 90],
                     backgroundColor: 'rgba(168, 85, 247, 0.2)',
                     borderColor: '#a855f7',
                     pointBackgroundColor: '#fff'
@@ -287,9 +309,9 @@
             },
             options: {
                 scales: {
-                    r: { grid: { color: 'rgba(255,255,255,0.1)' }, angleLines: { color: 'rgba(255,255,255,0.1)' } }
+                    r: { grid: { color: '#333' }, angleLines: { color: '#333' }, pointLabels: { color: '#fff' } }
                 },
-                plugins: { legend: { labels: { color: '#fff' } } }
+                plugins: { legend: { display: false } }
             }
         });
     </script>
