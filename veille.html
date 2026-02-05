@@ -3,226 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // CYBER_INTEL_CENTER</title>
+    <title>ALEXIS_VELOSO // CYBER_INTEL_SYSTEM</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <style>
+        :root {
+            --accent: #00f2ff;
+            --purple: #bc13fe;
+            --bg-dark: #050505;
+            --border-color: rgba(0, 242, 255, 0.2);
+            --text-dim: #a0a0a0;
+            --terminal-green: #00ff41;
+        }
+
+        body { background: var(--bg-dark); color: #fff; font-family: 'JetBrains Mono'; overflow-x: hidden; margin: 0; }
+
+        /* --- EFFETS VISUELS --- */
+        .scanline {
+            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+            background: rgba(0, 242, 255, 0.3); box-shadow: 0 0 15px var(--accent);
+            z-index: 9999; pointer-events: none; animation: scan 4s linear infinite;
+        }
+        @keyframes scan { from { top: -2%; } to { top: 100%; } }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+
         .wrapper { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
-        .section-spacing { margin-bottom: 60px; }
 
-        /* Effet Terminal & Clignotement */
-        .blink-text { animation: blinker 1.5s step-start infinite; color: var(--accent); font-weight: bold; }
-        @keyframes blinker { 50% { opacity: 0; } }
-        .terminal-loader { color: var(--green); font-size: 0.8rem; margin-top: 10px; font-family: 'JetBrains Mono'; }
-
-        /* Navigation Tabs */
-        .tabs { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
-        .tab-btn {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
-            color: var(--text-dim); padding: 12px 20px; cursor: pointer; font-family: 'JetBrains Mono';
-            text-transform: uppercase; transition: 0.3s; font-size: 0.75rem;
+        /* --- TICKER NEWS --- */
+        .news-ticker {
+            background: rgba(0, 242, 255, 0.05); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+            margin: 20px 0; padding: 12px; overflow: hidden; white-space: nowrap;
         }
-        .tab-btn.active { background: var(--accent); color: #000; font-weight: bold; border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
+        .ticker-content { display: inline-block; animation: scroll 40s linear infinite; color: var(--accent); font-size: 0.85rem; }
+        .ticker-content span { margin-right: 60px; }
+        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-        /* Grid Layout & Cards */
-        .grid-layout { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 45px; 
+        /* --- CARTES & GLITCH --- */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
+        
+        .card-veille { 
+            background: rgba(10, 10, 15, 0.9); border: 1px solid var(--border-color); 
+            cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative;
+        }
+        .card-veille:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+
+        .card-veille:hover h3 { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; }
+        @keyframes glitch {
+            0% { text-shadow: -2px 0 var(--purple), 2px 0 var(--accent); }
+            50% { text-shadow: 2px 0 var(--purple), -2px 0 var(--accent); transform: translate(2px, -1px); }
+            100% { text-shadow: -2px 0 var(--purple), 2px 0 var(--accent); }
         }
 
-        .card-veille {
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid var(--border-color);
-            display: flex; flex-direction: column;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            height: 100%;
-        }
-        .card-veille:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-
-        .image-placeholder {
-            width: 100%; aspect-ratio: 16 / 9;
-            background: rgba(188, 19, 254, 0.03);
-            border-bottom: 1px solid rgba(188, 19, 254, 0.15);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .image-placeholder::after { content: "[ NO_VISUAL_DATA ]"; font-family: 'JetBrains Mono'; font-size: 0.6rem; color: rgba(188, 19, 254, 0.3); }
-
-        .card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-        .severity { font-size: 0.6rem; padding: 3px 10px; border-radius: 2px; font-weight: 800; margin-bottom: 15px; display: inline-block; text-transform: uppercase; }
+        .image-placeholder { width: 100%; aspect-ratio: 16/9; background: #0a0a0a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-color); }
+        .card-body { padding: 25px; }
+        .severity { font-size: 0.6rem; padding: 3px 10px; border-radius: 2px; font-weight: 800; margin-bottom: 15px; display: inline-block; }
         .sev-high { background: #ff4444; color: #fff; }
         .sev-med { background: #ffbb33; color: #000; }
-        .sev-low { background: #00C851; color: #fff; }
-        
-        .card-body h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--accent); font-family: 'Orbitron'; letter-spacing: 1px; }
-        .card-body p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 25px; text-align: justify; }
+        .sev-low { background: var(--terminal-green); color: #000; }
 
-        .source-btn {
-            margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 12px; background: rgba(0, 242, 255, 0.03);
-            border: 1px solid var(--accent); color: var(--accent); text-decoration: none;
-            font-family: 'JetBrains Mono'; font-size: 0.7rem; text-transform: uppercase; transition: 0.3s;
+        /* --- MODALE FOCUS --- */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
+        .modal-content {
+            background: #050505; border: 1px solid var(--accent); width: 85%; max-width: 900px;
+            margin: 2% auto; padding: 40px; position: relative; box-shadow: 0 0 50px rgba(0, 242, 255, 0.15);
+            max-height: 85vh; overflow-y: auto;
         }
-        .source-btn:hover { background: var(--accent); color: #000; }
+        .close-modal { position: absolute; right: 25px; top: 20px; color: var(--accent); cursor: pointer; font-size: 2rem; }
+        .analysis-block { border-left: 2px solid var(--accent); padding-left: 20px; margin: 25px 0; color: #ddd; }
+        .counter-measures { background: rgba(0, 255, 65, 0.05); border: 1px dashed var(--terminal-green); padding: 15px; color: var(--terminal-green); }
+
+        /* --- TABS --- */
+        .tabs { display: flex; gap: 10px; margin: 40px 0; flex-wrap: wrap; }
+        .tab-btn { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: var(--text-dim); padding: 12px 25px; cursor: pointer; font-family: 'JetBrains Mono'; text-transform: uppercase; }
+        .tab-btn.active { background: var(--accent); color: #000; font-weight: bold; border-color: var(--accent); }
 
         .content-section { display: none; }
         .content-section.active { display: block; }
-
-        #searchInput {
-            width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            padding: 18px; color: var(--accent); font-family: 'JetBrains Mono'; outline: none; margin-bottom: 30px;
-        }
     </style>
 </head>
 <body>
-    <div class="circuit-bg"></div>
-
-    <header class="top-bar">
-        <div class="brand">ALEXIS_VELOSO // <span>INTEL_DATABASE</span></div>
-        <nav class="nav-links">
-            <a href="index.html">ACCUEIL</a>
-            <a href="veille.html" style="color: var(--accent);">VEILLE</a>
-        </nav>
-    </header>
+    <div id="particles-js"></div>
+    <div class="scanline"></div>
 
     <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-                    <div class="terminal-title-inline">root@intelligence_hub:~</div>
+        <header class="card" style="padding: 20px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
+            <div style="font-size: 0.8rem; color: var(--terminal-green); margin-bottom: 10px;">[ SYSTEM READY ] [ USER: ALEXIS_VELOSO ]</div>
+            <h1 class="hero-name" style="margin: 0; font-size: 2.2rem;">INTELLIGENCE_HUB_2026</h1>
+            <div class="news-ticker">
+                <div class="ticker-content">
+                    <span>[ ALERT ] NOUVELLE CAMPAGNE RANSOMWARE CIBLANT LES INFRASTRUCTURES DE SANTÉ...</span>
+                    <span>[ INTEL ] DÉCOUVERTE D'UNE FAILLE ZERO-DAY DANS LES PROTOCOLES DE ROUTAGE SATELLITE...</span>
+                    <span>[ NEWS ] L'ANSSI PUBLIE UN NOUVEAU GUIDE SUR LA RÉSILIENCE POST-QUANTIQUE...</span>
+                    <span>[ VULN ] CVE-2026-XXXX : EXÉCUTION DE CODE À DISTANCE DANS LES SERVICES CLOUD MAJEURS...</span>
                 </div>
             </div>
-            <div class="terminal-body">
-                <div class="terminal-prompt"><span class="t-green">alexis@kali</span>:<span class="t-purple">~</span>$ fetch --all-vulnerabilities</div>
-                <div class="content-block">
-                    <h1 class="hero-name" style="font-size: 2.2rem;">MONITORING_STRATÉGIQUE</h1>
-                    <div class="blink-text">> STATUT: SCANNING_THREADS... ACTIVE</div>
-                    <div class="terminal-loader">[<span class="t-white">####################</span>] 100% // 29 ARCHIVES SYNCED</div>
-                </div>
-            </div>
-        </section>
+        </header>
 
-        <input type="text" id="searchInput" placeholder="[ RECHERCHER : ENTREPRISE, MENACE, TECHNOLOGIE... ]" onkeyup="filterCards()">
+        <input type="text" id="searchInput" placeholder="> FILTRER_LA_BASE_DE_DONNÉES..." onkeyup="filterCards()" 
+               style="width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--accent); font-family: 'JetBrains Mono'; outline: none; margin-bottom: 20px;">
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="showSection('exemples')">01. MENACES RÉELLES (12)</button>
-            <button class="tab-btn" onclick="showSection('technos')">02. INNOVATIONS TECH (12)</button>
-            <button class="tab-btn" onclick="showSection('crises')">03. ARCHIVES CRISES (5)</button>
-            <button class="tab-btn" onclick="showSection('graph')">04. DATA ANALYSIS</button>
+            <button class="tab-btn active" onclick="showSection('menaces')">01. MENACES_DÉTECTÉES (12)</button>
+            <button class="tab-btn" onclick="showSection('technos')">02. INNOVATIONS_TECH (12)</button>
+            <button class="tab-btn" onclick="showSection('crises')">03. ARCHIVES_CRISES (5)</button>
         </div>
 
-        <div id="exemples" class="content-section active">
+        <div id="menaces" class="content-section active">
             <div class="grid-layout">
-                <div class="card-veille" data-tags="cloud aws s3">
+                <div class="card-veille" onclick="openFocus('AWS S3 IAM Leak', 'Analyse : Mauvaise gestion des politiques d\'accès (ACL) permettant une lecture publique de données sensibles. \n\nRisque : Exfiltration de 2.5To de logs confidentiels en moins d\'une heure.', '1. Désactiver S3 Public Access au niveau compte. \n2. Utiliser IAM Access Analyzer. \n3. Chiffrer via KMS par défaut.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>Fuite S3 & IAM Misconfig</h3>
-                        <p>Analyse de l'exposition de données sensibles due à des politiques d'accès Amazon S3 trop permissives. Un vecteur d'attaque privilégié pour l'exfiltration massive en 2026.</p>
-                        <a href="https://aws.amazon.com/security/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Cloud S3 Exposure</h3>
+                        <p>Analyse de la persistance des fuites de données dues à des politiques IAM permissives...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="lockbit ransomware">
+                <div class="card-veille" onclick="openFocus('LockBit 4.0 RaaS', 'Analyse : Mutation du ransomware vers un modèle modulaire ultra-rapide codé en Rust.', '1. Sauvegardes immuables. \n2. Segmentation réseau zero-trust. \n3. Détection comportementale (EDR).')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>Écosystème LockBit RaaS</h3>
-                        <p>Étude du modèle Ransomware-as-a-Service. Malgré les saisies du FBI, les itérations de LockBit exploitent de nouvelles vulnérabilités VPN en un temps record.</p>
-                        <a href="https://www.cyber.gouv.fr/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>LockBit RaaS Evolution</h3>
+                        <p>Étude sur la résilience des opérateurs de ransomware malgré les saisies policières...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="supply chain moveit">
+                <div class="card-veille" onclick="openFocus('MoveIT Zero-Day', 'Analyse : Injection SQL sur les serveurs de transfert de fichiers exposés.', '1. Mises à jour d\'urgence sous 4h. \n2. Audit des logs d\'accès HTTP. \n3. WAF renforcé.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>Compromission MoveIT</h3>
-                        <p>Attaque sur la chaîne d'approvisionnement via un logiciel de transfert tiers. Impact global sur des milliers d'organisations gouvernementales et privées.</p>
-                        <a href="https://www.cisa.gov/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Supply Chain MoveIT</h3>
+                        <p>Compromission massive via des services tiers de transfert de données...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="mfa fatigue social">
+                <div class="card-veille" onclick="openFocus('MFA Fatigue', 'Analyse : Harcèlement de l\'utilisateur via des push notifications jusqu\'à approbation accidentelle.', '1. Utiliser le Number Matching. \n2. Déployer des clés FIDO2/U2F. \n3. Sensibilisation continue.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-med">Moyen</span>
-                        <h3>MFA Fatigue Attacks</h3>
-                        <p>Ingénierie sociale visant à submerger l'utilisateur de notifications d'authentification pour forcer une validation frauduleuse par erreur ou lassitude.</p>
-                        <a href="https://www.mandiant.com/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>MFA Fatigue / Vishing</h3>
+                        <p>Techniques d'ingénierie sociale pour contourner la double authentification...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="github api secrets">
+                <div class="card-veille" onclick="openFocus('GitHub Secret Leak', 'Analyse : Scan automatique des commits pour extraire des tokens AWS/Azure en clair.', '1. Installer Gitleaks. \n2. Utiliser des secrets éphémères. \n3. Révoquer les clés fuitées immédiatement.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>GitHub Secret Leakage</h3>
-                        <p>La présence de clés d'API et de tokens codés en dur dans les dépôts publics. Ma veille surveille les outils de scanning automatisés type TruffleHog.</p>
-                        <a href="https://github.com/features/security" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Secret Leakage (GitHub)</h3>
+                        <p>Fuite massive de clés d'API et identifiants dans les dépôts de code publics...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="mirai ddos iot">
+                <div class="card-veille" onclick="openFocus('IoT Mirai Botnets', 'Analyse : Exploitation des vulnérabilités Telnet/SSH sur objets connectés.', '1. Changer les mots de passe par défaut. \n2. Isoler l\'IoT sur un VLAN dédié. \n3. Filtrage IP entrant.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-med">Moyen</span>
                         <h3>Botnets IoT Volumétriques</h3>
-                        <p>Exploitation d'objets connectés mal sécurisés pour lancer des attaques DDoS massives capables de paralyser des segments entiers de l'Internet.</p>
-                        <a href="https://www.cloudflare.com/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <p>Utilisation de millions d'objets connectés pour des attaques DDoS record...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="powershell lotl">
+                <div class="card-veille" onclick="openFocus('LotL Attacks', 'Analyse : Utilisation de binaires légitimes comme PowerShell ou Certutil pour l\'exfiltration.', '1. Désactiver PowerShell v2. \n2. Monitorer les commandes suspectes. \n3. Appliquer le principe du moindre privilège.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>Living Off The Land (LotL)</h3>
-                        <p>Attaques utilisant des binaires légitimes du système d'exploitation pour rester furtif et contourner les solutions EDR traditionnelles.</p>
-                        <a href="https://attack.mitre.org/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Living Off The Land</h3>
+                        <p>Tactiques furtives utilisant les outils natifs du système pour éviter la détection...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="ia deepfake voice">
+                <div class="card-veille" onclick="openFocus('AI Voice Clones', 'Analyse : Clone vocal parfait réalisé avec moins de 3 secondes d\'échantillon audio.', '1. Mettre en place un code de vérification verbal. \n2. Double validation pour tout virement. \n3. Signalement INTERPOL.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-med">Moyen</span>
-                        <h3>Deepfake Vocal (Vishing)</h3>
-                        <p>Utilisation d'IA générative pour cloner la voix de décideurs lors d'appels téléphoniques, orchestrant des virements frauduleux complexes.</p>
-                        <a href="https://www.interpol.int/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>AI Deepfake Fraud</h3>
+                        <p>Fraude au président amplifiée par le clonage vocal par intelligence artificielle...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="log4j zero-day">
+                <div class="card-veille" onclick="openFocus('Log4j Shadow IT', 'Analyse : Bibliothèques Java non répertoriées restant vulnérables dans les vieux applicatifs.', '1. Scan SBOM systématique. \n2. Mise à jour vers Log4j v2.17.1+. \n3. Virtual Patching via WAF.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>Shadow Log4Shell</h3>
-                        <p>Persistance de la faille Log4j dans les bibliothèques logicielles oubliées (Shadow IT). Une menace silencieuse qui nécessite un inventaire SBOM strict.</p>
-                        <a href="https://www.tenable.com/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Persistance Log4Shell</h3>
+                        <p>Risques résiduels de la faille Log4j dans les systèmes non inventoriés...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="steganographie malware">
+                <div class="card-veille" onclick="openFocus('AI Steganography', 'Analyse : Cache de charge malveillante dans les bits de poids faible des images générées par IA.', '1. Analyse stéganographique des images. \n2. Scan des métadonnées. \n3. DLP renforcé.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-low">Faible</span>
-                        <h3>Malware Stéganographique</h3>
-                        <p>Dissimulation de code malveillant au sein de fichiers images ou audios apparemment inoffensifs pour exfiltrer des données sans être détecté.</p>
-                        <a href="https://www.mcafee.com/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Steganographie / AI</h3>
+                        <p>Nouvelles méthodes de dissimulation de malware dans les médias numériques...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="wi-fi evil twin">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <span class="severity sev-med">Moyen</span>
-                        <h3>Wi-Fi Evil Twin (Man-in-the-Middle)</h3>
-                        <p>Création de points d'accès frauduleux imitant des réseaux d'entreprise pour intercepter les identifiants de connexion des employés distants.</p>
-                        <a href="https://www.kaspersky.fr/resource-center" target="_blank" class="source-btn">SOURCE INTEL</a>
-                    </div>
-                </div>
-                <div class="card-veille" data-tags="api boken auth">
+                <div class="card-veille" onclick="openFocus('BOLA API Flaws', 'Analyse : Accès non autorisé aux ressources d\'un autre utilisateur via modification d\'ID dans l\'URL.', '1. Vérifier l\'autorisation sur chaque requête. \n2. Utiliser des IDs non prédictibles (UUID). \n3. Tests d\'intrusion API.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
                         <span class="severity sev-high">Critique</span>
-                        <h3>API Broken Auth (BOLA)</h3>
-                        <p>Exploitation de failles d'autorisation au niveau des objets dans les API modernes, permettant d'accéder aux données d'autres utilisateurs.</p>
-                        <a href="https://owasp.org/www-project-api-security/" target="_blank" class="source-btn">SOURCE INTEL</a>
+                        <h3>Broken Object Auth (API)</h3>
+                        <p>Vulnérabilités critiques dans les APIs modernes permettant l'accès aux données privées...</p>
+                    </div>
+                </div>
+                <div class="card-veille" onclick="openFocus('Evil Twin Wi-Fi', 'Analyse : Capture des identifiants via un faux portail captif imitant le réseau d\'entreprise.', '1. Utiliser le protocole WPA3. \n2. Déployer un certificat 802.1X. \n3. VPN obligatoire sur réseaux publics.')">
+                    <div class="image-placeholder"></div>
+                    <div class="card-body">
+                        <span class="severity sev-med">Moyen</span>
+                        <h3>Wi-Fi Evil Twin Attacks</h3>
+                        <p>Interception des communications via des points d'accès frauduleux...</p>
                     </div>
                 </div>
             </div>
@@ -230,183 +216,98 @@
 
         <div id="technos" class="content-section">
             <div class="grid-layout">
-                <div class="card-veille" data-tags="quantum pqc">
+                <div class="card-veille" onclick="openFocus('Post-Quantum Crypto', 'Analyse : Adoption des standards CRYSTALS-Kyber et Dilithium.', '1. Audit de l\'agilité cryptographique. \n2. Inventaire des données à longue durée de vie. \n3. Test des implémentations PQC.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
-                        <div class="badge">PROPRIÉTAIRE</div>
-                        <h3>Crypto Post-Quantique</h3>
-                        <p>Déploiement des algorithmes NIST résistants aux futurs ordinateurs quantiques. Un enjeu souverain pour la confidentialité à long terme.</p>
-                        <a href="https://csrc.nist.gov/" target="_blank" class="source-btn">SOURCE TECH</a>
+                        <span class="severity sev-low" style="background:var(--purple); color:#fff;">Tech Future</span>
+                        <h3>Quantum-Safe Defense</h3>
+                        <p>Protection contre le décryptage futur par ordinateur quantique (NIST PQC)...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="ia llm soc">
+                <div class="card-veille" onclick="openFocus('Autonomous SOC', 'Analyse : Tri et réponse automatique aux incidents via LLM entraînés localement.', '1. Intégration SOAR. \n2. Modèles d\'IA en circuit fermé (On-prem). \n3. Supervision humaine obligatoire.')">
                     <div class="image-placeholder"></div>
                     <div class="card-body">
-                        <div class="badge">INNOVATION</div>
-                        <h3>Copilotes Cyber (LLM)</h3>
-                        <p>Assistance par IA pour les analystes SOC, permettant une réponse aux incidents ultra-rapide et une analyse automatique des malwares.</p>
-                        <a href="https://www.microsoft.com/en-us/security/" target="_blank" class="source-btn">SOURCE TECH</a>
+                        <span class="severity sev-low" style="background:var(--purple); color:#fff;">Innovation</span>
+                        <h3>SOC Autonome (IA)</h3>
+                        <p>Réduction drastique du temps de réponse via l'IA générative et prédictive...</p>
                     </div>
                 </div>
-                <div class="card-veille" data-tags="zero trust ztna">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">NETWORK</div>
-                        <h3>ZTNA Multi-Cloud</h3>
-                        <p>L'abandon définitif du VPN au profit d'une vérification continue de l'identité et de la santé du poste, peu importe sa localisation.</p>
-                        <a href="https://www.paloaltonetworks.com/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Zero Trust 2.0', 'Accès granulaire basé sur l\'identité et le contexte continu.', 'Vérification continue, pas seulement à la connexion.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>ZTNA Multi-Cloud</h3><p>Remplacement définitif des VPN par une approche Zero Trust...</p></div>
                 </div>
-                <div class="card-veille" data-tags="rust memory safety">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">DEVSECOPS</div>
-                        <h3>Rust Adoption Ecosystem</h3>
-                        <p>Migration massive vers Rust pour les composants critiques afin d'éradiquer les failles mémoire by design (0-day prevention).</p>
-                        <a href="https://www.rust-lang.org/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Rust Systems', 'Éradication des vulnérabilités de gestion mémoire.', 'Migration du C++ vers Rust pour les noyaux critiques.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Rust Security Engine</h3><p>Utilisation de langages sécurisés pour le développement système...</p></div>
                 </div>
-                <div class="card-veille" data-tags="wifi 8 connectivity">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">CONNECTIVITY</div>
-                        <h3>Wi-Fi 8 (802.11bn)</h3>
-                        <p>Standard optimisant la latence et la densité pour les environnements IIoT (Industrie 4.0) et la réalité augmentée professionnelle.</p>
-                        <a href="https://www.ieee.org/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('6G Security', 'Sécurité intégrée dès la conception des ondes millimétriques.', 'Cryptographie matérielle dans les antennes.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Edge 6G Native</h3><p>Traitement ultra-rapide et sécurisé en bordure de réseau...</p></div>
                 </div>
-                <div class="card-veille" data-tags="edge computing 6g">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">TELECOM</div>
-                        <h3>Natif 6G Intelligence</h3>
-                        <p>Intégration de fonctions de sécurité et de calcul directement dans le tissu du réseau 6G pour un traitement immédiat.</p>
-                        <a href="https://www.6g-ia.eu/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('DNA Storage', 'Stockage immuable sur des molécules biologiques.', 'Idéal pour l\'archivage à long terme des preuves.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>ADN Data Vault</h3><p>Conserver des To de données pendant 1000 ans sans énergie...</p></div>
                 </div>
-                <div class="card-veille" data-tags="biotech storage">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">BIOTECH</div>
-                        <h3>Data Storage sur ADN</h3>
-                        <p>Technologie de stockage moléculaire permettant de conserver des masses de données critiques pendant des siècles sans énergie.</p>
-                        <a href="https://www.microsoft.com/research/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Homomorphic Encryption', 'Calcul sur données chiffrées sans déchiffrement.', 'Confidentialité totale pour le traitement Cloud.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Chiffrement Homomorphe</h3><p>Analyse de données sensibles sans jamais les voir en clair...</p></div>
                 </div>
-                <div class="card-veille" data-tags="digital twin sim">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">SIMULATION</div>
-                        <h3>Honeypots Digitaux Dynamiques</h3>
-                        <p>Utilisation de jumeaux numériques pour créer des leurres parfaits capturant les outils et tactiques des attaquants en temps réel.</p>
-                        <a href="https://www.thalesgroup.com/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Digital Twins', 'Modélisation du SI pour simuler des attaques.', 'Test de résilience sans risque pour la production.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Jumeaux Numériques Cyber</h3><p>Simulation de crises en environnement miroir virtuel...</p></div>
                 </div>
-                <div class="card-veille" data-tags="homomorphic encryption">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">PRIVACY</div>
-                        <h3>Chiffrement Homomorphe</h3>
-                        <p>Permet d'effectuer des calculs sur des données chiffrées sans jamais les révéler. Le futur de la confidentialité dans le Cloud.</p>
-                        <a href="https://www.cnil.fr/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('DID Identities', 'Identité souveraine décentralisée sur Blockchain.', 'Contrôle total des données par l\'utilisateur.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Identité Décentralisée (DID)</h3><p>Gestion de l'identité numérique sans tiers centralisé...</p></div>
                 </div>
-                <div class="card-veille" data-tags="did blockchain id">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">WEB3</div>
-                        <h3>Identité Souveraine (DID)</h3>
-                        <p>Système d'identité décentralisée où l'utilisateur contrôle ses données personnelles via des preuves à divulgation nulle (ZKP).</p>
-                        <a href="https://www.w3.org/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Spatial Cyber', 'Sécurisation des liens satellites LEO (Starlink).', 'Protection contre le jamming et le spoofing.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Cyber-Défense Spatiale</h3><p>Sécurisation des infrastructures de télécom orbitales...</p></div>
                 </div>
-                <div class="card-veille" data-tags="satellite cyber">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">SPACE</div>
-                        <h3>Cyber-Défense Spatiale</h3>
-                        <p>Sécurisation des liaisons satellites LEO contre le brouillage et le piratage, un enjeu vital pour les télécoms mondiales.</p>
-                        <a href="https://www.esa.int/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Adversarial ML', 'Défense contre l\'empoisonnement des modèles d\'IA.', 'Validation de l\'intégrité des données d\'entraînement.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Adversarial ML Defense</h3><p>Protéger l'intelligence artificielle contre les attaques logiques...</p></div>
                 </div>
-                <div class="card-veille" data-tags="adversarial ml ia">
-                    <div class="image-placeholder"></div>
-                    <div class="card-body">
-                        <div class="badge">AI_SECURITY</div>
-                        <h3>Adversarial Machine Learning</h3>
-                        <p>Défense des modèles d'IA contre les attaques par empoisonnement de données ou par contournement de logique (prompt injection).</p>
-                        <a href="https://www.owasp.org/" target="_blank" class="source-btn">SOURCE TECH</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Privacy AI', 'IA respectant nativement la vie privée par design.', 'Différenciation des données et anonymisation auto.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Privacy-Preserving AI</h3><p>Conformité RGPD automatisée au sein des LLMs...</p></div>
                 </div>
             </div>
         </div>
 
         <div id="crises" class="content-section">
             <div class="grid-layout">
-                <div class="card-veille" data-tags="sony breach attack">
-                    <div class="image-placeholder" style="background:rgba(255, 68, 68, 0.05)"></div>
-                    <div class="card-body">
-                        <span class="severity sev-high">Cas Historique</span>
-                        <h3>Sony Pictures Breach</h3>
-                        <p>Attaque dévastatrice entraînant la fuite de films non sortis et d'emails privés. Un tournant dans la perception de la cyber-guerre politique.</p>
-                        <a href="https://www.britannica.com/event/Sony-Pictures-Entertainment-hack" target="_blank" class="source-btn">DÉTAILS DU CAS</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Sony 2014', 'Groupe : Guardians of Peace. Impact : Emails de la direction fuités, destruction de données.', 'Leçon : Importance critique de l\'isolation des réseaux internes.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Sony Pictures Attack</h3><p>L'une des premières cyberattaques de destruction massive...</p></div>
                 </div>
-                <div class="card-veille" data-tags="equifax data leak">
-                    <div class="image-placeholder" style="background:rgba(255, 68, 68, 0.05)"></div>
-                    <div class="card-body">
-                        <span class="severity sev-high">Cas Historique</span>
-                        <h3>Equifax Data Breach</h3>
-                        <p>Fuite des données financières de 147 millions de personnes due à un serveur non patché. L'une des plus grosses amendes de l'histoire.</p>
-                        <a href="https://www.ftc.gov/enforcement/refunds/equifax-data-breach-settlement" target="_blank" class="source-btn">DÉTAILS DU CAS</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('SolarWinds 2020', 'Cible : Chaîne d\'approvisionnement logicielle. 18 000 clients infectés.', 'Leçon : Audit systématique des mises à jour logicielles.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>SolarWinds Orion</h3><p>L'attaque de supply chain la plus sophistiquée de l'histoire...</p></div>
                 </div>
-                <div class="card-veille" data-tags="solarwinds supply chain">
-                    <div class="image-placeholder" style="background:rgba(255, 68, 68, 0.05)"></div>
-                    <div class="card-body">
-                        <span class="severity sev-high">Cas Historique</span>
-                        <h3>SolarWinds (Orion)</h3>
-                        <p>Compromission d'une mise à jour logicielle utilisée par le gouvernement US. La définition même d'une attaque "State-sponsored" sophistiquée.</p>
-                        <a href="https://www.gao.gov/blog/solarwinds-cyberattack-demystifying-supply-chain-breach" target="_blank" class="source-btn">DÉTAILS DU CAS</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Equifax 2017', 'Cause : Faille Apache Struts non patchée. 147M de victimes.', 'Leçon : Gestion stricte des correctifs (Patch Management).')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Equifax Breach</h3><p>Une fuite de données financières colossale due à une négligence...</p></div>
                 </div>
-                <div class="card-veille" data-tags="uber hacker mfa">
-                    <div class="image-placeholder" style="background:rgba(255, 68, 68, 0.05)"></div>
-                    <div class="card-body">
-                        <span class="severity sev-high">Cas Historique</span>
-                        <h3>Uber "MFA Fatigue" Breach</h3>
-                        <p>L'intrusion de 2022 montrant comment un adolescent a pu accéder aux systèmes internes critiques via une simple manipulation psychologique.</p>
-                        <a href="https://www.uber.com/newsroom/security-update/" target="_blank" class="source-btn">DÉTAILS DU CAS</a>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Maersk (NotPetya)', 'Impact : Transport maritime mondial paralysé pendant 15 jours.', 'Leçon : Préparation d\'un plan de reconstruction Disaster Recovery.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Maersk NotPetya</h3><p>Une épidémie de ransomware qui a coûté 300 millions de dollars...</p></div>
                 </div>
-                <div class="card-veille" data-tags="maersk notpetya ransomware">
-                    <div class="image-placeholder" style="background:rgba(255, 68, 68, 0.05)"></div>
-                    <div class="card-body">
-                        <span class="severity sev-high">Cas Historique</span>
-                        <h3>Maersk (NotPetya)</h3>
-                        <p>Paralysie totale du leader mondial du transport maritime. Coût estimé : 300 millions de dollars. Une leçon sur la résilience opérationnelle.</p>
-                        <a href="https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world/" target="_blank" class="source-btn">DÉTAILS DU CAS</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="graph" class="content-section">
-            <div class="card">
-                <div class="analysis-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; padding: 40px;">
-                    <div><canvas id="mainChart"></canvas></div>
-                    <div style="color: var(--text-dim); line-height: 2;">
-                        <h2 style="color: var(--accent); font-family: 'Orbitron';">ANALYSE_PÉRIMITRALE</h2>
-                        <p>> La base de données contient <strong>29 vecteurs d'analyse</strong>.</p>
-                        <p>> On observe une corrélation directe entre les <strong>Crises Historiques</strong> et l'accélération de l'adoption du <strong>Zero Trust</strong>.</p>
-                        <p>> Le focus reste à 95% sur le <strong>Cloud</strong>, car 100% des entreprises du top 500 y sont vulnérables.</p>
-                    </div>
+                <div class="card-veille" onclick="openFocus('Uber 2022', 'Méthode : MFA Fatigue d\'un employé via Social Engineering.', 'Leçon : Le MFA seul ne suffit pas sans éducation humaine.')">
+                    <div class="image-placeholder"></div><div class="card-body"><h3>Uber Breach</h3><p>Comment un adolescent a piraté une multinationale en 1h...</p></div>
                 </div>
             </div>
         </div>
     </main>
 
+    <div id="focusModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeFocus()">&times;</span>
+            <h2 id="modalTitle" style="color:var(--accent); font-family:'Orbitron';"></h2>
+            <div id="modalAnalysis" class="analysis-block"></div>
+            <div id="modalCounter" class="counter-measures"></div>
+            <div style="margin-top:30px; font-size:0.6rem; color:var(--text-dim);">DÉPARTEMENT CYBER-SÉCURITÉ // ARCHIVE_REF_026</div>
+        </div>
+    </div>
+
     <script>
+        // Init Particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#00f2ff" },
+                "opacity": { "value": 0.2 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1 }
+            }
+        });
+
+        // Tabs
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -414,41 +315,31 @@
             event.currentTarget.classList.add('active');
         }
 
+        // Search
         function filterCards() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.card-veille');
             cards.forEach(card => {
                 let text = card.innerText.toLowerCase();
-                card.style.display = text.includes(input) ? "flex" : "none";
+                card.style.display = text.includes(input) ? "block" : "none";
             });
         }
 
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['CLOUD', 'IA', 'QUANTUM', 'NETWORK', 'IOT', 'IDENTITY'],
-                datasets: [{
-                    label: 'VIGILANCE',
-                    data: [95, 90, 85, 75, 80, 92],
-                    borderColor: '#00f2ff',
-                    backgroundColor: 'rgba(0, 242, 255, 0.1)',
-                    pointBackgroundColor: '#bc13fe',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    r: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        angleLines: { color: 'rgba(255,255,255,0.1)' },
-                        pointLabels: { color: '#fff', font: { size: 12, family: 'JetBrains Mono' } },
-                        ticks: { display: false }
-                    }
-                },
-                plugins: { legend: { display: false } }
-            }
-        });
+        // Modal Logic
+        function openFocus(title, analysis, counter) {
+            document.getElementById('modalTitle').innerText = ">>> " + title;
+            document.getElementById('modalAnalysis').innerText = analysis;
+            document.getElementById('modalCounter').innerHTML = "<strong>STRATÉGIE DE DÉFENSE :</strong><br>" + counter.replace(/\n/g, '<br>');
+            document.getElementById('focusModal').style.display = "block";
+        }
+
+        function closeFocus() {
+            document.getElementById('focusModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('focusModal')) closeFocus();
+        }
     </script>
 </body>
 </html>
