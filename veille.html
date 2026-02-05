@@ -80,6 +80,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden; /* Pour que l'image ne dépasse pas */
         }
         
         .card-veille:hover {
@@ -88,8 +89,53 @@
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
         }
 
+        .card-image-container {
+            width: calc(100% + 2px); /* +2px pour compenser la bordure */
+            margin: -1px; /* Pour aligner parfaitement l'image au bord */
+            height: 180px; /* Hauteur fixe pour les images */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000; /* Fond noir si l'image est transparente */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recadre l'image pour remplir le conteneur */
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .card-veille:hover .card-image-container img {
+            transform: scale(1.05); /* Zoom léger au survol */
+        }
+
+        .card-content {
+            padding: 20px 20px 10px 20px; /* Ajuste le padding après l'image */
+            flex-grow: 1; /* Permet au contenu de prendre l'espace restant */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-content p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 15px; /* Espace avant le bouton */
+            text-align: justify;
+        }
+
         .source-button {
-            margin-top: 15px;
+            margin-top: auto; /* Pousse le bouton vers le bas de la carte */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -103,6 +149,7 @@
             font-family: 'JetBrains Mono';
             text-transform: uppercase;
             transition: 0.3s;
+            width: 100%; /* Assure que le bouton prend toute la largeur */
         }
 
         .source-button:hover {
@@ -166,92 +213,122 @@
         <div id="exemples" class="content-section active">
             <div class="grid-layout">
                 <div class="card card-veille" data-tags="cloud iam amazon s3">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/007bff/ffffff?text=AWS+S3+Leak" alt="Image d'illustration Fuite S3">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">CLOUD_SECURITY</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">01. Fuite S3 & IAM Misconfig</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Analyse de l'exposition massive via buckets mal configurés. L'étude montre qu'une erreur de politique IAM permet l'exfiltration automatique.</p>
+                        <p>Cette étude de cas approfondie détaille comment des erreurs de configuration d'accès (IAM policies) sur des buckets Amazon S3 ont mené à des expositions massives de données sensibles. Les attaquants, souvent des bots automatisés, scannent en permanence le web pour identifier ces failles. Ma veille a mis en lumière les mesures de remédiation, telles que l'activation systématique du "Block Public Access" au niveau organisationnel et l'importance du "Security by Design" via l'Infrastructure as Code (IaC) pour prévenir les erreurs manuelles.</p>
                     </div>
                     <a href="https://aws.amazon.com/fr/security/security-resources/" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="ransomware lockbit malware">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/ff4444/ffffff?text=LockBit+RaaS" alt="Image d'illustration LockBit RaaS">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">RANSOMWARE</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">02. Écosystème LockBit RaaS</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Surveillance du groupe et de leur capacité à exploiter des failles VPN en un temps record. Analyse des TTPs (MITRE).</p>
+                        <p>Ce dossier de veille se concentre sur le groupe LockBit, un acteur majeur du Ransomware-as-a-Service (RaaS). L'analyse de leurs Techniques, Tactiques et Procédures (TTPs) révèle une capacité alarmante à exploiter des failles VPN moins de 24h après leur publication, ainsi qu'une utilisation massive d'outils système légitimes (Living off the Land). La protection passe par des sauvegardes immuables et une détection comportementale avancée (EDR).</p>
                     </div>
                     <a href="https://www.cyber.gouv.fr/publications/le-groupe-de-rancongiciels-lockbit" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="supply chain moveit sql">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/ffbb33/000000?text=MoveIT+SQLi" alt="Image d'illustration Compromission MoveIT">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">SUPPLY_CHAIN</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">03. Compromission MoveIT</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Attaque par injection SQL zero-day impactant des milliers d'entreprises mondiales via un logiciel tiers.</p>
+                        <p>Ce cas est un exemple parfait d'attaque par la chaîne d'approvisionnement. Une vulnérabilité de type injection SQL zero-day dans le logiciel de transfert de fichiers MoveIT a permis un accès direct aux bases de données de milliers de clients. Ma veille a documenté l'extrême réactivité requise pour l'inventaire des actifs impactés et le déploiement de patchs d'urgence, soulignant la dépendance critique de la sécurité d'une entreprise à celle de ses fournisseurs.</p>
                     </div>
                     <a href="https://www.bleepingcomputer.com/news/security/moveit-transfer-critical-zero-day-vulnerability-exploited-in-attacks/" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="ia deepfake vocal fraude">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/bc13fe/ffffff?text=Deepfake+Voice" alt="Image d'illustration Deepfake Vocal">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">SOCIAL_ENG</div>
                         <span class="severity sev-med">Moyen</span>
                         <h3 style="color: var(--accent);">04. Deepfake Vocal & Fraude</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Clonage de voix par IA pour fraude au président. Ma veille souligne l'importance de la formation humaine.</p>
+                        <p>Cette analyse porte sur l'utilisation de l'IA générative pour cloner la voix de dirigeants, permettant des appels frauduleux convaincants. Ce cas d'ingénierie sociale montre que les défenses techniques sont inutiles sans une formation humaine robuste. Ma veille explore la mise en place de protocoles de validation multi-canaux (ex: rappel sur un numéro connu) pour toutes les transactions financières sensibles.</p>
                     </div>
                     <a href="https://www.interpol.int/fr/Actualites/2024/L-IA-generative-au-service-de-la-criminalite" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="github api secrets leak">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/00f2ff/000000?text=GitHub+Secrets" alt="Image d'illustration GitHub Secrets">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">DEVSECOPS</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">05. Secret Leaks sur GitHub</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Scanning temps réel des clés d'API dans les dépôts publics. Utilisation de TruffleHog pour la prévention.</p>
+                        <p>Analyse de la persistance des clés d'API, identifiants et autres secrets dans les dépôts Git publics. Les attaquants scannent activement les commits en temps réel pour détourner des ressources cloud ou accéder à des systèmes. Ma veille inclut des tests d'outils comme TruffleHog pour détecter ces fuites avant même le push, et préconise l'utilisation systématique de gestionnaires de secrets centralisés comme HashiCorp Vault.</p>
                     </div>
                     <a href="https://github.com/features/security" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="mfa uber identity access">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/a0a0a0/000000?text=MFA+Fatigue" alt="Image d'illustration MFA Fatigue">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">IDENTITY</div>
                         <span class="severity sev-med">Moyen</span>
                         <h3 style="color: var(--accent);">06. MFA Fatigue (Cas Uber)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Submersion de notifications MFA pour forcer l'acceptation humaine. Passage nécessaire au FIDO2.</p>
+                        <p>Cette technique consiste à submerger un utilisateur de notifications MFA (Multi-Factor Authentication) jusqu'à ce qu'il accepte par lassitude ou erreur. Le cas de l'attaque sur Uber a mis en lumière l'efficacité de cette méthode d'ingénierie sociale. Ma veille préconise le passage à des méthodes plus robustes comme le "Number Matching" ou les clés physiques FIDO2 pour éliminer cette vulnérabilité psychologique.</p>
                     </div>
                     <a href="https://www.mandiant.com/resources/blog/uber-infrastructure-extortion" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="iot botnet mirai ddos">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/80ff80/000000?text=Mirai+Botnet" alt="Image d'illustration Mirai Botnet">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">IOT_SECURITY</div>
                         <span class="severity sev-med">Moyen</span>
                         <h3 style="color: var(--accent);">07. Botnet Mirai & DDoS</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Exploitation massive d'objets connectés mal sécurisés pour paralyser des services web mondiaux.</p>
+                        <p>Analyse de la résilience des botnets IoT qui exploitent les mots de passe par défaut d'appareils connectés (caméras IP, routeurs). Le botnet Mirai a prouvé la fragilité du Web face à des flux massifs de requêtes HTTP/S. Ma veille propose une segmentation réseau stricte (VLAN) pour isoler le parc IoT et met en avant la nécessité d'une "Security by Design" dès la conception des objets connectés.</p>
                     </div>
                     <a href="https://www.cloudflare.com/fr-fr/learning/ddos/glossary/mirai-botnet/" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="powershell lotl malware">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/ff4444/ffffff?text=Living+Off+The+Land" alt="Image d'illustration Living off the Land">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">ADVANCED</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">08. Living off the Land (LotL)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Attaques sans fichier utilisant les outils légitimes du système (PowerShell) pour rester invisible.</p>
+                        <p>Cette technique d'attaque utilise des outils système légitimes (PowerShell, Certutil, WMIC) pour exécuter des payloads sans fichier, rendant la détection difficile pour les antivirus traditionnels. Ma veille met l'accent sur l'importance du logging PowerShell détaillé (Event ID 4104) et la surveillance comportementale (EDR/XDR) des processus système pour identifier les usages anormaux.</p>
                     </div>
                     <a href="https://attack.mitre.org/techniques/T1059/001/" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="ia steganographie image">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/00f2ff/000000?text=AI+Steganography" alt="Image d'illustration AI Steganography">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">AI_THREAT</div>
                         <span class="severity sev-low">Faible</span>
                         <h3 style="color: var(--accent);">09. Stéganographie IA</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Injection de charges malveillantes dans les métadonnées d'images générées artificiellement.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Nouveau vecteur d'attaque où du code malveillant est dissimulé dans les pixels d'images générées par IA (via l'injection de code dans les métadonnées ou les modèles). Un script léger peut ensuite l'activer. Ma veille explore l'utilisation de filtres de nettoyage d'image avancés avant toute intégration sur un réseau interne pour neutraliser cette menace émergente.</p>
                     </div>
                     <a href="https://www.mcafee.com/blogs/other-blogs/mcafee-labs/steganography-in-the-age-of-ai/" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
                 <div class="card card-veille" data-tags="log4j java vulnerability">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/a0a0a0/ffffff?text=Log4Shell+Vuln" alt="Image d'illustration Log4Shell">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">LEGACY_VULN</div>
                         <span class="severity sev-high">Critique</span>
                         <h3 style="color: var(--accent);">10. Persistance Log4Shell</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Analyse de la survie de la faille Log4j dans les vieux systèmes et les méthodes de détection actuelles.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Deux ans après sa découverte, la faille Log4Shell (CVE-2021-44228) persiste dans de nombreux systèmes. Ma veille analyse les vecteurs d'attaque résiduels, les difficultés de patching dans les infrastructures complexes, et les meilleures pratiques pour la détection post-exploitation via les SIEM et outils de scanning de vulnérabilités actifs.</p>
                     </div>
                     <a href="https://www.cisa.gov/news-events/news/apache-log4j-vulnerability-guidance" target="_blank" class="source-button"><i class="fas fa-link"></i> Voir la source</a>
                 </div>
@@ -261,167 +338,87 @@
         <div id="technos" class="content-section">
             <div class="grid-layout">
                 <div class="card card-veille" data-tags="quantum pqc crypto">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/bc13fe/ffffff?text=Quantum+Crypto" alt="Image d'illustration Crypto Post-Quantique">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">QUANTUM</div>
                         <h3 style="color: var(--accent);">01. Crypto Post-Quantique (PQC)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Migration vers les standards NIST pour protéger les données contre le futur décryptage quantique.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">La standardisation des algorithmes résistants aux ordinateurs quantiques par le NIST est en phase finale (Kyber, Dilithium). Les entreprises doivent anticiper la migration avant 2030 pour éviter le "Harvest Now, Decrypt Later". Ma veille suit l'implémentation de ces protocoles dans les VPN, TLS et les signatures numériques pour garantir la confidentialité et l'intégrité des communications à long terme.</p>
                     </div>
                     <a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" class="source-button"><i class="fas fa-link"></i> Accéder au NIST</a>
                 </div>
                 <div class="card card-veille" data-tags="wifi 8 802.11bn network">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/007bff/ffffff?text=Wi-Fi+8+UHR" alt="Image d'illustration Wi-Fi 8 UHR">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">NETWORK</div>
-                        <h3 style="color: var(--accent);">02. Wi-Fi 8 (UHR)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Standard 802.11bn focalisé sur la fiabilité extrême et la latence sub-milliseconde en milieu industriel.</p>
+                        <h3 style="color: var(--accent);">02. Wi-Fi 8 (Ultra High Reliability)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Le standard 802.11bn, ou Wi-Fi 8, se concentre sur l'Ultra High Reliability (UHR). Conçu pour les environnements exigeants (usines automatisées, hôpitaux), il promet une latence inférieure à 2ms et une robustesse accrue aux interférences. Ma veille analyse son potentiel à remplacer les connexions filaires industrielles et les implications pour la sécurité des réseaux OT.</p>
                     </div>
                     <a href="https://www.ieee.org/" target="_blank" class="source-button"><i class="fas fa-link"></i> Documentation IEEE</a>
                 </div>
                 <div class="card card-veille" data-tags="ia soc autonomous remediation">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/00f2ff/000000?text=AI+SOC" alt="Image d'illustration SOC Autonome IA">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">AI_OPS</div>
                         <h3 style="color: var(--accent);">03. SOC Autonome via LLM</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Utilisation de modèles de langage spécialisés pour analyser et bloquer les menaces sans intervention humaine.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">L'IA générative permet aux Security Operations Centers (SOC) de passer à la remédiation automatique des incidents de niveau 1. Les LLM peuvent analyser des logs complexes, isoler des machines infectées et générer des rapports d'incident en quelques secondes. Ma veille surveille les risques d'"hallucination" de l'IA et l'évolution du rôle de l'analyste vers la supervision d'algorithmes.</p>
                     </div>
                     <a href="https://www.paloaltonetworks.com/cortex/xansi" target="_blank" class="source-button"><i class="fas fa-link"></i> Source Palo Alto</a>
                 </div>
                 <div class="card card-veille" data-tags="greenops rust energy">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/80ff80/000000?text=GreenOps+Rust" alt="Image d'illustration GreenOps Rust">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">GREEN_IT</div>
                         <h3 style="color: var(--accent);">04. GreenOps & Code Économe</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Optimisation des ressources serveurs via le langage Rust pour réduire drastiquement l'empreinte carbone.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">L'optimisation du code et des infrastructures IT pour réduire l'empreinte carbone devient un impératif. Ma veille s'intéresse aux langages comme Rust, connu pour sa performance et sa faible consommation énergétique, ainsi qu'aux systèmes d'exploitation capables de déplacer les calculs vers des zones géographiques à basse intensité carbone.</p>
                     </div>
                     <a href="https://www.rust-lang.org/" target="_blank" class="source-button"><i class="fas fa-link"></i> Rust Foundation</a>
                 </div>
                 <div class="card card-veille" data-tags="6g edge telecom">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/ffbb33/000000?text=6G+Edge" alt="Image d'illustration 6G Edge">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">6G_INTELLIGENCE</div>
                         <h3 style="color: var(--accent);">05. Edge 6G Natif</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Traitement instantané des données IA directement dans les antennes pour une autonomie totale des robots.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">La 6G promet des débits de l'ordre du Tbit/s et une intelligence nativement intégrée au réseau Edge. Les capacités de calcul et l'IA sont déportées en bordure de réseau pour un traitement instantané des données des capteurs. Ma veille analyse la sécurité de ces infrastructures décentralisées, clé pour l'essor des usines entièrement autonomes et des smart-cities.</p>
                     </div>
                     <a href="https://www.6g-ia.eu/" target="_blank" class="source-button"><i class="fas fa-link"></i> 6G Smart Networks</a>
                 </div>
                 <div class="card card-veille" data-tags="dna storage storage">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/a0a0a0/ffffff?text=DNA+Storage" alt="Image d'illustration Stockage ADN">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">BIO_TECH</div>
                         <h3 style="color: var(--accent);">06. Stockage sur ADN Synthétique</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Solution d'archivage éternelle capable de stocker des exaoctets dans un volume minuscule.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Face à la raréfaction des métaux, le stockage de données sur ADN synthétique devient une solution viable pour l'archivage séculaire. Un gramme d'ADN peut théoriquement stocker 215 pétaoctets pendant des milliers d'années. Ma veille suit l'évolution des coûts de séquençage et de synthèse, ainsi que les enjeux de sécurité pour la préservation des archives nationales.</p>
                     </div>
                     <a href="https://www.microsoft.com/en-us/research/project/dna-storage/" target="_blank" class="source-button"><i class="fas fa-link"></i> Microsoft Research</a>
                 </div>
                 <div class="card card-veille" data-tags="zero trust ztna security">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/007bff/ffffff?text=ZTNA+2.0" alt="Image d'illustration ZTNA 2.0">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">SECURITY</div>
                         <h3 style="color: var(--accent);">07. ZTNA 2.0 (Zero Trust)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Le réseau n'est plus un périmètre. L'accès est validé en continu par application et comportement.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">L'évolution du VPN vers le Zero Trust Network Access (ZTNA) est la norme pour le télétravail sécurisé. L'accès n'est plus accordé par réseau, mais par application, après vérification continue de l'état du poste et de l'identité de l'utilisateur. Ma veille documente la réduction de la surface d'attaque grâce à la micro-segmentation dynamique et l'élimination du concept de "réseau de confiance" interne.</p>
                     </div>
                     <a href="https://www.zscaler.com/resources/security-terms-glossary/what-is-zero-trust-network-access" target="_blank" class="source-button"><i class="fas fa-link"></i> Guide Zscaler</a>
                 </div>
                 <div class="card card-veille" data-tags="digital twin cyber crisis">
-                    <div>
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/400x180/ff4444/ffffff?text=Cyber+Twin" alt="Image d'illustration Cyber Digital Twin">
+                    </div>
+                    <div class="card-content">
                         <div class="badge">SIMULATION</div>
                         <h3 style="color: var(--accent);">08. Jumeaux Numériques Cyber</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Modélisation totale du SI pour tester des scénarios d'attaques étatiques sans impacter la production.</p>
-                    </div>
-                    <a href="https://www.thalesgroup.com/fr/marches/activites-mondiales-de-cybersecurite" target="_blank" class="source-button"><i class="fas fa-link"></i> Thales Cyber</a>
-                </div>
-                <div class="card card-veille" data-tags="privacy rgpd camera">
-                    <div>
-                        <div class="badge">PRIVACY</div>
-                        <h3 style="color: var(--accent);">09. Vision Anonymisée native</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Caméras transmettant uniquement des vecteurs de données, sans jamais capter d'image identifiable.</p>
-                    </div>
-                    <a href="https://www.cnil.fr/fr/la-videosurveillance-videoprotection" target="_blank" class="source-button"><i class="fas fa-link"></i> Ressource CNIL</a>
-                </div>
-                <div class="card card-veille" data-tags="web3 blockchain id">
-                    <div>
-                        <div class="badge">WEB3_ID</div>
-                        <h3 style="color: var(--accent);">10. Identité Décentralisée (DID)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de l'identité numérique par l'utilisateur via blockchain, sans autorité centrale (Gouvernement/Google).</p>
-                    </div>
-                    <a href="https://www.w3.org/TR/did-core/" target="_blank" class="source-button"><i class="fas fa-link"></i> W3C DID Core</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="graph" class="content-section">
-            <section class="card" style="border-color: var(--purple);">
-                <div class="badge" style="background: var(--purple);">DATAVIZ // PRIORITÉS D'ANALYSE 2026</div>
-                <div class="analysis-container" style="margin-top: 20px;">
-                    <div>
-                        <canvas id="mainChart"></canvas>
-                    </div>
-                    <div style="color: var(--text-dim); line-height: 1.7;">
-                        <h3 style="color: var(--accent); margin-bottom: 15px;"><i class="fas fa-microchip"></i> Matrice des Compétences de Veille</h3>
-                        <p>> Mon focus actuel se concentre sur trois axes majeurs : le <strong>Cloud</strong> (95%) pour sécuriser l'infrastructure, l'<strong>IA</strong> (90%) pour contrer les nouvelles menaces génératives, et l'<strong>Identité</strong> (92%) car c'est le nouveau périmètre de sécurité en entreprise.</p>
-                        <p style="margin-top: 15px;">> Le secteur <strong>Quantum</strong> (85%) est en forte progression suite aux standardisations NIST de 2025.</p>
-                        <p style="margin-top: 15px;">> La section <strong>IOT</strong> (80%) reste un point de vigilance stable face aux botnets persistants.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> INTEL_SYNC: <span class="t-green">OK</span></div>
-        <div class="footer-segment">VEILLE_COUNT: <span class="t-green">20</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // © 2026</div>
-    </footer>
-
-    <script>
-        // Gestion des Onglets
-        function showSection(id) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        // Filtrage Dynamique
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.card-veille');
-            
-            cards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                let tags = card.getAttribute('data-tags') || "";
-                if (text.includes(input) || tags.includes(input)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-
-        // Configuration Graphique Radar
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['CLOUD', 'IA', 'QUANTUM', 'NETWORK', 'IOT', 'IDENTITY'],
-                datasets: [{
-                    label: 'Intensité de Veille (%)',
-                    data: [95, 90, 85, 75, 80, 92],
-                    borderColor: '#00f2ff',
-                    backgroundColor: 'rgba(0, 242, 255, 0.1)',
-                    pointBackgroundColor: '#bc13fe',
-                    pointBorderColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(255,255,255,0.1)' },
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        pointLabels: { color: '#e0e0e0', font: { family: 'JetBrains Mono', size: 12 } },
-                        ticks: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Création d'une réplique exacte du Système d'Information (SI) en environnement virtuel pour simuler des cyberattaques de grande ampleur. Cette technologie permet de tester la résilience des infrastructures critiques (eau, énergie) sans risque réel. Ma veille analyse les outils de synchronisation temps réel entre le jumeau et le système physique, positionnant le "Cyber-Digital-
