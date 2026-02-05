@@ -3,110 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // VEILLE_STRATÉGIQUE</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>ALEXIS_VELOSO // VEILLE_V4</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <style>
+        /* --- IMPORTATION DE TA DA V4 --- */
         :root {
-            --accent: #00f2ff;
-            --purple: #bc13fe;
-            --bg-dark: #050505;
-            --card-bg: rgba(10, 10, 15, 0.9);
-            --border-color: rgba(0, 242, 255, 0.2);
-            --text-dim: #a0a0a0;
+            --bg: #05050a;
+            --card-bg: rgba(13, 13, 26, 0.94); 
+            --accent: #a366ff;
+            --accent-glow: rgba(163, 102, 255, 0.4);
+            --red: #ff4d4d;
+            --white: #ffffff;
+            --green: #00ff9d;
+            --text-dim: #b0b0d0;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        body { background-color: var(--bg-dark); color: #fff; font-family: 'JetBrains Mono', monospace; margin: 0; overflow-x: hidden; }
-
-        /* --- EFFET SCAN LASER --- */
-        .scanline {
-            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
-            background: rgba(0, 242, 255, 0.3); box-shadow: 0 0 15px var(--accent);
-            z-index: 9999; pointer-events: none; animation: scan 4s linear infinite;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: var(--bg); color: var(--white); font-family: var(--font-mono); 
+            line-height: 1.6; overflow-x: hidden;
         }
-        @keyframes scan { from { top: -2%; } to { top: 100%; } }
 
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
-
-        .wrapper { padding: 40px 20px; max-width: 1400px; margin: 0 auto; position: relative; }
-
-        /* --- TERMINAL CLIGNOTANT --- */
-        .terminal-header-box {
-            background: rgba(0, 0, 0, 0.8); border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent); padding: 25px; margin-bottom: 30px;
+        /* --- FOND CARTE MÈRE (DA V4) --- */
+        .circuit-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: 
+                linear-gradient(rgba(163, 102, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(163, 102, 255, 0.05) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(163, 102, 255, 0.1) 0%, transparent 80%);
+            background-size: 50px 50px, 50px 50px, 100% 100%; opacity: 0.6;
         }
-        .blink { animation: blinker 1s linear infinite; color: var(--accent); font-weight: bold; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        .hero-title {
-            font-family: 'Orbitron', sans-serif; font-size: 2.5rem;
-            background: linear-gradient(to right, #fff, var(--accent), var(--purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0;
+        .circuit-bg::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(163, 102, 255, 0.03) 50px, rgba(163, 102, 255, 0.03) 51px);
+            animation: flow 20s linear infinite;
         }
+        @keyframes flow { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        .scanline-global {
+            width: 100%; height: 2px; background: rgba(163, 102, 255, 0.1);
+            position: fixed; top: 0; z-index: 1000; pointer-events: none;
+            animation: globalScan 8s linear infinite;
+        }
+        @keyframes globalScan { from { top: 0; } to { top: 100%; } }
+
+        .wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px 120px; z-index: 1; position: relative; }
+
+        /* --- HEADER & NAVIGATION --- */
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(163, 102, 255, 0.2);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 999;
+        }
+        .brand { font-weight: 800; font-size: 0.9rem; }
+        .brand span { color: var(--accent); }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 25px; font-size: 0.8rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+        /* --- TERMINAL HEADER VEILLE --- */
+        .terminal-window { 
+            background: var(--card-bg); border: 1px solid rgba(163, 102, 255, 0.15);
+            border-radius: 8px; overflow: hidden; margin-bottom: 40px;
+        }
+        .terminal-header { background: rgba(163, 102, 255, 0.1); padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        .terminal-body { padding: 40px; text-align: center; }
+        .hero-name { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; letter-spacing: 2px; }
 
         /* --- NEWS TICKER --- */
         .news-ticker {
-            background: rgba(188, 19, 254, 0.05); border-top: 1px solid var(--purple);
-            border-bottom: 1px solid var(--purple); padding: 10px; overflow: hidden; white-space: nowrap; margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent);
+            padding: 8px; overflow: hidden; white-space: nowrap; margin-top: 20px;
         }
-        .ticker-content { display: inline-block; animation: scroll 45s linear infinite; color: var(--purple); font-size: 0.8rem; }
-        .ticker-content span { margin-right: 60px; font-weight: bold; }
+        .ticker-content { display: inline-block; animation: scroll 35s linear infinite; color: var(--accent); font-size: 0.75rem; }
+        .ticker-content span { margin-right: 50px; }
         @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-        /* --- CARTES & GLITCH --- */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; }
-        .card-veille { 
-            background: var(--card-bg); border: 1px solid var(--border-color); 
-            transition: 0.4s; cursor: pointer; position: relative; overflow: hidden;
+        /* --- TABS & SEARCH --- */
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .tab-btn {
+            background: rgba(163, 102, 255, 0.05); border: 1px solid rgba(163, 102, 255, 0.2);
+            color: var(--white); padding: 10px 20px; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem;
         }
-        .card-veille:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); }
-        .card-veille:hover h3 { animation: glitch 0.3s infinite; }
-        @keyframes glitch {
-            0% { text-shadow: -2px 0 var(--purple), 2px 0 var(--accent); }
-            50% { text-shadow: 2px 0 var(--purple), -2px 0 var(--accent); transform: translate(1px, -1px); }
-            100% { text-shadow: -2px 0 var(--purple), 2px 0 var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #000; font-weight: 800; box-shadow: 0 0 15px var(--accent-glow); }
+
+        .cyber-input {
+            width: 100%; padding: 15px; background: #000; border: 1px solid rgba(163, 102, 255, 0.2);
+            color: var(--white); font-family: inherit; margin-bottom: 40px; outline: none;
+        }
+        .cyber-input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+
+        /* --- GRID VEILLE --- */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
+        .card {
+            background: var(--card-bg); border: 1px solid rgba(163, 102, 255, 0.15);
+            border-radius: 8px; padding: 25px; position: relative; transition: 0.4s;
+            cursor: pointer; backdrop-filter: blur(10px);
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(163, 102, 255, 0.2); }
+        .card:hover h3 { animation: glitch 0.3s infinite; color: var(--accent); }
+        @keyframes glitch { 0% { text-shadow: 2px 0 var(--red), -2px 0 var(--green); } 50% { transform: translate(1px, -1px); } 100% { text-shadow: -2px 0 var(--red), 2px 0 var(--green); } }
+
+        .badge {
+            position: absolute; top: -10px; left: 20px; background: var(--accent);
+            color: black; padding: 2px 12px; font-size: 0.6rem; font-weight: 800;
         }
 
-        .image-placeholder { 
-            width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(188, 19, 254, 0.1), rgba(0, 242, 255, 0.1));
-            display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-color);
-        }
-        .card-body { padding: 25px; }
-        .card-body h3 { font-family: 'Orbitron'; color: var(--accent); font-size: 1rem; margin: 15px 0; }
-        .card-body p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; }
-        
-        .severity { font-size: 0.6rem; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: inline-block; }
-        .sev-high { background: rgba(255, 68, 68, 0.2); color: #ff4444; border: 1px solid #ff4444; }
-        .sev-low { background: rgba(0, 242, 255, 0.2); color: var(--accent); border: 1px solid var(--accent); }
+        .card h3 { font-family: 'Orbitron'; font-size: 1rem; margin-bottom: 12px; margin-top: 10px; }
+        .card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
 
-        /* --- MODALE --- */
-        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); }
+        /* --- MODALE FOCUS (STYLE V4) --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(5,5,10,0.95); backdrop-filter: blur(10px); }
         .modal-content {
-            background: #0a0a0a; border: 1px solid var(--accent); width: 90%; max-width: 800px;
-            margin: 5% auto; padding: 40px; border-radius: 4px; position: relative;
+            background: var(--card-bg); border: 1px solid var(--accent); width: 90%; max-width: 800px;
+            margin: 5% auto; padding: 40px; position: relative; box-shadow: 0 0 50px var(--accent-glow);
         }
-        .close-modal { position: absolute; right: 20px; top: 15px; color: var(--accent); cursor: pointer; font-size: 2rem; }
-        .analysis-box { border-left: 3px solid var(--purple); padding-left: 20px; margin: 25px 0; color: #ddd; font-size: 0.95rem; }
-        .defense-box { background: rgba(0, 242, 255, 0.05); border: 1px dashed var(--accent); padding: 20px; color: var(--accent); }
+        .close-modal { position: absolute; right: 20px; top: 15px; color: var(--accent); cursor: pointer; font-size: 1.5rem; }
+        .analysis-box { border-left: 2px solid var(--accent); padding-left: 20px; margin: 25px 0; font-size: 0.9rem; }
+        .defense-box { background: rgba(0, 255, 157, 0.05); border: 1px dashed var(--green); padding: 15px; color: var(--green); font-size: 0.85rem; }
 
-        /* --- NAVIGATION --- */
-        .tabs { display: flex; gap: 10px; margin: 30px 0; flex-wrap: wrap; }
-        .tab-btn { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: var(--text-dim); padding: 12px 20px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75rem; }
-        .tab-btn.active { background: linear-gradient(45deg, var(--accent), var(--purple)); color: #000; font-weight: bold; border: none; }
-
-        #searchInput { width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--accent); font-family: 'JetBrains Mono'; border-radius: 4px; outline: none; margin-bottom: 10px; }
+        /* --- FOOTER STATUS --- */
+        .status-footer {
+            position: fixed; bottom: 0; width: 100%; background: #000;
+            padding: 10px 30px; border-top: 1px solid var(--accent);
+            display: flex; gap: 30px; font-size: 0.7rem; z-index: 100;
+        }
+        .online-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         .content-section { display: none; }
         .content-section.active { display: block; }
+
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="scanline"></div>
+
+    <div class="circuit-bg"></div>
+    <div class="scanline-global"></div>
 
     <header class="top-bar">
         <div class="brand">ALEXIS_VELOSO // <span>V_INTEL</span></div>
@@ -117,34 +157,39 @@
     </header>
 
     <main class="wrapper">
-        <section class="terminal-header-box">
-            <div style="color: var(--accent); font-size: 0.7rem; margin-bottom: 10px;">[ LOG_SESSION: ACTIVE ]</div>
-            <h1 class="hero-title">VEILLE_TECHNOLOGIQUE</h1>
-            <div class="blink">> SYSTEM_SCANNING_REAL_TIME...</div>
-            <div style="color: #555; font-size: 0.8rem; margin-top: 10px;">29 ARCHIVES DÉPLOYÉES // DATABASE_VERIFIED</div>
-        </section>
-
-        <div class="news-ticker">
-            <div class="ticker-content">
-                <span>[ ALERT ] NOUVELLE CAMPAGNE RANSOMWARE DÉTECTÉE SUR LES SERVEURS ESXI...</span>
-                <span>[ INTEL ] LE NIST VALIDE LES PREMIERS ALGORITHMES POST-QUANTIQUES...</span>
-                <span>[ NEWS ] ANSSI : RAPPORT ANNUEL SUR L'ÉTAT DE LA MENACE CYBER 2026 DISPONIBLE...</span>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                </div>
+                <div class="terminal-title-inline">veille_strategique.sh</div>
+            </div>
+            <div class="terminal-body">
+                <h1 class="hero-name">CYBER_WATCH_2026</h1>
+                <div class="hero-role">STATUS: MONITORING_ACTIVE</div>
+                <div class="news-ticker">
+                    <div class="ticker-content">
+                        <span>[ ALERT ] NOUVELLE VULNÉRABILITÉ ZERO-DAY DÉCOUVERTE DANS LES SYSTÈMES LINUX...</span>
+                        <span>[ INTEL ] LE GROUPE LOCKBIT 4.0 REVENDIQUE UNE NOUVELLE ATTAQUE...</span>
+                        <span>[ NEWS ] L'ANSSI RAPPELLE LES BONNES PRATIQUES FACE AU RANSOMWARE...</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <input type="text" id="searchInput" placeholder="> ENTRER_MOT_CLÉ_POUR_FILTRER..." onkeyup="filterCards()">
+        <input type="text" id="searchInput" class="cyber-input" placeholder="> FILTRER_PAR_MOT_CLÉ..." onkeyup="filterCards()">
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="showSection('menaces')">MENACES_CRITIQUES (12)</button>
-            <button class="tab-btn" onclick="showSection('technos')">INNOVATIONS_TECH (12)</button>
-            <button class="tab-btn" onclick="showSection('crises')">ARCHIVES_CRISES (5)</button>
+            <button class="tab-btn active" onclick="showSection('menaces')">MENACES_CRITIQUES</button>
+            <button class="tab-btn" onclick="showSection('technos')">INNOVATIONS_TECH</button>
+            <button class="tab-btn" onclick="showSection('crises')">ARCHIVES_HISTO</button>
         </div>
 
         <div id="menaces" class="content-section active">
-            <div class="grid-layout" id="grid-menaces">
+            <div class="grid-layout">
                 <script>
-                    const menacesData = [
-                        { t: "AWS S3 Leak", d: "Mauvaises configurations IAM exposant des données cloud.", a: "Vecteur : ACL publiques. Impact : Exfiltration de données massives.", c: "Utiliser S3 Block Public Access et AWS Macie." },
+                    const mData = [
+                        { t: "AWS S3 Leak", d: "Exposition de buckets cloud due à des politiques IAM permissives.", a: "Analyse : Lecture publique activée sur des données sensibles. Risque de fuite massive.", c: "Utiliser S3 Block Public Access et audits IAM." },
                         { t: "LockBit 4.0", d: "Ransomware-as-a-Service ultra-rapide codé en Rust.", a: "Mutation vers l'extorsion pure sans chiffrement parfois.", c: "Segmentation réseau et sauvegardes immuables." },
                         { t: "MoveIT Zero-Day", d: "Exploitation SQL sur serveurs de transfert tiers.", a: "Attaque supply chain touchant des milliers d'organisations.", c: "Patch management prioritaire et audit des logs tiers." },
                         { t: "MFA Fatigue", d: "Push notification spamming pour forcer l'accès.", a: "Contournement humain du second facteur d'authentification.", c: "Activer le Number Matching (FIDO2)." },
@@ -157,15 +202,11 @@
                         { t: "BOLA API", d: "Accès aux données via modification d'ID utilisateur.", a: "Faille logique majeure dans les architectures micro-services.", c: "Contrôle systématique de l'autorisation au niveau objet." },
                         { t: "Evil Twin Wi-Fi", d: "Faux réseaux Wi-Fi pour capturer les credentials.", a: "Cible particulièrement les travailleurs en remote.", c: "VPN obligatoire et authentification 802.1X." }
                     ];
-
-                    document.write(menacesData.map(m => `
-                        <div class="card-veille" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
-                            <div class="image-placeholder"></div>
-                            <div class="card-body">
-                                <span class="severity sev-high">Critique</span>
-                                <h3>${m.t}</h3>
-                                <p>${m.d}</p>
-                            </div>
+                    document.write(mData.map(m => `
+                        <div class="card" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
+                            <span class="badge">VECTEUR_DÉTECTÉ</span>
+                            <h3>${m.t}</h3>
+                            <p>${m.d}</p>
                         </div>
                     `).join(''));
                 </script>
@@ -175,29 +216,25 @@
         <div id="technos" class="content-section">
             <div class="grid-layout">
                 <script>
-                    const techData = [
-                        { t: "PQC Kyber", d: "Standardisation NIST pour la crypto post-quantique.", a: "Anticipation du décryptage par futur ordinateur quantique.", c: "Audit de l'agilité cryptographique des systèmes." },
-                        { t: "Autonomous SOC", d: "Triage d'alertes 100% automatisé via LLM.", a: "Réduction du temps moyen de réponse (MTTR) de 90%.", c: "Supervision humaine sur les actions de remédiation." },
-                        { t: "Zero Trust 2.0", d: "Vérification continue basée sur le contexte.", a: "L'accès est réévalué à chaque nouvelle action de l'utilisateur.", c: "Déploiement de solutions ZTNA." },
-                        { t: "Rust Security", d: "Élimination des failles de mémoire by design.", a: "Rust empêche 70% des vulnérabilités critiques (CWE).", c: "Migration des composants critiques vers Rust." },
-                        { t: "Wi-Fi 8 Security", d: "Nouveau standard de fiabilité et chiffrement.", a: "Optimisation pour les environnements industriels critiques.", c: "Planification du cycle de vie matériel." },
-                        { t: "6G Edge AI", d: "IA intégrée nativement dans les antennes 6G.", a: "Détection de menaces à la vitesse de la lumière en bordure.", c: "Étude de la surface d'attaque Edge." },
-                        { t: "DNA Storage", d: "Archivage de données sur ADN synthétique.", a: "Stockage immuable sur des milliers d'années sans énergie.", c: "Solution de coffre-fort numérique ultime." },
-                        { t: "Cyber Digital Twin", d: "Simulation d'attaques sur jumeaux numériques.", a: "Tester la résilience sans impacter la production réelle.", c: "Coupler le SI à une instance virtuelle de test." },
-                        { t: "Homomorphic Crypt", d: "Calculer sur des données sans les déchiffrer.", a: "Garantit une confidentialité totale dans le cloud public.", c: "Analyse de données sensibles via tiers chiffré." },
-                        { t: "DID Identity", d: "Identité décentralisée via Blockchain.", a: "L'utilisateur possède ses preuves d'identité (Self-Sovereign).", c: "Intégration de portefeuilles d'identité numérique." },
-                        { t: "Satellite Cyber", d: "Protection des réseaux LEO (Starlink/Kuiper).", a: "Sécurisation des liens contre le brouillage et le spoofing.", c: "Utilisation de liens laser cryptés." },
-                        { t: "Privacy AI", d: "Apprentissage fédéré respectant le RGPD.", a: "Les modèles apprennent sans jamais voir les données brutes.", c: "Déploiement de Federated Learning." }
+                    const tData = [
+                        { t: "PQC Kyber", d: "Standardisation NIST pour la crypto post-quantique.", a: "Anticipation du décryptage par futur ordinateur quantique.", c: "Audit de l'agilité cryptographique." },
+                        { t: "Autonomous SOC", d: "Triage d'alertes automatisé via LLM local.", a: "Réduction drastique du temps moyen de réponse (MTTR).", c: "Supervision humaine des remédiations auto." },
+                        { t: "Zero Trust 2.0", d: "Vérification continue basée sur le contexte.", a: "Accès réévalué à chaque nouvelle action utilisateur.", c: "Déploiement de solutions ZTNA." },
+                        { t: "Rust Systems", d: "Élimination des failles de mémoire by design.", a: "Empêche 70% des vulnérabilités critiques courantes.", c: "Migration des composants critiques vers Rust." },
+                        { t: "Wi-Fi 8 Security", d: "Nouveau standard de chiffrement matériel.", a: "Optimisation pour les environnements industriels.", c: "Planification du cycle de vie matériel." },
+                        { t: "6G Edge AI", d: "IA intégrée nativement dans les antennes.", a: "Détection de menaces à la vitesse de la lumière.", c: "Sécurisation de la surface d'attaque Edge." },
+                        { t: "DNA Storage", d: "Archivage de données sur molécules ADN.", a: "Stockage immuable sur des milliers d'années.", c: "Coffre-fort numérique longue durée." },
+                        { t: "Cyber Digital Twin", d: "Simulation d'attaques sur SI miroir.", a: "Tester la résilience sans risque pour la production.", c: "Coupler le SI à une instance virtuelle." },
+                        { t: "Homomorphic Crypto", d: "Calcul sur données sans les déchiffrer.", a: "Confidentialité totale dans le cloud public.", c: "Traitement de données sensibles via tiers." },
+                        { t: "DID Identity", d: "Identité décentralisée via Blockchain.", a: "L'utilisateur possède ses preuves d'identité.", c: "Intégration de portefeuilles numériques." },
+                        { t: "Satellite Cyber", d: "Protection des réseaux LEO (Starlink).", a: "Sécurisation des liens contre le brouillage.", c: "Chiffrement laser de bout en bout." },
+                        { t: "Privacy AI", d: "Apprentissage fédéré respectant le RGPD.", a: "Les modèles apprennent sans voir les données brutes.", c: "Anonymisation native des datasets." }
                     ];
-
-                    document.write(techData.map(m => `
-                        <div class="card-veille" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
-                            <div class="image-placeholder"></div>
-                            <div class="card-body">
-                                <span class="severity sev-low">Innovation</span>
-                                <h3>${m.t}</h3>
-                                <p>${m.d}</p>
-                            </div>
+                    document.write(tData.map(m => `
+                        <div class="card" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
+                            <span class="badge" style="background:var(--green); color:black">R&D_SEC</span>
+                            <h3>${m.t}</h3>
+                            <p>${m.d}</p>
                         </div>
                     `).join(''));
                 </script>
@@ -207,22 +244,18 @@
         <div id="crises" class="content-section">
             <div class="grid-layout">
                 <script>
-                    const crisesData = [
-                        { t: "Sony Attack 2014", d: "Attaque destructive avec fuites massives d'emails.", a: "Attaque étatique (GOP) visant à paralyser une entreprise.", c: "Importance de la séparation des réseaux administratifs." },
-                        { t: "Equifax 2017", d: "Fuite de 147 millions de données financières.", a: "Cause : Une faille Apache Struts non patchée.", c: "Gestion rigoureuse du Patch Management." },
-                        { t: "SolarWinds 2020", d: "Compromission de la supply chain logicielle.", a: "Infiltration via une mise à jour logicielle légitime.", c: "Audit SBOM et contrôle d'intégrité des binaires." },
-                        { t: "Maersk NotPetya", d: "Paralysie du transport maritime mondial.", a: "Propagation virale automatique via vulnérabilité SMB.", c: "Plan de continuité d'activité (PCA) robuste." },
-                        { t: "Uber 2022", d: "Piratage via MFA Fatigue et ingénierie sociale.", a: "Accès total au Slack et au cloud AWS de l'entreprise.", c: "Sensibilisation aux nouvelles formes de phishing." }
+                    const cData = [
+                        { t: "Sony 2014", d: "Attaque destructive avec fuites d'emails.", a: "Méthode : Wiper Malware par les GOP.", c: "Segmentation et isolation des réseaux." },
+                        { t: "Equifax 2017", d: "Fuite de 147M de données financières.", a: "Cause : Faille Apache Struts non patchée.", c: "Patch management rigoureux." },
+                        { t: "SolarWinds 2020", d: "Compromission supply chain logicielle.", a: "Infiltration via mise à jour légitime.", c: "Audit SBOM et intégrité des binaires." },
+                        { t: "Maersk NotPetya", d: "Paralysie du fret maritime mondial.", a: "Propagation virale via vulnérabilité SMB.", c: "Plan de continuité d'activité (PCA)." },
+                        { t: "Uber 2022", d: "Piratage via MFA Fatigue.", a: "Accès total au Slack et au cloud AWS.", c: "Sensibilisation à l'ingénierie sociale." }
                     ];
-
-                    document.write(crisesData.map(m => `
-                        <div class="card-veille" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
-                            <div class="image-placeholder"></div>
-                            <div class="card-body">
-                                <span class="severity sev-high" style="background:white; color:black">Archive</span>
-                                <h3>${m.t}</h3>
-                                <p>${m.d}</p>
-                            </div>
+                    document.write(cData.map(m => `
+                        <div class="card" onclick="openFocus('${m.t}', '${m.a}', '${m.c}')">
+                            <span class="badge" style="background:var(--white); color:black">HISTORIC</span>
+                            <h3>${m.t}</h3>
+                            <p>${m.d}</p>
                         </div>
                     `).join(''));
                 </script>
@@ -230,28 +263,23 @@
         </div>
     </main>
 
+    <footer class="status-footer">
+        <div><span class="online-dot"></span> SYSTEM_ONLINE</div>
+        <div>ALEXIS_VELOSO // CORE_DB</div>
+        <div style="margin-left:auto; color:var(--accent);">v4.0.2</div>
+    </footer>
+
     <div id="focusModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeFocus()">&times;</span>
             <h2 id="modalTitle" style="color:var(--accent); font-family:'Orbitron';"></h2>
             <div id="modalAnalysis" class="analysis-box"></div>
             <div id="modalDefense" class="defense-box"></div>
-            <div style="margin-top:20px; font-size:0.6rem; color:var(--text-dim);">[ DB_ENTRY_ID: 2026_X0 ]</div>
+            <div style="margin-top:20px; font-size:0.6rem; color:var(--text-dim);">[ DB_ENTRY_VALIDATED ]</div>
         </div>
     </div>
 
     <script>
-        // PARTICULES
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80 },
-                "color": { "value": "#00f2ff" },
-                "opacity": { "value": 0.2 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1 }
-            }
-        });
-
-        // NAVIGATION
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -259,11 +287,19 @@
             event.currentTarget.classList.add('active');
         }
 
-        // MODALE
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                card.style.display = text.includes(input) ? "block" : "none";
+            });
+        }
+
         function openFocus(title, analysis, defense) {
             document.getElementById('modalTitle').innerText = "> " + title;
             document.getElementById('modalAnalysis').innerText = analysis;
-            document.getElementById('modalDefense').innerHTML = "<strong>PRÉCONISATION :</strong><br>" + defense;
+            document.getElementById('modalDefense').innerHTML = "<strong>STRATÉGIE DE RÉPONSE :</strong><br>" + defense;
             document.getElementById('focusModal').style.display = "block";
         }
 
@@ -271,14 +307,8 @@
             document.getElementById('focusModal').style.display = "none";
         }
 
-        // RECHERCHE
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.card-veille');
-            cards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                card.style.display = text.includes(input) ? "block" : "none";
-            });
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('focusModal')) closeFocus();
         }
     </script>
 </body>
