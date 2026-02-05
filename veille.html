@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // CYBER_WATCH_2026</title>
+    <title>ALEXIS_VELOSO // CYBER_STRAT_CENTER</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,9 +13,10 @@
             --accent: #00f2ff;
             --purple: #bc13fe;
             --bg: #050507;
-            --card-bg: rgba(15, 15, 20, 0.8);
+            --card-bg: rgba(15, 15, 20, 0.9);
             --border: rgba(0, 242, 255, 0.2);
             --text: #e0e0e0;
+            --critique: #ff0055;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,280 +24,246 @@
             background: var(--bg); 
             color: var(--text); 
             font-family: 'JetBrains Mono', monospace; 
-            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050507 100%);
+            min-height: 100vh;
         }
 
-        /* Scanline Effect */
-        body::before {
-            content: " ";
+        /* Scanline Overlay */
+        .scanline {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 100;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px; pointer-events: none; z-index: 1000;
         }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
 
-        /* Header */
+        /* Navigation Corrigée */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px; border: 1px solid var(--border);
-            background: var(--card-bg); backdrop-filter: blur(10px);
-            margin-bottom: 30px; border-radius: 4px;
+            padding: 20px 40px; border: 1px solid var(--border);
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+            margin-bottom: 30px; border-radius: 8px; position: sticky; top: 10px; z-index: 100;
         }
-        .logo { font-family: 'Orbitron', sans-serif; color: var(--accent); font-weight: bold; font-size: 1.2rem; }
-        .status-dot { height: 8px; width: 8px; background: #00ff00; border-radius: 50%; display: inline-block; margin-right: 10px; box-shadow: 0 0 10px #00ff00; }
+        .nav-menu a {
+            color: var(--text); text-decoration: none; margin-left: 25px;
+            font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 
-        /* Terminal Hero */
-        .hero {
-            background: rgba(0, 0, 0, 0.6); border-left: 5px solid var(--purple);
-            padding: 30px; margin-bottom: 40px; position: relative;
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 30px; display: flex; gap: 10px;
         }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
-        .glitch-text { animation: glitch 2s infinite; }
-        @keyframes glitch { 
-            0% { text-shadow: 2px 0 var(--accent); } 
-            50% { text-shadow: -2px 0 var(--purple); } 
-            100% { text-shadow: 2px 0 var(--accent); } 
+        #searchInput {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            padding: 15px; color: var(--accent); font-family: 'JetBrains Mono';
+            outline: none; border-radius: 4px;
         }
 
-        /* Navigation Tabs */
-        .tabs { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-        .tab-btn {
-            background: transparent; border: 1px solid var(--border); color: var(--accent);
-            padding: 12px 25px; cursor: pointer; font-family: 'Orbitron', sans-serif;
-            transition: 0.3s; border-radius: 2px; text-transform: uppercase; font-size: 0.8rem;
-        }
-        .tab-btn:hover, .tab-btn.active { background: var(--accent); color: #000; box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
-
-        /* Veille Grid */
-        .content-section { display: none; animation: slideUp 0.5s ease; }
+        /* Content Sections */
+        .content-section { display: none; animation: fadeIn 0.6s ease-out; }
         .content-section.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Grid & Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
-
         .card {
-            background: var(--card-bg); border: 1px solid var(--border); padding: 25px;
-            position: relative; transition: 0.4s; overflow: hidden;
+            background: var(--card-bg); border: 1px solid var(--border); padding: 30px;
+            position: relative; transition: 0.4s; border-radius: 4px;
         }
-        .card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            transform: translateX(-100%); transition: 0.6s;
+        .card:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); transform: translateY(-5px); }
+        .card h3 { color: var(--accent); font-family: 'Orbitron'; margin-bottom: 15px; font-size: 1rem; }
+        .card p { font-size: 0.85rem; line-height: 1.8; color: #b0b0b0; text-align: justify; margin-bottom: 15px; }
+        
+        .severity { font-size: 0.6rem; padding: 3px 10px; border-radius: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: inline-block; }
+        .sev-high { background: var(--critique); color: #fff; }
+        .sev-med { background: #ffaa00; color: #000; }
+        .sev-low { background: var(--accent); color: #000; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; }
+        .tab-btn {
+            background: none; border: 1px solid var(--border); color: var(--text);
+            padding: 12px 20px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.7rem; transition: 0.3s;
         }
-        .card:hover::before { transform: translateX(100%); }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .tab-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-        .card h3 { color: var(--accent); margin-bottom: 15px; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; }
-        .card p { font-size: 0.9rem; line-height: 1.7; color: #b0b0b0; margin-bottom: 15px; }
-        .card .impact { font-size: 0.8rem; color: var(--purple); font-weight: bold; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; }
-
-        .badge { position: absolute; top: 15px; right: 15px; background: rgba(188, 19, 254, 0.2); color: var(--purple); padding: 3px 10px; font-size: 0.7rem; border-radius: 10px; border: 1px solid var(--purple); }
-
-        /* Stats Chart */
-        .chart-container { background: var(--card-bg); border: 1px solid var(--border); padding: 40px; margin-top: 30px; border-radius: 4px; }
-
-        /* Ticker */
-        .ticker-wrap { background: #000; border: 1px solid var(--border); padding: 10px; margin-bottom: 30px; overflow: hidden; white-space: nowrap; }
-        .ticker { display: inline-block; animation: ticker 20s linear infinite; color: var(--accent); font-size: 0.8rem; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
-        footer { text-align: center; padding: 50px; border-top: 1px solid var(--border); margin-top: 100px; color: var(--border); font-size: 0.7rem; }
+        footer { text-align: center; padding: 60px; color: rgba(255,255,255,0.2); font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
+    <div class="scanline"></div>
 
-<div class="container">
-    <header>
-        <div class="logo"><span class="status-dot"></span>ALEXIS_VELOSO // CORE_INTEL</div>
-        <div id="clock">00:00:00</div>
-    </header>
+    <div class="container">
+        <header>
+            <div class="logo" style="font-family: 'Orbitron'; color: var(--accent);">
+                <i class="fas fa-shield-virus"></i> CORE_INTEL_V3
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+                <a href="#" class="active"><i class="fas fa-eye"></i> Ma Veille</a>
+            </nav>
+        </header>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            [ALERTE] Nouvelle faille Zero-Day sur architectures ARM64 -- [STABILITÉ] Système de veille opérationnel à 99.8% -- [INFO] Déploiement Wi-Fi 8 imminent en zone urbaine -- [RISQUE] Augmentation des attaques par stéganographie IA...
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="RECHERCHER UNE MENACE OU UNE TECHNOLOGIE (ex: IA, Cloud, Quantum)..." onkeyup="filterCards()">
         </div>
-    </div>
 
-    <section class="hero">
-        <div style="color: var(--accent); margin-bottom: 10px;">> ACCESSING SECURE_DATABASE... DONE.</div>
-        <h1 class="glitch-text">VEILLE STRATÉGIQUE V3.0</h1>
-        <p>// Surveillance active des menaces et innovations technologiques. Edition 2026.</p>
-    </section>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showSection('exemples')">CAS RÉELS (9)</button>
+            <button class="tab-btn" onclick="showSection('technos')">FUTUR_TECH (9)</button>
+            <button class="tab-btn" onclick="showSection('graph')">ANALYSE_GRAPHIQUE</button>
+        </div>
 
-    <nav class="tabs">
-        <button class="tab-btn active" onclick="showSection('exemples')">01_CAS_D_ÉTUDES (9)</button>
-        <button class="tab-btn" onclick="showSection('technos')">02_HORIZON_TECH (9)</button>
-        <button class="tab-btn" onclick="showSection('data')">03_ANALYSE_DATA</button>
-    </nav>
-
-    <div id="exemples" class="content-section active">
-        <div class="grid">
-            <div class="card">
-                <span class="badge">CLOUD</span>
-                <h3>01. Fuite S3 & IAM Misconfig</h3>
-                <p>Analyse de l'exposition massive de données via des buckets Amazon S3 mal configurés. L'étude montre qu'une simple erreur de politique d'identité (IAM) permet l'exfiltration automatique par des bots. J'ai surveillé les méthodes de remédiation comme le "Block Public Access" forcé au niveau organisationnel. Ce cas souligne l'importance de la sécurité par le code (IaC) pour éviter les dérives de configuration manuelle.</p>
-                <div class="impact">> IMPACT : Perte de confidentialité et amendes RGPD critiques.</div>
-            </div>
-            <div class="card">
-                <span class="badge">MALWARE</span>
-                <h3>02. Écosystème LockBit RaaS</h3>
-                <p>Surveillance du groupe LockBit et de son modèle "Ransomware-as-a-Service". Ma veille a porté sur leur capacité à exploiter des failles VPN en moins de 24h après publication. L'analyse des TTPs révèle une utilisation massive d'outils d'administration légitimes pour le mouvement latéral (LotL). La protection étudiée repose sur la sauvegarde immuable et la détection comportementale (EDR).</p>
-                <div class="impact">> IMPACT : Paralysie totale des infrastructures métiers.</div>
-            </div>
-            <div class="card">
-                <span class="badge">SUPPLY_CHAIN</span>
-                <h3>03. Compromission MoveIT</h3>
-                <p>Cas d'école d'une attaque par la chaîne d'approvisionnement via un logiciel de transfert de fichiers. L'injection SQL zero-day a permis un accès direct aux bases de données de milliers de clients. Ma veille a documenté la réactivité nécessaire pour l'inventaire des actifs et le patching d'urgence. Cela démontre que la sécurité de l'entreprise dépend directement du niveau de sécurité de ses fournisseurs tiers.</p>
-                <div class="impact">> IMPACT : Compromission indirecte de millions de comptes.</div>
-            </div>
-            <div class="card">
-                <span class="badge">AI_THREAT</span>
-                <h3>04. Deepfake Vocal & Fraude</h3>
-                <p>Utilisation de l'IA générative pour cloner la voix de dirigeants lors d'appels frauduleux. Ce cas d'ingénierie sociale montre que les barrières techniques sont inutiles sans une formation humaine adéquate. J'ai étudié la mise en place de protocoles de validation multi-canaux pour toute transaction financière. La veille technologique doit ici s'accompagner d'une veille sur les risques psycho-sociaux.</p>
-                <div class="impact">> IMPACT : Fraude au président et pertes financières directes.</div>
-            </div>
-            <div class="card">
-                <span class="badge">DEVSEC</span>
-                <h3>05. Secret Leaks sur GitHub</h3>
-                <p>Analyse de la persistance des clés d'API et secrets dans les dépôts Git publics. L'étude montre que les attaquants scannent les commits en temps réel pour détourner des ressources cloud. J'ai testé des outils comme Trufflehog pour automatiser la détection avant le push. La remédiation passe par l'utilisation systématique de gestionnaires de secrets comme HashiCorp Vault.</p>
-                <div class="impact">> IMPACT : Détournement de puissance cloud (Crypto-jacking).</div>
-            </div>
-            <div class="card">
-                <span class="badge">IDENTITY</span>
-                <h3>06. MFA Fatigue & Social Eng.</h3>
-                <p>Technique consistant à submerger l'utilisateur de notifications MFA jusqu'à l'acceptation par dépit. Ce cas a été illustré par l'attaque sur Uber, utilisant une simple fatigue psychologique. Ma veille préconise le passage au "Number Matching" ou aux clés physiques FIDO2. L'authentification ne doit plus reposer sur une simple validation binaire pour être considérée comme robuste.</p>
-                <div class="impact">> IMPACT : Contournement de la double authentification.</div>
-            </div>
-            <div class="card">
-                <span class="badge">IOT</span>
-                <h3>07. Botnet Mirai & DDoS</h3>
-                <p>Analyse de la résilience des botnets IoT exploitant des mots de passe par défaut sur des caméras IP. L'attaque montre la fragilité du Web face à des flux massifs de requêtes HTTP/S générés par des millions d'objets. Ma veille propose une segmentation réseau stricte par VLAN pour isoler le parc IoT. La sécurité de l'objet doit être intégrée dès sa conception (Security by Design).</p>
-                <div class="impact">> IMPACT : Indisponibilité de services web mondiaux.</div>
-            </div>
-            <div class="card">
-                <span class="badge">ENDPOINT</span>
-                <h3>08. Living off the Land (LotL)</h3>
-                <p>Utilisation détournée d'outils Windows (PowerShell, Certutil) pour exécuter des payloads sans fichier. Cette technique permet de rester invisible pour la majorité des antivirus basés sur les signatures. J'ai analysé l'importance du logging PowerShell (Event ID 4104) pour reconstruire l'attaque. La défense moderne nécessite une surveillance étroite des processus système légitimes.</p>
-                <div class="impact">> IMPACT : Persistance indétectable dans le SI.</div>
-            </div>
-            <div class="card">
-                <span class="badge">NOUVEAU</span>
-                <h3>09. Stéganographie IA</h3>
-                <p>Nouveau cas de veille portant sur l'injection de code malveillant dans des images générées par IA. Le code est caché dans les pixels et activé par un script léger lors de l'affichage. Ma veille explore l'utilisation de filtres de nettoyage d'image avant toute utilisation sur un réseau interne. Cette menace montre que même les fichiers multimédias peuvent désormais servir de vecteurs d'attaque complexes.</p>
-                <div class="impact">> IMPACT : Exécution de code via simple affichage d'image.</div>
+        <div id="exemples" class="content-section active">
+            <div class="grid" id="gridExemples">
+                <div class="card" data-tags="cloud iam amazon">
+                    <span class="severity sev-high">Critique</span>
+                    <h3>01. Fuite S3 & IAM Misconfig</h3>
+                    <p>Analyse de l'exposition massive de données via des buckets Amazon S3 mal configurés. L'étude montre qu'une simple erreur de politique d'identité (IAM) permet l'exfiltration automatique par des bots. J'ai surveillé les méthodes de remédiation comme le "Block Public Access" forcé au niveau organisationnel. Ce cas souligne l'importance de la sécurité par le code (IaC) pour éviter les dérives de configuration manuelle.</p>
+                </div>
+                <div class="card" data-tags="ransomware lockbit malware">
+                    <span class="severity sev-high">Critique</span>
+                    <h3>02. Écosystème LockBit RaaS</h3>
+                    <p>Surveillance du groupe LockBit et de son modèle "Ransomware-as-a-Service". Ma veille a porté sur leur capacité à exploiter des failles VPN en moins de 24h après publication. L'analyse des TTPs révèle une utilisation massive d'outils d'administration légitimes pour le mouvement latéral (LotL). La protection étudiée repose sur la sauvegarde immuable et la détection comportementale (EDR).</p>
+                </div>
+                <div class="card" data-tags="supply chain moveit sql">
+                    <span class="severity sev-high">Critique</span>
+                    <h3>03. Compromission MoveIT</h3>
+                    <p>Cas d'école d'une attaque par la chaîne d'approvisionnement via un logiciel de transfert de fichiers. L'injection SQL zero-day a permis un accès direct aux bases de données de milliers de clients. Ma veille a documenté la réactivité nécessaire pour l'inventaire des actifs et le patching d'urgence. Cela démontre que la sécurité de l'entreprise dépend directement du niveau de sécurité de ses fournisseurs tiers.</p>
+                </div>
+                <div class="card" data-tags="ia deepfake vocal fraude">
+                    <span class="severity sev-med">Moyen</span>
+                    <h3>04. Deepfake Vocal & Fraude</h3>
+                    <p>Utilisation de l'IA générative pour cloner la voix de dirigeants lors d'appels frauduleux. Ce cas d'ingénierie sociale montre que les barrières techniques sont inutiles sans une formation humaine adéquate. J'ai étudié la mise en place de protocoles de validation multi-canaux pour toute transaction financière. La veille technologique doit ici s'accompagner d'une veille sur les risques psycho-sociaux.</p>
+                </div>
+                <div class="card" data-tags="github api secret leak">
+                    <span class="severity sev-high">Critique</span>
+                    <h3>05. Secret Leaks sur GitHub</h3>
+                    <p>Analyse de la persistance des clés d'API et secrets dans les dépôts Git publics. L'étude montre que les attaquants scannent les commits en temps réel pour détourner des ressources cloud. J'ai testé des outils comme Trufflehog pour automatiser la détection avant le push. La remédiation passe par l'utilisation systématique de gestionnaires de secrets comme HashiCorp Vault.</p>
+                </div>
+                <div class="card" data-tags="mfa uber identity">
+                    <span class="severity sev-med">Moyen</span>
+                    <h3>06. MFA Fatigue & Social Eng.</h3>
+                    <p>Technique consistant à submerger l'utilisateur de notifications MFA jusqu'à l'acceptation par dépit. Ce cas a été illustré par l'attaque sur Uber, utilisant une simple fatigue psychologique. Ma veille préconise le passage au "Number Matching" ou aux clés physiques FIDO2. L'authentification ne doit plus reposer sur une simple validation binaire pour être considérée comme robuste.</p>
+                </div>
+                <div class="card" data-tags="iot botnet mirai ddos">
+                    <span class="severity sev-med">Moyen</span>
+                    <h3>07. Botnet Mirai & DDoS</h3>
+                    <p>Analyse de la résilience des botnets IoT exploitant des mots de passe par défaut sur des caméras IP. L'attaque montre la fragilité du Web face à des flux massifs de requêtes HTTP/S générés par des millions d'objets. Ma veille propose une segmentation réseau stricte par VLAN pour isoler le parc IoT. La sécurité de l'objet doit être intégrée dès sa conception (Security by Design).</p>
+                </div>
+                <div class="card" data-tags="powershell lotl endpoint">
+                    <span class="severity sev-high">Critique</span>
+                    <h3>08. Living off the Land (LotL)</h3>
+                    <p>Utilisation détournée d'outils Windows (PowerShell, Certutil) pour exécuter des payloads sans fichier. Cette technique permet de rester invisible pour la majorité des antivirus basés sur les signatures. J'ai analysé l'importance du logging PowerShell (Event ID 4104) pour reconstruire l'attaque. La défense moderne nécessite une surveillance étroite des processus système légitimes.</p>
+                </div>
+                <div class="card" data-tags="ia steganographie image">
+                    <span class="severity sev-low">Faible</span>
+                    <h3>09. Stéganographie IA</h3>
+                    <p>Nouveau cas de veille portant sur l'injection de code malveillant dans des images générées par IA. Le code est caché dans les pixels et activé par un script léger lors de l'affichage. Ma veille explore l'utilisation de filtres de nettoyage d'image avant toute utilisation sur un réseau interne. Cette menace montre que même les fichiers multimédias peuvent désormais servir de vecteurs d'attaque complexes.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="technos" class="content-section">
-        <div class="grid">
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>01. Crypto Post-Quantique (PQC)</h3>
-                <p>La standardisation des algorithmes résistants aux ordinateurs quantiques (NIST) arrive à maturité. En 2026, les entreprises doivent migrer vers Kyber ou Dilithium pour protéger leurs communications futures. Ma veille suit l'implémentation de ces protocoles dans les serveurs web et les VPN. L'enjeu est d'éviter le "Harvest Now, Decrypt Later".</p>
-                <div class="impact">> ÉCHÉANCE : Standardisation complète fin 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>02. Wi-Fi 8 (High Reliability)</h3>
-                <p>Le Wi-Fi 8 (802.11bn) se focalise sur l'UHR (Ultra High Reliability) pour garantir une connexion sans coupure. Contrairement aux versions précédentes, il gère mieux les zones à haute densité comme les entrepôts automatisés. Ma veille analyse les gains de productivité liés à la latence réduite à moins de 2ms. Cette technologie remplacera progressivement les connexions filaires industrielles.</p>
-                <div class="impact">> ÉCHÉANCE : Premiers routeurs certifiés Q3 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>03. SOC Autonome & IA</h3>
-                <p>L'IA générative permet désormais une remédiation automatique des incidents de niveau 1 sans humain. Le système analyse les logs, isole la machine infectée et propose un rapport d'incident complet en secondes. Ma veille surveille les risques de "hallucination" de l'IA pouvant bloquer des services légitimes. Le rôle de l'analyste évolue vers la supervision d'algorithmes.</p>
-                <div class="impact">> ÉCHÉANCE : Intégration massive dans les SIEM 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>04. GreenOps & Carbon Computing</h3>
-                <p>L'optimisation du code et des serveurs pour réduire l'empreinte carbone devient une obligation légale. Les OS de 2026 incluent des planificateurs de tâches qui déplacent les calculs vers des zones à basse intensité carbone. Ma veille suit le développement de langages de programmation plus économes en énergie comme Rust. Le "Green-by-Design" est le nouveau standard du développement durable.</p>
-                <div class="impact">> ÉCHÉANCE : Réglementations Européennes 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>05. Edge 6G & Réseaux Locaux</h3>
-                <p>La 6G commence à être testée pour les réseaux locaux industriels nécessitant des débits de l'ordre du Tbit/s. L'intelligence est déportée en bordure de réseau (Edge) pour un traitement instantané des données de capteurs. Ma veille analyse la sécurité de ces infrastructures décentralisées très exposées. C'est la technologie clé pour l'essor définitif des usines totalement autonomes.</p>
-                <div class="impact">> ÉCHÉANCE : Tests grandeur nature 2026-2027.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>06. Stockage de Données ADN</h3>
-                <p>Face à la pénurie de métaux rares pour les disques durs, le stockage sur ADN synthétique devient viable pour l'archivage séculaire. Un gramme d'ADN peut stocker 215 pétaoctets de données de manière quasi éternelle. Ma veille suit les baisses de coûts des séquenceurs permettant de relire ces données. C'est la solution ultime pour la préservation des archives nationales et historiques.</p>
-                <div class="impact">> ÉCHÉANCE : Centres de données pilotes en 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>07. Zero Trust Network (ZTNA)</h3>
-                <p>L'évolution du VPN vers le ZTNA (Zero Trust Network Access) devient la norme pour le télétravail sécurisé. L'accès n'est plus accordé par réseau mais par application, après vérification de l'état du poste et de l'identité. Ma veille documente la réduction de la surface d'attaque grâce à la micro-segmentation dynamique. C'est la fin du concept de "réseau de confiance" interne.</p>
-                <div class="impact">> ÉCHÉANCE : Adoption par 80% des grands comptes en 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>08. Jumeaux Numériques de Sécurité</h3>
-                <p>Création d'une réplique exacte du SI en environnement virtuel pour simuler des cyberattaques de grande ampleur. Cette technologie permet de tester la résilience des infrastructures critiques (eau, énergie) sans risque réel. Ma veille analyse les outils de synchronisation temps réel entre le jumeau et le système physique. Le "Cyber-Digital-Twin" est l'outil ultime de gestion de crise.</p>
-                <div class="impact">> ÉCHÉANCE : Standardisation pour les OIV en 2026.</div>
-            </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-                <h3>09. Vidéosurveillance Privacy-by-Design</h3>
-                <p>Nouvelle génération de caméras intelligentes traitant l'image localement pour n'envoyer que des métadonnées anonymisées. L'image brute n'est jamais stockée ni transmise, garantissant le respect total du RGPD et de la vie privée. Ma veille explore l'intégration de ces systèmes dans les smart-cities pour la gestion du trafic et de la sécurité. La technologie réconcilie enfin surveillance et libertés individuelles.</p>
-                <div class="impact">> ÉCHÉANCE : Déploiement Smart-Cities 2026.</div>
+        <div id="technos" class="content-section">
+            <div class="grid" id="gridTechnos">
+                <div class="card" data-tags="quantum crypto nist">
+                    <h3>01. Crypto Post-Quantique (PQC)</h3>
+                    <p>La standardisation des algorithmes résistants aux ordinateurs quantiques (NIST) arrive à maturité. En 2026, les entreprises doivent migrer vers Kyber ou Dilithium pour protéger leurs communications futures. Ma veille suit l'implémentation de ces protocoles dans les serveurs web et les VPN. L'enjeu est d'éviter le "Harvest Now, Decrypt Later".</p>
+                </div>
+                <div class="card" data-tags="wifi 8 reseau 802.11bn">
+                    <h3>02. Wi-Fi 8 (High Reliability)</h3>
+                    <p>Le Wi-Fi 8 (802.11bn) se focalise sur l'UHR (Ultra High Reliability) pour garantir une connexion sans coupure. Contrairement aux versions précédentes, il gère mieux les zones à haute densité comme les entrepôts automatisés. Ma veille analyse les gains de productivité liés à la latence réduite à moins de 2ms. Cette technologie remplacera progressivement les connexions filaires industrielles.</p>
+                </div>
+                <div class="card" data-tags="ia soc siem">
+                    <h3>03. SOC Autonome & IA</h3>
+                    <p>L'IA générative permet désormais une remédiation automatique des incidents de niveau 1 sans humain. Le système analyse les logs, isole la machine infectée et propose un rapport d'incident complet en secondes. Ma veille surveille les risques de "hallucination" de l'IA pouvant bloquer des services légitimes. Le rôle de l'analyste évolue vers la supervision d'algorithmes.</p>
+                </div>
+                <div class="card" data-tags="greenops carbone rust">
+                    <h3>04. GreenOps & Carbon Computing</h3>
+                    <p>L'optimisation du code et des serveurs pour réduire l'empreinte carbone devient une obligation légale. Les OS de 2026 incluent des planificateurs de tâches qui déplacent les calculs vers des zones à basse intensité carbone. Ma veille suit le développement de langages de programmation plus économes en énergie comme Rust. Le "Green-by-Design" est le nouveau standard du développement durable.</p>
+                </div>
+                <div class="card" data-tags="6g edge antenne">
+                    <h3>05. Edge 6G & Réseaux Locaux</h3>
+                    <p>La 6G commence à être testée pour les réseaux locaux industriels nécessitant des débits de l'ordre du Tbit/s. L'intelligence est déportée en bordure de réseau (Edge) pour un traitement instantané des données de capteurs. Ma veille analyse la sécurité de ces infrastructures décentralisées très exposées. C'est la technologie clé pour l'essor définitif des usines totalement autonomes.</p>
+                </div>
+                <div class="card" data-tags="adn stockage bio">
+                    <h3>06. Stockage de Données ADN</h3>
+                    <p>Face à la pénurie de métaux rares pour les disques durs, le stockage sur ADN synthétique devient viable pour l'archivage séculaire. Un gramme d'ADN peut stocker 215 pétaoctets de données de manière quasi éternelle. Ma veille suit les baisses de coûts des séquenceurs permettant de relire ces données. C'est la solution ultime pour la préservation des archives nationales et historiques.</p>
+                </div>
+                <div class="card" data-tags="zero trust ztna vpn">
+                    <h3>07. Zero Trust Network (ZTNA)</h3>
+                    <p>L'évolution du VPN vers le ZTNA (Zero Trust Network Access) devient la norme pour le télétravail sécurisé. L'accès n'est plus accordé par réseau mais par application, après vérification de l'état du poste et de l'identité. Ma veille documente la réduction de la surface d'attaque grâce à la micro-segmentation dynamique. C'est la fin du concept de "réseau de confiance" interne.</p>
+                </div>
+                <div class="card" data-tags="jumeau numerique twin simulation">
+                    <h3>08. Jumeaux Numériques de Sécurité</h3>
+                    <p>Création d'une réplique exacte du SI en environnement virtuel pour simuler des cyberattaques de grande ampleur. Cette technologie permet de tester la résilience des infrastructures critiques (eau, énergie) sans risque réel. Ma veille analyse les outils de synchronisation temps réel entre le jumeau et le système physique. Le "Cyber-Digital-Twin" est l'outil ultime de gestion de crise.</p>
+                </div>
+                <div class="card" data-tags="camera privacy rgpd">
+                    <h3>09. Vidéosurveillance Privacy-by-Design</h3>
+                    <p>Nouvelle génération de caméras intelligentes traitant l'image localement pour n'envoyer que des métadonnées anonymisées. L'image brute n'est jamais stockée ni transmise, garantissant le respect total du RGPD et de la vie privée. Ma veille explore l'intégration de ces systèmes dans les smart-cities pour la gestion du trafic et de la sécurité. La technologie réconcilie enfin surveillance et libertés individuelles.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="data" class="content-section">
-        <div class="chart-container">
-            <h2 style="text-align: center; font-family: 'Orbitron'; margin-bottom: 20px;">ANALYSE DES MENACES SURVEILLÉES</h2>
-            <canvas id="threatChart" style="max-height: 500px;"></canvas>
+        <div id="graph" class="content-section">
+            <div style="background: var(--card-bg); padding: 40px; border: 1px solid var(--border);">
+                <canvas id="mainChart"></canvas>
+            </div>
         </div>
+
+        <footer>
+            PROJET_VEILLE_CYBER // ALEXIS_VELOSO // © 2026
+        </footer>
     </div>
 
-    <footer>
-        ALEXIS_VELOSO // VEILLE_TECHNOLOGIQUE_OFFICIELLE // 2026 // TOUS DROITS RÉSERVÉS
-    </footer>
-</div>
-
-<script>
-    // Horloge
-    function updateClock() {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
-    }
-    setInterval(updateClock, 1000);
-
-    // Navigation
-    function showSection(id) {
-        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-
-    // Graphique Radar
-    const ctx = document.getElementById('threatChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['Cyber-Attaques', 'Infrastructure Cloud', 'IA & Deepfakes', 'Réseaux 6G/Wifi 8', 'Quantum Risks', 'IoT Security', 'Identity Access'],
-            datasets: [{
-                label: 'Intensité de Veille (%)',
-                data: [95, 88, 92, 75, 80, 70, 90],
-                backgroundColor: 'rgba(0, 242, 255, 0.2)',
-                borderColor: '#00f2ff',
-                pointBackgroundColor: '#fff',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                r: {
-                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                    pointLabels: { color: '#00f2ff', font: { size: 12, family: 'Orbitron' } },
-                    ticks: { display: false }
-                }
-            },
-            plugins: {
-                legend: { labels: { color: '#fff', font: { family: 'JetBrains Mono' } } }
-            }
+    <script>
+        // Changement de section
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
-    });
-</script>
 
+        // Filtrage dynamique
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                let tags = card.getAttribute('data-tags') || "";
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let text = card.querySelector('p').innerText.toLowerCase();
+                
+                if (title.includes(input) || text.includes(input) || tags.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Graphique
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['CLOUD', 'IA', 'QUANTUM', 'NETWORK', 'IOT', 'IDENTITY'],
+                datasets: [{
+                    label: 'Intensité de Veille (%)',
+                    data: [95, 90, 85, 75, 80, 92],
+                    borderColor: '#00f2ff',
+                    backgroundColor: 'rgba(0, 242, 255, 0.1)',
+                }]
+            },
+            options: {
+                scales: {
+                    r: { grid: { color: '#333' }, pointLabels: { color: '#00f2ff' }, ticks: { display: false } }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
