@@ -7,6 +7,49 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Ajouts pour l'intégration du logo Neo-Violet */
+        .hero-header-flex {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .terminal-logo {
+            width: 60px; /* Ajuste la taille selon tes besoins */
+            height: auto;
+            filter: drop-shadow(0 0 10px #8a2be2); /* Lueur violette de base */
+            animation: float 3s ease-in-out infinite, neonPulse 2s infinite alternate;
+        }
+
+        /* Animation de flottement (bouge un peu) */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Effet de reflet néo-violet (pulse) */
+        @keyframes neonPulse {
+            from {
+                filter: drop-shadow(0 0 5px #8a2be2) brightness(1);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #bf00ff) brightness(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .terminal-logo {
+                width: 45px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="circuit-bg"></div>
@@ -40,9 +83,13 @@
                     <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">cat intro_expert.txt</span>
                 </div>
                 <div class="content-block">
-                    <h1 class="hero-name">
-                        <span class="terminal-typing">ALEXIS VELOSO</span>
-                    </h1>
+                    <div class="hero-header-flex">
+                        <h1 class="hero-name">
+                            <span class="terminal-typing">ALEXIS VELOSO</span>
+                        </h1>
+                        <img src="logo.png" alt="Logo" class="terminal-logo">
+                    </div>
+                    
                     <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
                     <div class="hero-text-large">
                         <p>> Étudiant en Licence Générale Informatique (SDR).</p>
