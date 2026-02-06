@@ -75,6 +75,7 @@
 
         .log-success { color: var(--green); }
         .log-info { color: var(--accent); }
+        .log-error { color: #ff5555; font-weight: bold; } /* Ajout style erreur */
 
         @media (max-width: 768px) {
             .social-hub { grid-template-columns: 1fr; }
@@ -144,7 +145,7 @@
                             <input type="text" name="name" id="sender-name" placeholder="Votre Nom" class="cyber-input" required>
                         </div>
                         <div style="display:flex; flex-direction:column; flex:1;">
-                            <label style="font-size: 0.65rem; color: var(--accent);">MAIL</label>
+                            <label style="font-size: 0.65rem; color: var(--accent);">MAIL (OBLIGATOIRE)</label>
                             <input type="email" name="email" id="sender-email" placeholder="votre@email.com" class="cyber-input" required>
                         </div>
                     </div>
@@ -168,7 +169,7 @@
                         <textarea name="message" id="msg-body" placeholder="Initialisez votre message..." class="cyber-input" rows="7" required></textarea>
                     </div>
 
-                    <button type="submit" class="cyber-button" style="margin-top:30px; width:100%; height: 50px;">
+                    <button type="submit" id="submit-btn" class="cyber-button" style="margin-top:30px; width:100%; height: 50px;">
                         EXECUTE_TRANSMISSION
                     </button>
 
@@ -190,6 +191,7 @@
         const customSubjectContainer = document.getElementById('custom-subject-container');
         const customSubjectInput = document.getElementById('custom-subject');
         const consoleLog = document.getElementById('ssh-console');
+        const emailInput = document.getElementById('sender-email');
 
         // GESTION OBJET DYNAMIQUE
         subjectSelect.addEventListener('change', function() {
@@ -213,6 +215,17 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             consoleLog.style.display = 'block';
+            consoleLog.innerHTML = ''; // Clear previous logs
+            
+            // VERIFICATION OBLIGATOIRE DE L'EMAIL
+            if (!emailInput.value || !emailInput.checkValidity()) {
+                addLog("CRITICAL_ERROR: MAIL_ADDRESS_REQUIRED", "log-error");
+                addLog("Transmission aborted. Please provide a valid email.", "log-error");
+                emailInput.style.borderColor = "var(--red)";
+                emailInput.focus();
+                return; // Bloque l'envoi
+            }
+
             addLog("Authenticating SSH tunnel...", "log-info");
             
             let finalSubject = subjectSelect.value === 'autre' ? customSubjectInput.value : subjectSelect.value;
@@ -223,18 +236,25 @@
             const formData = new FormData(form);
             formData.append('subject', finalSubject);
 
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
 
-            if (response.ok) {
-                setTimeout(() => {
-                    addLog("TRANSMISSION_SUCCESS: Delivered to alexis-server.", "log-success");
-                    form.reset();
-                    customSubjectContainer.style.display = 'none';
-                }, 1500);
+                if (response.ok) {
+                    setTimeout(() => {
+                        addLog("TRANSMISSION_SUCCESS: Delivered to alexis-server.", "log-success");
+                        form.reset();
+                        customSubjectContainer.style.display = 'none';
+                        emailInput.style.borderColor = ""; 
+                    }, 1500);
+                } else {
+                    addLog("SERVER_ERROR: Transmission failed.", "log-error");
+                }
+            } catch (error) {
+                addLog("NETWORK_ERROR: Check your connection.", "log-error");
             }
         });
 
