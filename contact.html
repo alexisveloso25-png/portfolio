@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALEXIS_VELOSO // CONTACT_LINK</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- AJOUTS SPECIFIQUES POUR CONTACT --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 20px;
+        }
+
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .map-placeholder {
+            height: 150px;
+            background: rgba(163, 102, 255, 0.05);
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--red);
+            z-index: 2;
+        }
+
+        .social-connect {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 15px;
+            border: 1px solid rgba(163, 102, 255, 0.3);
+            text-align: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: 0.3s;
+            background: rgba(163, 102, 255, 0.02);
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent);
+            background: rgba(163, 102, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .status-msg {
+            font-size: 0.7rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="circuit-bg"></div>
+    <div class="scanline-global"></div>
+
+    <header class="top-bar">
+        <div class="brand">USER: ALEXIS_VELOSO / <span>CONTACT_MODEM</span></div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
+            <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
+            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
+            <a href="veille.html"><i class="fas fa-graduation-cap"></i> VEILLE</a>
+        </nav>
+    </header>
+
+    <main class="wrapper">
+        <section class="terminal-window card section-spacing">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div class="terminal-title-inline">bash — establish_connection.sh</div>
+                </div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-prompt">
+                    <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./send_request --target="Alexis Veloso"</span>
+                </div>
+                <div class="content-block">
+                    <h1 class="hero-name">
+                        <span class="terminal-typing">ME CONTACTER</span>
+                    </h1>
+                    <p class="hero-role">// OPEN_FOR_NETWORKING & PROJECTS</p>
+                    <div class="hero-text-large">
+                        <p>> Handshake protocole prêt.</p>
+                        <p>> Temps de réponse moyen : < 24 heures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="contact-grid section-spacing">
+            <div class="info-panel">
+                <section class="card">
+                    <div class="badge">LOCATION_TRACKING</div>
+                    <div class="map-placeholder">
+                        <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(circle, rgba(163, 102, 255, 0.1) 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        <div class="map-dot pulse"></div>
+                        <div style="z-index: 2; margin-left: 15px; font-size: 0.8rem; font-weight: 800;">PARIS_FRANCE [48.8566° N, 2.3522° E]</div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="badge">ENCRYPTED_CHANNELS</div>
+                    <div class="social-connect">
+                        <a href="https://www.linkedin.com/in/alexis-veloso-004097270" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin-in"></i><br><small>LINKEDIN</small>
+                        </a>
+                        <a href="https://github.com/AlexisVeloso" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i><br><small>GITHUB</small>
+                        </a>
+                        <a href="mailto:alexis.veloso25@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i><br><small>EMAIL</small>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <section class="card">
+                <div class="badge">SECURE_MESSAGE_GATEWAY</div>
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                    <input type="hidden" name="access_key" value="f7b3c0d7-6a6f-4258-a355-eabf5ebea407">
+                    <input type="hidden" name="subject" value="URGENT: Nouveau message Portfolio">
+                    <input type="checkbox" name="botcheck" id="" style="display: none;">
+
+                    <div class="form-row">
+                        <div style="display:flex; flex-direction:column; gap:5px;">
+                            <label style="font-size: 0.6rem; color: var(--accent);">ID_SENDER</label>
+                            <input type="text" name="name" placeholder="Votre nom" class="cyber-input" required>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:5px;">
+                            <label style="font-size: 0.6rem; color: var(--accent);">RETURN_MAIL_ADDR</label>
+                            <input type="email" name="email" placeholder="email@exemple.com" class="cyber-input" required>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
+                        <label style="font-size: 0.6rem; color: var(--accent);">MESSAGE_DATA_PACKET</label>
+                        <textarea name="message" placeholder="Tapez votre message ici..." class="cyber-input" rows="6" required></textarea>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="cyber-button" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> TRANSMIT_DATA
+                        </button>
+                        <p id="form-status" class="status-msg"></p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="status-footer">
+        <div class="footer-segment"><span class="online-dot pulse"></span> LINK: <span class="t-green">STABLE</span></div>
+        <div class="footer-segment">ENCRYPTION: <span class="t-green">AES-256</span></div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // CONTACT_V4</div>
+    </footer>
+
+    <script>
+        // Gestion de l'envoi du formulaire pour éviter de quitter la page
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('form-status');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            status.style.display = "block";
+            status.innerHTML = "SYSTEM: Transmitting data...";
+            status.style.color = "var(--accent)";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    status.innerHTML = "SYSTEM: Data transmitted successfully. Handshake OK.";
+                    status.style.color = "var(--green)";
+                    form.reset();
+                } else {
+                    status.innerHTML = "SYSTEM ERROR: " + json.message;
+                    status.style.color = "var(--red)";
+                }
+            })
+            .catch(error => {
+                status.innerHTML = "CRITICAL ERROR: Connection lost.";
+                status.style.color = "var(--red)";
+            });
+        });
+    </script>
+</body>
+</html>
