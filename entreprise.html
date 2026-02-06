@@ -19,24 +19,38 @@
 
         .logo-3d-side {
             flex-shrink: 0;
-            width: 200px; /* Taille du logo */
-            perspective: 1000px;
-            /* Lueur violette sur les lettres */
-            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.7)); 
-            animation: floating3D 5s infinite ease-in-out;
-            opacity: 0.85;
-            transition: all 0.4s ease;
+            width: 220px;
+            perspective: 1200px; /* Profondeur accentuée */
+    
+           /* EFFET NÉO-VIOLET & RELIEF */
+           /* 1. On donne une lueur violette aux lettres */
+           /* 2. On augmente le contraste pour que le logo ressorte du noir */
+           filter: drop-shadow(5px 5px 15px rgba(163, 102, 255, 0.9)) 
+                   brightness(1.2) 
+                   contrast(1.1);
+    
+            /* INCLINAISON 3D FIXE + ANIMATION */
+            transform: rotateY(25deg) rotateX(10deg);
+            animation: floating3D_Expert 6s infinite ease-in-out;
+    
+            opacity: 0.9;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo-3d-side:hover {
             opacity: 1;
-            filter: drop-shadow(0 0 25px var(--accent));
-            transform: scale(1.05) rotateY(-10deg);
+            /* Effet "Surcharge" au survol */
+            filter: drop-shadow(0 0 30px #a366ff) brightness(1.5);
+            transform: rotateY(0deg) rotateX(0deg) scale(1.1);
         }
 
-        @keyframes floating3D {
-            0%, 100% { transform: rotateY(15deg) rotateX(5deg) translateY(0px); }
-            50% { transform: rotateY(5deg) rotateX(-5deg) translateY(-15px); }
+        @keyframes floating3D_Expert {
+            0%, 100% { 
+                transform: rotateY(25deg) rotateX(10deg) translateY(0px); 
+            }
+            50% { 
+                transform: rotateY(15deg) rotateX(-5deg) translateY(-20px); 
+            }
         }
 
         /* --- STYLES D'ORIGINE CONSERVÉS --- */
