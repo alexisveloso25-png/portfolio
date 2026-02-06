@@ -8,52 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- NOUVEAUX STYLES : LOGO 3D NÉO-VIOLET --- */
+        /* --- NOUVEAUX STYLES : LOGO HOLOGRAPHIQUE 3D --- */
         .terminal-content-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 40px;
+            gap: 30px;
             margin-top: 20px;
         }
 
         .logo-3d-side {
             flex-shrink: 0;
-            width: 220px;
-            perspective: 1200px; /* Profondeur accentuée */
-    
-           /* EFFET NÉO-VIOLET & RELIEF */
-           /* 1. On donne une lueur violette aux lettres */
-           /* 2. On augmente le contraste pour que le logo ressorte du noir */
-           filter: drop-shadow(5px 5px 15px rgba(163, 102, 255, 0.9)) 
-                   brightness(1.2) 
-                   contrast(1.1);
-    
-            /* INCLINAISON 3D FIXE + ANIMATION */
-            transform: rotateY(25deg) rotateX(10deg);
-            animation: floating3D_Expert 6s infinite ease-in-out;
-    
-            opacity: 0.9;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 280px; /* Taille augmentée pour voir les cadres transparents */
+            perspective: 1000px;
+            /* Lueur violette douce qui s'adapte au logo */
+            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.4)); 
+            animation: floatingHolo 6s infinite ease-in-out;
+            transition: all 0.5s ease;
         }
 
         .logo-3d-side:hover {
-            opacity: 1;
-            /* Effet "Surcharge" au survol */
-            filter: drop-shadow(0 0 30px #a366ff) brightness(1.5);
-            transform: rotateY(0deg) rotateX(0deg) scale(1.1);
+            transform: scale(1.08) rotateY(-5deg);
+            filter: drop-shadow(0 0 25px var(--accent));
         }
 
-        @keyframes floating3D_Expert {
-            0%, 100% { 
-                transform: rotateY(25deg) rotateX(10deg) translateY(0px); 
-            }
-            50% { 
-                transform: rotateY(15deg) rotateX(-5deg) translateY(-20px); 
-            }
+        @keyframes floatingHolo {
+            0%, 100% { transform: rotateY(8deg) translateY(0px); }
+            50% { transform: rotateY(-2deg) translateY(-15px); }
         }
 
-        /* --- STYLES D'ORIGINE CONSERVÉS --- */
+        /* --- STYLES D'ORIGINE --- */
         .skill-bar-container {
             background: rgba(255, 255, 255, 0.1);
             height: 6px;
@@ -84,7 +68,6 @@
             font-weight: bold;
             transition: all 0.3s;
             text-transform: uppercase;
-            text-align: center;
         }
         .btn-mission:hover {
             background: var(--accent);
@@ -102,16 +85,6 @@
             padding-top: 10px;
             margin-top: 15px;
         }
-        .log-line { margin-bottom: 2px; }
-        .log-time { color: var(--purple); }
-
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
 
         .project-card { 
             transition: transform 0.3s ease, box-shadow 0.3s ease; 
@@ -124,11 +97,10 @@
             justify-content: space-between;
         }
         .project-card:hover { transform: translateY(-5px); border-color: var(--accent) !important; }
-        small { color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; letter-spacing: 1px; }
 
-        @media (max-width: 900px) {
-            .terminal-content-wrapper { flex-direction: column; text-align: center; }
-            .logo-3d-side { width: 140px; margin-top: 20px; }
+        @media (max-width: 950px) {
+            .terminal-content-wrapper { flex-direction: column-reverse; text-align: center; }
+            .logo-3d-side { width: 200px; margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -172,7 +144,7 @@
                         </div>
                     </div>
 
-                    <img src="assets/logo_theneas.png" alt="THENEAS 3D LOGO" class="logo-3d-side">
+                    <img src="assets/logo_theneas.png" alt="THENEAS Hologram" class="logo-3d-side">
                 </div>
             </div>
         </section>
@@ -202,7 +174,6 @@
         <section class="card section-spacing">
             <div class="badge" style="margin-bottom: 20px;">MISSIONS</div>
             <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                
                 <div class="project-card">
                     <div>
                         <div style="display: flex; justify-content: space-between;">
@@ -252,7 +223,6 @@
 
         <section class="card section-spacing" style="background: rgba(0,0,0,0.4); border: 1px solid var(--purple);">
             <div class="badge" style="background: var(--purple);">SUPERVISION_SYSTEM_DASHBOARD</div>
-            
             <div class="supervision-layout" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
                 <div class="noc-screen" style="flex: 2; min-width: 300px;">
                     <div style="border: 1px solid var(--purple); padding: 15px; background: rgba(147, 51, 234, 0.05);">
@@ -260,39 +230,15 @@
                             <span class="t-purple">PRTG_LIVE_FEED</span>
                             <span class="online-dot pulse"></span>
                         </div>
-                        <h3 class="v-title">PRTG // NETWORK MONITORING OBJECTIFS</h3>
-                        
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Surveillance en temps réel</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-bell t-green"></i> Alerting proactive (SMS/Mail)</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-chart-line t-green"></i> Analyse de bande passante</li>
-                            </ul>
-                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Historisation des données</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-network-wired t-green"></i> Mapping de l'infrastructure</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-file-alt t-green"></i> Rapports de disponibilité</li>
-                            </ul>
-                        </div>
-
+                        <h3 class="v-title">PRTG // NETWORK MONITORING</h3>
                         <div id="log-container"></div>
                     </div>
                 </div>
-
                 <div class="noc-metrics" style="flex: 0.5; min-width: 180px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);"><small>SENSORS</small><div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;"><small>PING</small><div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono';">99.9%</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono';">12ms</div></div>
                 </div>
             </div>
-        </section>
-
-        <section class="card section-spacing" style="border-left: 4px solid var(--accent);">
-            <div class="badge">INFRASTRUCTURE_HEALTH</div>
-            <p style="font-size: 0.9rem; font-style: italic; color: var(--text-dim);">
-                "Inspiré des principes Agile, j'ai privilégié une approche itérative, décomposant le projet en phases successives et gérables. Cette méthode m'a permis d'avancer pas à pas..."
-            </p>
         </section>
     </main>
 
@@ -302,22 +248,13 @@
     </footer>
 
     <script>
-        const logs = [
-            "Syncing with Azure AD...",
-            "Backup Job #84 completed.",
-            "Analyzing PRTG traffic spikes...",
-            "Proxmox Node 2: Resources OK",
-            "New ticket in GLPI: #4582",
-            "Network Topology refresh..."
-        ];
+        const logs = ["Syncing...", "Backup completed.", "Proxmox OK", "GLPI ticket #4582"];
         setInterval(() => {
             const container = document.getElementById('log-container');
             if(!container) return;
-            const time = new Date().toLocaleTimeString();
             const log = logs[Math.floor(Math.random() * logs.length)];
-            container.innerHTML += `<div class="log-line"><span class="log-time">[${time}]</span> ${log}</div>`;
-            if(container.childNodes.length > 8) container.removeChild(container.firstChild);
-            container.scrollTop = container.scrollHeight;
+            container.innerHTML += `<div class="log-line"><span class="log-time">[${new Date().toLocaleTimeString()}]</span> ${log}</div>`;
+            if(container.childNodes.length > 5) container.removeChild(container.firstChild);
         }, 3000);
     </script>
 </body>
