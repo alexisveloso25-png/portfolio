@@ -21,15 +21,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 30px; /* Augmenté légèrement pour l'équilibre */
             margin-top: 15px;
         }
 
         .logo-3d-side {
             flex-shrink: 0;
-            width: 250px;
+            width: 320px; /* AMÉLIORATION : Logo agrandi comme demandé */
+            height: auto;
             mix-blend-mode: screen; /* Pour détourer le logo sur fond noir */
-            filter: drop-shadow(0 0 10px rgba(163, 102, 255, 0.5));
+            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.6)); /* Ombre portée plus diffuse */
             perspective: 1000px;
             animation: floatingHolo 6s infinite ease-in-out;
             transition: all 0.5s ease;
@@ -97,7 +98,7 @@
 
         @media (max-width: 900px) {
             .terminal-content-wrapper { flex-direction: column-reverse; text-align: center; }
-            .logo-3d-side { width: 180px; }
+            .logo-3d-side { width: 220px; } /* Adapté pour mobile tout en restant plus grand qu'avant */
         }
     </style>
 </head>
