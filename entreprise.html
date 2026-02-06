@@ -8,7 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- NOUVEAUX STYLES : LOGO HOLOGRAPHIQUE 3D --- */
+        :root {
+            --accent: #a366ff;
+            --purple: #9333ea;
+            --green: #22c55e;
+            --text-dim: #aaa;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- STYLES DU TERMINAL ET DU NOUVEAU LOGO --- */
         .terminal-content-wrapper {
             display: flex;
             justify-content: space-between;
@@ -17,19 +25,15 @@
             margin-top: 20px;
         }
 
+        .content-block { flex: 1; }
+
         .logo-3d-side {
             flex-shrink: 0;
-            width: 280px; /* Taille augmentée pour voir les cadres transparents */
+            width: 280px; 
             perspective: 1000px;
-            /* Lueur violette douce qui s'adapte au logo */
             filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.4)); 
             animation: floatingHolo 6s infinite ease-in-out;
             transition: all 0.5s ease;
-        }
-
-        .logo-3d-side:hover {
-            transform: scale(1.08) rotateY(-5deg);
-            filter: drop-shadow(0 0 25px var(--accent));
         }
 
         @keyframes floatingHolo {
@@ -37,7 +41,23 @@
             50% { transform: rotateY(-2deg) translateY(-15px); }
         }
 
-        /* --- STYLES D'ORIGINE --- */
+        /* --- STYLES DES MISSIONS & CARTES --- */
+        .project-card { 
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 4px;
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--accent); 
+            box-shadow: 0 5px 15px rgba(163, 102, 255, 0.1);
+        }
+
         .skill-bar-container {
             background: rgba(255, 255, 255, 0.1);
             height: 6px;
@@ -51,13 +71,6 @@
             box-shadow: 0 0 10px var(--accent);
         }
 
-        .btn-mission-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 15px;
-        }
-
         .btn-mission {
             display: inline-block;
             padding: 8px 15px;
@@ -67,40 +80,32 @@
             font-size: 0.75rem;
             font-weight: bold;
             transition: all 0.3s;
-            text-transform: uppercase;
+            text-align: center;
+            margin-top: 15px;
         }
         .btn-mission:hover {
             background: var(--accent);
             color: #000;
-            box-shadow: 0 0 15px var(--accent);
         }
 
+        /* --- SUPERVISION PRTG --- */
         #log-container {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            height: 100px;
+            height: 120px;
             overflow: hidden;
             color: #aaa;
-            border-top: 1px solid rgba(147, 51, 234, 0.3);
-            padding-top: 10px;
-            margin-top: 15px;
-        }
-
-        .project-card { 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
             border-radius: 4px;
-            display: flex; 
-            flex-direction: column;
-            justify-content: space-between;
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--accent) !important; }
+        .log-line { margin-bottom: 4px; border-left: 2px solid var(--purple); padding-left: 8px; }
+        .log-time { color: var(--purple); font-weight: bold; }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 950px) {
             .terminal-content-wrapper { flex-direction: column-reverse; text-align: center; }
-            .logo-3d-side { width: 200px; margin-bottom: 20px; }
+            .logo-3d-side { width: 220px; }
         }
     </style>
 </head>
@@ -114,7 +119,7 @@
             <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
             <a href="entreprise.html" style="color: var(--accent);"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
             <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
-            <a href="veille.html"><i class="fas fa-graduation-cap"></i> VEILLE</a>
+            <a href="veille.html"><i class="fas fa-search"></i> VEILLE</a>
             <a href="contact.html"><i class="fas fa-paper-plane"></i> CONTACT</a>
         </nav>
     </header>
@@ -143,7 +148,6 @@
                             <p>> Mission : Garantir la disponibilité et la sécurité des SI du groupement.</p>
                         </div>
                     </div>
-
                     <img src="assets/logo_theneas.png" alt="THENEAS Hologram" class="logo-3d-side">
                 </div>
             </div>
@@ -151,111 +155,129 @@
 
         <section class="card section-spacing">
             <div class="badge">ADHÉRENTS_GROUP</div>
-            <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 20px;">
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
-                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
-                    <span style="font-weight: 800; color: var(--accent);">GROUPE ROCHER</span>
+            <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 25px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.02); border-radius: 4px; display: flex; align-items: center; gap: 10px;">
+                    <span class="status-indicator pulse" style="background: var(--green); width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="font-weight: 800; color: #fff;">GROUPE ROCHER</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
-                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
-                    <span style="font-weight: 800; color: var(--accent);">FIDESCO</span>
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.02); border-radius: 4px; display: flex; align-items: center; gap: 10px;">
+                    <span class="status-indicator pulse" style="background: var(--green); width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="font-weight: 800; color: #fff;">FIDESCO</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
-                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
-                    <span style="font-weight: 800; color: var(--accent);">SAJE</span>
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.02); border-radius: 4px; display: flex; align-items: center; gap: 10px;">
+                    <span class="status-indicator pulse" style="background: var(--green); width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="font-weight: 800; color: #fff;">SAJE</span>
                 </div>
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
-                    <span class="status-indicator pulse" style="background: #22c55e;"></span>
-                    <span style="font-weight: 800; color: var(--accent);">AVM</span>
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.02); border-radius: 4px; display: flex; align-items: center; gap: 10px;">
+                    <span class="status-indicator pulse" style="background: var(--green); width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="font-weight: 800; color: #fff;">AVM</span>
                 </div>
             </div>
         </section>
 
         <section class="card section-spacing">
-            <div class="badge" style="margin-bottom: 20px;">MISSIONS</div>
-            <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="badge" style="margin-bottom: 25px;">PORTFOLIO_MISSIONS</div>
+            <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                
                 <div class="project-card">
                     <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_01</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <i class="fas fa-ticket-alt t-purple" style="font-size: 1.8rem;"></i>
+                            <span class="v-year" style="font-size: 0.7rem; opacity: 0.6;">REF: BTS_01</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
+                        <h3 style="margin: 20px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
                         <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Ticketing et gestion d'inventaire ITIL.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.4;">Déploiement et maintenance de la solution de ticketing ITIL et gestion du parc informatique.</p>
                     </div>
-                    <div class="btn-mission-container">
-                        <a href="assets/GPL.pdf" class="btn-mission">Fiche Mission</a>
-                    </div>
+                    <a href="assets/GPL.pdf" target="_blank" class="btn-mission">CONSULTER LA FICHE</a>
                 </div>
 
                 <div class="project-card">
                     <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_02</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <i class="fab fa-microsoft t-purple" style="font-size: 1.8rem;"></i>
+                            <span class="v-year" style="font-size: 0.7rem; opacity: 0.6;">REF: BTS_02</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
+                        <h3 style="margin: 20px 0 10px 0; color: var(--accent);">Administration O365</h3>
                         <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Administration Cloud et identités hybrides.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.4;">Gestion des utilisateurs, des licences et sécurisation des accès Azure AD / Exchange.</p>
                     </div>
-                    <div class="btn-mission-container">
-                        <a href="assets/OFFICE.pdf" class="btn-mission">Fiche Mission</a>
-                    </div>
+                    <a href="assets/OFFICE.pdf" target="_blank" class="btn-mission">CONSULTER LA FICHE</a>
                 </div>
 
                 <div class="project-card">
                     <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_03</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <i class="fas fa-server t-purple" style="font-size: 1.8rem;"></i>
+                            <span class="v-year" style="font-size: 0.7rem; opacity: 0.6;">REF: BTS_03</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
+                        <h3 style="margin: 20px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
                         <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de clusters et isolations de services.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.4;">Mise en place de conteneurs LXC et VM pour l'isolation des services applicatifs.</p>
                     </div>
-                    <div class="btn-mission-container">
-                        <a href="assets/PROXMOX.pdf" class="btn-mission">Fiche Mission</a>
-                    </div>
+                    <a href="assets/PROXMOX.pdf" target="_blank" class="btn-mission">CONSULTER LA FICHE</a>
                 </div>
+
             </div>
         </section>
 
-        <section class="card section-spacing" style="background: rgba(0,0,0,0.4); border: 1px solid var(--purple);">
-            <div class="badge" style="background: var(--purple);">SUPERVISION_SYSTEM_DASHBOARD</div>
-            <div class="supervision-layout" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
-                <div class="noc-screen" style="flex: 2; min-width: 300px;">
-                    <div style="border: 1px solid var(--purple); padding: 15px; background: rgba(147, 51, 234, 0.05);">
-                        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--purple); padding-bottom: 5px; margin-bottom: 10px;">
-                            <span class="t-purple">PRTG_LIVE_FEED</span>
-                            <span class="online-dot pulse"></span>
-                        </div>
-                        <h3 class="v-title">PRTG // NETWORK MONITORING</h3>
-                        <div id="log-container"></div>
+        <section class="card section-spacing" style="border-color: var(--purple);">
+            <div class="badge" style="background: var(--purple);">LIVE_MONITORING_FEED</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
+                <div style="flex: 2; min-width: 300px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.8rem;">
+                        <span class="t-purple">PRTG_SYSTEM_LOGS</span>
+                        <span class="t-green">STATUS: ACTIVE</span>
                     </div>
+                    <div id="log-container"></div>
                 </div>
-                <div class="noc-metrics" style="flex: 0.5; min-width: 180px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono';">99.9%</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono';">12ms</div></div>
+                <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid var(--green); padding: 15px; border-radius: 4px;">
+                        <small style="display: block; opacity: 0.7;">SLA UPTIME</small>
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--green);">99.98%</span>
+                    </div>
+                    <div style="background: rgba(163, 102, 255, 0.1); border: 1px solid var(--accent); padding: 15px; border-radius: 4px;">
+                        <small style="display: block; opacity: 0.7;">NETWORK LATENCY</small>
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">14ms</span>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: <span class="t-green">ONLINE</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
+        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM_STATUS: <span class="t-green">OPERATIONAL</span></div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // MISSIONS_2026</div>
     </footer>
 
     <script>
-        const logs = ["Syncing...", "Backup completed.", "Proxmox OK", "GLPI ticket #4582"];
-        setInterval(() => {
+        const logs = [
+            "PRTG: Scanning sensor 1042...",
+            "Backup Job: #SRV-DC01 - Success",
+            "AzureSync: Delta synchronization complete",
+            "Proxmox: LXC Container #105 running",
+            "GLPI: 2 new tickets assigned",
+            "Security: Firewall rules updated",
+            "Veeam: Health check OK"
+        ];
+        
+        function updateLogs() {
             const container = document.getElementById('log-container');
             if(!container) return;
             const log = logs[Math.floor(Math.random() * logs.length)];
-            container.innerHTML += `<div class="log-line"><span class="log-time">[${new Date().toLocaleTimeString()}]</span> ${log}</div>`;
-            if(container.childNodes.length > 5) container.removeChild(container.firstChild);
-        }, 3000);
+            const time = new Date().toLocaleTimeString();
+            
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerHTML = `<span class="log-time">[${time}]</span> ${log}`;
+            
+            container.appendChild(line);
+            if(container.childNodes.length > 6) {
+                container.removeChild(container.firstChild);
+            }
+        }
+        setInterval(updateLogs, 2500);
+        updateLogs(); // Premier log immédiat
     </script>
 </body>
 </html>
