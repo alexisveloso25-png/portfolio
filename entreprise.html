@@ -21,16 +21,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 30px; /* Augmenté légèrement pour l'équilibre */
+            gap: 30px; 
             margin-top: 15px;
         }
 
         .logo-3d-side {
             flex-shrink: 0;
-            width: 320px; /* AMÉLIORATION : Logo agrandi comme demandé */
+            width: 320px; 
             height: auto;
-            mix-blend-mode: screen; /* Pour détourer le logo sur fond noir */
-            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.6)); /* Ombre portée plus diffuse */
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.6)); 
             perspective: 1000px;
             animation: floatingHolo 6s infinite ease-in-out;
             transition: all 0.5s ease;
@@ -82,6 +82,41 @@
         }
         .btn-mission:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
 
+        /* --- LOGOS ADHÉRENTS --- */
+        .logo-placeholder {
+            margin-top: 15px;
+            width: 100%;
+            height: 80px; /* Taille contrôlée pour ne pas être trop grand */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(163, 102, 255, 0.3);
+            border-radius: 15px; /* Angles ovales */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            padding: 10px;
+        }
+        
+        .logo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(0.5) brightness(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .adherent-item:hover .logo-placeholder {
+            background: rgba(163, 102, 255, 0.1);
+            border-color: var(--accent);
+            border-style: solid;
+        }
+
+        .adherent-item:hover .logo-placeholder img {
+            filter: grayscale(0) brightness(1);
+            transform: scale(1.05);
+        }
+
         /* --- MONITORING & LOGS --- */
         #log-container {
             font-family: 'JetBrains Mono', monospace;
@@ -98,7 +133,7 @@
 
         @media (max-width: 900px) {
             .terminal-content-wrapper { flex-direction: column-reverse; text-align: center; }
-            .logo-3d-side { width: 220px; } /* Adapté pour mobile tout en restant plus grand qu'avant */
+            .logo-3d-side { width: 220px; } 
         }
     </style>
 </head>
@@ -152,18 +187,30 @@
                 <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
                     <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px;"></span>
                     <span style="font-weight: 800; color: var(--accent);">GROUPE ROCHER</span>
+                    <div class="logo-placeholder">
+                        <img src="assets/rocher.png" alt="Logo Rocher">
+                    </div>
                 </div>
                 <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
                     <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px;"></span>
                     <span style="font-weight: 800; color: var(--accent);">FIDESCO</span>
+                    <div class="logo-placeholder">
+                        <img src="assets/fideso.png" alt="Logo Fidesco">
+                    </div>
                 </div>
                 <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
                     <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px;"></span>
                     <span style="font-weight: 800; color: var(--accent);">SAJE</span>
+                    <div class="logo-placeholder">
+                        <img src="assets/saje.png" alt="Logo Saje">
+                    </div>
                 </div>
                 <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 15px; background: rgba(255,255,255,0.03); border-radius: 4px;">
                     <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px;"></span>
                     <span style="font-weight: 800; color: var(--accent);">AVM</span>
+                    <div class="logo-placeholder">
+                        <img src="assets/avm.png" alt="Logo AVM">
+                    </div>
                 </div>
             </div>
         </section>
