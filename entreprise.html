@@ -82,41 +82,41 @@
         }
         .btn-mission:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
 
-        /* --- LOGOS ADHÉRENTS (AMÉLIORÉ - PLUS GRAND) --- */
+        /* --- LOGOS ADHÉRENTS (AVEC COULEUR) --- */
         .logo-placeholder {
             margin-top: 20px;
             width: 100%;
-            height: 180px; /* BEAUCOUP PLUS GRAND comme demandé */
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(163, 102, 255, 0.2);
-            border-radius: 25px; /* Angles ovales accentués */
+            height: 180px; 
+            background: rgba(163, 102, 255, 0.05); /* Fond coloré léger */
+            border: 1px solid rgba(163, 102, 255, 0.3);
+            border-radius: 30px; /* Angles bien ovales */
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             overflow: hidden;
             padding: 25px;
-            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
         }
         
         .logo-placeholder img {
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-            filter: grayscale(1) brightness(0.9) opacity(0.7);
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
             transition: all 0.4s ease;
         }
 
         .adherent-item:hover .logo-placeholder {
-            background: rgba(163, 102, 255, 0.08);
+            background: rgba(163, 102, 255, 0.15); /* Plus de couleur au survol */
             border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(163, 102, 255, 0.2);
-            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(163, 102, 255, 0.3), inset 0 0 10px rgba(163, 102, 255, 0.2);
+            transform: translateY(-5px);
         }
 
         .adherent-item:hover .logo-placeholder img {
-            filter: grayscale(0) brightness(1) opacity(1);
             transform: scale(1.1);
+            filter: drop-shadow(0 0 15px var(--accent));
         }
 
         /* --- MONITORING & LOGS --- */
@@ -172,7 +172,7 @@
                         <h1 class="hero-name">
                             <span class="terminal-typing">THENEAS</span>
                         </h1>
-                        <p class="hero-role">// GEIE - GROUPEMENT EUROPÉEN D'INTÉRÊT ÉCONOMIQUE</p>
+                        <p class="hero-role">// GEIE - GROUPEMENT EUROPÉEN d'INTÉRÊT ÉCONOMIQUE</p>
                         <div class="hero-text-large">
                             <p>> Expertise multi-services (Finance, RH, IT) au profit de ses adhérents.</p>
                             <p>> Mission : Garantir la disponibilité et la sécurité des SI du groupement.</p>
@@ -187,7 +187,7 @@
             <div class="badge">ADHÉRENTS_GROUP</div>
             <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 20px;">
                 
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
                         <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
                         <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">GROUPE ROCHER</span>
@@ -197,17 +197,17 @@
                     </div>
                 </div>
 
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
                         <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
                         <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">FIDESCO</span>
                     </div>
                     <div class="logo-placeholder">
-                        <img src="assets/fideso.png" alt="Logo Fidesco">
+                        <img src="assets/fidesco.png" alt="Logo Fidesco">
                     </div>
                 </div>
 
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
                         <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
                         <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">SAJE</span>
@@ -217,7 +217,7 @@
                     </div>
                 </div>
 
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
                         <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
                         <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">AVM</span>
