@@ -8,16 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- VARIABLES DE COULEURS (Basées sur votre thème) --- */
-        :root {
-            --accent: #00f2ff; /* Cyan/Bleu tech */
-            --purple: #9333ea;
-            --text-dim: rgba(255, 255, 255, 0.6);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --green: #22c55e;
-        }
-
-        /* --- DESIGN DES BARRES DE PROGRESSION --- */
+        /* --- OPTION 4 : Design des Barres de Progression --- */
         .skill-bar-container {
             background: rgba(255, 255, 255, 0.1);
             height: 6px;
@@ -31,13 +22,14 @@
             box-shadow: 0 0 10px var(--accent);
         }
 
-        /* --- BOUTON FICHE MISSION --- */
+        /* Bouton Fiche Mission - Centrage */
         .btn-mission-container {
             display: flex;
             justify-content: center;
             width: 100%;
             margin-top: 15px;
         }
+
         .btn-mission {
             display: inline-block;
             padding: 8px 15px;
@@ -56,7 +48,7 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
-        /* --- TERMINAL DE LOGS --- */
+        /* --- OPTION 3 : Style du terminal de Logs --- */
         #log-container {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
@@ -78,68 +70,7 @@
             margin-right: 8px;
         }
 
-        /* --- EFFET HERO 3D & LAYOUT --- */
-        .company-layout {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            perspective: 1200px; /* Profondeur 3D */
-        }
-        
-        .company-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .three-d-container {
-            width: 100%;
-            max-width: 350px;
-            transform-style: preserve-3d;
-        }
-
-        .three-d-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--accent);
-            padding: 20px;
-            border-radius: 8px;
-            transform: rotateY(-25deg) rotateX(10deg);
-            box-shadow: -20px 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0, 242, 255, 0.1);
-            transition: all 0.6s ease;
-        }
-
-        .three-d-card:hover {
-            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
-            border-color: #fff;
-        }
-
-        .company-img {
-            width: 100%;
-            height: auto;
-            /* C'est ici qu'on enlève le fond blanc "moche" */
-            mix-blend-mode: screen; 
-            filter: contrast(1.1) brightness(1.1);
-        }
-
-        .glow-effect {
-            position: absolute;
-            top: 0; left: -100%;
-            width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.2), transparent);
-            transform: skewX(-20deg);
-            animation: shine 5s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
-        }
-
-        /* --- CARTES DE PROJETS --- */
+        /* Styles existants conservés */
         .project-card { 
             transition: transform 0.3s ease, box-shadow 0.3s ease; 
             background: rgba(255,255,255,0.03);
@@ -151,13 +82,7 @@
             justify-content: space-between;
         }
         .project-card:hover { transform: translateY(-5px); border-color: var(--accent) !important; }
-        
         small { color: rgba(255, 255, 255, 0.85) !important; font-weight: 500; letter-spacing: 1px; }
-
-        @media (max-width: 768px) {
-            .company-layout { flex-direction: column-reverse; text-align: center; }
-            .three-d-card { transform: none; }
-        }
     </style>
 </head>
 <body>
@@ -184,9 +109,9 @@
                     <div class="terminal-title-inline">bash — info_entreprise.sh</div>
                 </div>
             </div>
-            <div class="terminal-body company-layout">
+            <div class="terminal-body">
+                <div class="terminal-prompt"><span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./display_company_info.sh</span></div>
                 <div class="content-block">
-                    <div class="terminal-prompt"><span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./display_company_info.sh</span></div>
                     <h1 class="hero-name">
                         <span class="terminal-typing">THENEAS</span>
                     </h1>
@@ -194,15 +119,6 @@
                     <div class="hero-text-large">
                         <p>> Expertise multi-services (Finance, RH, IT) au profit de ses adhérents.</p>
                         <p>> Mission : Garantir la disponibilité et la sécurité des SI du groupement.</p>
-                    </div>
-                </div>
-
-                <div class="company-visual">
-                    <div class="three-d-container">
-                        <div class="three-d-card">
-                            <img src="assets/votre-photo-entreprise.png" alt="Logo Thénéas" class="company-img">
-                            <div class="glow-effect"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -296,17 +212,18 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
                             <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
                                 <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Surveillance en temps réel</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-bell t-green"></i> Alerting proactive</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-chart-line t-green"></i> Analyse bande passante</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-bell t-green"></i> Alerting proactive (SMS/Mail)</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-chart-line t-green"></i> Analyse de bande passante</li>
                             </ul>
                             <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Historisation</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-network-wired t-green"></i> Mapping infra</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-file-alt t-green"></i> Rapports dispo</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Historisation des données</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-network-wired t-green"></i> Mapping de l'infrastructure</li>
+                                <li style="margin-bottom: 8px;"><i class="fas fa-file-alt t-green"></i> Rapports de disponibilité</li>
                             </ul>
                         </div>
 
-                        <div id="log-container"></div>
+                        <div id="log-container">
+                            </div>
                     </div>
                 </div>
 
@@ -314,6 +231,7 @@
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div></div>
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div></div>
                     <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);"><small>SENSORS</small><div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div></div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;"><small>PING</small><div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div></div>
                 </div>
             </div>
         </section>
@@ -332,7 +250,6 @@
     </footer>
 
     <script>
-        // SCRIPT POUR LES LOGS EN TEMPS RÉEL
         const logs = [
             "Syncing with Azure AD...",
             "Backup Job #84 completed.",
