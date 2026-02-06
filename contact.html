@@ -3,64 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // SECURE_COMM_v4</title>
+    <title>ALEXIS_VELOSO // CONTACT_CENTER</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- STYLES UX & DYNAMIQUE --- */
-        .cyber-input.invalid { border-color: var(--red) !important; box-shadow: 0 0 10px rgba(255, 77, 77, 0.3) !important; }
-        
-        /* Champ Objet Dynamique */
-        #custom-subject-container {
-            display: none; /* Caché par défaut */
-            margin-top: 15px;
-            animation: slideDown 0.4s ease-out;
+        /* --- LAYOUT FULL WIDTH --- */
+        .contact-wrapper-centered {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Console SSH */
-        #ssh-console {
-            display: none;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--accent);
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            max-height: 120px;
-            overflow-y: auto;
-        }
-
-        .log-success { color: var(--green); }
-        
-        /* Réseaux Sociaux */
-        .social-fast-links {
+        /* Réseaux Sociaux au milieu */
+        .social-hub {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin: 40px 0;
         }
 
-        .social-link-card {
+        .social-card-large {
             background: rgba(163, 102, 255, 0.05);
             border: 1px solid rgba(163, 102, 255, 0.2);
-            padding: 15px;
+            padding: 30px;
             text-align: center;
             text-decoration: none;
             color: var(--white);
-            font-size: 0.7rem;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 4px;
         }
 
-        .social-link-card:hover {
+        .social-card-large:hover {
             border-color: var(--accent);
-            background: rgba(163, 102, 255, 0.1);
-            transform: translateY(-3px);
+            background: rgba(163, 102, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .social-card-large i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .social-card-large span {
+            font-weight: 800;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        /* Formulaire en Grand */
+        .large-form-container {
+            width: 100%;
+        }
+
+        #custom-subject-container {
+            display: none;
+            margin-top: 15px;
+            animation: fadeInTerminal 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInTerminal {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #ssh-console {
+            display: none;
+            background: #000;
+            border: 1px solid var(--accent);
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            max-height: 150px;
+            overflow-y: auto;
+            border-radius: 4px;
+        }
+
+        .log-success { color: var(--green); }
+        .log-info { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .social-hub { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -69,7 +96,7 @@
     <div class="scanline-global"></div>
 
     <header class="top-bar">
-        <div class="brand">USER: ALEXIS_VELOSO / <span>CONTACT_V4</span></div>
+        <div class="brand">USER: ALEXIS_VELOSO / <span>COMM_MODULE</span></div>
         <nav class="nav-links">
             <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
             <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
@@ -79,84 +106,88 @@
     </header>
 
     <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-                    <div class="terminal-title-inline">ssh-session — establish_link.sh</div>
-                </div>
-            </div>
-            <div class="terminal-body">
-                <h1 class="hero-name"><span class="terminal-typing">ME CONTACTER</span></h1>
-                <p class="hero-role">// PROTOCOLE DE COMMUNICATION SÉCURISÉ</p>
-            </div>
-        </section>
-
-        <div class="profile-academic-group section-spacing">
+        <div class="contact-wrapper-centered">
             
-            <section class="card profile-card">
-                <div class="badge">SENDER_ID</div>
-                <div class="bio-data" style="width: 100%;">
-                    <div class="data-row"><span class="label-red">NOM :</span> <span class="data-val">VELOSO</span></div>
-                    <div class="data-row"><span class="label-red">MAIL :</span> <span class="data-val" style="font-size:0.6rem;">alexis.veloso25@gmail.com</span></div>
-                    <div class="data-row"><span class="label-red">LOC :</span> <span class="data-val">PARIS_FR</span></div>
+            <section class="terminal-window card">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="terminal-title-inline">root@veloso-infra: /bin/contact</div>
+                    </div>
                 </div>
-                <hr style="border:0; border-top:1px solid rgba(163,102,255,0.2); margin:20px 0; width:100%;">
-                <p style="font-size:0.65rem; color:var(--text-dim);">Utilisez le terminal à droite pour initier un transfert de données.</p>
+                <div class="terminal-body" style="text-align: center; padding: 40px 0;">
+                    <h1 class="hero-name" style="font-size: 3rem;"><span class="terminal-typing">GET_IN_TOUCH</span></h1>
+                    <p class="hero-role">// SÉLECTIONNEZ UN CANAL DE COMMUNICATION</p>
+                </div>
             </section>
 
-            <div style="display: flex; flex-direction: column;">
-                
-                <div class="social-fast-links">
-                    <a href="https://linkedin.com" target="_blank" class="social-link-card"><i class="fab fa-linkedin"></i>LINKEDIN</a>
-                    <a href="https://github.com" target="_blank" class="social-link-card"><i class="fab fa-github"></i>GITHUB</a>
-                    <a href="mailto:alexis.veloso25@gmail.com" class="social-link-card"><i class="fas fa-envelope"></i>MAIL</a>
-                </div>
-
-                <section class="card">
-                    <div class="badge">MESSAGE_DATAGRAM</div>
-                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-                        <input type="hidden" name="access_key" value="f7b3c0d7-6a6f-4258-a355-eabf5ebea407">
-                        
-                        <div class="form-row">
-                            <div style="display:flex; flex-direction:column; flex:1;">
-                                <label style="font-size: 0.6rem; color: var(--accent);">ID_SENDER</label>
-                                <input type="text" name="name" id="sender-name" placeholder="Votre Nom" class="cyber-input" required>
-                            </div>
-                            <div style="display:flex; flex-direction:column; flex:1;">
-                                <label style="font-size: 0.6rem; color: var(--accent);">RETURN_PATH</label>
-                                <input type="email" name="email" id="sender-email" placeholder="email@domaine.com" class="cyber-input" required>
-                            </div>
-                        </div>
-
-                        <div style="display:flex; flex-direction:column; margin-top:15px;">
-                            <label style="font-size: 0.6rem; color: var(--accent);">OBJECT_CATEGORY</label>
-                            <select id="subject-select" name="category" class="cyber-input" required>
-                                <option value="Contact Général">GENERAL_INQUIRY</option>
-                                <option value="Offre Alternance">RECRUITMENT_OFFER</option>
-                                <option value="Collaboration">COLLAB_REQUEST</option>
-                                <option value="autre">AUTRE_DEMANDE (MANUAL_INPUT)</option>
-                            </select>
-                        </div>
-
-                        <div id="custom-subject-container">
-                            <label style="font-size: 0.6rem; color: var(--red);">SPECIFY_OBJECT_STUB</label>
-                            <input type="text" id="custom-subject" name="custom_subject" placeholder="Saisissez votre objet..." class="cyber-input">
-                        </div>
-
-                        <div style="display:flex; flex-direction:column; margin-top:15px;">
-                            <label style="font-size: 0.6rem; color: var(--accent);">DATA_PAYLOAD</label>
-                            <textarea name="message" id="msg-body" placeholder="Initialisez votre message..." class="cyber-input" rows="5" required></textarea>
-                        </div>
-
-                        <button type="submit" class="cyber-button" style="margin-top:20px; width:100%;">TRANSMIT_PACKET</button>
-
-                        <div id="ssh-console"></div>
-                    </form>
-                </section>
+            <div class="social-hub">
+                <a href="https://www.linkedin.com/in/alexis-veloso-004097270" target="_blank" class="social-card-large">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LINKEDIN</span>
+                </a>
+                <a href="https://github.com/AlexisVeloso" target="_blank" class="social-card-large">
+                    <i class="fab fa-github"></i>
+                    <span>GITHUB</span>
+                </a>
+                <a href="mailto:alexis.veloso25@gmail.com" class="social-card-large">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <span>E-MAIL</span>
+                </a>
             </div>
+
+            <section class="card large-form-container">
+                <div class="badge">SECURE_DATA_TRANSMISSION</div>
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate style="margin-top: 30px;">
+                    <input type="hidden" name="access_key" value="f7b3c0d7-6a6f-4258-a355-eabf5ebea407">
+                    
+                    <div class="form-row">
+                        <div style="display:flex; flex-direction:column; flex:1;">
+                            <label style="font-size: 0.7rem; color: var(--accent); margin-bottom: 8px;">SOURCE_ID (NOM)</label>
+                            <input type="text" name="name" id="sender-name" placeholder="Tapez votre nom..." class="cyber-input" required>
+                        </div>
+                        <div style="display:flex; flex-direction:column; flex:1;">
+                            <label style="font-size: 0.7rem; color: var(--accent); margin-bottom: 8px;">REPLY_TO (EMAIL)</label>
+                            <input type="email" name="email" id="sender-email" placeholder="votre@email.com" class="cyber-input" required>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; margin-top:20px;">
+                        <label style="font-size: 0.7rem; color: var(--accent); margin-bottom: 8px;">OBJECT_TYPE</label>
+                        <select id="subject-select" class="cyber-input" required>
+                            <option value="Demande de contact">GENERAL_INQUIRY</option>
+                            <option value="Offre d'alternance">RECRUITMENT_PROPOSAL</option>
+                            <option value="Question Technique">TECH_SUPPORT</option>
+                            <option value="autre">AUTRE_DEMANDE (SPECIFY...)</option>
+                        </select>
+                    </div>
+
+                    <div id="custom-subject-container">
+                        <label style="font-size: 0.7rem; color: var(--red); margin-bottom: 8px;">SPECIFY_CUSTOM_OBJECT</label>
+                        <input type="text" id="custom-subject" placeholder="Entrez votre sujet personnalisé..." class="cyber-input">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; margin-top:20px;">
+                        <label style="font-size: 0.7rem; color: var(--accent); margin-bottom: 8px;">MESSAGE_CONTENT</label>
+                        <textarea name="message" id="msg-body" placeholder="Initialisez la saisie des données..." class="cyber-input" rows="8" required></textarea>
+                    </div>
+
+                    <button type="submit" class="cyber-button" style="margin-top:30px; width:100%; height: 60px; font-size: 1.2rem;">
+                        <i class="fas fa-terminal"></i> EXECUTE_SEND_PROTOCOL
+                    </button>
+
+                    <div id="ssh-console"></div>
+                </form>
+            </section>
+
         </div>
     </main>
+
+    <footer class="status-footer">
+        <div class="footer-segment"><span class="online-dot pulse"></span> STATUS: <span class="t-green">LISTENING</span></div>
+        <div class="footer-segment">LOC: <span class="t-green">PARIS_RELIANCE</span></div>
+        <div class="footer-segment footer-right">ALEXIS_VELOSO // V4.2</div>
+    </footer>
 
     <script>
         const form = document.getElementById('contact-form');
@@ -165,19 +196,17 @@
         const customSubjectInput = document.getElementById('custom-subject');
         const consoleLog = document.getElementById('ssh-console');
 
-        // 1. GESTION DE L'OBJET DYNAMIQUE
+        // GESTION DE L'OBJET DYNAMIQUE
         subjectSelect.addEventListener('change', function() {
             if (this.value === 'autre') {
                 customSubjectContainer.style.display = 'block';
-                customSubjectInput.required = true;
                 customSubjectInput.focus();
             } else {
                 customSubjectContainer.style.display = 'none';
-                customSubjectInput.required = false;
             }
         });
 
-        // 2. LOGS SSH AU CLIC
+        // LOGS SSH
         const addLog = (text, type = '') => {
             const line = document.createElement('div');
             line.className = `log-entry ${type}`;
@@ -189,15 +218,15 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             consoleLog.style.display = 'block';
-            addLog("Authenticating SSH channel...", "log-info");
+            addLog("Checking network connectivity...", "log-info");
             
-            // On prépare l'objet final pour l'envoi
             let finalSubject = subjectSelect.value === 'autre' ? customSubjectInput.value : subjectSelect.value;
             
-            setTimeout(() => addLog(`Handshake OK. Subject: ${finalSubject}`, "log-info"), 600);
+            setTimeout(() => addLog("Handshake TLS 1.3... OK", "log-info"), 500);
+            setTimeout(() => addLog(`Packet Header: Subject="${finalSubject}"`, "log-info"), 1000);
 
             const formData = new FormData(form);
-            formData.append('subject', finalSubject); // Ajoute l'objet personnalisé aux données envoyées
+            formData.append('subject', finalSubject);
 
             const response = await fetch(form.action, {
                 method: 'POST',
@@ -207,14 +236,14 @@
 
             if (response.ok) {
                 setTimeout(() => {
-                    addLog("TRANSMISSION_COMPLETE: Data sent.", "log-success");
+                    addLog("TRANSMISSION_SUCCESS: Message delivered.", "log-success");
                     form.reset();
                     customSubjectContainer.style.display = 'none';
-                }, 1500);
+                }, 2000);
             }
         });
 
-        // Auto-focus au démarrage
+        // Focus auto
         window.onload = () => document.getElementById('sender-name').focus();
     </script>
 </body>
