@@ -271,3 +271,78 @@ body {
     from, to { border-color: transparent }
     50% { border-color: var(--accent) }
 }
+
+/* Layout pour mettre l'image à droite du texte */
+.company-layout {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    perspective: 1000px; /* Nécessaire pour l'effet 3D */
+}
+
+.content-block { flex: 1; }
+
+/* Conteneur de l'image en 3D */
+.company-visual {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+}
+
+.three-d-container {
+    width: 100%;
+    max-width: 350px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.three-d-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--accent);
+    padding: 10px;
+    border-radius: 8px;
+    /* Rotation initiale pour l'effet 3D */
+    transform: rotateY(-20px) rotateX(10px);
+    box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(0, 242, 255, 0.2);
+    overflow: hidden;
+}
+
+.company-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Ce mode de fusion supprime le blanc pur et laisse passer le fond du site */
+    mix-blend-mode: screen; 
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Effet de reflet lumineux qui passe sur l'image */
+.glow-effect {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.3), transparent);
+    transform: skewX(-25deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* Animation au survol : la carte se remet droite */
+.three-d-container:hover .three-d-card {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+    border-color: var(--purple);
+    box-shadow: 0 0 30px var(--purple);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .company-layout { flex-direction: column-reverse; }
+    .three-d-card { transform: none; }
+}
