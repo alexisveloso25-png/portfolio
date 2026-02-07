@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Garde ton code existant --- */
+        /* --- Ton code original préservé --- */
         .hero-header-flex {
             display: flex;
             align-items: center;
@@ -44,9 +44,7 @@
             }
         }
 
-        /* --- AJUSTEMENTS DE ZOOM ET BOUTON --- */
-
-        /* Bouton plus petit et discret en haut à gauche */
+        /* --- Bouton de contrôle discret --- */
         .accessibility-tool {
             position: fixed;
             top: 65px;
@@ -55,49 +53,54 @@
         }
 
         .btn-access {
-            background: rgba(138, 43, 226, 0.2);
+            background: rgba(138, 43, 226, 0.1);
             color: #8a2be2;
             border: 1px solid #8a2be2;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
             cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem; /* Très petit */
-            transition: all 0.3s ease;
+            font-size: 0.6rem;
             text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
         .btn-access:hover {
             background: #8a2be2;
-            color: white;
+            color: #fff;
         }
 
-        /* Zoom sur les textes spécifiques (Compétences, Écoles, Profil) */
-        .bio-data { font-size: 1.2rem; } /* Zoom Profil */
-        .v-content h3 { font-size: 1.3rem; } /* Zoom Titres Écoles */
-        .v-content p { font-size: 1.1rem; } /* Zoom Noms Écoles */
+        /* --- MODE ZOOM (Activé uniquement au clic) --- */
         
-        .skill-item .s-head { font-size: 1.2rem; } /* Zoom Titre Compétences */
-        .skill-item .s-details { font-size: 1rem; color: #ccc; } /* Zoom détails compétences */
-        
-        .soft-tag { font-size: 1.1rem; padding: 8px 15px; } /* Zoom Points Forts */
-        .cert-row { font-size: 1.1rem; } /* Zoom Certifications */
+        /* On ne touche pas au terminal, seulement au reste */
+        body.high-contrast .bio-data { font-size: 1.25rem; }
+        body.high-contrast .v-content h3 { font-size: 1.4rem; }
+        body.high-contrast .v-content p { font-size: 1.15rem; }
+        body.high-contrast .skill-item .s-head { font-size: 1.3rem; }
+        body.high-contrast .skill-item .s-details { font-size: 1.1rem; }
+        body.high-contrast .soft-tag { font-size: 1.2rem; padding: 10px 18px; }
+        body.high-contrast .cert-row { font-size: 1.2rem; }
+        body.high-contrast .badge { font-size: 1rem; padding: 8px 15px; }
 
-        /* Mode Accessibilité : Garde le fond noir mais améliore le contraste */
+        /* Amélioration visuelle en mode zoom (fond noir conservé) */
         body.high-contrast {
             background: #000 !important;
         }
 
-        body.high-contrast .t-green { color: #00ff00 !important; font-weight: 800; }
-        body.high-contrast .t-purple { color: #ff00ff !important; font-weight: 800; }
-        body.high-contrast .label-red { color: #ff4d4d !important; font-weight: 800; }
-        
-        /* Désactive les animations fatigantes en mode accessibilité */
         body.high-contrast .scanline-global,
         body.high-contrast .glitch-overlay,
         body.high-contrast .laser-line {
-            display: none !important;
+            display: none !important; /* On enlève ce qui gêne la lecture */
         }
+
+        body.high-contrast .card:not(.terminal-window) {
+            border: 1px solid #fff !important; /* Bordures plus blanches pour mieux voir les blocs */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        body.high-contrast .t-green { color: #00ff00 !important; font-weight: bold; }
+        body.high-contrast .t-purple { color: #d000ff !important; font-weight: bold; }
+
     </style>
 </head>
 <body id="main-body">
@@ -106,7 +109,7 @@
 
     <div class="accessibility-tool">
         <button class="btn-access" onclick="toggleAccessibility()">
-            <i class="fas fa-adjust"></i> Visibilité
+            <i class="fas fa-search-plus"></i> Visibilité
         </button>
     </div>
 
@@ -306,6 +309,10 @@
     <script>
         function toggleAccessibility() {
             document.body.classList.toggle('high-contrast');
+            const isZoomed = document.body.classList.contains('high-contrast');
+            // Optionnel : changer le texte du bouton selon l'état
+            const btn = document.querySelector('.btn-access');
+            btn.innerHTML = isZoomed ? '<i class="fas fa-search-minus"></i> Normal' : '<i class="fas fa-search-plus"></i> Visibilité';
         }
     </script>
 </body>
