@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Ton code original préservé --- */
+        /* --- Garde ton code existant --- */
         .hero-header-flex {
             display: flex;
             align-items: center;
@@ -44,62 +44,82 @@
             }
         }
 
-        /* --- Bouton de contrôle discret --- */
-        .accessibility-tool {
+        /* --- Barre d'outils Accessibilité Verticale --- */
+        .accessibility-toolbar {
             position: fixed;
-            top: 65px;
-            left: 10px;
+            top: 75px;
+            left: 15px;
             z-index: 1000;
+            display: flex;
+            flex-direction: column; /* Boutons l'un sous l'autre */
+            gap: 10px;
         }
 
         .btn-access {
             background: rgba(138, 43, 226, 0.1);
             color: #8a2be2;
             border: 1px solid #8a2be2;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
             cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            width: 120px; /* Largeur fixe pour l'alignement */
         }
 
         .btn-access:hover {
             background: #8a2be2;
             color: #fff;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
 
-        /* --- MODE ZOOM (Activé uniquement au clic) --- */
-        
-        /* On ne touche pas au terminal, seulement au reste */
-        body.high-contrast .bio-data { font-size: 1.25rem; }
-        body.high-contrast .v-content h3 { font-size: 1.4rem; }
-        body.high-contrast .v-content p { font-size: 1.15rem; }
-        body.high-contrast .skill-item .s-head { font-size: 1.3rem; }
-        body.high-contrast .skill-item .s-details { font-size: 1.1rem; }
-        body.high-contrast .soft-tag { font-size: 1.2rem; padding: 10px 18px; }
-        body.high-contrast .cert-row { font-size: 1.2rem; }
-        body.high-contrast .badge { font-size: 1rem; padding: 8px 15px; }
+        /* --- MODE ZOOM (is-zoomed) --- */
+        body.is-zoomed .bio-data { font-size: 1.25rem; }
+        body.is-zoomed .v-content h3 { font-size: 1.4rem; }
+        body.is-zoomed .v-content p { font-size: 1.15rem; }
+        body.is-zoomed .skill-item { margin-bottom: 20px; }
+        body.is-zoomed .skill-item .s-head { font-size: 1.3rem; }
+        body.is-zoomed .skill-item .s-details { font-size: 1.1rem; }
+        body.is-zoomed .soft-tag { font-size: 1.2rem; padding: 10px 18px; }
+        body.is-zoomed .cert-row { font-size: 1.2rem; }
+        body.is-zoomed .badge { font-size: 1rem; padding: 8px 15px; }
 
-        /* Amélioration visuelle en mode zoom (fond noir conservé) */
-        body.high-contrast {
+        /* --- MODE COULEURS SIMPLES (is-simple) --- */
+        body.is-simple .card:not(.terminal-window) {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #000 !important;
+            box-shadow: none !important;
+        }
+
+        body.is-simple .card:not(.terminal-window) .badge {
             background: #000 !important;
+            color: #fff !important;
         }
 
-        body.high-contrast .scanline-global,
-        body.high-contrast .glitch-overlay,
-        body.high-contrast .laser-line {
-            display: none !important; /* On enlève ce qui gêne la lecture */
+        body.is-simple .card:not(.terminal-window) .label-red,
+        body.is-simple .card:not(.terminal-window) .data-val,
+        body.is-simple .card:not(.terminal-window) h3,
+        body.is-simple .card:not(.terminal-window) p,
+        body.is-simple .card:not(.terminal-window) span,
+        body.is-simple .card:not(.terminal-window) div {
+            color: #000 !important;
         }
 
-        body.high-contrast .card:not(.terminal-window) {
-            border: 1px solid #fff !important; /* Bordures plus blanches pour mieux voir les blocs */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        body.is-simple .s-bar { background: #e0e0e0 !important; border: 1px solid #000; }
+        body.is-simple .s-fill { background: #000 !important; }
+        
+        body.is-simple .scanline-global,
+        body.is-simple .glitch-overlay,
+        body.is-simple .laser-line {
+            display: none !important;
         }
-
-        body.high-contrast .t-green { color: #00ff00 !important; font-weight: bold; }
-        body.high-contrast .t-purple { color: #d000ff !important; font-weight: bold; }
 
     </style>
 </head>
@@ -107,9 +127,12 @@
     <div class="circuit-bg"></div>
     <div class="scanline-global"></div>
 
-    <div class="accessibility-tool">
-        <button class="btn-access" onclick="toggleAccessibility()">
-            <i class="fas fa-search-plus"></i> Visibilité
+    <div class="accessibility-toolbar">
+        <button class="btn-access" onclick="toggleZoom()">
+            <i class="fas fa-search-plus"></i> Vision
+        </button>
+        <button class="btn-access" onclick="toggleSimple()">
+            <i class="fas fa-palette"></i> Couleurs
         </button>
     </div>
 
@@ -172,7 +195,6 @@
                         <div class="corner tr"></div>
                         <div class="corner bl"></div>
                         <div class="corner br"></div>
-                        
                         <div class="avatar-box">AV</div>
                         <div class="laser-line"></div>
                         <div class="glitch-overlay"></div>
@@ -276,7 +298,7 @@
             <section class="card">
                 <div class="badge">VALIDATIONS</div>
                 <div class="cert-list">
-                    <div class="cert-row"><span>CCNA en COURS</span><span class="t-purple">PENDING</span></div>
+                    <div class="cert-row"><span>CCNA en COURS</span><span>PENDING</span></div>
                     <div class="cert-row"><span>Attestation RGPD</span><i class="fas fa-check t-green"></i></div>
                     <div class="cert-row"><span>PIX CERTIFIED</span><i class="fas fa-check t-green"></i></div>
                     <div class="cert-row"><span>CISCO NETACAD IT</span><i class="fas fa-check t-green"></i></div>
@@ -288,7 +310,6 @@
             <div class="badge">CONTACT</div>
             <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
                 <input type="hidden" name="access_key" value="f7b3c0d7-6a6f-4258-a355-eabf5ebea407">
-                <input type="hidden" name="subject" value="Nouveau contact de ALEXIS_VELOSO PORTFOLIO">
                 <div class="form-row">
                     <input type="text" name="name" placeholder="ID_NOM" class="cyber-input" required>
                     <input type="email" name="email" placeholder="EMAIL_RETURN" class="cyber-input" required>
@@ -301,18 +322,15 @@
 
     <footer class="status-footer">
         <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: <span class="t-green">ONLINE</span></div>
-        <div class="footer-segment">PING: <span class="t-green">24MS</span></div>
-        <div class="footer-segment">CPU: <span class="t-green">12%</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
+        <div class="footer-segment">ALEXIS_VELOSO // PORTFOLIO_V4</div>
     </footer>
 
     <script>
-        function toggleAccessibility() {
-            document.body.classList.toggle('high-contrast');
-            const isZoomed = document.body.classList.contains('high-contrast');
-            // Optionnel : changer le texte du bouton selon l'état
-            const btn = document.querySelector('.btn-access');
-            btn.innerHTML = isZoomed ? '<i class="fas fa-search-minus"></i> Normal' : '<i class="fas fa-search-plus"></i> Visibilité';
+        function toggleZoom() {
+            document.body.classList.toggle('is-zoomed');
+        }
+        function toggleSimple() {
+            document.body.classList.toggle('is-simple');
         }
     </script>
 </body>
