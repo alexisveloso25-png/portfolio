@@ -8,19 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Garde ton code existant --- */
+        /* --- Garde ton code existant avec améliorations demandées --- */
         .hero-header-flex {
             display: flex;
             align-items: center;
+            justify-content: space-between; /* Pousse le logo vers la droite */
             gap: 20px;
             margin-bottom: 10px;
+            width: 100%; /* S'assure de prendre toute la largeur */
         }
 
         .terminal-logo {
-            width: 60px;
+            width: 150px; /* Logo beaucoup plus grand */
             height: auto;
             filter: drop-shadow(0 0 10px #8a2be2);
             animation: float 3s ease-in-out infinite, neonPulse 2s infinite alternate;
+            margin-right: 20px; /* Évite qu'il colle trop au bord droit */
         }
 
         @keyframes float {
@@ -37,10 +40,13 @@
         @media (max-width: 768px) {
             .hero-header-flex {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center; /* Centré sur mobile pour l'esthétique */
+                text-align: center;
             }
             .terminal-logo {
-                width: 45px;
+                width: 100px; /* Taille intermédiaire sur mobile */
+                margin-right: 0;
+                margin-top: 15px;
             }
         }
 
