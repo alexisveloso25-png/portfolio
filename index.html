@@ -34,10 +34,18 @@
         }
 
         .terminal-logo {
-            width: 500px;
+            width: 400px;
             height: auto;
             filter: drop-shadow(0 0 15px #8a2be2);
             animation: float 3s ease-in-out infinite, neonPulse 2s infinite alternate;
+        }
+
+        /* Style spécifique pour l'image de profil */
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         @keyframes float {
@@ -88,48 +96,40 @@
 
         /* --- MODES (Zoom & Simple) --- */
         
-        /* Amélioration Globale du mode Visibilité (Zoom) */
         body.is-zoomed {
             font-size: 1.25rem;
         }
         body.is-zoomed .wrapper { max-width: 95%; }
 
-        /* Profil ID Agrandi */
         body.is-zoomed .bio-data { font-size: 1.4rem; line-height: 1.8; }
         body.is-zoomed .avatar-box { width: 120px; height: 120px; font-size: 2.5rem; }
         body.is-zoomed .label-red { font-size: 1.1rem; min-width: 100px; display: inline-block; }
 
-        /* Parcours Agrandi */
         body.is-zoomed .v-content h3 { font-size: 1.6rem; }
         body.is-zoomed .v-content p { font-size: 1.3rem; }
         body.is-zoomed .v-year { font-size: 1.1rem; padding: 5px 15px; }
 
-        /* Compétences Agrandies */
         body.is-zoomed .skill-item { margin-bottom: 30px; }
         body.is-zoomed .s-head { font-size: 1.3rem; margin-bottom: 12px; }
-        body.is-zoomed .s-bar { height: 18px; } /* Barre plus épaisse */
+        body.is-zoomed .s-bar { height: 18px; }
         body.is-zoomed .s-details { font-size: 1.1rem; margin-top: 8px; }
 
-        /* Points Forts Agrandis */
         body.is-zoomed .soft-tag { 
             font-size: 1.3rem; 
             padding: 15px 25px; 
             border-width: 2px;
         }
 
-        /* Validations Agrandies */
         body.is-zoomed .cert-row { 
             font-size: 1.3rem; 
             padding: 15px 0; 
             border-bottom: 2px solid rgba(138, 43, 226, 0.3);
         }
 
-        /* En-tête et Logo */
         body.is-zoomed .hero-name { font-size: 4rem; }
         body.is-zoomed .hero-role { font-size: 1.5rem; }
         body.is-zoomed .terminal-logo { width: 450px; }
 
-        /* Mode Simple */
         body.is-simple .card:not(.terminal-window) {
             background: #ffffff !important;
             color: #000000 !important;
@@ -140,7 +140,6 @@
         body.is-simple .s-fill { background: #000 !important; }
         body.is-simple .scanline-global, body.is-simple .glitch-overlay, body.is-simple .laser-line { display: none !important; }
 
-        /* --- Responsive --- */
         @media (max-width: 992px) {
             .hero-header-flex {
                 flex-direction: column;
@@ -227,7 +226,9 @@
                     <div class="scanner-container">
                         <div class="corner tl"></div><div class="corner tr"></div>
                         <div class="corner bl"></div><div class="corner br"></div>
-                        <div class="avatar-box">AV</div>
+                        <div class="avatar-box">
+                            <img src="assets/photo.png" alt="Photo Alexis Veloso">
+                        </div>
                         <div class="laser-line"></div>
                         <div class="glitch-overlay"></div>
                     </div>
