@@ -21,6 +21,11 @@
             flex: 1;
         }
 
+        /* Ajustement de la distance entre le texte focus et les boutons réseaux */
+        .hero-text-large {
+            margin-bottom: 10px; 
+        }
+
         .terminal-logo-container {
             flex: 0 0 auto;
             display: flex;
@@ -332,19 +337,6 @@
                 </div>
             </section>
         </div>
-
-        <section class="card section-spacing">
-            <div class="badge">CONTACT</div>
-            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                <input type="hidden" name="access_key" value="f7b3c0d7-6a6f-4258-a355-eabf5ebea407">
-                <div class="form-row">
-                    <input type="text" name="name" placeholder="ID_NOM" class="cyber-input" required>
-                    <input type="email" name="email" placeholder="EMAIL_RETURN" class="cyber-input" required>
-                </div>
-                <textarea name="message" placeholder="MESSAGE_PACKET" class="cyber-input" rows="5" required></textarea>
-                <button type="submit" class="cyber-button">SEND_MESSAGE</button>
-            </form>
-        </section>
     </main>
 
     <footer class="status-footer">
