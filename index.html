@@ -12,13 +12,13 @@
         .hero-header-flex {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Texte à gauche, Logo à droite */
+            justify-content: space-between;
             gap: 40px;
             margin-bottom: 20px;
         }
 
         .hero-main-content {
-            flex: 1; /* Prend l'espace nécessaire à gauche */
+            flex: 1;
         }
 
         .terminal-logo-container {
@@ -29,7 +29,7 @@
         }
 
         .terminal-logo {
-            width: 350px; /* Logo beaucoup plus grand */
+            width: 350px;
             height: auto;
             filter: drop-shadow(0 0 15px #8a2be2);
             animation: float 3s ease-in-out infinite, neonPulse 2s infinite alternate;
@@ -72,7 +72,7 @@
             align-items: center;
             justify-content: flex-start;
             gap: 8px;
-            width: 130px; /* Légèrement élargi pour le texte variable */
+            width: 130px;
         }
 
         .btn-access:hover {
@@ -83,20 +83,46 @@
 
         /* --- MODES (Zoom & Simple) --- */
         
-        /* Amélioration du mode Visibilité (Zoom) */
+        /* Amélioration Globale du mode Visibilité (Zoom) */
         body.is-zoomed {
-            font-size: 1.2rem; /* Agrandit la base de texte du site */
+            font-size: 1.25rem;
         }
-        body.is-zoomed .wrapper { max-width: 1400px; } /* Donne plus d'espace */
-        body.is-zoomed .bio-data { font-size: 1.35rem; }
+        body.is-zoomed .wrapper { max-width: 95%; }
+
+        /* Profil ID Agrandi */
+        body.is-zoomed .bio-data { font-size: 1.4rem; line-height: 1.8; }
+        body.is-zoomed .avatar-box { width: 120px; height: 120px; font-size: 2.5rem; }
+        body.is-zoomed .label-red { font-size: 1.1rem; min-width: 100px; display: inline-block; }
+
+        /* Parcours Agrandi */
         body.is-zoomed .v-content h3 { font-size: 1.6rem; }
-        body.is-zoomed .v-content p { font-size: 1.25rem; }
-        body.is-zoomed .skill-item { margin-bottom: 25px; }
-        body.is-zoomed .soft-tag { font-size: 1.3rem; padding: 12px 20px; }
-        body.is-zoomed .hero-name { font-size: 3.5rem; }
-        body.is-zoomed .hero-text-large { font-size: 1.4rem; }
-        body.is-zoomed .terminal-logo { width: 450px; } /* Logo encore plus grand */
-        body.is-zoomed .cyber-button, body.is-zoomed .btn-cyber-outline { padding: 15px 30px; font-size: 1.1rem; }
+        body.is-zoomed .v-content p { font-size: 1.3rem; }
+        body.is-zoomed .v-year { font-size: 1.1rem; padding: 5px 15px; }
+
+        /* Compétences Agrandies */
+        body.is-zoomed .skill-item { margin-bottom: 30px; }
+        body.is-zoomed .s-head { font-size: 1.3rem; margin-bottom: 12px; }
+        body.is-zoomed .s-bar { height: 18px; } /* Barre plus épaisse */
+        body.is-zoomed .s-details { font-size: 1.1rem; margin-top: 8px; }
+
+        /* Points Forts Agrandis */
+        body.is-zoomed .soft-tag { 
+            font-size: 1.3rem; 
+            padding: 15px 25px; 
+            border-width: 2px;
+        }
+
+        /* Validations Agrandies */
+        body.is-zoomed .cert-row { 
+            font-size: 1.3rem; 
+            padding: 15px 0; 
+            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
+        }
+
+        /* En-tête et Logo */
+        body.is-zoomed .hero-name { font-size: 4rem; }
+        body.is-zoomed .hero-role { font-size: 1.5rem; }
+        body.is-zoomed .terminal-logo { width: 450px; }
 
         /* Mode Simple */
         body.is-simple .card:not(.terminal-window) {
@@ -333,7 +359,6 @@
             
             body.classList.toggle('is-zoomed');
             
-            // Si la classe est présente, on met "Normal", sinon on remet "Visibilité"
             if (body.classList.contains('is-zoomed')) {
                 zoomText.innerText = "Normal";
             } else {
