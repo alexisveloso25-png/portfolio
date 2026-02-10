@@ -22,14 +22,14 @@ Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale 
 ## 🛠️ Matrix des Compétences
 
 ### **Infrastructure & Systèmes**
-* **Windows Server (90%) :** Active Directory, DNS, DHCP, GPO, WSUS.
-* **Linux Server (85%) :** Administration Debian, Apache, SSH, Bash scripting.
-* **Virtualisation (85%) :** VMware, Hyper-V, Proxmox, Docker.
+* **Windows Server  :** Active Directory, DNS, DHCP, GPO, WSUS.
+* **Linux Server  :** Administration Debian, Apache, SSH, Bash scripting.
+* **Virtualisation  :** VMware, Hyper-V, Proxmox, Docker.
 * **Cloud & SaaS :** Administration Office 365 (Azure AD, Exchange, SharePoint).
 
 ### **Réseaux & Sécurité**
-* **Networking (80%) :** Architecture VLAN, Routage, Cisco, VPN, Firewalling.
-* **Programmation (55%) :** Python, SQL, HTML/CSS, PowerShell.
+* **Networking  :** Architecture VLAN, Routage, Cisco, VPN, Firewalling.
+* **Programmation  :** Python, SQL, HTML/CSS, PowerShell.
 
 ---
 
@@ -51,7 +51,7 @@ Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale 
 ## 📫 Me Contacter
 * **LinkedIn :** [Alexis Veloso](https://www.linkedin.com/in/alexis-veloso-004097270)
 * **Email :** [alexis.veloso25@gmail.com](mailto:alexis.veloso25@gmail.com)
-* **Portfolio Web :** `ALEXIS_VELOSO // PORTFOLIO_V4`
+* **Portfolio Web :** `ALEXIS_VELOSO // PORTFOLIO`
 
 ---
 <p align="center">
