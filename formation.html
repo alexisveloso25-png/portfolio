@@ -92,23 +92,26 @@
             border-radius: 2px;
         }
 
+        /* Bouton stylisé comme Entreprise.html */
         .btn-mission {
             display: inline-block;
             margin-top: 15px;
-            padding: 8px 15px;
-            background: transparent;
+            padding: 10px 15px;
+            background: rgba(147, 51, 234, 0.1);
             border: 1px solid var(--purple);
-            color: var(--purple);
+            color: #fff;
             text-decoration: none;
             font-size: 0.75rem;
             text-align: center;
             border-radius: 4px;
+            font-family: 'JetBrains Mono';
             transition: all 0.3s ease;
+            text-transform: uppercase;
         }
 
         .btn-mission:hover {
             background: var(--purple);
-            color: #fff;
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
         }
 
         .tech-icon-box {
@@ -207,10 +210,6 @@
                 <i class="fas fa-building"></i> <strong>L'École :</strong> Le Campus Montsouris est un centre de formation d'excellence situé à Paris, spécialisé dans l'alternance. Il bénéficie d'un écosystème pédagogique moderne favorisant la mise en pratique immédiate des concepts de l'infrastructure réseau.
             </div>
 
-            <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.6;">
-                La spécialité <strong>SISR</strong> forme des experts en administration de solutions d'infrastructure, capables de maintenir la continuité de service des parcs informatiques en entreprise.
-            </p>
-
             <h3 style="font-size: 0.8rem; color: var(--accent); margin-top: 30px; font-family: 'JetBrains Mono'; text-transform: uppercase;">
                 <i class="fas fa-flask"></i> Laboratoire : Les 6 projets majeurs
             </h3>
@@ -220,13 +219,13 @@
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fas fa-users-cog t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Missions_01</span>
+                            <span class="v-year">Mission_01</span>
                         </div>
                         <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion ACL / Partages</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
                         <p style="font-size: 0.85rem; color: var(--text-dim);">Mise en place des droits NTFS et gestion des partages réseaux sécurisés.</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/ACL.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
 
                 <div class="project-card">
@@ -236,10 +235,10 @@
                             <span class="v-year">Projet_02</span>
                         </div>
                         <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion Disque / NTFS</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
                         <p style="font-size: 0.85rem; color: var(--text-dim);">Administration des volumes, quotas de disque et formatage NTFS.</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/NTFS.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
 
                 <div class="project-card">
@@ -249,10 +248,10 @@
                             <span class="v-year">Projet_03</span>
                         </div>
                         <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Routage Sites Distants</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 95%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Configuration de routes statiques et dynamiques entre deux sites.</p>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Configuration de routage entre deux sites distants.</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/ROUTAGE.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
 
                 <div class="project-card">
@@ -261,11 +260,11 @@
                             <i class="fas fa-user-shield t-purple" style="font-size: 1.5rem;"></i>
                             <span class="v-year">Projet_04</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Agent Récupération (EFS)</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Chiffrement de fichiers et création d'agents de récupération de données.</p>
+                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Agent de Récupération</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Création d'un agent de récupération de données (EFS).</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/EFS.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
 
                 <div class="project-card">
@@ -275,10 +274,10 @@
                             <span class="v-year">Projet_05</span>
                         </div>
                         <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Tunneling VPN</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Sécurisation des accès distants par tunnel chiffré.</p>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Mise en place et sécurisation de tunnels VPN.</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/VPN.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
 
                 <div class="project-card">
@@ -287,11 +286,11 @@
                             <i class="fas fa-network-wired t-purple" style="font-size: 1.5rem;"></i>
                             <span class="v-year">Projet_06</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">DHCP Serveur & Routeur</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Paramétrage des étendues DHCP sur Windows Server et Cisco.</p>
+                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">DHCP Serveur / Routeur</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Paramétrage DHCP sur un serveur et un routeur.</p>
                     </div>
-                    <a href="#" class="btn-mission">Fiche Technique</a>
+                    <a href="assets/DHCP.pdf" class="btn-mission">Fiche Technique</a>
                 </div>
             </div>
 
@@ -304,24 +303,26 @@
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fab fa-windows t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year" style="background: var(--purple);">PROJET_FINAL</span>
+                            <span class="v-year" style="background: var(--purple);">FINAL_BTS</span>
                         </div>
-                        <h3 style="margin: 15px 0 10px 0; color: #fff;">Serveur WSUS (2022)</h3>
+                        <h3 style="margin: 15px 0 10px 0; color: #fff;">Serveur WSUS 2022</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
                         <p style="font-size: 0.85rem; color: var(--text-dim);">Configuration et gestion d'un serveur de mise à jour avec Windows Server 2022 et WSUS.</p>
                     </div>
-                    <a href="#" class="btn-mission" style="border-color: var(--purple); color: var(--purple);">Voir le Projet</a>
+                    <a href="assets/WSUS.pdf" class="btn-mission" style="background: rgba(147, 51, 234, 0.2);">Voir le Projet</a>
                 </div>
 
                 <div class="project-card" style="border-color: var(--purple);">
                     <div>
                         <div style="display: flex; justify-content: space-between;">
                             <i class="fas fa-desktop t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year" style="background: var(--purple);">PROJET_FINAL</span>
+                            <span class="v-year" style="background: var(--purple);">FINAL_BTS</span>
                         </div>
                         <h3 style="margin: 15px 0 10px 0; color: #fff;">Supervision PRTG</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
                         <p style="font-size: 0.85rem; color: var(--text-dim);">Mise en place d'un serveur PRTG Network Monitor pour superviser les performances et l'état des équipements.</p>
                     </div>
-                    <a href="#" class="btn-mission" style="border-color: var(--purple); color: var(--purple);">Voir le Projet</a>
+                    <a href="assets/PRTG.pdf" class="btn-mission" style="background: rgba(147, 51, 234, 0.2);">Voir le Projet</a>
                 </div>
             </div>
         </section>
@@ -334,12 +335,8 @@
             </div>
 
             <div class="school-context" style="border-left-color: #555; background: rgba(255,255,255,0.03);">
-                <i class="fas fa-school"></i> <strong>L'École :</strong> Le Lycée Louis Armand (Nogent-sur-Marne) est un établissement réputé pour ses pôles technologiques. Il offre un cadre technique complet pour l'apprentissage des métiers de l'électronique et du numérique.
+                <i class="fas fa-school"></i> <strong>L'École :</strong> Le Lycée Louis Armand (Nogent-sur-Marne) est un établissement réputé pour ses pôles technologiques.
             </div>
-
-            <p style="font-size: 0.9rem; color: var(--text-dim);">
-                Spécialité <strong>RISC</strong> : Une immersion dans les bases du hardware et des premières configurations réseaux professionnelles.
-            </p>
 
             <div class="module-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
                 <div class="tech-icon-box">
