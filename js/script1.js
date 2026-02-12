@@ -20,6 +20,7 @@ async function askAI() {
 
     if (!userText) return;
 
+    // Affichage message utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
@@ -28,41 +29,35 @@ async function askAI() {
     history.scrollTop = history.scrollHeight;
 
     try {
-        // CHANGEMENT : Utilisation de la version v1 stable et vérification de la structure
-        const baseUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
-        
-        const response = await fetch(`${baseUrl}?key=${API_KEY}`, {
+        // --- LA CORRECTION EST ICI ---
+        // On utilise 'v1' au lieu de 'v1beta' et on ajoute 'models/' avant le nom
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+        const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{
-                        text: `Tu es l'assistant d'Alexis Veloso. Sois bref. Question : ${userText}`
-                    }]
+                    parts: [{ text: `Tu es l'assistant d'Alexis Veloso. Réponds brièvement. Question: ${userText}` }]
                 }]
             })
         });
 
-        // Diagnostic si la réponse n'est pas OK (pour voir la 404 en direct)
-        if (!response.ok) {
-            const errorDetail = await response.json();
-            document.getElementById(loadingId).innerHTML = 
-                `<span style="color:red">Erreur HTTP ${response.status}: ${errorDetail.error.message}</span>`;
+        const data = await response.json();
+
+        if (data.error) {
+            // Affiche l'erreur réelle de Google si le 404 persiste
+            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur : ${data.error.message}</span>`;
             return;
         }
 
-        const data = await response.json();
-        
         if (data.candidates && data.candidates[0].content) {
             const aiReply = data.candidates[0].content.parts[0].text;
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
         }
 
     } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR DE CONNEXION</span>`;
-        console.error("Détails :", error);
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU</span>`;
     }
     history.scrollTop = history.scrollHeight;
 }
