@@ -23,3 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('clock').innerText = now.toLocaleTimeString('fr-FR');
     }, 1000);
 });
+
+
