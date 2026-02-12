@@ -282,7 +282,7 @@
                     </div>
                     <div class="bio-data">
                         <div class="data-row"><span class="label-red">NOM :</span> <span class="data-val">VELOSO</span></div>
-                        <div class="data-row"><span class="label-red">PRENOM :</span> <span class="data-val">ALEXIS</span></div>
+                        <div class="data-row"><span class="label-red">PRÉNOM :</span> <span class="data-val">ALEXIS</span></div>
                         <div class="data-row"><span class="label-red">LOC :</span> <span class="data-val">PARIS, FR</span></div>
                         <div class="data-row"><span class="label-red">ROLE :</span> <span class="data-val">ADMIN RÉSEAUX</span></div>
                         <div class="data-row"><span class="label-red">MAIL :</span> <span class="data-val">alexis.veloso25@gmail.com</span></div>
@@ -325,7 +325,7 @@
         </div>
 
         <section class="card skill-matrix-section section-spacing">
-            <div class="badge">COMPETENCES TECHNIQUES</div>
+            <div class="badge">COMPÉTENCES TECHNIQUES</div>
             <div class="skills-grid">
                 <div class="skill-item">
                     <div class="s-head"><span>WINDOWS SERVEUR</span><span>90%</span></div>
@@ -338,9 +338,19 @@
                     <div class="s-details">Debian, Apache, SSH, Bash, Permissions</div>
                 </div>
                 <div class="skill-item">
-                    <div class="s-head"><span>RESEAUX</span><span>80%</span></div>
+                    <div class="s-head"><span>PROGRAMMATION</span><span>55%</span></div>
+                    <div class="s-bar"><div class="s-fill" style="width: 55%;"></div></div>
+                    <div class="s-details">Python, SQL, HTML/CSS, PowerShell</div>
+                </div>
+                <div class="skill-item">
+                    <div class="s-head"><span>RÉSEAUX</span><span>80%</span></div>
                     <div class="s-bar"><div class="s-fill" style="width: 80%;"></div></div>
                     <div class="s-details">VLAN, Routage, Cisco, VPN, Pare-feu</div>
+                </div>
+                <div class="skill-item">
+                    <div class="s-head"><span>ADMIN OFFICE 365</span><span>80%</span></div>
+                    <div class="s-bar"><div class="s-fill" style="width: 80%;"></div></div>
+                    <div class="s-details">Azure AD, Exchange, SharePoint</div>
                 </div>
                 <div class="skill-item">
                     <div class="s-head"><span>VIRTUALISATION</span><span>85%</span></div>
@@ -358,7 +368,11 @@
                     <div class="soft-tag"><span>Rigueur</span></div>
                     <div class="soft-tag"><span>Esprit d'équipe</span></div>
                     <div class="soft-tag"><span>Curiosité</span></div>
+                    <div class="soft-tag"><span>Professionnel</span></div>
+                    <div class="soft-tag"><span>Ponctuel</span></div>
                     <div class="soft-tag"><span>Adaptabilité</span></div>
+                    <div class="soft-tag"><span>Sens du service</span></div>
+                    <div class="soft-tag"><span>Communication</span></div>
                 </div>
             </section>
 
@@ -402,13 +416,16 @@
 
     <script>
         function toggleZoom() {
-            document.body.classList.toggle('is-zoomed');
-            document.getElementById('zoom-text').innerText = document.body.classList.contains('is-zoomed') ? "Normal" : "Visibilité";
+            const body = document.body;
+            const zoomText = document.getElementById('zoom-text');
+            body.classList.toggle('is-zoomed');
+            zoomText.innerText = body.classList.contains('is-zoomed') ? "Normal" : "Visibilité";
         }
         function toggleSimple() {
             document.body.classList.toggle('is-simple');
         }
     </script>
+    
     <script src="js/script1.js"></script>
 </body>
 </html>
