@@ -1,5 +1,5 @@
 // --- CONFIGURATION DU CHATBOT AI ---
-const API_KEY = "TON_API_KEY_ICI"; // Remplace par ta vraie clé Google AI Studio
+const API_KEY = "AIzaSyCsaZCot2QqMahY1HlXcov61TOzZOzv7xo"; // Remplace par ta vraie clé Google AI Studio
 
 function toggleChat() {
     const win = document.getElementById('ai-window');
