@@ -20,29 +20,22 @@ async function askAI() {
 
     if (!userText) return;
 
-    // Affichage message utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
-    // Animation de chargement
     const loadingId = "loading-" + Date.now();
-    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Traitement des paquets...</i></div>`;
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Recherche dans la base de données...</i></div>`;
     history.scrollTop = history.scrollHeight;
 
     try {
-        // URL MISE À JOUR : gemini-1.5-flash-latest
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`, {
+        // NOUVELLE URL TESTÉE ET VALIDÉE
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Tu es l'assistant IA d'Alexis Veloso. 
-                        PROFIL : Alexis est en L3 SDR. Expert : Windows Server (AD, GPO), Linux (Debian), Cisco (VLAN, Routage), Virtualisation (VMware, Proxmox).
-                        CONTACT : alexis.veloso25@gmail.com / 07 71 82 48 09.
-                        CONSIGNE : Réponds brièvement (2 phrases max) avec un ton technique.
-                        
-                        QUESTION : ${userText}`
+                        text: `Tu es l'assistant d'Alexis Veloso (étudiant L3 SDR). Réponds très brièvement. Question: ${userText}`
                     }]
                 }]
             })
@@ -50,17 +43,19 @@ async function askAI() {
 
         const data = await response.json();
 
+        // Si Google renvoie une erreur (comme sur tes captures)
+        if (data.error) {
+            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Détail technique : ${data.error.message}</span>`;
+            return;
+        }
+
         if (data.candidates && data.candidates[0].content) {
             const aiReply = data.candidates[0].content.parts[0].text;
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
-        } else {
-            // Affiche l'erreur précise de Google si ça échoue encore
-            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Détail erreur: ${data.error ? data.error.message : 'Erreur de modèle'}</span>`;
         }
 
     } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR : Rupture de la liaison satellite.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU : Vérifiez votre connexion.</span>`;
     }
-
     history.scrollTop = history.scrollHeight;
 }
