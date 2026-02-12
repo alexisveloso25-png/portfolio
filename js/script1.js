@@ -20,34 +20,37 @@ async function askAI() {
 
     if (!userText) return;
 
-    // Affichage message utilisateur
+    // Affichage utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
     const loadingId = "loading-" + Date.now();
-    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Connexion au serveur...</i></div>`;
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Transmission des paquets...</i></div>`;
     history.scrollTop = history.scrollHeight;
 
     try {
-        // --- LA CORRECTION EST ICI ---
-        // On utilise 'v1' au lieu de 'v1beta' et on ajoute 'models/' avant le nom
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        // --- CETTE URL EST LA SEULE VALIDE POUR GEMINI 1.5 FLASH ---
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
         const response = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{ text: `Tu es l'assistant d'Alexis Veloso. Réponds brièvement. Question: ${userText}` }]
+                    parts: [{
+                        text: `Tu es l'assistant d'Alexis Veloso. Réponds en 2 phrases max. Question : ${userText}`
+                    }]
                 }]
             })
         });
 
         const data = await response.json();
 
+        // Si l'API renvoie quand même une erreur
         if (data.error) {
-            // Affiche l'erreur réelle de Google si le 404 persiste
-            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur : ${data.error.message}</span>`;
+            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur Google: ${data.error.message}</span>`;
             return;
         }
 
@@ -57,7 +60,7 @@ async function askAI() {
         }
 
     } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU</span>`;
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU : Impossible de joindre l'API.</span>`;
     }
     history.scrollTop = history.scrollHeight;
 }
