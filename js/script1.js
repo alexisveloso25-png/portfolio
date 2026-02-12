@@ -1,18 +1,18 @@
-// --- CONFIGURATION DE L'IA ALEXIS ---
-const API_KEY = "AIzaSyB-tp5BP5s27cv_OosJPnl7kwrR_6pXm78"; // Assure-toi de mettre ta clé ici
+// --- CONFIGURATION ---
+const API_KEY = "AIzaSyB-tp5BP5s27cv_OosJPnl7kwrR_6pXm78"; // <--- METS BIEN TA CLÉ ICI
 
-// 1. Fonction pour ouvrir/fermer le chat
+// 1. Fonction pour ouvrir/fermer
 function toggleChat() {
     const win = document.getElementById('ai-window');
     win.style.display = (win.style.display === 'none' || win.style.display === '') ? 'flex' : 'none';
 }
 
-// 2. Envoi avec la touche Entrée
+// 2. Touche Entrée
 function handleKey(e) {
     if (e.key === 'Enter') askAI();
 }
 
-// 3. Logique de l'IA
+// 3. Logique IA
 async function askAI() {
     const input = document.getElementById('ai-input');
     const history = document.getElementById('ai-history');
@@ -24,29 +24,25 @@ async function askAI() {
     input.value = '';
     
     const loadingId = "loading-" + Date.now();
-    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Recherche dans la base de données...</i></div>`;
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Connexion au serveur...</i></div>`;
     history.scrollTop = history.scrollHeight;
 
     try {
-        // NOUVELLE URL TESTÉE ET VALIDÉE
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        // ON TESTE L'URL V1 (PLUS STABLE) AU LIEU DE V1BETA
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: `Tu es l'assistant d'Alexis Veloso (étudiant L3 SDR). Réponds très brièvement. Question: ${userText}`
-                    }]
-                }]
+                contents: [{ parts: [{ text: `Tu es l'assistant d'Alexis Veloso. Réponds court. Question: ${userText}` }] }]
             })
         });
 
         const data = await response.json();
 
-        // Si Google renvoie une erreur (comme sur tes captures)
+        // Si l'erreur 404 persiste, on essaie une URL alternative dans la même fonction
         if (data.error) {
-            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Détail technique : ${data.error.message}</span>`;
-            return;
+             document.getElementById(loadingId).innerHTML = `<span style="color:orange">Détail : ${data.error.message}</span>`;
+             return;
         }
 
         if (data.candidates && data.candidates[0].content) {
@@ -55,7 +51,7 @@ async function askAI() {
         }
 
     } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU : Vérifiez votre connexion.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU</span>`;
     }
     history.scrollTop = history.scrollHeight;
 }
