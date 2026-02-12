@@ -1,7 +1,7 @@
 // --- CONFIGURATION DU CHATBOT IA ALEXIS ---
 
 // Ta clé API à récupérer sur https://aistudio.google.com/
-const API_KEY = "AIzaSyCsaZCot2QqMahY1HlXcov61TOzZOzv7xo"; 
+const API_KEY = "AIzaSyB-tp5BP5s27cv_OosJPnl7kwrR_6pXm78"; 
 
 // 1. Fonction pour ouvrir/fermer la fenêtre de chat
 function toggleChat() {
