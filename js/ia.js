@@ -1,6 +1,6 @@
 // --- CONFIGURATION ---
 // Ta clé est protégée par la restriction de domaine (Referer HTTP) sur Google Cloud
-const API_KEY = "AIzaSyC1EsBqzpbHDmi4M3fReJuM0HQs1pAvgg8"; 
+const API_KEY = "X"; 
 
 /**
  * 1. GESTION DE L'INTERFACE (Ouverture/Fermeture)
