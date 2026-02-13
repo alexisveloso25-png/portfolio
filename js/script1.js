@@ -20,39 +20,39 @@ async function askAI() {
 
     if (!userText) return;
 
-    // 1. Affichage utilisateur
+    // Affichage utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
     const loadingId = "loading-" + Date.now();
-    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Analyse des paquets...</i></div>`;
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Connexion au serveur Gemini 2.0...</i></div>`;
     history.scrollTop = history.scrollHeight;
 
     try {
-        // --- URL CORRIGÉE POUR GEMINI 1.5 FLASH ---
-        
-       curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;;
+        // --- URL MISE À JOUR AVEC GEMINI 2.0 FLASH ---
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
         const response = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json'
+                // Note : Dans un navigateur, on passe la clé dans l'URL (?key=) 
+                // plutôt que dans le header 'X-goog-api-key' pour éviter des erreurs CORS.
+            },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{ text: `Tu es l'assistant d'Alexis Veloso. Réponds brièvement. Question: ${userText}` }]
+                    parts: [{ text: userText }]
                 }]
             })
         });
 
         const data = await response.json();
 
-        // 2. Debug en cas d'erreur de clé ou de domaine
         if (data.error) {
-            console.error("Erreur Google détaillée:", data.error);
             document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur: ${data.error.message}</span>`;
             return;
         }
 
-        // 3. Affichage de la réponse
         if (data.candidates && data.candidates[0].content) {
             const aiReply = data.candidates[0].content.parts[0].text;
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
