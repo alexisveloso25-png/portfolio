@@ -1,7 +1,5 @@
 // --- CONFIGURATION ---
-// 1. Remplace par ton token Hugging Face (hf_...)
 const HF_TOKEN = "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"; 
-// 2. Modèle Llama 3.1 (puissant et gratuit)
 const MODEL_ID = "meta-llama/Llama-3.1-8B-Instruct"; 
 
 /**
@@ -14,12 +12,22 @@ function toggleChat() {
         return;
     }
 
+    // Alterne entre 'none' et 'flex'
     if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
         chatWindow.style.display = 'flex';
         console.log("Fenêtre de chat ouverte");
     } else {
         chatWindow.style.display = 'none';
         console.log("Fenêtre de chat fermée");
+    }
+}
+
+/**
+ * Gère la touche Entrée sur l'input (appelée par ton HTML)
+ */
+function handleKey(event) {
+    if (event.key === 'Enter') {
+        askAI();
     }
 }
 
@@ -67,8 +75,10 @@ async function askAI() {
         if (response.ok && data[0] && data[0].generated_text) {
             let aiReply = data[0].generated_text.trim();
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
+        } else if (data.error && data.error.includes("currently loading")) {
+            // Cas particulier Hugging Face : le modèle s'allume
+            document.getElementById(loadingId).innerHTML = `<i>Modèle en cours de chargement... réessaie dans 10 secondes.</i>`;
         } else {
-            // Gestion des erreurs de quota ou d'API
             const errorMsg = data.error || "Erreur inconnue";
             document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur : ${errorMsg}</span>`;
         }
@@ -82,12 +92,7 @@ async function askAI() {
     history.scrollTop = history.scrollHeight;
 }
 
-// Permettre d'envoyer avec la touche "Entrée"
+// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('ai-input');
-    if (input) {
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') askAI();
-        });
-    }
+    console.log("ALEXIS_AI_ASSISTANT v1.0 chargé");
 });
