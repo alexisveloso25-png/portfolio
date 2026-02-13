@@ -41,8 +41,8 @@ async function askAI() {
 
     try {
         // URL configurée avec le modèle gemini-2.0-flash et la version v1beta
-        // Le séparateur ":" est utilisé avant la méthode generateContent
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        // On passe sur le modèle "flash-live" qui est le seul en Illimité chez toi
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-live:generateContent?key=${API_KEY}`;
 
         const response = await fetch(url, {
             method: 'POST',
