@@ -42,16 +42,16 @@ async function askAI() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // CHANGEMENT ICI : On passe sur le modèle 3.3 qui est actif
-                model: "llama-3.3-70b-versatile", 
-                messages: [
-                    { 
-                        role: "system", 
-                        content: "Tu es l'assistant virtuel d'Alexis, étudiant en SDR (Systèmes et Réseaux). Réponds de manière très concise et technique." 
-                    },
-                    { role: "user", content: userText }
-                ]
-            })
+    // On passe sur la version 3.3 qui est le remplaçant officiel
+    model: "llama-3.3-70b-versatile", 
+    messages: [
+        { 
+            role: "system", 
+            content: "Tu es l'assistant d'Alexis, expert en Systèmes et Réseaux. Réponds de façon concise." 
+        },
+        { role: "user", content: userText }
+    ]
+})
         });
 
         const data = await response.json();
