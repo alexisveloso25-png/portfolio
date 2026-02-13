@@ -1,6 +1,6 @@
 // --- CONFIGURATION ---
 const HF_TOKEN = "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"; 
-const MODEL_ID = "meta-llama/Llama-3.1-8B-Instruct"; 
+const MODEL_ID = "mistralai/Mistral-7B-Instruct-v0.3";
 
 /**
  * Gère l'ouverture et la fermeture de la fenêtre de chat
