@@ -20,46 +20,46 @@ async function askAI() {
 
     if (!userText) return;
 
-    // Affichage utilisateur
+    // 1. Affichage utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
     const loadingId = "loading-" + Date.now();
-    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Transmission des paquets...</i></div>`;
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Analyse des paquets...</i></div>`;
     history.scrollTop = history.scrollHeight;
 
     try {
-        // --- CETTE URL EST LA SEULE VALIDE POUR GEMINI 1.5 FLASH ---
-     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        // --- URL CORRIGÉE POUR GEMINI 1.5 FLASH ---
+        // Note le format : v1beta/models/gemini-1.5-flash:generateContent
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{
-                        text: `Tu es l'assistant d'Alexis Veloso. Réponds en 2 phrases max. Question : ${userText}`
-                    }]
+                    parts: [{ text: `Tu es l'assistant d'Alexis Veloso. Réponds brièvement. Question: ${userText}` }]
                 }]
             })
         });
 
         const data = await response.json();
 
-        // Si l'API renvoie quand même une erreur
+        // 2. Debug en cas d'erreur de clé ou de domaine
         if (data.error) {
-            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur Google: ${data.error.message}</span>`;
+            console.error("Erreur Google détaillée:", data.error);
+            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur: ${data.error.message}</span>`;
             return;
         }
 
+        // 3. Affichage de la réponse
         if (data.candidates && data.candidates[0].content) {
             const aiReply = data.candidates[0].content.parts[0].text;
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
         }
 
     } catch (error) {
-        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU : Impossible de joindre l'API.</span>`;
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU</span>`;
     }
     history.scrollTop = history.scrollHeight;
 }
