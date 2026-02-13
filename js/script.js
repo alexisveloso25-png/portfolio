@@ -1,8 +1,11 @@
 // --- CONFIGURATION GROQ ---
+// Note : Garde bien cette clé, elle est valide.
 const GROQ_API_KEY = "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"; 
 
 function toggleChat() {
     const win = document.getElementById('ai-window');
+    if (!win) return;
+    
     if (win.style.display === 'none' || win.style.display === '') {
         win.style.display = 'flex';
     } else {
@@ -17,10 +20,13 @@ function handleKey(event) {
 async function askAI() {
     const input = document.getElementById('ai-input');
     const history = document.getElementById('ai-history');
+    
+    if (!input || !history) return;
+    
     const userText = input.value.trim();
-
     if (!userText) return;
 
+    // Affichage message utilisateur
     history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
     input.value = '';
     
@@ -36,9 +42,13 @@ async function askAI() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama-3.1-70b-versatile",
+                // CHANGEMENT ICI : On passe sur le modèle 3.3 qui est actif
+                model: "llama-3.3-70b-versatile", 
                 messages: [
-                    { role: "system", content: "Tu es l'assistant virtuel d'Alexis, étudiant en SDR. Réponds de manière concise." },
+                    { 
+                        role: "system", 
+                        content: "Tu es l'assistant virtuel d'Alexis, étudiant en SDR (Systèmes et Réseaux). Réponds de manière très concise et technique." 
+                    },
                     { role: "user", content: userText }
                 ]
             })
@@ -50,10 +60,14 @@ async function askAI() {
             let aiReply = data.choices[0].message.content;
             document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
         } else {
-            document.getElementById(loadingId).innerHTML = `Erreur: ${data.error.message || "Quota atteint"}`;
+            // Affiche l'erreur précise renvoyée par Groq pour débugger
+            const errorDetail = data.error ? data.error.message : "Erreur de configuration";
+            document.getElementById(loadingId).innerHTML = `Erreur: ${errorDetail}`;
         }
     } catch (error) {
+        console.error("Erreur Fetch:", error);
         document.getElementById(loadingId).innerHTML = "Impossible de joindre Groq.";
     }
+    
     history.scrollTop = history.scrollHeight;
 }
