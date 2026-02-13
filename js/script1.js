@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const API_KEY = "AIzaSyB-tp5BP5s27cv_OosJPnl7kwrR_6pXm78"; // <--- METS BIEN TA CLÉ ICI
+const API_KEY = "AIzaSyAUCOxB5LDJUreE1KYn00wmHHN0LHCgQtg"; 
 
 // 1. Fonction pour ouvrir/fermer
 function toggleChat() {
