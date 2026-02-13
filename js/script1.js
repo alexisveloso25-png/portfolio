@@ -31,7 +31,7 @@ async function askAI() {
     try {
         // --- URL CORRIGÉE POUR GEMINI 1.5 FLASH ---
         
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;;
+       curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;;
 
         const response = await fetch(url, {
             method: 'POST',
