@@ -1,431 +1,87 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7W7C7KH04"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-P7W7C7KH04');
-    </script>
+// --- CONFIGURATION ---
+// Ta clé est protégée par la restriction de domaine (Referer HTTP) sur Google Cloud
+const API_KEY = "AIzaSyAUCOxB5LDJUreE1KYn00wmHHN0LHCgQtg"; 
+
+/**
+ * 1. GESTION DE L'INTERFACE (Ouverture/Fermeture)
+ */
+function toggleChat() {
+    const win = document.getElementById('ai-window');
+    // Alterne l'affichage entre 'none' et 'flex'
+    win.style.display = (win.style.display === 'none' || win.style.display === '') ? 'flex' : 'none';
+}
+
+/**
+ * 2. GESTION DU CLAVIER
+ */
+function handleKey(e) {
+    // Permet d'envoyer le message en appuyant sur la touche 'Entrée'
+    if (e.key === 'Enter') askAI();
+}
+
+/**
+ * 3. LOGIQUE D'APPEL À L'IA GEMINI 2.0 FLASH
+ */
+async function askAI() {
+    const input = document.getElementById('ai-input');
+    const history = document.getElementById('ai-history');
+    const userText = input.value.trim();
+
+    // Arrête la fonction si l'entrée est vide
+    if (!userText) return;
+
+    // Affiche le message de l'utilisateur
+    history.innerHTML += `<div class="ai-msg user-msg"><b>></b> ${userText}</div>`;
+    input.value = ''; // Vide le champ de saisie
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // PORTFOLIO_V4</title>
+    // Crée un élément de chargement avec un ID unique pour le remplacer plus tard
+    const loadingId = "loading-" + Date.now();
+    history.innerHTML += `<div class="ai-msg bot-msg" id="${loadingId}"><i>Liaison satellite Gemini 2.0...</i></div>`;
+    history.scrollTop = history.scrollHeight;
+
+    try {
+        // URL configurée avec le modèle gemini-2.0-flash et la version v1beta
+        // On passe sur le modèle "flash-live" qui est le seul en Illimité chez toi
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ 
+                        // Tu peux ajouter une instruction ici pour personnaliser les réponses
+                        text: userText 
+                    }]
+                }]
+            })
+        });
+
+        const data = await response.json();
+
+        // Gestion des erreurs spécifiques (Quota, Domaine bloqué, etc.)
+        if (data.error) {
+            console.error("Détails de l'erreur:", data.error);
+            document.getElementById(loadingId).innerHTML = `<span style="color:orange">Erreur: ${data.error.message}</span>`;
+            return;
+        }
+
+        // Extraction et affichage de la réponse texte
+        if (data.candidates && data.candidates[0].content) {
+            const aiReply = data.candidates[0].content.parts[0].text;
+            document.getElementById(loadingId).innerHTML = `<b>AI:</b> ${aiReply}`;
+        } else {
+            document.getElementById(loadingId).innerHTML = `<b>AI:</b> (Pas de réponse générée)`;
+        }
+
+    } catch (error) {
+        // En cas de problème de connexion ou d'erreur réseau majeure
+        console.error("Erreur réseau:", error);
+        document.getElementById(loadingId).innerHTML = `<span style="color:red">ERREUR RÉSEAU</span>`;
+    }
     
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        /* --- Styles du Terminal et du Logo --- */
-        .hero-header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 20px;
-        }
-
-        .hero-main-content { flex: 1; }
-        .hero-text-large { margin-bottom: 10px; }
-
-        .terminal-logo-container {
-            flex: 0 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .terminal-logo {
-            width: 400px;
-            height: auto;
-            filter: drop-shadow(0 0 15px #8a2be2);
-            animation: float 3s ease-in-out infinite, neonPulse 2s infinite alternate;
-        }
-
-        .avatar-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes neonPulse {
-            from { filter: drop-shadow(0 0 10px #8a2be2) brightness(1); }
-            to { filter: drop-shadow(0 0 30px #bf00ff) brightness(1.3); }
-        }
-
-        /* --- Accessibilité Verticale --- */
-        .accessibility-toolbar {
-            position: fixed;
-            top: 75px;
-            left: 15px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn-access {
-            background: rgba(138, 43, 226, 0.1);
-            color: #8a2be2;
-            border: 1px solid #8a2be2;
-            padding: 6px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 8px;
-            width: 130px;
-        }
-
-        .btn-access:hover {
-            background: #8a2be2;
-            color: #fff;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-        }
-
-        /* --- MODES (Zoom & Simple) --- */
-        body.is-zoomed { font-size: 1.25rem; }
-        body.is-zoomed .wrapper { max-width: 95%; }
-        body.is-zoomed .bio-data { font-size: 1.4rem; line-height: 1.8; }
-        body.is-zoomed .avatar-box { width: 120px; height: 120px; }
-        body.is-zoomed .hero-name { font-size: 4rem; }
-
-        body.is-simple .card:not(.terminal-window) {
-            background: #ffffff !important;
-            color: #000000 !important;
-            border: 1px solid #000 !important;
-            box-shadow: none !important;
-        }
-        body.is-simple .card:not(.terminal-window) * { color: #000 !important; }
-        body.is-simple .scanline-global, body.is-simple .glitch-overlay, body.is-simple .laser-line { display: none !important; }
-
-        /* --- STYLE DU CHATBOT AI (CYBER LOOK) --- */
-        #ai-chat-container {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            z-index: 9999;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        #ai-window {
-            display: none;
-            width: 320px;
-            height: 450px;
-            background: rgba(10, 10, 15, 0.98);
-            border: 2px solid #8a2be2;
-            border-radius: 8px;
-            flex-direction: column;
-            box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .ai-header {
-            background: #8a2be2;
-            color: white;
-            padding: 12px;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-        }
-
-        #ai-history {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            color: #e0e0e0;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            background-image: linear-gradient(rgba(138, 43, 226, 0.05) 1px, transparent 1px);
-            background-size: 100% 20px;
-        }
-
-        .ai-msg { margin-bottom: 12px; padding: 10px; border-radius: 4px; }
-        .user-msg { background: rgba(138, 43, 226, 0.2); border-left: 3px solid #8a2be2; margin-left: 10px; }
-        .bot-msg { background: rgba(0, 255, 65, 0.05); border-left: 3px solid #00ff41; margin-right: 10px; }
-
-        .ai-input-area {
-            display: flex;
-            background: #1a1a24;
-            padding: 12px;
-            border-top: 1px solid #333;
-        }
-
-        #ai-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #00ff41;
-            outline: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-        }
-
-        #ai-launcher {
-            width: 60px;
-            height: 60px;
-            background: #8a2be2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
-            float: right;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @media (max-width: 992px) {
-            .hero-header-flex { flex-direction: column; text-align: center; }
-            .terminal-logo { width: 180px; }
-            #ai-window { width: 280px; right: 10px; }
-        }
-    </style>
-</head>
-<body id="main-body">
-    <div class="circuit-bg"></div>
-    <div class="scanline-global"></div>
-
-    <div class="accessibility-toolbar">
-        <button class="btn-access" onclick="toggleZoom()" id="zoom-btn">
-            <i class="fas fa-search-plus"></i> <span id="zoom-text">Visibilité</span>
-        </button>
-        <button class="btn-access" onclick="toggleSimple()">
-            <i class="fas fa-palette"></i> Couleurs
-        </button>
-    </div>
-
-    <header class="top-bar">
-        <div class="brand">USER: ALEXIS_VELOSO / <span>L3_SDR_STUDENT</span></div>
-        <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
-            <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
-            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
-            <a href="veille.html"><i class="fas fa-search"></i> VEILLE</a>
-            <a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a>
-        </nav>
-    </header>
-
-    <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                    </div>
-                    <div class="terminal-title-inline">bash — root@alexis_veloso</div>
-                </div>
-            </div>
-            <div class="terminal-body extended-padding">
-                <div class="terminal-prompt">
-                    <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">cat intro_expert.txt</span>
-                </div>
-                
-                <div class="hero-header-flex">
-                    <div class="hero-main-content">
-                        <h1 class="hero-name">
-                            <span class="terminal-typing">ALEXIS VELOSO</span>
-                        </h1>
-                        <p class="hero-role">// SYSTEMS_AND_NETWORKS_EXPERT</p>
-                        <div class="hero-text-large">
-                            <p>> Étudiant en Licence Générale Informatique (SDR).</p>
-                            <p>> Spécialiste Système Développement et Réseaux.</p>
-                            <p>> Focus : Cybersécurité, Système, Réseaux et Cloud</p>
-                        </div>
-                    </div>
-
-                    <div class="terminal-logo-container">
-                        <img src="assets/logo1.png" alt="Logo" class="terminal-logo">
-                    </div>
-                </div>
-
-                <div class="terminal-actions-modern">
-                    <a href="assets/CV.pdf" class="btn-cyber-outline"><span>CV</span></a>
-                    <a href="https://www.linkedin.com/in/alexis-veloso-004097270" class="btn-cyber-outline" target="_blank"><span>LINKEDIN.URL</span></a>
-                    <a href="assets/Recommandation.pdf" class="btn-cyber-outline"><span>RECOMMANDATION</span></a>
-                </div>
-            </div>
-        </section>
-
-        <div class="profile-academic-group section-spacing">
-            <section class="card profile-card">
-                <div class="badge">PROFIL ID</div>
-                <div class="bio-flex">
-                    <div class="scanner-container">
-                        <div class="corner tl"></div><div class="corner tr"></div>
-                        <div class="corner bl"></div><div class="corner br"></div>
-                        <div class="avatar-box">
-                            <img src="assets/photo.png" alt="Photo Alexis Veloso">
-                        </div>
-                        <div class="laser-line"></div>
-                        <div class="glitch-overlay"></div>
-                    </div>
-                    <div class="bio-data">
-                        <div class="data-row"><span class="label-red">NOM :</span> <span class="data-val">VELOSO</span></div>
-                        <div class="data-row"><span class="label-red">PRÉNOM :</span> <span class="data-val">ALEXIS</span></div>
-                        <div class="data-row"><span class="label-red">LOC :</span> <span class="data-val">PARIS, FR</span></div>
-                        <div class="data-row"><span class="label-red">ROLE :</span> <span class="data-val">ADMIN RÉSEAUX</span></div>
-                        <div class="data-row"><span class="label-red">MAIL :</span> <span class="data-val">alexis.veloso25@gmail.com</span></div>
-                        <div class="data-row"><span class="label-red">TEL :</span> <span class="data-val">07 71 82 48 09</span></div>
-                        <div class="data-row"><span class="label-red">STATUS :</span> <span class="data-val t-green">ACTIVE</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card academic-card">
-                <div class="badge">PARCOURS</div>
-                <div class="vertical-timeline">
-                    <div class="v-line"></div>
-                    <div class="v-item">
-                        <div class="v-node"></div>
-                        <div class="v-content">
-                            <span class="v-year">2025-2026</span>
-                            <h3 class="v-title">LICENCE INFORMATIQUE (SDR)</h3>
-                            <p class="v-school">CNAM - Campus Montsouris</p>
-                        </div>
-                    </div>
-                    <div class="v-item">
-                        <div class="v-node"></div>
-                        <div class="v-content">
-                            <span class="v-year">2023-2025</span>
-                            <h3 class="v-title">BTS SIO OPTION SISR</h3>
-                            <p class="v-school">Campus Montsouris</p>
-                        </div>
-                    </div>
-                    <div class="v-item">
-                        <div class="v-node"></div>
-                        <div class="v-content">
-                            <span class="v-year">2020-2023</span>
-                            <h3 class="v-title">BAC PRO SN OPTION SISR</h3>
-                            <p class="v-school">Lycée Louis Armand</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <section class="card skill-matrix-section section-spacing">
-            <div class="badge">COMPÉTENCES TECHNIQUES</div>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="s-head"><span>WINDOWS SERVEUR</span><span>90%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 90%;"></div></div>
-                    <div class="s-details">AD, DNS, DHCP, GPO, WSUS</div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>LINUX SERVER</span><span>85%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 85%;"></div></div>
-                    <div class="s-details">Debian, Apache, SSH, Bash, Permissions</div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>PROGRAMMATION</span><span>55%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 55%;"></div></div>
-                    <div class="s-details">Python, SQL, HTML/CSS, PowerShell</div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>RÉSEAUX</span><span>80%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 80%;"></div></div>
-                    <div class="s-details">VLAN, Routage, Cisco, VPN, Pare-feu</div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>ADMIN OFFICE 365</span><span>80%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 80%;"></div></div>
-                    <div class="s-details">Azure AD, Exchange, SharePoint</div>
-                </div>
-                <div class="skill-item">
-                    <div class="s-head"><span>VIRTUALISATION</span><span>85%</span></div>
-                    <div class="s-bar"><div class="s-fill" style="width: 85%;"></div></div>
-                    <div class="s-details">VMware, Hyper-V, Proxmox, Docker</div>
-                </div>
-            </div>
-        </section>
-
-        <div class="grid-layout section-spacing">
-            <section class="card">
-                <div class="badge">POINTS FORTS</div>
-                <div class="soft-skills-grid">
-                    <div class="soft-tag"><span>Autonomie</span></div>
-                    <div class="soft-tag"><span>Rigueur</span></div>
-                    <div class="soft-tag"><span>Esprit d'équipe</span></div>
-                    <div class="soft-tag"><span>Curiosité</span></div>
-                    <div class="soft-tag"><span>Professionnel</span></div>
-                    <div class="soft-tag"><span>Ponctuel</span></div>
-                    <div class="soft-tag"><span>Adaptabilité</span></div>
-                    <div class="soft-tag"><span>Sens du service</span></div>
-                    <div class="soft-tag"><span>Communication</span></div>
-                </div>
-            </section>
-
-            <section class="card">
-                <div class="badge">VALIDATIONS</div>
-                <div class="cert-list">
-                    <div class="cert-row"><span>CCNA en COURS</span><span>PENDING</span></div>
-                    <div class="cert-row"><span>Attestation RGPD</span><i class="fas fa-check t-green"></i></div>
-                    <div class="cert-row"><span>PIX CERTIFIED</span><i class="fas fa-check t-green"></i></div>
-                    <div class="cert-row"><span>CISCO NETACAD IT</span><i class="fas fa-check t-green"></i></div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <div id="ai-chat-container">
-        <div id="ai-window">
-            <div class="ai-header">
-                <span><i class="fas fa-microchip"></i> ALEXIS_AI_ASSISTANT v1.0</span>
-                <span style="cursor:pointer" onclick="toggleChat()"><i class="fas fa-times"></i></span>
-            </div>
-            <div id="ai-history">
-                <div class="ai-msg bot-msg">Système initialisé. Je suis l'assistant virtuel d'Alexis. Que souhaitez-vous savoir sur son profil ?</div>
-            </div>
-            <div class="ai-input-area">
-                <input type="text" id="ai-input" placeholder="Taper une commande..." onkeypress="handleKey(event)">
-                <button onclick="askAI()" style="background:none; border:none; color:#8a2be2; cursor:pointer;">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-        <div id="ai-launcher" onclick="toggleChat()">
-            <i class="fas fa-robot" style="font-size: 1.5rem;"></i>
-        </div>
-    </div>
-
-    <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: <span class="t-green">ONLINE</span></div>
-        <div class="footer-segment">ALEXIS_VELOSO // PORTFOLIO_V4</div>
-    </footer>
-
-    <script>
-        function toggleZoom() {
-            const body = document.body;
-            const zoomText = document.getElementById('zoom-text');
-            body.classList.toggle('is-zoomed');
-            zoomText.innerText = body.classList.contains('is-zoomed') ? "Normal" : "Visibilité";
-        }
-        function toggleSimple() {
-            document.body.classList.toggle('is-simple');
-        }
-    </script>
-    
-    <script src="js/script3.js"></script>
-</body>
-</html>
+    // Garde l'historique scrollé vers le bas
+    history.scrollTop = history.scrollHeight;
+}
