@@ -272,3 +272,18 @@ body {
     50% { border-color: var(--accent) }
 }
 
+#ai-window {
+    display: none; /* Indispensable pour le toggle */
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    background-color: #121212;
+    border: 2px solid #8a2be2;
+    border-radius: 12px;
+    z-index: 9999; /* Pour passer devant tout le reste */
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
