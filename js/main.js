@@ -1,350 +1,318 @@
-entreprise : 
+/* ============================
+   ALEXIS VELOSO — PORTFOLIO V5
+   main.js — Polish Edition
+   ============================ */
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALEXIS_VELOSO // MISSIONS_THENEAS</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --accent: #a366ff;
-            --purple: #9333ea;
-            --green: #22c55e;
-            --text-dim: #aaa;
-            --border-color: rgba(255, 255, 255, 0.1);
+/* --- CUSTOM CURSOR --- */
+(function initCursor() {
+    const cursor = document.querySelector('.cursor');
+    const ring   = document.querySelector('.cursor-ring');
+    if (!cursor) return;
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    const tick = () => {
+        cursor.style.left = mx + 'px';
+        cursor.style.top  = my + 'px';
+        rx += (mx - rx) * 0.14;
+        ry += (my - ry) * 0.14;
+        if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+        requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    document.querySelectorAll('a, button, .card, .soft-tag, .tab-btn, .veille-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.opacity = '0.6';
+            if (ring) { ring.style.width = '52px'; ring.style.height = '52px'; }
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '12px'; cursor.style.height = '12px'; cursor.style.opacity = '1';
+            if (ring) { ring.style.width = '36px'; ring.style.height = '36px'; }
+        });
+    });
+})();
+
+/* --- BOOT SCREEN --- */
+(function initBoot() {
+    const boot     = document.getElementById('boot');
+    const bootText = document.getElementById('boot-text');
+    if (!boot || !bootText) return;
+    const lines = [
+        '> Initializing SDR_OS v5.0...',
+        '> Loading security modules... [OK]',
+        '> Mounting encrypted volumes... [OK]',
+        '> Network interface: eth0 SECURED',
+        '> Authentication: USER_ALEXIS_VELOSO',
+        '> Access granted. Welcome.'
+    ];
+    let i = 0;
+    const next = () => {
+        if (i >= lines.length) {
+            setTimeout(() => {
+                boot.style.transition = 'opacity 0.5s';
+                boot.style.opacity = '0';
+                setTimeout(() => boot.remove(), 500);
+            }, 300);
+            return;
         }
+        bootText.textContent += lines[i] + '
+';
+        i++;
+        setTimeout(next, 320);
+    };
+    setTimeout(next, 150);
+})();
 
-        /* --- LOGO 3D & ALIGNEMENT --- */
-        .terminal-content-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px; 
-            margin-top: 15px;
+/* --- STICKY NAV + ACTIVE LINK --- */
+(function initNav() {
+    const bar = document.querySelector('.top-bar');
+    if (bar) window.addEventListener('scroll', () => {
+        bar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+    const path = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        if (a.getAttribute('href') === path) a.classList.add('active');
+    });
+})();
+
+/* --- HERO CANVAS PARTICLES --- */
+(function initParticles() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    const resize = () => {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    class Particle {
+        constructor() { this.reset(); }
+        reset() {
+            this.x  = Math.random() * W;
+            this.y  = Math.random() * H;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.r  = Math.random() * 1.5 + 0.3;
+            this.alpha = Math.random() * 0.6 + 0.2;
         }
-
-        .logo-3d-side {
-            flex-shrink: 0;
-            width: 320px; 
-            height: auto;
-            mix-blend-mode: screen; 
-            filter: drop-shadow(0 0 15px rgba(163, 102, 255, 0.6)); 
-            perspective: 1000px;
-            animation: floatingHolo 6s infinite ease-in-out;
-            transition: all 0.5s ease;
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
         }
-
-        @keyframes floatingHolo {
-            0%, 100% { transform: rotateY(15deg) translateY(0px); }
-            50% { transform: rotateY(5deg) translateY(-15px); }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(163,102,255,${this.alpha})`;
+            ctx.fill();
         }
+    }
 
-        /* --- MISSIONS --- */
-        .project-card { 
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 4px;
-            display: flex; 
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s;
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+    const drawLines = () => {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const d  = Math.sqrt(dx*dx + dy*dy);
+                if (d < 90) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(163,102,255,${0.12 * (1 - d/90)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--accent) !important; }
+    };
 
-        .skill-bar-container {
-            background: rgba(255, 255, 255, 0.1);
-            height: 6px;
-            border-radius: 3px;
-            margin: 10px 0;
-            overflow: hidden;
+    const loop = () => {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        drawLines();
+        requestAnimationFrame(loop);
+    };
+    loop();
+})();
+
+/* --- SCROLL REVEAL + SKILL BARS + STAGGER --- */
+(function initReveal() {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+
+            const el = e.target;
+            el.classList.add('active', 'animated');
+
+            // Animate skill bar fills
+            el.querySelectorAll('.s-fill').forEach(bar => {
+                const target = bar.style.width || '0%';
+                bar.style.width = '0%';
+                requestAnimationFrame(() => {
+                    setTimeout(() => { bar.style.width = target; }, 80);
+                });
+            });
+
+            // Animate skill-bar-fill (entreprise/formation)
+            el.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                const target = bar.style.width || '0%';
+                bar.style.width = '0%';
+                requestAnimationFrame(() => {
+                    setTimeout(() => { bar.style.width = target; }, 80);
+                });
+            });
+
+            // Animate counters
+            el.querySelectorAll('[data-count]').forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                const suffix = counter.dataset.suffix || '';
+                let current = 0;
+                const step = Math.ceil(target / 50);
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    counter.textContent = current + suffix;
+                    if (current >= target) clearInterval(timer);
+                }, 28);
+            });
+
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.12 });
+
+    // Observe cards
+    document.querySelectorAll('.card, .formation-card, .veille-card').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = `opacity 0.6s ease ${(i % 3) * 0.08}s, transform 0.6s ease ${(i % 3) * 0.08}s`;
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+
+    // Soft skills grid
+    document.querySelectorAll('.soft-skills-grid').forEach(grid => observer.observe(grid));
+    // Cert list
+    document.querySelectorAll('.cert-list').forEach(list => observer.observe(list));
+})();
+
+// Override: when reveal fires, also set opacity/transform inline
+const _origObserver = window._revealObserver;
+
+/* --- ANIMATED COUNTERS (standalone) --- */
+window._animateCounter = function(el, target, suffix = '') {
+    let cur = 0;
+    const step = Math.ceil(target / 55);
+    const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur + suffix;
+        if (cur >= target) clearInterval(t);
+    }, 25);
+};
+
+/* --- LIVE CLOCK --- */
+(function initClock() {
+    const el = document.getElementById('live-time');
+    if (!el) return;
+    const update = () => {
+        el.textContent = new Date().toLocaleTimeString('fr-FR', { hour12: false });
+    };
+    update();
+    setInterval(update, 1000);
+})();
+
+/* --- AI CHATBOT --- */
+(function initAI() {
+    const win   = document.getElementById('ai-window');
+    const input = document.getElementById('ai-input');
+    const hist  = document.getElementById('ai-history');
+    if (!win) return;
+
+    window.toggleChat = function() {
+        const isOpen = win.style.display === 'flex';
+        win.style.display = isOpen ? 'none' : 'flex';
+        if (!isOpen && input) setTimeout(() => input.focus(), 50);
+    };
+
+    window.handleKey = function(e) {
+        if (e.key === 'Enter') askAI();
+    };
+
+    const context = `Tu es l'assistant virtuel du portfolio d'Alexis Veloso.
+Alexis est étudiant en Licence Informatique (SDR) au CNAM Paris, spécialisé systèmes, réseaux et cybersécurité.
+Formation : BTS SIO SISR (Campus Montsouris, 2023-2025), Bac Pro SN (Lycée Louis Armand, 2020-2023).
+Alternance chez THENEAS (GEIE — groupement Groupe Rocher, Fidesco, Saje, AVM) : admin réseau, GLPI, Office 365, Proxmox.
+Compétences : Windows Server (AD, DNS, DHCP, GPO, WSUS 90%), Linux Debian (85%), Réseaux VLAN/Cisco/VPN (80%), Virtualisation VMware/Proxmox/Docker (85%), Azure AD/O365 (80%), Programmation Python/SQL/PS (55%).
+Certifications : PIX ✓, RGPD ✓, CISCO Netacad IT ✓, CCNA en cours.
+Contact : alexis.veloso25@gmail.com | 07 71 82 48 09 | Paris.
+LinkedIn : linkedin.com/in/alexis-veloso-004097270
+Réponds de façon concise, professionnelle, en français. Utilise un style terminal/cyber.`;
+
+    const history = [
+        { role: 'user',      content: context + '
+
+[SYSTEM INIT — ne réponds pas à ce message]' },
+        { role: 'assistant', content: 'Système initialisé. Je suis l'assistant virtuel d'Alexis. Que souhaitez-vous savoir sur son profil ?' }
+    ];
+
+    const addMsg = (text, cls) => {
+        const div = document.createElement('div');
+        div.className = 'ai-msg ' + cls;
+        div.innerHTML = text.replace(/
+/g, '<br>');
+        hist.appendChild(div);
+        hist.scrollTop = hist.scrollHeight;
+    };
+
+    const showTyping = () => {
+        const d = document.createElement('div');
+        d.className = 'ai-msg bot-msg typing-dots'; d.id = 'typing-ind';
+        d.innerHTML = '<span></span><span></span><span></span>';
+        hist.appendChild(d); hist.scrollTop = hist.scrollHeight;
+    };
+    const hideTyping = () => { document.getElementById('typing-ind')?.remove(); };
+
+    window.askAI = async function() {
+        const q = (input?.value || '').trim();
+        if (!q) return;
+        addMsg(q, 'user-msg');
+        input.value = '';
+        history.push({ role: 'user', content: q });
+        showTyping();
+        try {
+            const res = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 350, messages: history })
+            });
+            const data = await res.json();
+            hideTyping();
+            const reply = data?.content?.[0]?.text || '> ERREUR: Réponse invalide du serveur.';
+            history.push({ role: 'assistant', content: reply });
+            addMsg(reply, 'bot-msg');
+        } catch {
+            hideTyping();
+            addMsg('> NETWORK_ERROR: Impossible de joindre le serveur AI.', 'bot-msg');
         }
-        .skill-bar-fill {
-            background: var(--accent);
-            height: 100%;
-            box-shadow: 0 0 10px var(--accent);
-        }
+    };
+})();
 
-        .btn-mission {
-            display: inline-block;
-            padding: 8px 15px;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            text-align: center;
-            margin-top: 15px;
-        }
-        .btn-mission:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
-
-        /* --- LOGOS ADHÉRENTS (AVEC COULEUR) --- */
-        .logo-placeholder {
-            margin-top: 20px;
-            width: 100%;
-            height: 180px; 
-            background: rgba(163, 102, 255, 0.05); /* Fond coloré léger */
-            border: 1px solid rgba(163, 102, 255, 0.3);
-            border-radius: 30px; /* Angles bien ovales */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s ease;
-            overflow: hidden;
-            padding: 25px;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .logo-placeholder img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-            transition: all 0.4s ease;
-        }
-
-        .adherent-item:hover .logo-placeholder {
-            background: rgba(163, 102, 255, 0.15); /* Plus de couleur au survol */
-            border-color: var(--accent);
-            box-shadow: 0 0 25px rgba(163, 102, 255, 0.3), inset 0 0 10px rgba(163, 102, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .adherent-item:hover .logo-placeholder img {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 15px var(--accent));
-        }
-
-        /* --- MONITORING & LOGS --- */
-        #log-container {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            height: 100px;
-            overflow: hidden;
-            color: #aaa;
-            border-top: 1px solid rgba(147, 51, 234, 0.3);
-            padding-top: 10px;
-            margin-top: 15px;
-        }
-        .log-line { margin-bottom: 2px; }
-        .log-time { color: var(--purple); margin-right: 8px; }
-
-        @media (max-width: 900px) {
-            .terminal-content-wrapper { flex-direction: column-reverse; text-align: center; }
-            .logo-3d-side { width: 220px; } 
-        }
-    </style>
-</head>
-<body>
-    <div class="circuit-bg"></div>
-    <div class="scanline-global"></div>
-
-    <header class="top-bar">
-        <div class="brand">USER: ALEXIS_VELOSO / <span>MISSIONS_LOG</span></div>
-        <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
-            <a href="entreprise.html" style="color: var(--accent);"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
-            <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
-            <a href="veille.html"><i class="fas fa-search"></i> VEILLE</a>
-            <a href="contact.html"><i class="fas fa-paper-plane"></i> CONTACT</a>
-        </nav>
-    </header>
-
-    <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots">
-                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                    </div>
-                    <div class="terminal-title-inline">bash — info_entreprise.sh</div>
-                </div>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-prompt"><span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./display_company_info.sh</span></div>
-                
-                <div class="terminal-content-wrapper">
-                    <div class="content-block">
-                        <h1 class="hero-name">
-                            <span class="terminal-typing">THENEAS</span>
-                        </h1>
-                        <p class="hero-role">// GEIE - GROUPEMENT EUROPÉEN d'INTÉRÊT ÉCONOMIQUE</p>
-                        <div class="hero-text-large">
-                            <p>> Expertise multi-services (Finance, RH, IT) au profit de ses adhérents.</p>
-                            <p>> Mission : Garantir la disponibilité et la sécurité des SI du groupement.</p>
-                        </div>
-                    </div>
-                    <img src="assets/logo_theneas.png" alt="THENEAS 3D" class="logo-3d-side">
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge">ADHÉRENTS_GROUP</div>
-            <div class="adherents-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 20px;">
-                
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
-                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
-                        <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">GROUPE ROCHER</span>
-                    </div>
-                    <div class="logo-placeholder">
-                        <img src="assets/rocher.png" alt="Logo Rocher">
-                    </div>
-                </div>
-
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
-                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
-                        <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">FIDESCO</span>
-                    </div>
-                    <div class="logo-placeholder">
-                        <img src="assets/fidesco.png" alt="Logo Fidesco">
-                    </div>
-                </div>
-
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
-                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
-                        <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">SAJE</span>
-                    </div>
-                    <div class="logo-placeholder">
-                        <img src="assets/saje.png" alt="Logo Saje">
-                    </div>
-                </div>
-
-                <div class="adherent-item" style="border: 1px solid var(--border-color); padding: 20px; background: rgba(255,255,255,0.03); border-radius: 8px; transition: 0.3s;">
-                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <span class="status-indicator pulse" style="background: #22c55e; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 10px;"></span>
-                        <span style="font-weight: 800; color: var(--accent); letter-spacing: 1px;">AVM</span>
-                    </div>
-                    <div class="logo-placeholder">
-                        <img src="assets/avm.png" alt="Logo AVM">
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="card section-spacing">
-            <div class="badge" style="margin-bottom: 20px;">MISSIONS</div>
-            <div class="project-catalog" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-ticket-alt t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_01</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion GLPI</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Ticketing et gestion d'inventaire ITIL.</p>
-                    </div>
-                    <a href="assets/GPL.pdf" class="btn-mission">Fiche Mission</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fab fa-microsoft t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_02</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Admin Office 365</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 75%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Administration Cloud et identités hybrides.</p>
-                    </div>
-                    <a href="assets/OFFICE.pdf" class="btn-mission">Fiche Mission</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-server t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">BTS_03</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Virtualisation Proxmox</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Gestion de clusters et isolations de services.</p>
-                    </div>
-                    <a href="assets/PROXMOX.pdf" class="btn-mission">Fiche Mission</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing" style="background: rgba(0,0,0,0.4); border: 1px solid var(--purple);">
-            <div class="badge" style="background: var(--purple);">SUPERVISION_SYSTEM_DASHBOARD</div>
-            
-            <div class="supervision-layout" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 20px;">
-                <div class="noc-screen" style="flex: 2; min-width: 300px;">
-                    <div style="border: 1px solid var(--purple); padding: 15px; background: rgba(147, 51, 234, 0.05);">
-                        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--purple); padding-bottom: 5px; margin-bottom: 10px;">
-                            <span class="t-purple">PRTG_LIVE_FEED</span>
-                            <span class="online-dot pulse"></span>
-                        </div>
-                        <h3 class="v-title">PRTG // NETWORK MONITORING OBJECTIFS</h3>
-                        
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0;">
-                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 8px;"><i class="fas fa-eye t-green"></i> Surveillance en temps réel</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-bell t-green"></i> Alerting proactive (SMS/Mail)</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-chart-line t-green"></i> Analyse de bande passante</li>
-                            </ul>
-                            <ul style="list-style: none; padding: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 8px;"><i class="fas fa-database t-green"></i> Historisation des données</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-network-wired t-green"></i> Mapping de l'infrastructure</li>
-                                <li style="margin-bottom: 8px;"><i class="fas fa-file-alt t-green"></i> Rapports de disponibilité</li>
-                            </ul>
-                        </div>
-
-                        <div id="log-container"></div>
-                    </div>
-                </div>
-
-                <div class="noc-metrics" style="flex: 0.5; min-width: 180px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--green);"><small>UPTIME</small><div style="font-family: 'JetBrains Mono'; color: var(--green);">99.9%</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--accent);"><small>LATENCY</small><div style="font-family: 'JetBrains Mono'; color: var(--accent);">12ms</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid var(--purple);"><small>SENSORS</small><div style="font-family: 'JetBrains Mono'; color: var(--purple);">124 ACTIVES</div></div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #00f2ff;"><small>PING</small><div style="font-family: 'JetBrains Mono'; color: #00f2ff;">1ms [OK]</div></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="card section-spacing" style="border-left: 4px solid var(--accent);">
-            <div class="badge">INFRASTRUCTURE_HEALTH</div>
-            <p style="font-size: 0.9rem; font-style: italic; color: var(--text-dim);">
-                "Inspiré des principes Agile, j'ai privilégié une approche itérative, décomposant le projet en phases successives et gérables. Cette méthode m'a permis d'avancer pas à pas..."
-            </p>
-        </section>
-    </main>
-
-    <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> SYSTEM: <span class="t-green">ONLINE</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // MISSIONS_2026</div>
-    </footer>
-
-    <script>
-        const logs = [
-            "PRTG: Scanning sensor 1042...",
-            "Backup Job #84 completed.",
-            "Analyzing traffic spikes...",
-            "Proxmox Node 2: Resources OK",
-            "New ticket in GLPI: #4582",
-            "Azure AD Sync successful"
-        ];
-        setInterval(() => {
-            const container = document.getElementById('log-container');
-            if(!container) return;
-            const time = new Date().toLocaleTimeString();
-            const log = logs[Math.floor(Math.random() * logs.length)];
-            container.innerHTML += `<div class="log-line"><span class="log-time">[${time}]</span> ${log}</div>`;
-            if(container.childNodes.length > 5) container.removeChild(container.firstChild);
-            container.scrollTop = container.scrollHeight;
-        }, 3000);
-    </script>
-</body>
-</html>
+/* --- THEME TOGGLE --- */
+function toggleTheme() {
+    const body = document.body;
+    const btn  = document.getElementById('theme-btn');
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    if (btn) btn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+(function initTheme() {
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        const btn = document.getElementById('theme-btn');
+        if (btn) btn.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+})();
