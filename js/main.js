@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function initBoot() {
 });
 
 /* --- STICKY NAV + ACTIVE LINK --- */
-(function initNav() {
+document.addEventListener('DOMContentLoaded', function initNav() {
     const bar = document.querySelector('.top-bar');
     if (bar) window.addEventListener('scroll', () => {
         bar.classList.toggle('scrolled', window.scrollY > 20);
@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function initBoot() {
     document.querySelectorAll('.nav-links a').forEach(a => {
         if (a.getAttribute('href') === path) a.classList.add('active');
     });
-})();
+});
 
 /* --- HERO CANVAS PARTICLES --- */
-(function initParticles() {
+document.addEventListener('DOMContentLoaded', function initParticles() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -139,20 +139,23 @@ document.addEventListener('DOMContentLoaded', function initBoot() {
         requestAnimationFrame(loop);
     };
     loop();
-})();
+});
 
 /* --- SCROLL REVEAL + SKILL BARS + STAGGER --- */
-(function initReveal() {
+document.addEventListener('DOMContentLoaded', function initReveal() {
     const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
             if (!e.isIntersecting) return;
-
             const el = e.target;
+
+            // Reveal: restore visibility
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
             el.classList.add('active', 'animated');
 
             // Animate skill bar fills
             el.querySelectorAll('.s-fill').forEach(bar => {
-                const target = bar.style.width || '0%';
+                const target = bar.getAttribute('data-width') || bar.style.width || '0%';
                 bar.style.width = '0%';
                 requestAnimationFrame(() => {
                     setTimeout(() => { bar.style.width = target; }, 80);
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function initBoot() {
 
             // Animate skill-bar-fill (entreprise/formation)
             el.querySelectorAll('.skill-bar-fill').forEach(bar => {
-                const target = bar.style.width || '0%';
+                const target = bar.getAttribute('data-width') || bar.style.width || '0%';
                 bar.style.width = '0%';
                 requestAnimationFrame(() => {
                     setTimeout(() => { bar.style.width = target; }, 80);
@@ -183,22 +186,24 @@ document.addEventListener('DOMContentLoaded', function initBoot() {
 
             observer.unobserve(el);
         });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08 });
 
-    // Observe cards
+    // Observe all cards with staggered fade-in
     document.querySelectorAll('.card, .formation-card, .veille-card').forEach((el, i) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(24px)';
-        el.style.transition = `opacity 0.6s ease ${(i % 3) * 0.08}s, transform 0.6s ease ${(i % 3) * 0.08}s`;
-        el.classList.add('reveal');
+        el.style.transition = `opacity 0.55s ease ${(i % 4) * 0.07}s, transform 0.55s ease ${(i % 4) * 0.07}s`;
         observer.observe(el);
     });
 
-    // Soft skills grid
+    // Also observe skill bars to save their target width before zeroing
+    document.querySelectorAll('.s-fill, .skill-bar-fill').forEach(bar => {
+        bar.setAttribute('data-width', bar.style.width || '0%');
+    });
+
     document.querySelectorAll('.soft-skills-grid').forEach(grid => observer.observe(grid));
-    // Cert list
     document.querySelectorAll('.cert-list').forEach(list => observer.observe(list));
-})();
+});
 
 // Override: when reveal fires, also set opacity/transform inline
 const _origObserver = window._revealObserver;
@@ -215,7 +220,7 @@ window._animateCounter = function(el, target, suffix = '') {
 };
 
 /* --- LIVE CLOCK --- */
-(function initClock() {
+document.addEventListener('DOMContentLoaded', function initClock() {
     const el = document.getElementById('live-time');
     if (!el) return;
     const update = () => {
@@ -223,10 +228,10 @@ window._animateCounter = function(el, target, suffix = '') {
     };
     update();
     setInterval(update, 1000);
-})();
+});
 
 /* --- AI CHATBOT --- */
-(function initAI() {
+document.addEventListener('DOMContentLoaded', function initAI() {
     const win   = document.getElementById('ai-window');
     const input = document.getElementById('ai-input');
     const hist  = document.getElementById('ai-history');
@@ -295,7 +300,7 @@ Réponds de façon concise, professionnelle, en français. Utilise un style term
             addMsg('> NETWORK_ERROR: Impossible de joindre le serveur AI.', 'bot-msg');
         }
     };
-})();
+});
 
 /* --- THEME TOGGLE --- */
 function toggleTheme() {
