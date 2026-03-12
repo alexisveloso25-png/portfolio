@@ -32,7 +32,7 @@
 })();
 
 /* --- BOOT SCREEN --- */
-(function initBoot() {
+document.addEventListener('DOMContentLoaded', function initBoot() {
     const boot     = document.getElementById('boot');
     const bootText = document.getElementById('boot-text');
     if (!boot || !bootText) return;
@@ -48,19 +48,20 @@
     const next = () => {
         if (i >= lines.length) {
             setTimeout(() => {
-                boot.style.transition = 'opacity 0.5s';
+                boot.style.transition = 'opacity 0.6s';
                 boot.style.opacity = '0';
-                setTimeout(() => boot.remove(), 500);
-            }, 300);
+                setTimeout(() => { if (boot.parentNode) boot.remove(); }, 600);
+            }, 400);
             return;
         }
-        bootText.textContent += lines[i] + '
-';
+        bootText.textContent += lines[i] + '\n';
         i++;
         setTimeout(next, 320);
     };
-    setTimeout(next, 150);
-})();
+    setTimeout(next, 200);
+    // Safety: force close after 5s
+    setTimeout(() => { if (boot && boot.parentNode) boot.remove(); }, 5000);
+});
 
 /* --- STICKY NAV + ACTIVE LINK --- */
 (function initNav() {
@@ -252,17 +253,13 @@ LinkedIn : linkedin.com/in/alexis-veloso-004097270
 Réponds de façon concise, professionnelle, en français. Utilise un style terminal/cyber.`;
 
     const history = [
-        { role: 'user',      content: context + '
-
-[SYSTEM INIT — ne réponds pas à ce message]' },
-        { role: 'assistant', content: 'Système initialisé. Je suis l'assistant virtuel d'Alexis. Que souhaitez-vous savoir sur son profil ?' }
+        { role: 'user',      content: context + '\n\n[SYSTEM INIT — ne réponds pas à ce message]' },
+        { role: 'assistant', content: "Système initialisé. Je suis l'assistant virtuel d'Alexis. Que souhaitez-vous savoir sur son profil ?" }
     ];
-
     const addMsg = (text, cls) => {
         const div = document.createElement('div');
         div.className = 'ai-msg ' + cls;
-        div.innerHTML = text.replace(/
-/g, '<br>');
+        div.innerHTML = text.replace(/\n/g, '<br>');
         hist.appendChild(div);
         hist.scrollTop = hist.scrollHeight;
     };
