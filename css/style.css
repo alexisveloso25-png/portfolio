@@ -234,6 +234,7 @@ body::before {
     animation:
         typing 3s steps(30, end) forwards,
         blink-caret .75s step-end infinite;
+    vertical-align: bottom;
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: var(--accent); } }
@@ -529,24 +530,45 @@ select.cyber-input option { background: #0a0a1a; }
     to   { filter: drop-shadow(0 0 30px #bf00ff) brightness(1.25); }
 }
 
-/* --- ACCESSIBILITY TOOLBAR --- */
-.accessibility-toolbar {
-    position: fixed; top: 72px; left: 14px;
+/* --- THEME TOGGLE --- */
+.theme-toggle {
+    position: fixed;
+    top: 80px;
+    right: 20px;
     z-index: 1000;
-    display: flex; flex-direction: column; gap: 8px;
-}
-.btn-access {
-    background: rgba(138,43,226,0.08);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(163,102,255,0.12);
+    border: 1px solid rgba(163,102,255,0.35);
     color: var(--accent);
-    border: 1px solid rgba(138,43,226,0.35);
-    padding: 6px 10px; border-radius: 4px;
+    font-size: 1.1rem;
     cursor: pointer;
-    font-family: var(--font-mono); font-size: 0.62rem;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    transition: 0.3s; display: flex; align-items: center;
-    gap: 7px; width: 126px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
 }
-.btn-access:hover { background: rgba(138,43,226,0.3); color: var(--white); box-shadow: 0 0 12px var(--accent-glow); }
+.theme-toggle:hover {
+    background: rgba(163,102,255,0.25);
+    box-shadow: 0 0 16px var(--accent-glow);
+    transform: rotate(20deg) scale(1.1);
+}
+
+/* --- LIGHT MODE --- */
+body.light-mode {
+    --bg:        #f0f0f8;
+    --bg2:       #e4e4f0;
+    --card-bg:   rgba(255,255,255,0.92);
+    --white:     #111122;
+    --text-dim:  #555577;
+    --text-mid:  #333350;
+    --border:    rgba(110,63,221,0.2);
+    --border-hover: rgba(110,63,221,0.5);
+    --accent-dim: rgba(163,102,255,0.1);
+    background-color: var(--bg);
+}
+body.light-mode .top-bar    { background: rgba(240,240,248,0.95); }
+body.light-mode .status-footer { background: #e4e4f0; }
+body.light-mode .circuit-bg { opacity: 0.15; }
+body.light-mode .scanline-global { opacity: 0.05; }
 
 /* --- AI CHATBOT --- */
 #ai-chat-container { position: fixed; bottom: 80px; right: 20px; z-index: 9999; font-family: var(--font-mono); }
