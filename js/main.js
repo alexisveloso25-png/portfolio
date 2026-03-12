@@ -8,6 +8,9 @@
     var boot = document.getElementById('boot');
     if (!boot) return;
 
+    // Force fixed positioning via JS — garantit que le boot ne touche jamais au layout
+    boot.style.cssText = 'position:fixed!important;inset:0;top:0;left:0;width:100%;height:100%;z-index:99999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;';
+
     var canvas = document.getElementById('boot-canvas');
     if (!canvas) { boot.style.display = 'none'; return; }
 
@@ -16,9 +19,11 @@
     var startTime = Date.now();
 
     var killBoot = function () {
-        boot.style.transition = 'opacity 0.6s ease';
+        boot.style.transition = 'opacity 0.5s ease';
         boot.style.opacity = '0';
-        setTimeout(function () { if (boot.parentNode) boot.parentNode.removeChild(boot); }, 650);
+        setTimeout(function () {
+            if (boot.parentNode) boot.parentNode.removeChild(boot);
+        }, 520);
     };
     var safety = setTimeout(killBoot, 5000);
 
