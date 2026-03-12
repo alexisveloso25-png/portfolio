@@ -4,64 +4,79 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;800&family=Orbitron:wght@400;700;900&display=swap');
 
-/* --- BOOT SCREEN GLITCH + PARTICLES --- */
+/* --- BOOT SCREEN --- */
 #boot {
     position: fixed; inset: 0;
     background: #000;
-    z-index: 99997;
+    z-index: 99999;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
+    font-family: var(--font-mono);
     overflow: hidden;
 }
-#boot canvas {
+#boot::before {
+    content: "";
     position: absolute; inset: 0;
-    width: 100%; height: 100%;
+    background-image:
+        linear-gradient(rgba(163,102,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(163,102,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
     pointer-events: none;
 }
 #boot-logo {
-    position: relative; z-index: 2;
     font-family: var(--font-mono);
-    font-size: clamp(2rem, 8vw, 4.5rem);
+    font-size: clamp(2rem, 7vw, 4rem);
     font-weight: 800;
     color: var(--accent);
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    animation: bootGlitch 0.12s ease infinite;
-    text-shadow: 0 0 20px var(--accent), 0 0 60px var(--accent-glow);
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    letter-spacing: 8px;
+    text-shadow: 0 0 30px var(--accent), 0 0 80px var(--accent-glow);
+    margin-bottom: 6px;
+    animation: bootPulse 2s ease infinite;
 }
-@keyframes bootGlitch {
-    0%   { text-shadow: 0 0 20px var(--accent), 0 0 60px var(--accent-glow); transform: none; }
-    10%  { text-shadow: -3px 0 #ff4560, 3px 0 #00d4ff; transform: translate(-2px,0); }
-    20%  { text-shadow: 3px 0 #ff4560, -3px 0 #00d4ff; transform: translate(2px,1px); }
-    30%  { text-shadow: 0 0 20px var(--accent); transform: none; }
-    40%  { text-shadow: -2px 0 #00d4ff, 2px 0 #ff4560; transform: translate(1px,-1px) scaleX(1.01); }
-    60%  { text-shadow: 3px 2px #ff4560, -3px 0 #00d4ff; transform: translate(-1px,0); }
-    85%  { text-shadow: -4px 0 #ff4560, 4px 0 #00d4ff; transform: translate(3px,0) skewX(-2deg); }
-    100% { text-shadow: 0 0 20px var(--accent), 0 0 60px var(--accent-glow); transform: none; }
+@keyframes bootPulse {
+    0%,100% { text-shadow: 0 0 20px var(--accent), 0 0 60px var(--accent-glow); }
+    50%      { text-shadow: 0 0 40px var(--accent), 0 0 120px var(--accent-glow), 0 0 4px #fff; }
 }
+.boot-cursor {
+    animation: blinkCursor 0.7s step-end infinite;
+    color: var(--accent);
+}
+@keyframes blinkCursor { 0%,100%{opacity:1} 50%{opacity:0} }
+
 #boot-sub {
-    position: relative; z-index: 2;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--green);
-    letter-spacing: 4px;
-    margin-top: 16px;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+    opacity: 0.7;
+}
+#boot-text {
+    display: flex; flex-direction: column; gap: 4px;
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    min-width: min(420px, 90vw);
+    margin-bottom: 24px;
+}
+.boot-line {
     opacity: 0;
-    animation: bootSubIn 0.5s ease 0.4s forwards;
-    transition: color 0.3s ease;
+    transform: translateX(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
-@keyframes bootSubIn { to { opacity: 0.85; } }
-.boot-scanlines {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
-    animation: scanMove 8s linear infinite;
+.boot-progress {
+    width: min(420px, 90vw);
+    height: 2px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
 }
-@keyframes scanMove { from { background-position: 0 0; } to { background-position: 0 100px; } }
-.boot-vignette {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+.boot-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    box-shadow: 0 0 12px var(--accent);
+    animation: bootLoad 2.2s cubic-bezier(0.4,0,0.2,1) forwards;
+    width: 0%;
 }
+@keyframes bootLoad { to { width: 100%; } }
 
 /* --- THEME TOGGLE --- */
 .theme-toggle {
