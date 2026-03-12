@@ -32,10 +32,24 @@
 })();
 
 /* --- BOOT SCREEN --- */
-(function initBoot() {
+function runBoot() {
     const boot     = document.getElementById('boot');
     const bootText = document.getElementById('boot-text');
-    if (!boot || !bootText) return;
+    if (!boot) return;
+
+    // Safety: force remove after 5s max no matter what
+    const forceRemove = setTimeout(() => {
+        boot.style.opacity = '0';
+        setTimeout(() => boot.remove(), 400);
+    }, 5000);
+
+    if (!bootText) {
+        clearTimeout(forceRemove);
+        boot.style.opacity = '0';
+        setTimeout(() => boot.remove(), 400);
+        return;
+    }
+
     const lines = [
         '> Initializing SDR_OS v5.0...',
         '> Loading security modules... [OK]',
@@ -47,6 +61,7 @@
     let i = 0;
     const next = () => {
         if (i >= lines.length) {
+            clearTimeout(forceRemove);
             setTimeout(() => {
                 boot.style.transition = 'opacity 0.5s';
                 boot.style.opacity = '0';
@@ -59,7 +74,13 @@
         setTimeout(next, 320);
     };
     setTimeout(next, 150);
-})();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runBoot);
+} else {
+    runBoot();
+}
 
 /* --- STICKY NAV + ACTIVE LINK --- */
 (function initNav() {
