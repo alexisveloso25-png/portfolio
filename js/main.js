@@ -3,70 +3,7 @@
    main.js — Polish Edition
    ============================ */
 
-/* --- CUSTOM CURSOR --- */
-(function initCursor() {
-    const cursor = document.querySelector('.cursor');
-    const ring   = document.querySelector('.cursor-ring');
-    if (!cursor) return;
-
-    let rx = -100, ry = -100;
-    let moved = false;
-
-    document.addEventListener('mousemove', e => {
-        const x = e.clientX, y = e.clientY;
-
-        // Direct position for dot (no lag)
-        cursor.style.left = x + 'px';
-        cursor.style.top  = y + 'px';
-
-        // Smooth lag for ring
-        rx += (x - rx) * 0.15;
-        ry += (y - ry) * 0.15;
-        if (ring) {
-            ring.style.left = rx + 'px';
-            ring.style.top  = ry + 'px';
-        }
-
-        // Only hide native cursor once we confirm JS is running
-        if (!moved) {
-            moved = true;
-            document.body.classList.add('cursor-ready');
-        }
-    }, { passive: true });
-
-    // Smooth ring loop
-    const tick = () => {
-        if (ring && moved) {
-            ring.style.left = rx + 'px';
-            ring.style.top  = ry + 'px';
-        }
-        requestAnimationFrame(tick);
-    };
-
-    // Hover scale effects
-    const addHover = () => {
-        document.querySelectorAll('a, button, .card, .soft-tag, .tab-btn, .veille-card, .btn-cyber-outline, .social-card-large').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.width  = '18px';
-                cursor.style.height = '18px';
-                if (ring) { ring.style.width = '48px'; ring.style.height = '48px'; }
-            }, { passive: true });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.width  = '12px';
-                cursor.style.height = '12px';
-                if (ring) { ring.style.width = '36px'; ring.style.height = '36px'; }
-            }, { passive: true });
-        });
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', addHover);
-    } else {
-        addHover();
-    }
-
-    requestAnimationFrame(tick);
-})();
+/* --- BOOT SCREEN --- */
 
 /* --- BOOT SCREEN --- */
 function runBoot() {
