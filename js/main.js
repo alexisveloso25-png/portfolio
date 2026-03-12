@@ -8,27 +8,64 @@
     const cursor = document.querySelector('.cursor');
     const ring   = document.querySelector('.cursor-ring');
     if (!cursor) return;
-    let mx = -100, my = -100, rx = -100, ry = -100;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    let rx = -100, ry = -100;
+    let moved = false;
+
+    document.addEventListener('mousemove', e => {
+        const x = e.clientX, y = e.clientY;
+
+        // Direct position for dot (no lag)
+        cursor.style.left = x + 'px';
+        cursor.style.top  = y + 'px';
+
+        // Smooth lag for ring
+        rx += (x - rx) * 0.15;
+        ry += (y - ry) * 0.15;
+        if (ring) {
+            ring.style.left = rx + 'px';
+            ring.style.top  = ry + 'px';
+        }
+
+        // Only hide native cursor once we confirm JS is running
+        if (!moved) {
+            moved = true;
+            document.body.classList.add('cursor-ready');
+        }
+    }, { passive: true });
+
+    // Smooth ring loop
     const tick = () => {
-        cursor.style.left = mx + 'px';
-        cursor.style.top  = my + 'px';
-        rx += (mx - rx) * 0.14;
-        ry += (my - ry) * 0.14;
-        if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+        if (ring && moved) {
+            ring.style.left = rx + 'px';
+            ring.style.top  = ry + 'px';
+        }
         requestAnimationFrame(tick);
     };
+
+    // Hover scale effects
+    const addHover = () => {
+        document.querySelectorAll('a, button, .card, .soft-tag, .tab-btn, .veille-card, .btn-cyber-outline, .social-card-large').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width  = '18px';
+                cursor.style.height = '18px';
+                if (ring) { ring.style.width = '48px'; ring.style.height = '48px'; }
+            }, { passive: true });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width  = '12px';
+                cursor.style.height = '12px';
+                if (ring) { ring.style.width = '36px'; ring.style.height = '36px'; }
+            }, { passive: true });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addHover);
+    } else {
+        addHover();
+    }
+
     requestAnimationFrame(tick);
-    document.querySelectorAll('a, button, .card, .soft-tag, .tab-btn, .veille-card').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.opacity = '0.6';
-            if (ring) { ring.style.width = '52px'; ring.style.height = '52px'; }
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.width = '12px'; cursor.style.height = '12px'; cursor.style.opacity = '1';
-            if (ring) { ring.style.width = '36px'; ring.style.height = '36px'; }
-        });
-    });
 })();
 
 /* --- BOOT SCREEN --- */
