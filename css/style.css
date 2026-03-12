@@ -38,37 +38,10 @@ body {
     font-family: var(--font-mono);
     line-height: 1.65;
     overflow-x: hidden;
-    cursor: none;
 }
 
-/* --- CUSTOM CURSOR --- */
-.cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    left: -100px; top: -100px;
-    transform: translate(-50%, -50%);
-    transition: width 0.15s ease, height 0.15s ease;
-    mix-blend-mode: screen;
-    box-shadow: 0 0 12px var(--accent), 0 0 30px var(--accent-glow);
-}
-.cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(163,102,255,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99998;
-    left: -100px; top: -100px;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
-}
-/* Hide native cursor only after JS confirms custom cursor works */
-body.cursor-ready { cursor: none !important; }
-body.cursor-ready * { cursor: none !important; }
+
+
 
 /* --- BOOT SCREEN --- */
 #boot {
