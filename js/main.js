@@ -302,17 +302,24 @@ Réponds de façon concise, professionnelle, en français. Utilise un style term
 
 /* --- THEME TOGGLE --- */
 function toggleTheme() {
-    const body = document.body;
-    const btn  = document.getElementById('theme-btn');
-    body.classList.toggle('light-mode');
-    const isLight = body.classList.contains('light-mode');
-    if (btn) btn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-}
-(function initTheme() {
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-        const btn = document.getElementById('theme-btn');
-        if (btn) btn.innerHTML = '<i class="fas fa-moon"></i>';
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    const btn = document.getElementById('theme-btn');
+    if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
     }
-})();
+    try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch(e) {}
+}
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            const btn = document.getElementById('theme-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = 'fas fa-moon';
+            }
+        }
+    } catch(e) {}
+});
