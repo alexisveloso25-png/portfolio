@@ -3,43 +3,119 @@
    main.js
    ============================ */
 
-/* --- BOOT SCREEN --- */
+/* --- BOOT SCREEN GLITCH + PARTICLES --- */
 (function () {
-    const boot = document.getElementById('boot');
-    if (!boot) return; // pas de boot sur les autres pages
+    var boot = document.getElementById('boot');
+    if (!boot) return;
 
-    const bootText = document.getElementById('boot-text');
-    const lines = [
-        '> Initializing SDR_OS v5.0...',
-        '> Loading security modules... [OK]',
-        '> Mounting encrypted volumes... [OK]',
-        '> Network interface: eth0 SECURED',
-        '> Authentication: USER_ALEXIS_VELOSO',
-        '> Access granted. Welcome.'
-    ];
+    var canvas = document.getElementById('boot-canvas');
+    if (!canvas) { boot.style.display = 'none'; return; }
 
-    // Fermeture garantie dans tous les cas après 4s
-    const killBoot = () => {
-        boot.style.transition = 'opacity 0.45s ease';
+    var ctx = canvas.getContext('2d');
+    var W, H, particles = [], exploded = false;
+    var startTime = Date.now();
+
+    var killBoot = function () {
+        boot.style.transition = 'opacity 0.6s ease';
         boot.style.opacity = '0';
-        setTimeout(() => { if (boot.parentNode) boot.parentNode.removeChild(boot); }, 450);
+        setTimeout(function () { if (boot.parentNode) boot.parentNode.removeChild(boot); }, 650);
     };
-    const safetyTimer = setTimeout(killBoot, 4000);
+    var safety = setTimeout(killBoot, 5000);
 
-    if (!bootText) { clearTimeout(safetyTimer); killBoot(); return; }
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
 
-    let i = 0;
-    const next = () => {
-        if (i >= lines.length) {
-            clearTimeout(safetyTimer);
-            setTimeout(killBoot, 250);
-            return;
+    function Particle(x, y, burst) {
+        this.x = x; this.y = y;
+        var angle = Math.random() * Math.PI * 2;
+        var speed = burst ? (Math.random() * 14 + 5) : (Math.random() * 0.6 + 0.2);
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed - (burst ? Math.random() * 5 : 0);
+        this.alpha = 1;
+        this.size  = burst ? (Math.random() * 4 + 1) : (Math.random() * 1.5 + 0.3);
+        this.color = burst
+            ? ['#a366ff','#7b2fff','#00ffa3','#00d4ff','#ff4560','#ffffff'][Math.floor(Math.random() * 6)]
+            : 'rgba(163,102,255,' + (Math.random() * 0.35 + 0.1) + ')';
+        this.decay   = burst ? (Math.random() * 0.022 + 0.01) : 0.003;
+        this.gravity = burst ? 0.2 : 0;
+        this.burst   = burst;
+        this.trail   = [];
+    }
+    Particle.prototype.update = function () {
+        if (this.burst) {
+            this.trail.push({ x: this.x, y: this.y, a: this.alpha });
+            if (this.trail.length > 7) this.trail.shift();
         }
-        bootText.textContent += lines[i] + '\n';
-        i++;
-        setTimeout(next, 300);
+        this.x += this.vx; this.y += this.vy;
+        this.vy += this.gravity;
+        this.vx *= 0.96; this.alpha -= this.decay;
     };
-    next();
+    Particle.prototype.draw = function () {
+        if (this.burst && this.trail.length > 1) {
+            for (var t = 0; t < this.trail.length - 1; t++) {
+                ctx.beginPath();
+                ctx.moveTo(this.trail[t].x, this.trail[t].y);
+                ctx.lineTo(this.trail[t+1].x, this.trail[t+1].y);
+                ctx.strokeStyle = this.color;
+                ctx.globalAlpha = this.trail[t].a * 0.25;
+                ctx.lineWidth = this.size * 0.5;
+                ctx.stroke();
+            }
+        }
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+    };
+
+    for (var k = 0; k < 90; k++) particles.push(new Particle(Math.random() * W, Math.random() * H, false));
+
+    function explode() {
+        exploded = true;
+        var cx = W / 2, cy = H / 2;
+        for (var i = 0; i < 260; i++) particles.push(new Particle(cx, cy, true));
+        for (var j = 0; j < 70; j++) {
+            var p = new Particle(cx, cy, true);
+            var a = (j / 70) * Math.PI * 2;
+            p.vx = Math.cos(a) * (10 + Math.random() * 7);
+            p.vy = Math.sin(a) * (10 + Math.random() * 7);
+            p.size = 3; p.color = '#a366ff'; p.decay = 0.016;
+            particles.push(p);
+        }
+        var sub = document.getElementById('boot-sub');
+        if (sub) { sub.textContent = '// ACCESS GRANTED'; sub.style.color = '#00ffa3'; }
+        setTimeout(function () { clearTimeout(safety); killBoot(); }, 950);
+    }
+
+    function loop() {
+        ctx.clearRect(0, 0, W, H);
+        var pulse = 0.5 + 0.5 * Math.sin((Date.now() - startTime) / 1000 * 3);
+        ctx.fillStyle = 'rgba(163,102,255,' + (0.025 * pulse) + ')';
+        ctx.fillRect(0, 0, W, H);
+        particles = particles.filter(function (p) { return p.alpha > 0; });
+        particles.forEach(function (p) { p.update(); p.draw(); });
+        if (!exploded && particles.length < 90) particles.push(new Particle(Math.random() * W, Math.random() * H, false));
+        if (!exploded || particles.length > 0) requestAnimationFrame(loop);
+    }
+    loop();
+
+    // Glitch flash then explode at 2.3s
+    setTimeout(function () {
+        var logo = document.getElementById('boot-logo');
+        if (logo) {
+            logo.style.animation = 'none';
+            logo.style.color = '#fff';
+            logo.style.textShadow = '0 0 60px #fff, -5px 0 #ff4560, 5px 0 #00d4ff';
+            logo.style.transform = 'scaleX(1.04)';
+            setTimeout(function () {
+                logo.style.opacity = '0';
+                explode();
+            }, 200);
+        } else { explode(); }
+    }, 2300);
 }());
 
 /* --- STICKY NAV + ACTIVE LINK --- */
