@@ -8,67 +8,54 @@
     var boot = document.getElementById('boot');
     if (!boot) return;
 
-    // Force fixed positioning via JS — garantit que le boot ne touche jamais au layout
-    boot.style.cssText = 'position:fixed!important;inset:0;top:0;left:0;width:100%;height:100%;z-index:99999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;';
+    // Force le boot en overlay plein écran via JS — aucune dépendance CSS
+    boot.setAttribute('style',
+        'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
+        'z-index:99999;background:#000;overflow:hidden;' +
+        'display:flex;flex-direction:column;align-items:center;justify-content:center;'
+    );
 
     var canvas = document.getElementById('boot-canvas');
-    if (!canvas) { boot.style.display = 'none'; return; }
+    if (!canvas) {
+        boot.style.display = 'none';
+        return;
+    }
+    canvas.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%;');
 
     var ctx = canvas.getContext('2d');
-    var W, H, particles = [], exploded = false;
-    var startTime = Date.now();
+    var W = canvas.width  = window.innerWidth;
+    var H = canvas.height = window.innerHeight;
+    var running = true;
 
-    var killBoot = function () {
-        boot.style.transition = 'opacity 0.5s ease';
-        boot.style.opacity = '0';
-        setTimeout(function () {
-            if (boot.parentNode) boot.parentNode.removeChild(boot);
-        }, 520);
-    };
-    var safety = setTimeout(killBoot, 5000);
+    window.addEventListener('resize', function () {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }, { passive: true });
 
-    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    function Particle(x, y, burst) {
+    // --- Particule ---
+    function P(x, y, burst) {
         this.x = x; this.y = y;
-        var angle = Math.random() * Math.PI * 2;
-        var speed = burst ? (Math.random() * 14 + 5) : (Math.random() * 0.6 + 0.2);
-        this.vx = Math.cos(angle) * speed;
-        this.vy = Math.sin(angle) * speed - (burst ? Math.random() * 5 : 0);
-        this.alpha = 1;
-        this.size  = burst ? (Math.random() * 4 + 1) : (Math.random() * 1.5 + 0.3);
+        var a = Math.random() * Math.PI * 2;
+        var s = burst ? Math.random() * 14 + 5 : Math.random() * 0.6 + 0.1;
+        this.vx = Math.cos(a) * s;
+        this.vy = Math.sin(a) * s - (burst ? Math.random() * 4 : 0);
+        this.life = 1;
+        this.decay = burst ? Math.random() * 0.022 + 0.01 : 0.003;
+        this.size  = burst ? Math.random() * 4 + 1 : Math.random() * 1.5 + 0.3;
         this.color = burst
-            ? ['#a366ff','#7b2fff','#00ffa3','#00d4ff','#ff4560','#ffffff'][Math.floor(Math.random() * 6)]
-            : 'rgba(163,102,255,' + (Math.random() * 0.35 + 0.1) + ')';
-        this.decay   = burst ? (Math.random() * 0.022 + 0.01) : 0.003;
-        this.gravity = burst ? 0.2 : 0;
-        this.burst   = burst;
-        this.trail   = [];
+            ? ['#a366ff','#7b2fff','#00ffa3','#00d4ff','#ff4560','#fff'][Math.floor(Math.random()*6)]
+            : 'rgba(163,102,255,' + (Math.random()*0.3+0.1) + ')';
+        this.gravity = burst ? 0.18 : 0;
+        this.burst = burst;
     }
-    Particle.prototype.update = function () {
-        if (this.burst) {
-            this.trail.push({ x: this.x, y: this.y, a: this.alpha });
-            if (this.trail.length > 7) this.trail.shift();
-        }
+    P.prototype.tick = function () {
         this.x += this.vx; this.y += this.vy;
         this.vy += this.gravity;
-        this.vx *= 0.96; this.alpha -= this.decay;
+        this.vx *= 0.97;
+        this.life -= this.decay;
     };
-    Particle.prototype.draw = function () {
-        if (this.burst && this.trail.length > 1) {
-            for (var t = 0; t < this.trail.length - 1; t++) {
-                ctx.beginPath();
-                ctx.moveTo(this.trail[t].x, this.trail[t].y);
-                ctx.lineTo(this.trail[t+1].x, this.trail[t+1].y);
-                ctx.strokeStyle = this.color;
-                ctx.globalAlpha = this.trail[t].a * 0.25;
-                ctx.lineWidth = this.size * 0.5;
-                ctx.stroke();
-            }
-        }
-        ctx.globalAlpha = Math.max(0, this.alpha);
+    P.prototype.draw = function () {
+        ctx.globalAlpha = Math.max(0, this.life);
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
@@ -76,50 +63,89 @@
         ctx.globalAlpha = 1;
     };
 
-    for (var k = 0; k < 90; k++) particles.push(new Particle(Math.random() * W, Math.random() * H, false));
+    var particles = [];
+    for (var k = 0; k < 80; k++) {
+        particles.push(new P(Math.random() * W, Math.random() * H, false));
+    }
 
-    function explode() {
+    var exploded = false;
+
+    function doExplode() {
         exploded = true;
         var cx = W / 2, cy = H / 2;
-        for (var i = 0; i < 260; i++) particles.push(new Particle(cx, cy, true));
-        for (var j = 0; j < 70; j++) {
-            var p = new Particle(cx, cy, true);
-            var a = (j / 70) * Math.PI * 2;
-            p.vx = Math.cos(a) * (10 + Math.random() * 7);
-            p.vy = Math.sin(a) * (10 + Math.random() * 7);
-            p.size = 3; p.color = '#a366ff'; p.decay = 0.016;
+        for (var i = 0; i < 280; i++) particles.push(new P(cx, cy, true));
+        for (var j = 0; j < 60; j++) {
+            var p = new P(cx, cy, true);
+            p.vx = Math.cos((j/60)*Math.PI*2) * (10 + Math.random()*6);
+            p.vy = Math.sin((j/60)*Math.PI*2) * (10 + Math.random()*6);
+            p.size = 3; p.color = '#a366ff'; p.decay = 0.015;
             particles.push(p);
         }
         var sub = document.getElementById('boot-sub');
         if (sub) { sub.textContent = '// ACCESS GRANTED'; sub.style.color = '#00ffa3'; }
-        setTimeout(function () { clearTimeout(safety); killBoot(); }, 950);
+
+        // Fermeture après que les particules retombent
+        setTimeout(function () {
+            running = false;
+            boot.style.transition = 'opacity 0.5s ease';
+            boot.style.opacity = '0';
+            setTimeout(function () {
+                if (boot && boot.parentNode) boot.parentNode.removeChild(boot);
+            }, 520);
+        }, 900);
     }
 
+    var t0 = Date.now();
     function loop() {
+        if (!running && !exploded) return;
         ctx.clearRect(0, 0, W, H);
-        var pulse = 0.5 + 0.5 * Math.sin((Date.now() - startTime) / 1000 * 3);
-        ctx.fillStyle = 'rgba(163,102,255,' + (0.025 * pulse) + ')';
+
+        // Pulse bg
+        var pulse = 0.5 + 0.5 * Math.sin((Date.now() - t0) / 1000 * 3);
+        ctx.fillStyle = 'rgba(163,102,255,' + (0.02 * pulse) + ')';
         ctx.fillRect(0, 0, W, H);
-        particles = particles.filter(function (p) { return p.alpha > 0; });
-        particles.forEach(function (p) { p.update(); p.draw(); });
-        if (!exploded && particles.length < 90) particles.push(new Particle(Math.random() * W, Math.random() * H, false));
-        if (!exploded || particles.length > 0) requestAnimationFrame(loop);
+
+        // Mise à jour particules
+        var alive = [];
+        for (var i = 0; i < particles.length; i++) {
+            particles[i].tick();
+            particles[i].draw();
+            if (particles[i].life > 0) alive.push(particles[i]);
+        }
+        particles = alive;
+
+        // Recharge ambiante
+        if (!exploded && particles.length < 80) {
+            particles.push(new P(Math.random()*W, Math.random()*H, false));
+        }
+
+        if (running || particles.length > 0) requestAnimationFrame(loop);
     }
     loop();
 
-    // Glitch flash then explode at 2.3s
+    // Timer sécurité max 5s
+    var safety = setTimeout(function () {
+        running = false;
+        if (boot && boot.parentNode) boot.parentNode.removeChild(boot);
+    }, 5000);
+
+    // Flash + explosion à 2.3s
     setTimeout(function () {
         var logo = document.getElementById('boot-logo');
         if (logo) {
             logo.style.animation = 'none';
             logo.style.color = '#fff';
             logo.style.textShadow = '0 0 60px #fff, -5px 0 #ff4560, 5px 0 #00d4ff';
-            logo.style.transform = 'scaleX(1.04)';
+            logo.style.transform = 'scaleX(1.05)';
             setTimeout(function () {
                 logo.style.opacity = '0';
-                explode();
-            }, 200);
-        } else { explode(); }
+                clearTimeout(safety);
+                doExplode();
+            }, 180);
+        } else {
+            clearTimeout(safety);
+            doExplode();
+        }
     }, 2300);
 }());
 
