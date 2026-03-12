@@ -49,11 +49,11 @@ body {
     border-radius: 50%;
     pointer-events: none;
     z-index: 99999;
+    left: -100px; top: -100px;
     transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+    transition: width 0.15s ease, height 0.15s ease;
     mix-blend-mode: screen;
     box-shadow: 0 0 12px var(--accent), 0 0 30px var(--accent-glow);
-    opacity: 1;
 }
 .cursor-ring {
     position: fixed;
@@ -62,10 +62,13 @@ body {
     border-radius: 50%;
     pointer-events: none;
     z-index: 99998;
+    left: -100px; top: -100px;
     transform: translate(-50%, -50%);
-    transition: width 0.25s ease, height 0.25s ease;
-    opacity: 1;
+    transition: width 0.2s ease, height 0.2s ease;
 }
+/* Hide native cursor only after JS confirms custom cursor works */
+body.cursor-ready { cursor: none !important; }
+body.cursor-ready * { cursor: none !important; }
 
 /* --- BOOT SCREEN --- */
 #boot {
