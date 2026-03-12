@@ -5,363 +5,261 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALEXIS_VELOSO // ACADEMIC_RECORDS</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Optimisation UI/UX identique à l'index */
-        .formation-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            margin-bottom: 30px;
-        }
-
-        .formation-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--purple) !important;
-            box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
-        }
-
-        .school-context {
-            background: rgba(147, 51, 234, 0.05);
-            border-left: 3px solid var(--purple);
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            line-height: 1.5;
-        }
-
-        .module-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .module-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .module-item h5 {
-            color: var(--accent);
-            margin: 0 0 5px 0;
-            font-size: 0.85rem;
-        }
-
-        .module-item p {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin: 0;
-        }
-
-        .project-catalog {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            background: rgba(147, 51, 234, 0.05);
-            border-color: var(--purple);
-        }
-
-        .skill-bar-container {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin: 10px 0;
-        }
-
-        .skill-bar-fill {
-            height: 100%;
-            background: var(--purple);
-            border-radius: 2px;
-        }
-
-        /* Bouton stylisé comme Entreprise.html */
-        .btn-mission {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 15px;
-            background: rgba(147, 51, 234, 0.1);
-            border: 1px solid var(--purple);
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.75rem;
-            text-align: center;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono';
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .btn-mission:hover {
-            background: var(--purple);
-            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
-        }
-
-        .tech-icon-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
-    <div class="circuit-bg"></div>
-    <div class="scanline-global"></div>
 
-    <header class="top-bar">
-        <div class="brand">USER: ALEXIS_VELOSO / <span>ACADEMIC_LOG</span></div>
-        <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
-            <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
-            <a href="formation.html" style="color: var(--accent);"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
-            <a href="veille.html"><i class="fas fa-graduation-cap"></i> VEILLE</a>
-            <a href="contact.html"><i class="fas fa-graduation-cap"></i> CONTACT</a>
-        </nav>
-    </header>
+<div class="circuit-bg"></div>
+<div class="scanline-global"></div>
 
-    <main class="wrapper">
-        <section class="terminal-window card section-spacing">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Changer le theme">
+    <i class="fas fa-sun"></i>
+</button>
+
+<header class="top-bar">
+    <div class="brand">USER: ALEXIS_VELOSO / <span>ACADEMIC_LOG</span></div>
+    <nav class="nav-links">
+        <a href="index.html"><i class="fas fa-terminal"></i> APPRENTI</a>
+        <a href="entreprise.html"><i class="fas fa-network-wired"></i> ENTREPRISE</a>
+        <a href="formation.html"><i class="fas fa-graduation-cap"></i> FORMATIONS</a>
+        <a href="veille.html"><i class="fas fa-search"></i> VEILLE</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a>
+    </nav>
+</header>
+
+<main class="wrapper">
+
+    <!-- HERO -->
+    <section class="terminal-window card section-spacing">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <div class="terminal-dots">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                </div>
+                <div class="terminal-title-inline">bash — list_degrees.sh</div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-prompt">
+                <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span>./get_education_history.py</span>
+            </div>
+            <h1 class="hero-name"><span class="terminal-typing">PARCOURS ACADÉMIQUE</span></h1>
+            <p class="hero-role">// ANALYSE DES ENVIRONNEMENTS DE FORMATION</p>
+        </div>
+    </section>
+
+    <!-- LICENCE CNAM -->
+    <section class="card formation-card section-spacing" style="border-top:3px solid var(--accent);">
+        <div class="badge" style="background:var(--accent2);">CURRENT_STUDIES</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:22px;flex-wrap:wrap;gap:10px;">
+            <h2 style="font-size:1.3rem;">LICENCE GÉNÉRALE INFORMATIQUE <span style="color:var(--accent);">(SDR)</span></h2>
+            <span class="v-year" style="background:var(--accent2);">2025 — 2026</span>
+        </div>
+
+        <div class="school-context">
+            <i class="fas fa-university" style="margin-right:8px;"></i>
+            <strong>Le CNAM</strong> — Conservatoire National des Arts et Métiers, institution dédiée à la formation supérieure des professionnels. Diplômes d'État reconnus, axés sur les réalités du monde industriel et numérique.
+        </div>
+
+        <p style="font-size:0.86rem;color:var(--text-mid);line-height:1.65;">
+            Le parcours <strong style="color:var(--white);">SDR (Systèmes, Développement, Réseaux)</strong> offre une vision 360° de l'informatique, alliant maîtrise des couches basses (OS, matériel) à l'ingénierie logicielle moderne.
+        </p>
+
+        <div class="module-grid">
+            <div class="module-item">
+                <h5><i class="fas fa-microchip" style="margin-right:6px;"></i>Architecture Systèmes</h5>
+                <p>Cycles processeurs, gestion des ressources OS, mémoire virtuelle.</p>
+            </div>
+            <div class="module-item">
+                <h5><i class="fas fa-network-wired" style="margin-right:6px;"></i>Réseaux Avancés</h5>
+                <p>Optimisation des flux, protocoles de routage, QoS.</p>
+            </div>
+            <div class="module-item">
+                <h5><i class="fas fa-database" style="margin-right:6px;"></i>Ingénierie BDD</h5>
+                <p>Données massives, requêtage SQL optimisé, modélisation.</p>
+            </div>
+            <div class="module-item">
+                <h5><i class="fas fa-shield-alt" style="margin-right:6px;"></i>Cybersécurité SI</h5>
+                <p>Politiques de sécurité, défense périmétrique, SIEM.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BTS SIO -->
+    <section class="card formation-card section-spacing" style="border-top:3px solid var(--accent);">
+        <div class="badge">COMPLETED_DEGREE</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:22px;flex-wrap:wrap;gap:10px;">
+            <h2 style="font-size:1.3rem;">BTS SIO <span style="color:var(--accent);">OPTION SISR</span></h2>
+            <span class="v-year">2023 — 2025</span>
+        </div>
+
+        <div class="school-context" style="border-left-color:var(--accent);background:rgba(163,102,255,0.04);">
+            <i class="fas fa-building" style="margin-right:8px;"></i>
+            <strong>Campus Montsouris, Paris</strong> — Centre de formation d'excellence spécialisé dans l'alternance. Écosystème pédagogique axé sur la mise en pratique immédiate des concepts réseaux et infrastructure.
+        </div>
+
+        <h3 style="font-size:0.75rem;color:var(--accent);margin-top:28px;text-transform:uppercase;letter-spacing:1.5px;">
+            <i class="fas fa-flask" style="margin-right:6px;"></i> Laboratoire — 6 missions techniques
+        </h3>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:14px;">
+
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-users-cog t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_01</span>
                     </div>
-                    <div class="terminal-title-inline">bash — list_degrees.sh</div>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">Gestion ACL / Partages</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Droits NTFS et gestion des partages réseaux sécurisés.</p>
                 </div>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-prompt">
-                    <span class="t-green">alexis@infra</span>:<span class="t-purple">~</span>$ <span class="t-white">./get_education_history.py</span>
-                </div>
-                <div class="content-block">
-                    <h1 class="hero-name">
-                        <span class="terminal-typing">PARCOURS ACADÉMIQUE</span>
-                    </h1>
-                    <p class="hero-role">// ANALYSE DES ENVIRONNEMENTS DE FORMATION</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="card formation-card section-spacing" style="border-top: 3px solid var(--purple);">
-            <div class="badge" style="background: var(--purple);">CURRENT_STUDIES</div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
-                <h2 style="color: #fff; font-size: 1.4rem;">LICENCE GÉNÉRALE INFORMATIQUE (SDR)</h2>
-                <span class="v-year" style="background: var(--purple);">2025 - 2026</span>
+                <a href="assets/ACL.pdf" class="btn-mission">Fiche Technique</a>
             </div>
 
-            <div class="school-context">
-                <i class="fas fa-university"></i> <strong>L'École :</strong> Le Conservatoire National des Arts et Métiers (CNAM) est une institution prestigieuse dédiée à la formation supérieure des professionnels. Reconnu pour son exigence technique, il délivre des diplômes d'État axés sur les réalités du monde industriel et numérique.
-            </div>
-
-            <p style="font-size: 0.9rem; color: var(--text-dim); line-height: 1.6;">
-                Le parcours <strong>SDR (Systèmes, Développement, Réseaux)</strong> au CNAM permet d'acquérir une vision 360° de l'informatique, alliant la maîtrise des couches basses (système) à l'ingénierie logicielle moderne.
-            </p>
-
-            <div class="module-grid">
-                <div class="module-item">
-                    <h5>Architecture Systèmes</h5>
-                    <p>Analyse des cycles processeurs et gestion des ressources par l'OS.</p>
-                </div>
-                <div class="module-item">
-                    <h5>Réseaux Avancés</h5>
-                    <p>Optimisation des flux et administration des protocoles de routage.</p>
-                </div>
-                <div class="module-item">
-                    <h5>Ingénierie BDD</h5>
-                    <p>Structuration de données massives et requêtage SQL optimisé.</p>
-                </div>
-                <div class="module-item">
-                    <h5>Cybersécurité SI</h5>
-                    <p>Politiques de sécurité et mécanismes de défense périmétrique.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="card formation-card section-spacing" style="border-top: 3px solid var(--accent);">
-            <div class="badge">COMPLETED_DEGREE</div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
-                <h2 style="color: #fff; font-size: 1.4rem;">BTS SIO OPTION SISR</h2>
-                <span class="v-year">2023 - 2025</span>
-            </div>
-
-            <div class="school-context" style="border-left-color: var(--accent); background: rgba(0, 242, 255, 0.05);">
-                <i class="fas fa-building"></i> <strong>L'École :</strong> Le Campus Montsouris est un centre de formation d'excellence situé à Paris, spécialisé dans l'alternance. Il bénéficie d'un écosystème pédagogique moderne favorisant la mise en pratique immédiate des concepts de l'infrastructure réseau.
-            </div>
-
-            <h3 style="font-size: 0.8rem; color: var(--accent); margin-top: 30px; font-family: 'JetBrains Mono'; text-transform: uppercase;">
-                <i class="fas fa-flask"></i> Laboratoire : Les 6 projets majeurs
-            </h3>
-            
-            <div class="project-catalog">
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-users-cog t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_01</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion ACL / Partages</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Mise en place des droits NTFS et gestion des partages réseaux sécurisés.</p>
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-hdd t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_02</span>
                     </div>
-                    <a href="assets/ACL.pdf" class="btn-mission">Fiche Technique</a>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">Gestion Disque / NTFS</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Volumes, quotas disque et formatage NTFS.</p>
                 </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-hdd t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_02</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Gestion Disque / NTFS</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Administration des volumes, quotas de disque et formatage NTFS.</p>
-                    </div>
-                    <a href="assets/disque.pdf" class="btn-mission">Fiche Technique</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-route t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_03</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Routage Sites Distants</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Configuration de routage entre deux sites distants.</p>
-                    </div>
-                    <a href="assets/tunnel.pdf" class="btn-mission">Fiche Technique</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-user-shield t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_04</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Agent de Récupération</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Création d'un agent de récupération de données (EFS).</p>
-                    </div>
-                    <a href="assets/efs.pdf" class="btn-mission">Fiche Technique</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-user-lock t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_05</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">Configuration Vlan</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Segmentation d'un réseau.</p>
-                    </div>
-                    <a href="assets/vlan.pdf" class="btn-mission">Fiche Technique</a>
-                </div>
-
-                <div class="project-card">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-network-wired t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year">Mission_06</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: var(--accent);">DHCP Serveur / Routeur</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Paramétrage DHCP sur un serveur et un routeur.</p>
-                    </div>
-                    <a href="assets/dhcp.pdf" class="btn-mission">Fiche Technique</a>
-                </div>
+                <a href="assets/disque.pdf" class="btn-mission">Fiche Technique</a>
             </div>
 
-            <h3 style="font-size: 0.8rem; color: var(--purple); margin-top: 40px; font-family: 'JetBrains Mono'; text-transform: uppercase;">
-                <i class="fas fa-graduation-cap"></i> Projets Finaux BTS
-            </h3>
-
-            <div class="project-catalog">
-                <div class="project-card" style="border-color: var(--purple);">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fab fa-windows t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year" style="background: var(--purple);">FINAL_BTS</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: #fff;">Serveur WSUS 2022</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Configuration et gestion d'un serveur de mise à jour avec Windows Server 2022 et WSUS.</p>
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-route t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_03</span>
                     </div>
-                    <a href="assets/WSUS.pdf" class="btn-mission" style="background: rgba(147, 51, 234, 0.2);">Voir le Projet</a>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">Routage Sites Distants</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Configuration de routage inter-sites.</p>
                 </div>
+                <a href="assets/tunnel.pdf" class="btn-mission">Fiche Technique</a>
+            </div>
 
-                <div class="project-card" style="border-color: var(--purple);">
-                    <div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <i class="fas fa-desktop t-purple" style="font-size: 1.5rem;"></i>
-                            <span class="v-year" style="background: var(--purple);">FINAL_BTS</span>
-                        </div>
-                        <h3 style="margin: 15px 0 10px 0; color: #fff;">Supervision PRTG</h3>
-                        <div class="skill-bar-container"><div class="skill-bar-fill" style="width: 100%;"></div></div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Mise en place d'un serveur PRTG Network Monitor pour superviser les performances et l'état des équipements.</p>
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-user-shield t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_04</span>
                     </div>
-                    <a href="assets/PRTG.pdf" class="btn-mission" style="background: rgba(147, 51, 234, 0.2);">Voir le Projet</a>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">Agent de Récupération</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Agent de récupération de données (EFS).</p>
                 </div>
-            </div>
-        </section>
-
-        <section class="card formation-card section-spacing">
-            <div class="badge" style="background: #555;">ARCHIVED_RECORDS</div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
-                <h2 style="color: #fff; font-size: 1.4rem;">BAC PRO SYSTÈMES NUMÉRIQUES (SN)</h2>
-                <span class="v-year" style="background: #555;">2020 - 2023</span>
+                <a href="assets/efs.pdf" class="btn-mission">Fiche Technique</a>
             </div>
 
-            <div class="school-context" style="border-left-color: #555; background: rgba(255,255,255,0.03);">
-                <i class="fas fa-school"></i> <strong>L'École :</strong> Le Lycée Louis Armand (Nogent-sur-Marne) est un établissement réputé pour ses pôles technologiques.
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-sitemap t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_05</span>
+                    </div>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">Configuration VLAN</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Segmentation et isolation des réseaux.</p>
+                </div>
+                <a href="assets/vlan.pdf" class="btn-mission">Fiche Technique</a>
             </div>
 
-            <div class="module-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                <div class="tech-icon-box">
-                    <span style="font-size: 1.2rem;">🌐</span>
-                    <div style="font-size: 0.75rem;"><strong>Bases Réseaux</strong><br><span style="color: #888;">Câblage & IP</span></div>
+            <div class="project-card">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-network-wired t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year">Mission_06</span>
+                    </div>
+                    <h3 style="margin:12px 0 8px;color:var(--accent);">DHCP Serveur / Routeur</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Paramétrage DHCP sur serveur et routeur.</p>
                 </div>
-                <div class="tech-icon-box">
-                    <span style="font-size: 1.2rem;">💻</span>
-                    <div style="font-size: 0.75rem;"><strong>Packet Tracer</strong><br><span style="color: #888;">Simulation</span></div>
-                </div>
-                <div class="tech-icon-box">
-                    <span style="font-size: 1.2rem;">🤖</span>
-                    <div style="font-size: 0.75rem;"><strong>Arduino</strong><br><span style="color: #888;">Logique IoT</span></div>
-                </div>
-                <div class="tech-icon-box">
-                    <span style="font-size: 1.2rem;">🎓</span>
-                    <div style="font-size: 0.75rem;"><strong>Cisco Netacad</strong><br><span style="color: #888;">Certification</span></div>
-                </div>
+                <a href="assets/dhcp.pdf" class="btn-mission">Fiche Technique</a>
             </div>
-        </section>
-    </main>
 
-    <footer class="status-footer">
-        <div class="footer-segment"><span class="online-dot pulse"></span> STATUS: <span class="t-green">GRADUATED</span></div>
-        <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V4</div>
-    </footer>
+        </div>
+
+        <h3 style="font-size:0.75rem;color:var(--accent);margin-top:36px;text-transform:uppercase;letter-spacing:1.5px;">
+            <i class="fas fa-graduation-cap" style="margin-right:6px;"></i> Projets Finaux BTS
+        </h3>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:14px;">
+
+            <div class="project-card" style="border-color:var(--accent2);">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fab fa-windows t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year" style="background:var(--accent2);">FINAL_BTS</span>
+                    </div>
+                    <h3 style="margin:12px 0 8px;color:var(--white);">Serveur WSUS 2022</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Configuration et gestion d'un serveur de mise à jour avec Windows Server 2022 et WSUS.</p>
+                </div>
+                <a href="assets/WSUS.pdf" class="btn-mission" style="border-color:var(--accent2);color:var(--accent);">Voir le Projet</a>
+            </div>
+
+            <div class="project-card" style="border-color:var(--accent2);">
+                <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <i class="fas fa-desktop t-purple" style="font-size:1.3rem;"></i>
+                        <span class="v-year" style="background:var(--accent2);">FINAL_BTS</span>
+                    </div>
+                    <h3 style="margin:12px 0 8px;color:var(--white);">Supervision PRTG</h3>
+                    <div class="skill-bar-container"><div class="skill-bar-fill" style="width:100%;"></div></div>
+                    <p style="font-size:0.8rem;color:var(--text-dim);">Mise en place de PRTG Network Monitor pour superviser performances et état des équipements.</p>
+                </div>
+                <a href="assets/PRTG.pdf" class="btn-mission" style="border-color:var(--accent2);color:var(--accent);">Voir le Projet</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BAC PRO -->
+    <section class="card formation-card section-spacing" style="border-top:3px solid #555;">
+        <div class="badge" style="background:#555;">ARCHIVED_RECORDS</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:22px;flex-wrap:wrap;gap:10px;">
+            <h2 style="font-size:1.3rem;">BAC PRO SYSTÈMES NUMÉRIQUES <span style="color:#888;">(SN)</span></h2>
+            <span class="v-year" style="background:#555;">2020 — 2023</span>
+        </div>
+
+        <div class="school-context" style="border-left-color:#555;background:rgba(255,255,255,0.02);">
+            <i class="fas fa-school" style="margin-right:8px;"></i>
+            <strong>Lycée Louis Armand</strong>, Nogent-sur-Marne — Établissement reconnu pour ses pôles technologiques et son enseignement orienté pratique.
+        </div>
+
+        <div class="module-grid" style="grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin-top:18px;">
+            <div class="tech-icon-box">
+                <span style="font-size:1.1rem;">🌐</span>
+                <div style="font-size:0.72rem;"><strong>Bases Réseaux</strong><br><span style="color:var(--text-dim);">Câblage & IP</span></div>
+            </div>
+            <div class="tech-icon-box">
+                <span style="font-size:1.1rem;">💻</span>
+                <div style="font-size:0.72rem;"><strong>Packet Tracer</strong><br><span style="color:var(--text-dim);">Simulation Cisco</span></div>
+            </div>
+            <div class="tech-icon-box">
+                <span style="font-size:1.1rem;">🤖</span>
+                <div style="font-size:0.72rem;"><strong>Arduino / IoT</strong><br><span style="color:var(--text-dim);">Logique embarquée</span></div>
+            </div>
+            <div class="tech-icon-box">
+                <span style="font-size:1.1rem;">🎓</span>
+                <div style="font-size:0.72rem;"><strong>Cisco Netacad</strong><br><span style="color:var(--text-dim);">Certification IT</span></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="status-footer">
+    <div class="footer-segment"><span class="online-dot pulse"></span> STATUS: <span class="t-green">GRADUATED</span></div>
+    <div class="footer-segment footer-right">ALEXIS_VELOSO // PORTFOLIO_V5</div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
