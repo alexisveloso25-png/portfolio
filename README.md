@@ -1,7 +1,7 @@
 # 👨‍💻 ALEXIS VELOSO
 ### **Systems & Networks Expert | Apprenti Administrateur Réseaux**
 
-Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale Informatique (SDR)** au **CNAM - Campus Montsouris**, je me spécialise dans la gestion d'infrastructures critiques, le Cloud et la Cybersécurité.
+Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale Informatique (SDR)** au **CNAM - Campus Montsouris**, je me spécialise dans la gestion d'infrastructures critiques, le Cloud et la Cybersécurité. 
 
 ---
 
@@ -27,7 +27,7 @@ Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale 
 * **Virtualisation  :** VMware, Hyper-V, Proxmox, Docker.
 * **Cloud & SaaS :** Administration Office 365 (Azure AD, Exchange, SharePoint).
 
-### **Réseaux & Sécurité**
+### **Réseaux / Sécurité**
 * **Networking  :** Architecture VLAN, Routage, Cisco, VPN, Firewalling.
 * **Programmation  :** Python, SQL, HTML/CSS, PowerShell.
 
