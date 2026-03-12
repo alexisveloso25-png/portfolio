@@ -54,6 +54,3 @@ Bienvenue sur mon profil GitHub. Actuellement étudiant en **Licence Générale 
 * **Portfolio Web :** `ALEXIS_VELOSO // PORTFOLIO`
 
 ---
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=TON_PSEUDO_GITHUB&show_icons=true&theme=radical&count_private=true" alt="Stats de Alexis" />
-</p>
