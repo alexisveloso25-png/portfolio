@@ -78,6 +78,33 @@
 }
 @keyframes bootLoad { to { width: 100%; } }
 
+/* --- STATS ROW --- */
+.stats-row {
+    display: flex;
+    gap: 40px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.stat-counter {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-shadow: 0 0 14px var(--accent-glow);
+    line-height: 1;
+}
+.stat-label {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
 /* --- THEME TOGGLE --- */
 .theme-toggle {
     position: fixed;
