@@ -3,150 +3,51 @@
    main.js
    ============================ */
 
-/* --- BOOT SCREEN GLITCH + PARTICLES --- */
+/* --- BOOT SCREEN --- */
 (function () {
     var boot = document.getElementById('boot');
     if (!boot) return;
 
-    // Force le boot en overlay plein écran via JS — aucune dépendance CSS
-    boot.setAttribute('style',
-        'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
-        'z-index:99999;background:#000;overflow:hidden;' +
-        'display:flex;flex-direction:column;align-items:center;justify-content:center;'
-    );
-
-    var canvas = document.getElementById('boot-canvas');
-    if (!canvas) {
-        boot.style.display = 'none';
-        return;
-    }
-    canvas.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%;');
-
-    var ctx = canvas.getContext('2d');
-    var W = canvas.width  = window.innerWidth;
-    var H = canvas.height = window.innerHeight;
-    var running = true;
-
-    window.addEventListener('resize', function () {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    }, { passive: true });
-
-    // --- Particule ---
-    function P(x, y, burst) {
-        this.x = x; this.y = y;
-        var a = Math.random() * Math.PI * 2;
-        var s = burst ? Math.random() * 14 + 5 : Math.random() * 0.6 + 0.1;
-        this.vx = Math.cos(a) * s;
-        this.vy = Math.sin(a) * s - (burst ? Math.random() * 4 : 0);
-        this.life = 1;
-        this.decay = burst ? Math.random() * 0.022 + 0.01 : 0.003;
-        this.size  = burst ? Math.random() * 4 + 1 : Math.random() * 1.5 + 0.3;
-        this.color = burst
-            ? ['#a366ff','#7b2fff','#00ffa3','#00d4ff','#ff4560','#fff'][Math.floor(Math.random()*6)]
-            : 'rgba(163,102,255,' + (Math.random()*0.3+0.1) + ')';
-        this.gravity = burst ? 0.18 : 0;
-        this.burst = burst;
-    }
-    P.prototype.tick = function () {
-        this.x += this.vx; this.y += this.vy;
-        this.vy += this.gravity;
-        this.vx *= 0.97;
-        this.life -= this.decay;
+    var killBoot = function () {
+        boot.style.transition = 'opacity 0.6s ease';
+        boot.style.opacity = '0';
+        setTimeout(function () { if (boot && boot.parentNode) boot.parentNode.removeChild(boot); }, 650);
     };
-    P.prototype.draw = function () {
-        ctx.globalAlpha = Math.max(0, this.life);
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-    };
+    var safety = setTimeout(killBoot, 6000);
 
-    var particles = [];
-    for (var k = 0; k < 80; k++) {
-        particles.push(new P(Math.random() * W, Math.random() * H, false));
-    }
+    var bootText = document.getElementById('boot-text');
+    var bar      = document.querySelector('.boot-bar');
+    if (!bootText) { clearTimeout(safety); killBoot(); return; }
 
-    var exploded = false;
+    var lines = [
+        '> Initializing SDR_OS v5.0...',
+        '> Loading kernel modules............. [<span class="t-green">OK</span>]',
+        '> Mounting encrypted volumes......... [<span class="t-green">OK</span>]',
+        '> Starting firewall services......... [<span class="t-green">OK</span>]',
+        '> Network interface eth0............. [<span class="t-green">SECURED</span>]',
+        '> Authentication: <span class="t-purple">USER_ALEXIS_VELOSO</span>',
+        '> <span class="t-green">Access granted. Welcome.</span>',
+    ];
 
-    function doExplode() {
-        exploded = true;
-        var cx = W / 2, cy = H / 2;
-        for (var i = 0; i < 280; i++) particles.push(new P(cx, cy, true));
-        for (var j = 0; j < 60; j++) {
-            var p = new P(cx, cy, true);
-            p.vx = Math.cos((j/60)*Math.PI*2) * (10 + Math.random()*6);
-            p.vy = Math.sin((j/60)*Math.PI*2) * (10 + Math.random()*6);
-            p.size = 3; p.color = '#a366ff'; p.decay = 0.015;
-            particles.push(p);
-        }
-        var sub = document.getElementById('boot-sub');
-        if (sub) { sub.textContent = '// ACCESS GRANTED'; sub.style.color = '#00ffa3'; }
-
-        // Fermeture après que les particules retombent
-        setTimeout(function () {
-            running = false;
-            boot.style.transition = 'opacity 0.5s ease';
-            boot.style.opacity = '0';
-            setTimeout(function () {
-                if (boot && boot.parentNode) boot.parentNode.removeChild(boot);
-            }, 520);
-        }, 900);
-    }
-
-    var t0 = Date.now();
-    function loop() {
-        if (!running && !exploded) return;
-        ctx.clearRect(0, 0, W, H);
-
-        // Pulse bg
-        var pulse = 0.5 + 0.5 * Math.sin((Date.now() - t0) / 1000 * 3);
-        ctx.fillStyle = 'rgba(163,102,255,' + (0.02 * pulse) + ')';
-        ctx.fillRect(0, 0, W, H);
-
-        // Mise à jour particules
-        var alive = [];
-        for (var i = 0; i < particles.length; i++) {
-            particles[i].tick();
-            particles[i].draw();
-            if (particles[i].life > 0) alive.push(particles[i]);
-        }
-        particles = alive;
-
-        // Recharge ambiante
-        if (!exploded && particles.length < 80) {
-            particles.push(new P(Math.random()*W, Math.random()*H, false));
-        }
-
-        if (running || particles.length > 0) requestAnimationFrame(loop);
-    }
-    loop();
-
-    // Timer sécurité max 5s
-    var safety = setTimeout(function () {
-        running = false;
-        if (boot && boot.parentNode) boot.parentNode.removeChild(boot);
-    }, 5000);
-
-    // Flash + explosion à 2.3s
-    setTimeout(function () {
-        var logo = document.getElementById('boot-logo');
-        if (logo) {
-            logo.style.animation = 'none';
-            logo.style.color = '#fff';
-            logo.style.textShadow = '0 0 60px #fff, -5px 0 #ff4560, 5px 0 #00d4ff';
-            logo.style.transform = 'scaleX(1.05)';
-            setTimeout(function () {
-                logo.style.opacity = '0';
-                clearTimeout(safety);
-                doExplode();
-            }, 180);
-        } else {
+    var i = 0;
+    var next = function () {
+        if (i >= lines.length) {
             clearTimeout(safety);
-            doExplode();
+            setTimeout(killBoot, 400);
+            return;
         }
-    }, 2300);
+        var line = document.createElement('div');
+        line.className = 'boot-line';
+        line.innerHTML = lines[i];
+        bootText.appendChild(line);
+        // animate in
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () { line.style.opacity = '1'; line.style.transform = 'translateX(0)'; });
+        });
+        i++;
+        setTimeout(next, i === lines.length ? 300 : 320);
+    };
+    setTimeout(next, 300);
 }());
 
 /* --- STICKY NAV + ACTIVE LINK --- */
