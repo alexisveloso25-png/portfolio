@@ -257,10 +257,21 @@ Reponds de facon concise, professionnelle, en francais. Style terminal/cyber.`;
     };
 })();
 
-/* --- ACCESSIBILITY --- */
-function toggleZoom() {
-    document.body.classList.toggle('is-zoomed');
-    const txt = document.getElementById('zoom-text');
-    if (txt) txt.innerText = document.body.classList.contains('is-zoomed') ? 'Normal' : 'Visibilite';
+/* --- THEME TOGGLE (soleil/lune) --- */
+function toggleTheme() {
+    const body = document.body;
+    const btn  = document.getElementById('theme-btn');
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    if (btn) btn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
-function toggleSimple() { document.body.classList.toggle('is-simple'); }
+
+// Restore saved theme on load
+(function() {
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        const btn = document.getElementById('theme-btn');
+        if (btn) btn.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+})();
