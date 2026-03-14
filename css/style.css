@@ -38,7 +38,6 @@ body {
     font-family: var(--font-mono);
     line-height: 1.65;
     overflow-x: hidden;
-    cursor: none;
 }
 
 /* --- CUSTOM CURSOR --- */
